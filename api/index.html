@@ -45,7 +45,7 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
@@ -90,7 +90,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;
 .ng-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt4)}
 .ng-arr{font-size:9px;color:var(--txt4);transition:transform .15s}
 .ng-items{overflow:hidden;transition:max-height .2s ease}
-.ni{display:flex;align-items:center;gap:6px;padding:4px 8px;cursor:pointer;border-radius:4px;color:var(--txt3);font-size:12px;font-weight:400;transition:all .08s;white-space:nowrap;overflow:hidden}
+.ni{display:flex;align-items:center;gap:7px;padding:5px 9px;cursor:pointer;border-radius:5px;color:var(--txt3);font-size:12px;font-weight:400;transition:all .08s;white-space:nowrap;overflow:hidden}
 .ni:hover{background:rgba(0,0,0,.04);color:var(--txt)}
 .ni.on{background:rgba(35,131,226,.1);color:var(--acc);font-weight:500}
 .ni-ic{font-size:13px;flex-shrink:0;width:16px;text-align:center}
@@ -103,18 +103,18 @@ body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;
 .sf-btn:hover{background:var(--surf2);color:var(--txt)}
 
 /* ── CONTENT ── */
-.content{flex:1;overflow-y:auto;padding:28px 36px;background:var(--bg)}
+.content{flex:1;overflow-y:auto;padding:36px 48px;background:var(--bg)}
 .pg{display:none;animation:fi .15s ease}
 .pg.on{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
-.page-t{font-family:var(--ffd);font-size:24px;font-weight:700;color:var(--txt);margin-bottom:4px;letter-spacing:-.02em;opacity:.9}
-.page-s{font-size:12px;color:var(--txt3);margin-bottom:16px}
+.page-t{font-family:var(--ffd);font-size:32px;font-weight:700;color:var(--txt);margin-bottom:6px;letter-spacing:-.03em}
+.page-s{font-size:13px;color:var(--txt3);margin-bottom:22px;line-height:1.6}
 
 /* ── COMPONENTS ── */
-.card{background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:16px;transition:background .2s}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.card{background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:20px;transition:background .2s}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .pb{height:3px;background:var(--surf3);border-radius:2px;overflow:hidden}
 .pf{height:100%;border-radius:2px;transition:width .5s ease}
 .badge{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:20px;font-size:10px;font-weight:600}
@@ -129,8 +129,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;
 .btn-red{background:var(--red);color:#fff}
 .btn-sm{padding:4px 8px;font-size:11px;border-radius:5px}
 .btn-xs{padding:2px 5px;font-size:10px;border-radius:4px}
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:16px}
-.sc{background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:13px;position:relative;overflow:hidden;transition:background .2s}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.sc{background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:18px;position:relative;overflow:hidden;transition:background .2s}
 .sc-stripe{position:absolute;top:0;left:0;right:0;height:2px}
 .sc .sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3)}
 .sc .sv{font-size:24px;font-weight:700;line-height:1;margin:4px 0 2px;font-family:var(--ffm)}
@@ -343,6 +343,24 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   .cours-lay{flex-direction:column;height:auto;margin:-22px}
   .cours-sb{width:100%;height:150px;border-right:none;border-bottom:1px solid var(--brd)}
 }
+
+/* ── FICHE EDITOR ── */
+#fe-title:empty::before{content:"Sans titre…";color:var(--txt4);pointer-events:none;font-weight:400}
+#fe-body:empty::before{content:"Commence à écrire ta fiche…";color:var(--txt4);pointer-events:none}
+#fe-body h2{font-family:var(--ffd);font-size:26px;font-weight:700;color:var(--txt);margin:32px 0 12px}
+#fe-body h3{font-family:var(--ffd);font-size:20px;font-weight:600;color:var(--txt2);margin:24px 0 8px;font-style:italic}
+#fe-body p{margin-bottom:12px;line-height:1.9}
+#fe-body ul{margin:8px 0 16px;padding-left:0;list-style:none}
+#fe-body ul li{padding:6px 10px 6px 14px;margin-bottom:5px;border-left:2px solid var(--acc);background:var(--acc-l);border-radius:0 6px 6px 0;line-height:1.75}
+#fe-body ol{margin:8px 0 16px;padding-left:24px}
+#fe-body ol li{padding:4px 0;line-height:1.8}
+#fe-body blockquote{border-left:3px solid var(--gold);padding:12px 20px;background:var(--gold-l);border-radius:0 8px 8px 0;margin:16px 0;font-style:italic;color:var(--txt2);font-size:15px}
+#fe-body strong{font-weight:700;color:var(--txt)}
+#fe-body img{max-width:100%;border-radius:8px;margin:16px 0;display:block}
+#fe-body .fe-img-wrap{position:relative;width:100%;margin:16px 0}
+#fe-body .fe-img-wrap:hover .fe-img-del{opacity:1}
+#fe-body .fe-img-del{opacity:0;position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;border:none;border-radius:5px;padding:5px 10px;font-size:11px;cursor:pointer;transition:opacity .15s;font-family:var(--ff)}
+
 </style>
 </head>
 <body>
@@ -596,15 +614,18 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
   <!-- ════ FICHES ════ -->
   <div class="pg" id="pg-fiches">
-    <div class="page-t">Fiches synthèse</div>
-    <div class="page-s">Générées par IA · Notions · Auteurs · Chiffres · Erreurs · Plan type</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+      <div class="page-t">Fiches synthèse</div>
+      <button class="btn btn-p btn-sm" onclick="openCreateFiche()">✏️ Créer une fiche</button>
+    </div>
+    <div class="page-s">Générées par IA · Modifiables · Tes fiches perso · Notions · Auteurs · Chiffres</div>
     <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center">
       <span style="font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em">📁 Dossiers :</span>
       <div id="fiches-folders-bar" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"></div>
       <button class="btn btn-g btn-xs" onclick="addFicheFolder()">+ Dossier</button>
     </div>
 
-    <div class="g3" id="fiches-grid"></div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px" id="fiches-grid"></div>
   </div>
 
   <!-- ════ FLASHCARDS ════ -->
@@ -910,6 +931,13 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
           <select id="mf-p" style="flex:1;padding:4px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="indispensable">🔴 Indispensable</option><option value="tres-frequent">🟠 Très fréquent</option><option value="frequent">🟡 Fréquent</option></select>
           <input type="text" id="mf-c" placeholder="Chapitre" style="flex:1;padding:4px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
         </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-img-inp').click()">🖼️ Image</button>
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-pdf-inp').click()">📄 PDF</button>
+          <input type="file" id="mf-img-inp" accept="image/*" style="display:none" onchange="attachToFlash(this,'image')">
+          <input type="file" id="mf-pdf-inp" accept=".pdf" style="display:none" onchange="attachToFlash(this,'pdf')">
+        </div>
+        <div id="mf-attach" style="margin-bottom:8px;font-size:11px;color:var(--txt3)"></div>
         <button class="btn btn-p" style="width:100%" onclick="saveMyFlash()">💾 Ajouter au deck</button>
       </div>
       <div class="card"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2);margin-bottom:9px">Stats</div><div id="mf-stats" style="font-size:12px;color:var(--txt3)"></div></div>
@@ -968,6 +996,77 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="card" id="news-list"><div style="text-align:center;padding:20px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Chargement…</div></div></div>
   </div>
 
+    <!-- ════ FICHE EDITOR ════ -->
+  <div class="pg" id="pg-fiche-editor" style="padding:0;margin:-36px -48px;background:var(--surf);position:fixed;inset:0;z-index:100;overflow-y:auto;display:none">
+    
+    <!-- Barre top -->
+    <div style="position:sticky;top:0;z-index:10;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:12px">
+      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px;transition:background .1s" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">&#8592; Fiches</button>
+      <div style="flex:1"></div>
+      <select id="fe-prio" style="padding:5px 10px;border:1px solid var(--brd);border-radius:5px;font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
+        <option value="indispensable">&#128308; Indispensable</option>
+        <option value="tres-frequent">&#128992; Très fréquent</option>
+        <option value="frequent">&#129000; Fréquent</option>
+      </select>
+      <button onclick="saveFicheEditor()" style="background:var(--acc);color:#fff;border:none;border-radius:5px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">Sauvegarder</button>
+    </div>
+
+    <!-- Zone d'écriture Notion pure -->
+    <div style="max-width:660px;margin:0 auto;padding:72px 0 160px">
+
+      <!-- Titre -->
+      <div id="fe-title" contenteditable="true"
+        style="font-family:var(--ffd);font-size:42px;font-weight:700;color:var(--txt);outline:none;margin-bottom:24px;line-height:1.15;letter-spacing:-.03em;min-height:56px;word-break:break-word">
+      </div>
+
+      <!-- Séparateur fin -->
+      <div style="height:1px;background:var(--brd);margin-bottom:32px"></div>
+
+      <!-- Corps -->
+      <div id="fe-body" contenteditable="true"
+        style="font-size:16px;line-height:2;color:var(--txt2);outline:none;min-height:60vh;word-break:break-word">
+      </div>
+
+      <!-- Zone PDF/images attachés -->
+      <div id="fe-attachments" style="margin-top:32px;display:flex;flex-direction:column;gap:10px"></div>
+
+    </div>
+
+    <!-- Toolbar flottante centrée -->
+    <div style="position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 20px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:200">
+      <button class="rtb" onclick="execFE('bold')"><strong>B</strong></button>
+      <button class="rtb" onclick="execFE('italic')"><em>I</em></button>
+      <button class="rtb" onclick="execFE('underline')"><u>U</u></button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execFE('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execFE('formatBlock','h3')" style="font-size:10px">Moyen</button>
+      <button class="rtb" onclick="execFE('formatBlock','p')" style="font-size:10px">Normal</button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execFE('insertUnorderedList')">&#8226; L</button>
+      <button class="rtb" onclick="insertFEQuote()">&#10078;</button>
+      <div class="rtb-sep"></div>
+      <div class="rtb-c" style="background:#b8806a" onclick="execFE('foreColor','#b8806a')"></div>
+      <div class="rtb-c" style="background:#5b7fa6" onclick="execFE('foreColor','#5b7fa6')"></div>
+      <div class="rtb-c" style="background:#7aab8a" onclick="execFE('foreColor','#7aab8a')"></div>
+      <div class="rtb-c" style="background:#c48a82" onclick="execFE('foreColor','#c48a82')"></div>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="document.getElementById('fe-img-inp').click()" title="Image">&#128247;</button>
+      <button class="rtb" onclick="document.getElementById('fe-pdf-inp').click()" title="PDF">&#128196;</button>
+    </div>
+
+    <input type="file" id="fe-img-inp" accept="image/*" style="display:none" onchange="handleFEImage(this)">
+    <input type="file" id="fe-pdf-inp" accept=".pdf" style="display:none" onchange="handleFEPdf(this)">
+  </div>
+
+  <!-- COURS OVERLAY -->
+  <div id="cours-overlay" style="position:fixed;inset:0;z-index:200;background:var(--surf);overflow-y:auto;display:none">
+    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:10px;z-index:10">
+      <button onclick="closeCoursOverlay()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Cours</button>
+      <span id="co-title" style="font-size:13px;color:var(--txt3);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+      <div id="co-actions" style="display:flex;gap:6px"></div>
+    </div>
+    <div id="co-content" style="max-width:720px;margin:0 auto;padding:60px 40px 120px"></div>
+  </div>
   </div><!-- /content -->
 </main>
 </div>
@@ -1266,6 +1365,7 @@ const PM={
   myflash:{g:'Créer',l:'Mes flashcards',sec:'create'},
   docs:{g:'Créer',l:'Documents adaptatifs',sec:'create'},
   map:{g:'Outils',l:'Monde 🌍',sec:'tools'},
+  'fiche-editor':{g:'Fiches',l:'Éditeur de fiche',sec:'prog'},
   news:{g:'Outils',l:'News géopo',sec:'tools'},
 };
 let curPage='dash';
@@ -1520,6 +1620,9 @@ function loadChap(id){
   const c=CHAPTERS[id];
   document.querySelectorAll('.ci').forEach(el=>el.classList.remove('on'));
   document.getElementById('ci-'+id)?.classList.add('on');
+  // Show full-screen overlay
+  const ov=document.getElementById('cours-overlay');
+  if(ov){ov.style.display='block';const t=document.getElementById('co-title');if(t)t.textContent=c.short+' — '+c.title.substring(0,50);}
 
   // Track visit
   const visited=M.get('visited_chapters',[]);
@@ -1539,7 +1642,7 @@ function loadChap(id){
   const pl=c.priority==='indispensable'?'Indispensable':c.priority==='tres-frequent'?'Très fréquent':'Fréquent';
   const col=prog>70?'var(--grn)':prog>30?'var(--gold)':prog>0?'var(--org)':'var(--brd2)';
 
-  document.getElementById('cours-main').innerHTML=`
+  document.getElementById('co-content').innerHTML=`
     <div class="cours-pdf">
       <span style="font-size:24px">📄</span>
       <div style="flex:1">
@@ -1562,6 +1665,10 @@ function loadChap(id){
     <div class="cours-actions">
       <button class="btn btn-g btn-sm" id="edit-btn-${id}" onclick="toggleEditCours(${id})">🖊️ Modifier</button>
       <button class="btn btn-g btn-sm" onclick="showFicheModal(${id})">📋 Fiche synthèse</button>
+      <button class="btn btn-g btn-sm" onclick="document.getElementById('cours-img-${id}').click()" title="Ajouter image">🖼️</button>
+      <button class="btn btn-g btn-sm" onclick="document.getElementById('cours-pdf2-${id}').click()" title="Ajouter PDF">📄</button>
+      <input type="file" id="cours-img-${id}" accept="image/*" style="display:none" onchange="insertCoursFile(${id},this,'image')">
+      <input type="file" id="cours-pdf2-${id}" accept=".pdf" style="display:none" onchange="insertCoursFile(${id},this,'pdf')">
       <div style="display:flex;align-items:center;gap:5px;margin-left:auto">
         <span style="font-size:10px;color:var(--txt3)">Note :</span>
         <select onchange="setNote(${id},this.value)" style="padding:3px 5px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
@@ -1637,50 +1744,97 @@ function renderFiches(list){
     const pClass=c.priority==='indispensable'?'bi':c.priority==='tres-frequent'?'btf':'bf';
     const pl=c.priority==='indispensable'?'🔴 Indispensable':c.priority==='tres-frequent'?'🟠 Très fréquent':'🟡 Fréquent';
     const col=prog>70?'var(--grn)':prog>30?'var(--gold)':prog>0?'var(--org)':'var(--brd2)';
-    return `<div style="background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:13px;cursor:pointer;transition:all .1s" onmouseover="this.style.borderColor='var(--acc)';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='var(--brd)';this.style.transform=''" onclick="showFicheModal(${c.id})">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px">
-        <span class="badge ${pClass}" style="font-size:9px">${pl}</span>
-        ${note!==null?`<span style="font-size:10px;font-family:var(--ffm);font-weight:700;color:var(--gold)">${note}/20</span>`:''}
+    return `<div style="background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:22px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--acc)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.borderColor='var(--brd)';this.style.boxShadow=''" onclick="showFicheModal(${c.id})">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
+        <span class="badge ${pClass}">${pl}</span>
+        ${note!==null?`<span style="font-size:11px;font-family:var(--ffm);font-weight:700;color:var(--gold)">${note}/20</span>`:''}
       </div>
-      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--txt4);margin-bottom:2px">${c.short}</div>
-      <div style="font-size:12px;font-weight:700;line-height:1.3;margin-bottom:7px;color:var(--txt)">${c.title}</div>
-      <div class="pb" style="margin-bottom:5px"><div class="pf" style="width:${prog}%;background:${col}"></div></div>
-      <div style="font-size:10px;color:var(--acc);font-weight:600">📋 Cliquer pour la fiche →</div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt4);margin-bottom:5px">${c.short}</div>
+      <div style="font-size:15px;font-weight:700;line-height:1.4;margin-bottom:12px;color:var(--txt)">${c.title}</div>
+      <div class="pb" style="margin-bottom:10px;height:4px"><div class="pf" style="width:${prog}%;background:${col}"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:11px;color:var(--acc);font-weight:600">📋 Voir la fiche →</div>
+        <div style="font-size:10px;color:var(--txt4)">${prog}%</div>
+      </div>
     </div>`;
   }).join('');
 }
 
 async function showFicheModal(id){
   const c=CHAPTERS[id];
-  const m=document.createElement('div');
-  m.className='modal-bg';
-  m.innerHTML=`<div class="modal-box">
-    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:11px">
-      <div><div style="font-family:var(--ffd);font-size:19px;font-weight:700;color:var(--txt)">${c.short} — ${c.title}</div>
-      <div style="margin-top:4px;display:flex;gap:5px"><span class="badge ${c.priority==='indispensable'?'bi':c.priority==='tres-frequent'?'btf':'bf'}">${c.priority==='indispensable'?'Indispensable':c.priority==='tres-frequent'?'Très fréquent':'Fréquent'}</span></div></div>
-      <button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3);flex-shrink:0">✕</button>
+
+  // Get or create overlay
+  let ov=document.getElementById('fiche-overlay');
+  if(!ov){
+    ov=document.createElement('div');
+    ov.id='fiche-overlay';
+    ov.style.cssText='position:fixed;inset:0;z-index:200;background:var(--surf);overflow-y:auto';
+    document.body.appendChild(ov);
+  }
+  ov.style.display='block';
+
+  const prio=c.priority==='indispensable'?'bi':c.priority==='tres-frequent'?'btf':'bf';
+  const prioLabel=c.priority==='indispensable'?'Indispensable':c.priority==='tres-frequent'?'Très fréquent':'Fréquent';
+  const flashCount=[...FLASHCARDS,...M.get('my_flashcards',[])].filter(f=>f.c===c.short).length;
+
+  // Build with template literal — safe because it's not inside another string
+  ov.innerHTML = `
+    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:10px;z-index:10">
+      <button onclick="document.getElementById('fiche-overlay').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>
+      <div style="flex:1"></div>
+      <span class="badge ${prio}">${prioLabel}</span>
+      <button onclick="editFicheContent(${id})" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:var(--ff);color:var(--txt2)">✏️ Modifier</button>
+      <button onclick="deleteFicheCache(${id})" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:var(--ff);color:var(--red)">🗑 Effacer</button>
+      <button onclick="document.getElementById('fi-img-inp').click()" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 10px;font-size:13px;cursor:pointer">🖼️</button>
+      <button onclick="document.getElementById('fi-pdf-inp').click()" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 10px;font-size:13px;cursor:pointer">📄</button>
     </div>
-    <div class="tabs">
-      <div class="tab on" onclick="stab(this,'mff-${id}')">📋 Fiche</div>
-      <div class="tab" onclick="stab(this,'mfl-${id}')">🃏 Flashcards (${[...FLASHCARDS,...M.get('my_flashcards',[])].filter(f=>f.c===c.short).length})</div>
+    <div style="max-width:860px;margin:0 auto;padding:52px 40px 80px">
+      <div style="font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);margin-bottom:8px;letter-spacing:-.02em;line-height:1.2">${c.short} — ${c.title}</div>
+      <div style="height:1px;background:var(--brd);margin:20px 0 24px"></div>
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--brd);margin-bottom:28px">
+        <div class="tab on" onclick="stab(this,'mff-${id}')" style="font-size:13px;padding:8px 16px">📋 Fiche</div>
+        <div class="tab" onclick="stab(this,'mfl-${id}')" style="font-size:13px;padding:8px 16px">🃏 Flashcards (${flashCount})</div>
+      </div>
+      <div class="tc on" id="mff-${id}">
+        <div id="fiche-bd-${id}">
+          <div style="text-align:center;padding:40px;color:var(--txt3)">
+            <div class="dots" style="justify-content:center;margin-bottom:8px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            <div style="font-size:13px">Génération par IA…</div>
+          </div>
+        </div>
+      </div>
+      <div class="tc" id="mfl-${id}">${renderChapCards(c.short)}</div>
+      <div id="fi-attachments" style="margin-top:24px;display:flex;flex-direction:column;gap:10px"></div>
     </div>
-    <div class="tc on" id="mff-${id}">
-      <div id="fiche-bd-${id}"><div style="text-align:center;padding:22px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Génération de la fiche par IA…</div></div></div>
-    </div>
-    <div class="tc" id="mfl-${id}">${renderChapCards(c.short)}</div>
-  </div>`;
-  document.body.appendChild(m);
-  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
+    <input type="file" id="fi-img-inp" accept="image/*" style="display:none" onchange="addFiAttachment(this,'image')">
+    <input type="file" id="fi-pdf-inp" accept=".pdf" style="display:none" onchange="addFiAttachment(this,'pdf')">
+  `;
+
   logSession('fiche',c.short);
   await genFiche(id);
 }
 
-function renderChapCards(short){
-  const myCards=M.get('my_flashcards',[]);
-  const cards=[...FLASHCARDS,...myCards].filter(f=>f.c===short);
-  if(!cards.length)return`<div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune flashcard pour ce chapitre.<br><button class="btn btn-p btn-sm" style="margin-top:7px" onclick="go('myflash')">+ Créer</button></div>`;
-  return cards.map((f,i)=>`<div style="background:${i%2===0?'var(--surf2)':'var(--acc-l)'};border:1px solid var(--brd);border-radius:var(--r);padding:11px;margin-bottom:7px;transition:background .2s"><div style="font-size:11px;font-weight:700;color:var(--acc);margin-bottom:4px">❓ ${f.q}</div><div style="font-size:12px;color:var(--txt2);line-height:1.6;padding-top:6px;border-top:1px solid var(--brd)">${f.a}</div></div>`).join('');
+
+function addFiAttachment(inp,type){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const att=document.getElementById('fi-attachments');if(!att)return;
+    const div=document.createElement('div');
+    div.style.cssText='padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;position:relative';
+    if(type==='image'){
+      div.innerHTML='<img src="'+e.target.result+'" style="width:100%;border-radius:7px;display:block">';
+    } else {
+      div.innerHTML='<span style="font-size:18px">📄</span> <strong style="font-size:13px">'+f.name+'</strong>';
+    }
+    const del=document.createElement('button');
+    del.textContent='🗑';del.onclick=()=>div.remove();
+    del.style.cssText='position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;color:var(--red);font-size:13px';
+    div.appendChild(del);att.appendChild(div);
+  };
+  r.readAsDataURL(f);inp.value='';
 }
+
 
 async function genFiche(id){
   const c=CHAPTERS[id];
@@ -1817,21 +1971,31 @@ function renderFrise(filter='all'){
   if(filter==='must')items=items.filter(f=>f.must);
   else if(filter!=='all')items=items.filter(f=>f.type===filter);
   if(!items.length){el.innerHTML='<div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune entrée pour ce filtre</div>';return;}
-  el.innerHTML=items.map(f=>`
+  el.innerHTML=items.map((f,fi)=>`
     <div class="fi">
       <div class="fi-dot ${f.type}"></div>
-      <div class="fi-date">${f.date}</div>
+      <div class="fi-date">${f.date} ${f._custom?`<button onclick="deleteFriseItem(${fi})" style="background:none;border:none;cursor:pointer;font-size:9px;color:var(--red);padding:0 3px">✕</button>`:''}</div>
       <div class="fi-ev">${f.event} ${f.must?'<span class="must-badge">📍 INDISPENSABLE</span>':'<span style="font-size:8px;color:var(--txt4);border:1px solid var(--brd);padding:1px 4px;border-radius:8px">à connaître</span>'}</div>
       <div class="fi-det">${f.detail}</div>
     </div>`).join('');
 }
 
+function deleteFriseItem(fi){
+  // fi is index in the combined array, need to find in custom
+  const built=[...(typeof FRISE!=='undefined'?FRISE:[])];
+  const custom=M.get('custom_frise',[]);
+  const combined=[...built,...custom];
+  const item=combined[fi];
+  if(!item||!item._custom){showToast('Les dates officielles ne peuvent pas être supprimées');return;}
+  const customIdx=custom.findIndex(c=>c.date===item.date&&c.event===item.event);
+  if(customIdx>=0){custom.splice(customIdx,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}
+}
 function addFrise(){
   const d=document.getElementById('fa-d').value.trim();
   const e=document.getElementById('fa-e').value.trim();
   if(!d||!e){alert('Renseigne la date et l\'événement.');return;}
   const custom=M.get('custom_frise',[]);
-  custom.push({date:d,event:e,detail:document.getElementById('fa-det').value.trim(),type:document.getElementById('fa-t').value,must:document.getElementById('fa-m').value==='true'});
+  custom.push({date:d,event:e,detail:document.getElementById('fa-det').value.trim(),type:document.getElementById('fa-t').value,must:document.getElementById('fa-m').value==='true',_custom:true});
   M.set('custom_frise',custom);
   ['fa-d','fa-e','fa-det'].forEach(id=>document.getElementById(id).value='');
   renderFrise();
@@ -1967,11 +2131,7 @@ function initAnnales(){
 // ══════════════════════════════════════════════════════
 // COPIES
 // ══════════════════════════════════════════════════════
-const COPIES_DEMO=[
-  {title:'DST — Acteurs mondialisation',date:'12/01',score:13,c:{red:13,prob:11,tens:14,plan:14,aut:12,chif:11,ic:14,prec:13}},
-  {title:'Colle — Mondialisation financière',date:'20/01',score:14,c:{red:14,prob:13,tens:15,plan:14,aut:15,chif:13,ic:14,prec:14}},
-  {title:'DST — Construction européenne',date:'28/01',score:15,c:{red:15,prob:14,tens:15,plan:16,aut:14,chif:15,ic:15,prec:15}},
-];
+const COPIES_DEMO=[];
 const CK=['red','prob','tens','plan','aut','chif','ic','prec'];
 const CL=['Rédaction','Problémati.','Tension','Plan','Auteurs','Chiffres','I/C','Précision'];
 let copChart=null;
@@ -1981,7 +2141,7 @@ function initCopies(){
   if(!ctx)return;
   if(copChart)copChart.destroy();
   copChart=new Chart(ctx,{type:'radar',data:{labels:CL,datasets:copies.slice(-3).map((c,i)=>({label:c.date,data:CK.map(k=>c.c[k]),borderColor:i===0?'var(--red)':i===1?'var(--gold)':'var(--grn)',backgroundColor:i===0?'rgba(220,38,38,.05)':i===1?'rgba(202,138,4,.05)':'rgba(22,163,74,.05)',tension:.3,fill:true,pointRadius:3}))},options:{responsive:true,scales:{r:{min:0,max:20,ticks:{stepSize:5,font:{size:8}},pointLabels:{font:{size:8}}}},plugins:{legend:{labels:{font:{size:9},boxWidth:8}}}}});
-  document.getElementById('copies-list').innerHTML=copies.slice(-4).reverse().map(c=>`
+  document.getElementById('copies-list').innerHTML=copies.slice(-4).reverse().map((c,ci)=>`
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:7px">
         <div><div style="font-size:13px;font-weight:700;color:var(--txt)">${c.title}</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">${c.date}</div></div>
@@ -1990,8 +2150,13 @@ function initCopies(){
       <div class="crit-g">
         ${CK.map((k,i)=>`<div class="crit"><div class="crit-n">${CL[i]}</div><div class="crit-v" style="color:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'}">${c.c[k]}</div><div class="crit-pb"><div style="height:100%;border-radius:1px;background:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'};width:${c.c[k]/20*100}%"></div></div></div>`).join('')}
       </div>
+      <button class="btn btn-g btn-xs" style="margin-top:7px;color:var(--red)" onclick="deleteCopy(ci)">🗑 Supprimer</button>
     </div>`).join('');
   document.getElementById('nb-copies').textContent=copies.length;
+}
+function deleteCopy(i){
+  if(!confirm('Supprimer cette copie ?'))return;
+  const copies=M.get('copies',COPIES_DEMO);copies.splice(i,1);M.set('copies',copies);initCopies();showToast('🗑 Copie supprimée');
 }
 function handleDrop(e,type){e.preventDefault();const f=e.dataTransfer.files[0];if(f){if(type==='copy')uploadCopy(f);else uploadDoc(f);}}
 function uploadCopy(f){if(!f)return;alert(`📄 "${f.name}" reçu.`);logSession('copy',f.name);}
@@ -2143,8 +2308,20 @@ function deleteMyFlash(i){const cards=M.get('my_flashcards',[]);cards.splice(i,1
 // ══════════════════════════════════════════════════════
 function initDocs(){
   const saved=M.get('my_docs',[]);
-  const all=[{title:'Rapport jury HEC 2024',date:'14/01/2026',prio:'btf',status:'Fiché · 5 notions · 3 auteurs'},...saved];
-  document.getElementById('docs-grid').innerHTML=all.map(d=>`<div class="card" style="cursor:pointer;transition:all .1s" onmouseover="this.style.borderColor='var(--acc)'" onmouseout="this.style.borderColor='var(--brd)'"><div style="font-size:10px;color:var(--txt3);margin-bottom:2px">${d.date}</div><div style="font-size:13px;font-weight:700;margin-bottom:6px;color:var(--txt)">${d.title}</div><span class="badge ${d.prio}">${d.prio==='bi'?'Indispensable':'Très fréquent'}</span><div style="font-size:11px;color:var(--grn);margin-top:6px">✓ ${d.status}</div></div>`).join('');
+  const demos=[{title:'Rapport jury HEC 2024',date:'14/01/2026',prio:'btf',status:'Fiché · 5 notions · 3 auteurs',demo:true}];
+  const all=[...demos,...saved];
+  document.getElementById('docs-grid').innerHTML=all.map((d,i)=>`
+    <div class="card" style="transition:all .1s">
+      <div style="font-size:10px;color:var(--txt3);margin-bottom:2px">${d.date}</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;color:var(--txt)">${d.title}</div>
+      <span class="badge ${d.prio}">${d.prio==='bi'?'Indispensable':'Très fréquent'}</span>
+      <div style="font-size:11px;color:var(--grn);margin-top:6px">✓ ${d.status}</div>
+      ${!d.demo?`<button class="btn btn-g btn-xs" style="margin-top:8px;color:var(--red)" onclick="deleteDoc(${i-demos.length})">🗑 Supprimer</button>`:''}
+    </div>`).join('');
+}
+function deleteDoc(i){
+  if(!confirm('Supprimer ce document ?'))return;
+  const docs=M.get('my_docs',[]);docs.splice(i,1);M.set('my_docs',docs);initDocs();showToast('🗑 Document supprimé');
 }
 function uploadDoc(f){
   if(!f)return;
@@ -2230,7 +2407,7 @@ function filterMapRegion(region){
   ).join('');
 }
 
-// Stubs so existing references don't crash
+// Stubs so existing references do not crash
 function renderMap(r){filterMapRegion(r||'all');}
 function toggleMapMode(){}
 function mapZoom(){}
@@ -2247,38 +2424,41 @@ async function loadNotion(){
   el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Connexion à Notion…</div></div>`;
   status.textContent='Synchronisation…';
   try{
-    const res=await fetch(`https://api.notion.com/v1/blocks/${NOTION_PAGE}/children`,{
-      headers:{'Authorization':`Bearer ${NOTION_KEY}`,'Notion-Version':'2022-06-28','Content-Type':'application/json'}
-    });
+    // Use our server-side proxy — no CORS issues
+    const res=await fetch('/api/notion');
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
+    if(data.error)throw new Error(data.error);
     const blocks=data.results||[];
-    status.textContent=`✓ Synchronisé — ${blocks.length} blocs`;
-    el.innerHTML=blocks.slice(0,40).map(b=>{
-      const type=b.type;const content=b[type];
+    status.textContent='✓ Synchronisé — '+blocks.length+' blocs';
+    el.innerHTML=blocks.map(b=>{
+      const type=b.type;
+      if(type==='_subpage_title')return'<h1 style="margin-top:32px;padding:12px 16px;background:var(--acc-l);border-left:4px solid var(--acc);border-radius:0 8px 8px 0;font-family:var(--ffd);font-size:22px;color:var(--txt)">📄 '+b._title+'</h1>';
+      if(type==='divider')return'<hr style="margin:20px 0">';
+      if(type==='child_page')return'';
+      const content=b[type];
       const text=(content?.rich_text||[]).map(t=>t.plain_text).join('')||'';
       if(!text)return'';
-      if(type==='heading_1')return`<h1>${text}</h1>`;
-      if(type==='heading_2')return`<h2>${text}</h2>`;
-      if(type==='heading_3')return`<h3>${text}</h3>`;
-      if(type==='bulleted_list_item')return`<li>${text}</li>`;
-      if(type==='numbered_list_item')return`<li>${text}</li>`;
-      if(type==='quote')return`<blockquote>${text}</blockquote>`;
-      if(type==='divider')return`<hr>`;
-      return`<p>${text}</p>`;
+      if(type==='heading_1')return'<h2>'+text+'</h2>';
+      if(type==='heading_2')return'<h3>'+text+'</h3>';
+      if(type==='heading_3')return'<h4 style="font-size:14px;font-weight:600;margin:10px 0 4px;color:var(--txt2)">'+text+'</h4>';
+      if(type==='bulleted_list_item')return'<li>'+text+'</li>';
+      if(type==='numbered_list_item')return'<li>'+text+'</li>';
+      if(type==='quote')return'<blockquote>'+text+'</blockquote>';
+      return'<p>'+text+'</p>';
     }).filter(Boolean).join('');
     logSession('notion','Sync Notion — '+blocks.length+' blocs');
   } catch(e){
-    status.textContent='⚠️ Erreur CORS (local)';
+    status.textContent='⚠️ Erreur';
     el.innerHTML=`<div style="background:var(--gold-l);border:1px solid var(--gold-m);border-radius:var(--r);padding:14px;font-size:12px;color:var(--txt2)">
-      <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:7px">⚠️ CORS — Solution en 2 options</div>
-      <p style="margin-bottom:6px"><strong>Option 1 (meilleure) :</strong> Déploie sur Vercel — 20 min avec ton Terminal Mac. L'API Notion fonctionnera parfaitement depuis le serveur.</p>
-      <p style="margin-bottom:10px"><strong>Option 2 (maintenant) :</strong> Copie le contenu de ta page Notion (Ctrl+A → Ctrl+C) et colle-le dans le bouton ci-dessous.</p>
-      <button class="btn btn-p" onclick="pasteNotion()">📋 Coller du contenu Notion</button>
+      <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:7px">⚠️ Erreur de connexion Notion</div>
+      <p style="margin-bottom:10px">Vérifie que ta clé Notion et ton page ID sont bien configurés dans Vercel (Environment Variables).</p>
+      <button class="btn btn-p" onclick="pasteNotion()">📋 Coller du contenu Notion manuellement</button>
       <div style="font-size:10px;color:var(--txt4);margin-top:7px;font-family:var(--ffm)">${e.message}</div>
     </div>`;
   }
 }
+
 
 function pasteNotion(){
   const text=prompt('Colle ici le contenu copié depuis Notion (Ctrl+A puis Ctrl+C sur ta page Notion) :');
@@ -2885,6 +3065,294 @@ function logout(){
   }
   // else: overlay stays visible
 })();
+
+
+// ══════════════════════════════════════════════════════
+// FICHES PERSO — Create, Edit, Delete
+// ══════════════════════════════════════════════════════
+let _feEditId = null;
+
+function openCreateFiche(editId=null){
+  _feEditId = editId;
+  const existing = editId!==null ? M.get('my_fiches',[])[editId] : null;
+
+  // Show as full-screen overlay
+  document.getElementById('pg-fiche-editor').style.display='block';
+
+  // Reset editor
+  const titleEl = document.getElementById('fe-title');
+  const bodyEl = document.getElementById('fe-body');
+  const iconEl = document.getElementById('fe-icon-wrap');
+  const coverWrap = document.getElementById('fe-cover-wrap');
+  const coverImg = document.getElementById('fe-cover-img');
+  const prioSel = document.getElementById('fe-prio');
+
+  if(existing){
+    titleEl.textContent = existing.title || '';
+    bodyEl.innerHTML = existing.body || '';
+    iconEl.textContent = existing.icon || '📋';
+    prioSel.value = existing.prio || 'frequent';
+    if(existing.cover){coverImg.src=existing.cover;coverWrap.style.display='block';}
+    else coverWrap.style.display='none';
+  } else {
+    titleEl.textContent = '';
+    bodyEl.innerHTML = '';
+    iconEl.textContent = '📋';
+    prioSel.value = 'frequent';
+    coverWrap.style.display = 'none';
+  }
+
+  // Focus title
+  setTimeout(()=>{ titleEl.focus(); },100);
+}
+
+function closeFicheEditor(){
+  document.getElementById('pg-fiche-editor').style.display='none';
+  go('fiches');
+}
+
+function saveFichePerso(editId){
+  const title=document.getElementById('mf-title')?.value.trim();
+  const content=document.getElementById('mf-content')?.value.trim();
+  const prio=document.getElementById('mf-prio')?.value||'frequent';
+  if(!title||!content){showToast('Remplis le titre et le contenu');return;}
+  const fiches=M.get('my_fiches',[]);
+  const entry={title,content,prio,date:new Date().toLocaleString('fr-FR'),_custom:true};
+  if(editId!==null&&editId!==undefined)fiches[editId]=entry;
+  else fiches.unshift(entry);
+  M.set('my_fiches',fiches);
+  renderFiches(CHAPTERS);
+  showToast('✅ Fiche sauvegardée !');
+}
+
+function saveFicheEditor(){
+  const titleEl=document.getElementById('fe-title');
+  const bodyEl=document.getElementById('fe-body');
+  const prioSel=document.getElementById('fe-prio');
+  const iconEl=document.getElementById('fe-icon-wrap');
+  const coverImg=document.getElementById('fe-cover-img');
+  const coverWrap=document.getElementById('fe-cover-wrap');
+
+  const title=(titleEl?.textContent||'').trim();
+  const body=bodyEl?.innerHTML||'';
+  if(!title){showToast('Ajoute un titre à ta fiche');titleEl?.focus();return;}
+
+  const fiches=M.get('my_fiches',[]);
+  const entry={
+    title, body,
+    prio: prioSel?.value||'frequent',
+    icon: iconEl?.textContent||'📋',
+    cover: coverWrap?.style.display!=='none' ? coverImg?.src : null,
+    date: new Date().toLocaleString('fr-FR'),
+    _custom: true
+  };
+  if(_feEditId!==null)fiches[_feEditId]=entry;
+  else fiches.unshift(entry);
+  M.set('my_fiches',fiches);
+  showToast('✅ Fiche sauvegardée !');
+  document.getElementById('pg-fiche-editor').style.display='none';
+  go('fiches');
+}
+
+function execFE(cmd,val){document.execCommand(cmd,false,val||null);}
+
+function insertFEQuote(){
+  document.getElementById('fe-body').focus();
+  document.execCommand('formatBlock',false,'blockquote');
+}
+
+function pickFicheIcon(){
+  const picker=document.getElementById('fe-icon-picker');
+  picker.style.display=picker.style.display==='none'?'flex':'none';
+}
+
+function setFicheIcon(emoji){
+  document.getElementById('fe-icon-wrap').textContent=emoji;
+  document.getElementById('fe-icon-picker').style.display='none';
+}
+
+function addFicheCover(){
+  document.getElementById('fe-cover-inp').click();
+}
+function handleFECover(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const img=document.getElementById('fe-cover-img');
+    const wrap=document.getElementById('fe-cover-wrap');
+    img.src=e.target.result;
+    wrap.style.display='block';
+  };
+  r.readAsDataURL(f);
+}
+function removeFicheCover(){
+  document.getElementById('fe-cover-wrap').style.display='none';
+  document.getElementById('fe-cover-img').src='';
+}
+
+function addFicheImage(){
+  document.getElementById('fe-img-inp').click();
+}
+function handleFEImage(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const body=document.getElementById('fe-body');
+    body.focus();
+    // Insert image with delete button wrapper
+    const wrap=document.createElement('div');
+    wrap.className='fe-img-wrap';
+    wrap.innerHTML=`<img src="${e.target.result}" style="max-width:100%;border-radius:8px;margin:12px 0;display:block">
+      <button class="fe-img-del" onclick="this.closest('.fe-img-wrap').remove()">✕ Supprimer</button>`;
+    // Insert at cursor
+    const sel=window.getSelection();
+    if(sel.rangeCount){
+      const range=sel.getRangeAt(0);
+      range.insertNode(wrap);
+      range.collapse(false);
+    } else {
+      body.appendChild(wrap);
+    }
+  };
+  r.readAsDataURL(f);
+}
+
+function deleteFichePerso(i){
+  if(!confirm('Supprimer cette fiche ?'))return;
+  const fiches=M.get('my_fiches',[]);fiches.splice(i,1);M.set('my_fiches',fiches);
+  renderFiches(CHAPTERS);showToast('🗑 Fiche supprimée');
+}
+
+// Override renderFiches to also show personal fiches
+const _origRenderFiches = renderFiches;
+renderFiches = function(list){
+  _origRenderFiches(list);
+  const myFiches=M.get('my_fiches',[]);
+  if(!myFiches.length)return;
+  const grid=document.getElementById('fiches-grid');
+  if(!grid)return;
+  const persoHTML=myFiches.map((f,i)=>`
+    <div style="background:var(--surf);border:1px solid var(--acc-m);border-radius:12px;padding:22px;transition:all .15s;border-left:3px solid var(--acc)" onmouseover="this.style.boxShadow='var(--sh2)'" onmouseout="this.style.boxShadow=''">
+      ${f.cover?`<img src="${f.cover}" style="width:100%;height:100px;object-fit:cover;border-radius:7px;margin-bottom:12px;display:block">`:'' }
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
+        <span class="badge ${f.prio==='indispensable'?'bi':f.prio==='tres-frequent'?'btf':'bf'}">${f.prio==='indispensable'?'🔴 Indispensable':f.prio==='tres-frequent'?'🟠 Très fréquent':'🟡 Fréquent'}</span>
+        <span style="font-size:10px;background:var(--acc-l);color:var(--acc);padding:2px 7px;border-radius:8px;font-weight:600">✏️ Perso</span>
+      </div>
+      <div style="font-size:22px;margin-bottom:6px">${f.icon||'📋'}</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:5px;color:var(--txt);line-height:1.3">${f.title}</div>
+      <div style="font-size:11px;color:var(--txt3);margin-bottom:12px">${f.date}</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-g btn-sm" onclick="openFichePersoDetail(${i})">👁 Voir</button>
+        <button class="btn btn-g btn-sm" onclick="openCreateFiche(${i})">✏️ Modifier</button>
+        <button class="btn btn-g btn-sm" style="color:var(--red)" onclick="deleteFichePerso(${i})">🗑</button>
+      </div>
+    </div>`).join('');
+  grid.insertAdjacentHTML('afterbegin', persoHTML);
+};
+
+function openFichePersoDetail(i){
+  const f=M.get('my_fiches',[])[i];if(!f)return;
+  const m=document.createElement('div');m.className='modal-bg';
+  m.innerHTML=`<div class="modal-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">${f.title}</div>
+    <button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button>
+  </div>
+  <div style="font-size:13px;line-height:1.8;color:var(--txt2);white-space:pre-wrap">${f.content}</div>
+  <div style="display:flex;gap:7px;margin-top:14px">
+    <button class="btn btn-p btn-sm" onclick="openCreateFiche(${i});this.closest('.modal-bg').remove()">✏️ Modifier</button>
+    <button class="btn btn-g btn-sm" onclick="this.closest('.modal-bg').remove()">Fermer</button>
+  </div></div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
+}
+
+
+function editFicheContent(id){
+  const cached=M.get('fiche_'+id);
+  const m=document.createElement('div');m.className='modal-bg';
+  m.innerHTML=`<div class="modal-box" style="max-width:700px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">✏️ Modifier la fiche</div>
+      <button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button>
+    </div>
+    <div id="fiche-editor-${id}" class="my-editor-body" contenteditable="true" style="min-height:300px;border:1px solid var(--brd);border-radius:8px;padding:14px;font-size:13px;line-height:1.8;color:var(--txt2);outline:none">${cached||'<p>Génère d\'abord la fiche en cliquant sur le chapitre.</p>'}</div>
+    <div style="display:flex;gap:7px;margin-top:12px">
+      <button class="btn btn-p" onclick="saveFicheEdit(${id});this.closest('.modal-bg').remove()">💾 Sauvegarder</button>
+      <button class="btn btn-g" onclick="this.closest('.modal-bg').remove()">Annuler</button>
+    </div>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
+}
+
+function saveFicheEdit(id){
+  const el=document.getElementById('fiche-editor-'+id);
+  if(!el)return;
+  M.set('fiche_'+id,el.innerHTML);
+  showToast('✅ Fiche modifiée et sauvegardée !');
+}
+
+function deleteFicheCache(id){
+  if(!confirm('Effacer la fiche générée ? Elle sera régénérée par l\'IA au prochain clic.'))return;
+  localStorage.removeItem('geo_v5_fiche_'+id);
+  showToast('🗑 Fiche effacée — sera régénérée au prochain clic');
+}
+
+
+function handleFEPdf(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const att=document.getElementById('fe-attachments');
+    const div=document.createElement('div');
+    div.style.cssText='display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px';
+    div.innerHTML='<span style="font-size:20px">&#128196;</span><span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+f.name+'</span><button onclick="this.parentNode.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:12px;font-family:var(--ff)">&#128465; Supprimer</button>';
+    // Store pdf data
+    div.dataset.pdf=e.target.result;
+    att.appendChild(div);
+  };
+  r.readAsDataURL(f);
+  inp.value='';
+}
+
+
+function insertCoursFile(id,inp,type){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const body=document.getElementById('cours-body-'+id);
+    if(!body)return;
+    if(type==='image'){
+      body.focus();
+      document.execCommand('insertImage',false,e.target.result);
+    } else {
+      const div=document.createElement('div');
+      div.className='cours-ref';
+      div.innerHTML='<span>&#128196;</span><strong>'+f.name+'</strong><button onclick="this.parentNode.remove()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--red);font-size:11px">&#128465;</button>';
+      body.appendChild(div);
+    }
+    M.set('edit_chap_'+id,body.innerHTML);
+  };
+  r.readAsDataURL(f);
+  inp.value='';
+}
+
+
+let _flashAttach = null;
+function attachToFlash(inp,type){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    _flashAttach={name:f.name,data:e.target.result,type};
+    document.getElementById('mf-attach').innerHTML=
+      (type==='image'?'&#128247;':'&#128196;')+' '+f.name+
+      ' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">&#128465;</button>';
+  };
+  r.readAsDataURL(f);inp.value='';
+}
+
+
+function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');if(ov)ov.style.display='none';}
 
 </script>
 </body>
