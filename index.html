@@ -1779,27 +1779,27 @@ async function showFicheModal(id){
 
   ov.innerHTML=
     '<div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:10px;z-index:10">'+
-      '<button onclick="document.getElementById('fiche-overlay').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>'+
+      '<button onclick="document.getElementById(\'fiche-overlay\').style.display=\'none\'" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>'+
       '<div style="flex:1"></div>'+
       '<span class="badge '+prio+'">'+prioLabel+'</span>'+
       '<button onclick="editFicheContent('+id+')" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:var(--ff);color:var(--txt2)">✏️ Modifier</button>'+
       '<button onclick="deleteFicheCache('+id+')" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:var(--ff);color:var(--red)">🗑 Effacer</button>'+
-      '<button onclick="document.getElementById('fi-img-inp').click()" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 10px;font-size:13px;cursor:pointer">🖼️</button>'+
-      '<button onclick="document.getElementById('fi-pdf-inp').click()" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 10px;font-size:13px;cursor:pointer">📄</button>'+
+      '<button onclick="document.getElementById(\'fi-img-inp\').click()" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 10px;font-size:13px;cursor:pointer">🖼️</button>'+
+      '<button onclick="document.getElementById(\'fi-pdf-inp\').click()" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 10px;font-size:13px;cursor:pointer">📄</button>'+
     '</div>'+
     '<div style="max-width:860px;margin:0 auto;padding:52px 40px 80px">'+
       '<div style="font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);margin-bottom:8px;letter-spacing:-.02em;line-height:1.2">'+c.short+' — '+c.title+'</div>'+
       '<div style="height:1px;background:var(--brd);margin:20px 0 24px"></div>'+
       '<div style="display:flex;gap:0;border-bottom:1px solid var(--brd);margin-bottom:28px">'+
-        '<div class="tab on" onclick="stab(this,'mff-'+id+'')" style="font-size:13px;padding:8px 16px">📋 Fiche</div>'+
-        '<div class="tab" onclick="stab(this,'mfl-'+id+'')" style="font-size:13px;padding:8px 16px">🃏 Flashcards ('+flashCount+')</div>'+
+        '<div class="tab on" onclick="stab(this,\'mff-\'+id+\'\')" style="font-size:13px;padding:8px 16px">📋 Fiche</div>'+
+        '<div class="tab" onclick="stab(this,\'mfl-\'+id+\'\')" style="font-size:13px;padding:8px 16px">🃏 Flashcards ('+flashCount+')</div>'+
       '</div>'+
       '<div class="tc on" id="mff-'+id+'"><div id="fiche-bd-'+id+'"><div style="text-align:center;padding:40px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:8px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:13px">Génération par IA…</div></div></div></div>'+
       '<div class="tc" id="mfl-'+id+'">'+renderChapCards(c.short)+'</div>'+
       '<div id="fi-attachments" style="margin-top:24px;display:flex;flex-direction:column;gap:10px"></div>'+
     '</div>'+
-    '<input type="file" id="fi-img-inp" accept="image/*" style="display:none" onchange="addFiAttachment(this,'image')">'+
-    '<input type="file" id="fi-pdf-inp" accept=".pdf" style="display:none" onchange="addFiAttachment(this,'pdf')">';
+    '<input type="file" id="fi-img-inp" accept="image/*" style="display:none" onchange="addFiAttachment(this,\'image\')">'+
+    '<input type="file" id="fi-pdf-inp" accept=".pdf" style="display:none" onchange="addFiAttachment(this,\'pdf\')">';
 
   logSession('fiche',c.short);
   await genFiche(id);
