@@ -344,23 +344,22 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   .cours-sb{width:100%;height:150px;border-right:none;border-bottom:1px solid var(--brd)}
 }
 
-/* ── FICHE EDITOR (Notion-style) ── */
-#fe-title:empty::before{content:attr(placeholder);color:var(--txt4);pointer-events:none}
-#fe-body:empty::before{content:attr(placeholder);color:var(--txt4);pointer-events:none}
-#fe-body h1{font-family:var(--ffd);font-size:24px;font-weight:700;color:var(--txt);margin:28px 0 10px;padding:0;background:none;border:none}
-#fe-body h2{font-family:var(--ffd);font-size:19px;font-weight:700;color:var(--txt2);margin:22px 0 8px;padding:0;background:none;border:none;font-style:italic}
-#fe-body h3{font-size:16px;font-weight:700;color:var(--txt2);margin:16px 0 6px;border-bottom:1px solid var(--brd);padding-bottom:4px}
-#fe-body p{margin-bottom:10px;line-height:1.9}
-#fe-body ul{margin:6px 0 12px;padding-left:0;list-style:none}
-#fe-body ul li{padding:5px 10px 5px 14px;margin-bottom:4px;border-left:2px solid var(--acc);background:var(--acc-l);border-radius:0 6px 6px 0;line-height:1.7}
-#fe-body ol{margin:6px 0 12px;padding-left:20px}
-#fe-body ol li{padding:3px 0;line-height:1.7}
-#fe-body blockquote{border-left:3px solid var(--gold);padding:10px 16px;background:var(--gold-l);border-radius:0 8px 8px 0;margin:12px 0;font-style:italic;color:var(--txt2)}
+/* ── FICHE EDITOR ── */
+#fe-title:empty::before{content:"Sans titre…";color:var(--txt4);pointer-events:none}
+#fe-body:empty::before{content:"Commence à écrire ta fiche…";color:var(--txt4);pointer-events:none}
+#fe-body h2{font-family:var(--ffd);font-size:26px;font-weight:700;color:var(--txt);margin:32px 0 12px}
+#fe-body h3{font-family:var(--ffd);font-size:20px;font-weight:600;color:var(--txt2);margin:24px 0 8px;font-style:italic}
+#fe-body p{margin-bottom:12px;line-height:1.9}
+#fe-body ul{margin:8px 0 16px;padding-left:0;list-style:none}
+#fe-body ul li{padding:6px 10px 6px 14px;margin-bottom:5px;border-left:2px solid var(--acc);background:var(--acc-l);border-radius:0 6px 6px 0;line-height:1.75}
+#fe-body ol{margin:8px 0 16px;padding-left:24px}
+#fe-body ol li{padding:4px 0;line-height:1.8}
+#fe-body blockquote{border-left:3px solid var(--gold);padding:12px 20px;background:var(--gold-l);border-radius:0 8px 8px 0;margin:16px 0;font-style:italic;color:var(--txt2);font-size:15px}
 #fe-body strong{font-weight:700;color:var(--txt)}
-#fe-body img{max-width:100%;border-radius:8px;margin:12px 0;display:block;cursor:pointer}
-#fe-body .fe-img-wrap{position:relative;display:inline-block;width:100%}
-#fe-body .fe-img-wrap:hover .fe-img-del{display:flex}
-#fe-body .fe-img-del{display:none;position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:5px;padding:4px 9px;font-size:11px;cursor:pointer;align-items:center;gap:4px;font-family:var(--ff)}
+#fe-body img{max-width:100%;border-radius:8px;margin:16px 0;display:block}
+#fe-body .fe-img-wrap{position:relative;width:100%;margin:16px 0}
+#fe-body .fe-img-wrap:hover .fe-img-del{opacity:1}
+#fe-body .fe-img-del{opacity:0;position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;border:none;border-radius:5px;padding:5px 10px;font-size:11px;cursor:pointer;transition:opacity .15s;font-family:var(--ff)}
 
 </style>
 </head>
@@ -990,93 +989,59 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="card" id="news-list"><div style="text-align:center;padding:20px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Chargement…</div></div></div>
   </div>
 
-  <!-- ════ FICHE EDITOR (Notion-style) ════ -->
-  <div class="pg" id="pg-fiche-editor">
-    <!-- Top bar with back + save -->
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:0;padding-bottom:16px;border-bottom:1px solid var(--brd)">
-      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;display:flex;align-items:center;gap:5px;padding:5px 8px;border-radius:5px;transition:background .1s;font-family:var(--ff)" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">
-        ← Retour aux fiches
-      </button>
+    <!-- ════ FICHE EDITOR ════ -->
+  <div class="pg" id="pg-fiche-editor" style="padding:0;margin:-36px -48px;min-height:100vh;background:#fff">
+    
+    <!-- Barre top fine -->
+    <div style="position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--brd);padding:10px 32px;display:flex;align-items:center;gap:12px">
+      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 10px;border-radius:5px;transition:background .1s" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">&#8592; Fiches</button>
       <div style="flex:1"></div>
-      <select id="fe-prio" style="padding:5px 9px;border:1px solid var(--brd);border-radius:5px;font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
-        <option value="indispensable">🔴 Indispensable</option>
-        <option value="tres-frequent">🟠 Très fréquent</option>
-        <option value="frequent">🟡 Fréquent</option>
+      <select id="fe-prio" style="padding:5px 10px;border:1px solid var(--brd);border-radius:5px;font-size:12px;background:#fff;color:var(--txt);outline:none;font-family:var(--ff)">
+        <option value="indispensable">&#128308; Indispensable</option>
+        <option value="tres-frequent">&#128992; Très fréquent</option>
+        <option value="frequent">&#129000; Fréquent</option>
       </select>
-      <button onclick="saveFicheEditor()" class="btn btn-p btn-sm">💾 Sauvegarder</button>
+      <button onclick="saveFicheEditor()" style="background:var(--acc);color:#fff;border:none;border-radius:5px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">Sauvegarder</button>
     </div>
 
-    <!-- Notion-style editor area -->
-    <div style="max-width:760px;margin:0 auto;padding:40px 0">
+    <!-- Page blanche centrée -->
+    <div style="max-width:680px;margin:0 auto;padding:64px 32px 140px">
 
-      <!-- Cover image (optional) -->
-      <div id="fe-cover-wrap" style="display:none;margin-bottom:24px;position:relative;border-radius:10px;overflow:hidden">
-        <img id="fe-cover-img" style="width:100%;height:200px;object-fit:cover;display:block" src="" alt="">
-        <button onclick="removeFicheCover()" style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:5px;padding:4px 9px;font-size:11px;cursor:pointer;font-family:var(--ff)">✕ Supprimer</button>
-      </div>
-
-      <!-- Icon + title row -->
-      <div style="margin-bottom:8px">
-        <div id="fe-icon-wrap" style="font-size:48px;margin-bottom:10px;cursor:pointer;display:inline-block" onclick="pickFicheIcon()" title="Changer l'icône">📋</div>
-        <div id="fe-icon-picker" style="display:none;flex-wrap:wrap;gap:6px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:12px;margin-bottom:10px;max-width:380px">
-          ${['📋','📝','🔖','⭐','🏆','🎯','💡','🔑','🌍','🇪🇺','📊','💰','⚔️','🌱','🔬','📚','🗺️','🌐','⚡','🎓'].map(e=>`<span onclick="setFicheIcon('${e}')" style="font-size:24px;cursor:pointer;padding:4px;border-radius:5px" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">${e}</span>`).join('')}
-        </div>
-      </div>
-
-      <!-- Add cover / Add icon buttons (Notion style) -->
-      <div style="display:flex;gap:8px;margin-bottom:20px" id="fe-add-btns">
-        <button onclick="addFicheCover()" style="background:none;border:none;cursor:pointer;color:var(--txt4);font-size:12px;padding:3px 6px;border-radius:4px;font-family:var(--ff);transition:all .1s" onmouseover="this.style.background='var(--surf2)';this.style.color='var(--txt3)'" onmouseout="this.style.background='';this.style.color='var(--txt4)'">🖼️ Ajouter une image de couverture</button>
-        <button onclick="addFicheImage()" style="background:none;border:none;cursor:pointer;color:var(--txt4);font-size:12px;padding:3px 6px;border-radius:4px;font-family:var(--ff);transition:all .1s" onmouseover="this.style.background='var(--surf2)';this.style.color='var(--txt3)'" onmouseout="this.style.background='';this.style.color='var(--txt4)'">📷 Insérer une image</button>
-      </div>
-
-      <!-- Title -->
+      <!-- Titre -->
       <div id="fe-title" contenteditable="true"
-        style="font-family:var(--ffd);font-size:38px;font-weight:700;color:var(--txt);outline:none;margin-bottom:18px;line-height:1.25;letter-spacing:-.02em;min-height:48px"
-        placeholder="Titre de la fiche…"
-        onkeydown="if(event.key==='Enter'){event.preventDefault();document.getElementById('fe-body').focus();}"
-        oninput="this.style.minHeight=''">
+        style="font-family:var(--ffd);font-size:40px;font-weight:700;color:var(--txt);outline:none;margin-bottom:28px;line-height:1.2;letter-spacing:-.02em;min-height:52px;word-break:break-word">
       </div>
 
-      <!-- Toolbar -->
-      <div style="display:flex;gap:2px;flex-wrap:wrap;padding:7px 10px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;margin-bottom:16px;align-items:center">
-        <button class="rtb" onclick="execFE('bold')" title="Gras"><strong>B</strong></button>
-        <button class="rtb" onclick="execFE('italic')" title="Italique"><em>I</em></button>
-        <button class="rtb" onclick="execFE('underline')" title="Souligné"><u>U</u></button>
-        <div class="rtb-sep"></div>
-        <button class="rtb" onclick="execFE('formatBlock','h1')" title="Titre 1" style="font-size:11px">H1</button>
-        <button class="rtb" onclick="execFE('formatBlock','h2')" title="Titre 2" style="font-size:11px">H2</button>
-        <button class="rtb" onclick="execFE('formatBlock','h3')" title="Titre 3" style="font-size:11px">H3</button>
-        <button class="rtb" onclick="execFE('formatBlock','p')" title="Texte normal">¶</button>
-        <div class="rtb-sep"></div>
-        <button class="rtb" onclick="execFE('insertUnorderedList')" title="Liste à puces">• L</button>
-        <button class="rtb" onclick="execFE('insertOrderedList')" title="Liste numérotée">1.</button>
-        <button class="rtb" onclick="insertFEQuote()" title="Citation">❝</button>
-        <div class="rtb-sep"></div>
-        <div class="rtb-c" style="background:#2e2a24" onclick="execFE('foreColor','#2e2a24')" title="Noir"></div>
-        <div class="rtb-c" style="background:#b8806a" onclick="execFE('foreColor','#b8806a')" title="Pêche"></div>
-        <div class="rtb-c" style="background:#5b7fa6" onclick="execFE('foreColor','#5b7fa6')" title="Bleu ardoise"></div>
-        <div class="rtb-c" style="background:#7aab8a" onclick="execFE('foreColor','#7aab8a')" title="Sauge"></div>
-        <div class="rtb-c" style="background:#c48a82" onclick="execFE('foreColor','#c48a82')" title="Rose"></div>
-        <div class="rtb-c" style="background:#9b8ec4" onclick="execFE('foreColor','#9b8ec4')" title="Lavande"></div>
-        <div class="rtb-sep"></div>
-        <button class="rtb" onclick="addFicheImage()" title="Image">🖼️</button>
-        <button class="rtb" onclick="execFE('removeFormat')" title="Effacer format">Aa</button>
-        <button class="rtb" onclick="execFE('undo')">↩</button>
-        <button class="rtb" onclick="execFE('redo')">↪</button>
-      </div>
-
-      <!-- Body -->
+      <!-- Corps -->
       <div id="fe-body" contenteditable="true"
-        style="font-size:15px;line-height:1.9;color:var(--txt2);outline:none;min-height:400px"
-        placeholder="Commence à écrire ta fiche…">
+        style="font-size:16px;line-height:1.9;color:var(--txt2);outline:none;min-height:500px;word-break:break-word">
       </div>
 
-      <!-- Inline images added here -->
     </div>
 
-    <!-- Hidden file input for images -->
+    <!-- Toolbar flottante en bas au centre -->
+    <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--brd);border-radius:40px;padding:8px 18px;display:flex;gap:3px;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.12);z-index:30">
+      <button class="rtb" onclick="execFE('bold')"><strong>B</strong></button>
+      <button class="rtb" onclick="execFE('italic')"><em>I</em></button>
+      <button class="rtb" onclick="execFE('underline')"><u>U</u></button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execFE('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execFE('formatBlock','h3')" style="font-size:10px;font-weight:700">Moyen</button>
+      <button class="rtb" onclick="execFE('formatBlock','p')" style="font-size:10px">Normal</button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execFE('insertUnorderedList')">• L</button>
+      <button class="rtb" onclick="insertFEQuote()">&#10078;</button>
+      <div class="rtb-sep"></div>
+      <div class="rtb-c" style="background:#b8806a" onclick="execFE('foreColor','#b8806a')" title="Pêche"></div>
+      <div class="rtb-c" style="background:#5b7fa6" onclick="execFE('foreColor','#5b7fa6')" title="Bleu"></div>
+      <div class="rtb-c" style="background:#7aab8a" onclick="execFE('foreColor','#7aab8a')" title="Vert"></div>
+      <div class="rtb-c" style="background:#c48a82" onclick="execFE('foreColor','#c48a82')" title="Rose"></div>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="addFicheImage()" title="Ajouter une image" style="font-size:13px">&#128247;</button>
+      <button class="rtb" onclick="execFE('removeFormat')" style="font-size:10px">Aa</button>
+    </div>
+
     <input type="file" id="fe-img-inp" accept="image/*" style="display:none" onchange="handleFEImage(this)">
-    <input type="file" id="fe-cover-inp" accept="image/*" style="display:none" onchange="handleFECover(this)">
   </div>
 
   </div><!-- /content -->
