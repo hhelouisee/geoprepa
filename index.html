@@ -346,7 +346,44 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 </style>
 </head>
 <body>
-<div class="app">
+<!-- ████ AUTH OVERLAY ████ -->
+<div id="auth-overlay" style="position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:var(--ff)">
+  <div style="width:100%;max-width:380px;padding:20px">
+    <div style="text-align:center;margin-bottom:28px">
+      <div style="width:44px;height:44px;background:var(--acc);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--ffd);font-style:italic;font-size:20px;color:#fff;font-weight:700;margin:0 auto 10px">G</div>
+      <div style="font-family:var(--ffd);font-size:22px;font-weight:700;color:var(--txt)">GeoPrepa BCE</div>
+      <div style="font-size:12px;color:var(--txt3);margin-top:3px">Geopolitique - ECG</div>
+    </div>
+    <div style="display:flex;border:1px solid var(--brd);border-radius:8px;overflow:hidden;margin-bottom:18px">
+      <button id="tab-login" onclick="switchAuthTab('login')" style="flex:1;padding:8px;font-size:13px;font-weight:600;background:var(--acc);color:#fff;border:none;cursor:pointer;font-family:var(--ff)">Connexion</button>
+      <button id="tab-signup" onclick="switchAuthTab('signup')" style="flex:1;padding:8px;font-size:13px;font-weight:500;background:var(--surf);color:var(--txt3);border:none;cursor:pointer;font-family:var(--ff)">Creer un compte</button>
+    </div>
+    <div style="background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:20px">
+      <div style="margin-bottom:12px">
+        <label style="font-size:11px;font-weight:600;color:var(--txt3);display:block;margin-bottom:5px">EMAIL</label>
+        <input id="auth-email" type="email" placeholder="ton@email.com"
+          style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)"
+          onkeydown="if(event.key==='Enter')authSubmit()">
+      </div>
+      <div style="margin-bottom:16px">
+        <label style="font-size:11px;font-weight:600;color:var(--txt3);display:block;margin-bottom:5px">MOT DE PASSE</label>
+        <input id="auth-pwd" type="password" placeholder="min. 6 caracteres"
+          style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)"
+          onkeydown="if(event.key==='Enter')authSubmit()">
+      </div>
+      <button onclick="authSubmit()" id="auth-btn"
+        style="width:100%;padding:10px;background:var(--acc);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">
+        Se connecter
+      </button>
+      <div id="auth-msg" style="margin-top:10px;font-size:12px;text-align:center;color:var(--red);min-height:16px"></div>
+    </div>
+    <div style="text-align:center;margin-top:14px">
+      <button onclick="skipAuth()" style="background:none;border:none;font-size:12px;color:var(--txt4);cursor:pointer;font-family:var(--ff)">Continuer sans compte</button>
+    </div>
+  </div>
+</div>
+
+<div class="app" id="main-app" style="display:none">
 
 <!-- ████ SIDEBAR ████ -->
 <aside class="sb" id="sb">
@@ -1108,6 +1145,75 @@ const ANNALES=[
 
 <script>
 // ══════════════════════════════════════════════════════
+// SUPABASE CLIENT
+// ══════════════════════════════════════════════════════
+const SUPA_URL = (typeof process!=='undefined'&&process.env&&process.env.SUPABASE_URL)||window.__SUPA_URL__||'';
+const SUPA_KEY = (typeof process!=='undefined'&&process.env&&process.env.SUPABASE_ANON_KEY)||window.__SUPA_KEY__||'';
+
+// Simple Supabase REST client (no SDK needed)
+const DB = {
+  _h(){return{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};},
+  async upsert(table, data){
+    if(!SUPA_URL||!SUPA_KEY)return;
+    try{
+      await fetch(SUPA_URL+'/rest/v1/'+table,{
+        method:'POST',
+        headers:{...this._h(),'Prefer':'resolution=merge-duplicates'},
+        body:JSON.stringify(data)
+      });
+    }catch(e){console.log('DB upsert error:',e);}
+  },
+  async select(table, filter=''){
+    if(!SUPA_URL||!SUPA_KEY)return[];
+    try{
+      const r=await fetch(SUPA_URL+'/rest/v1/'+table+'?'+filter,{headers:this._h()});
+      return await r.json();
+    }catch(e){return[];}
+  }
+};
+
+// User ID — simple device fingerprint (no auth yet)
+const USER_ID = (()=>{
+  let id=localStorage.getItem('geo_user_id');
+  if(!id){id='u_'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('geo_user_id',id);}
+  return id;
+})();
+
+// Sync progress to Supabase (debounced)
+let _syncTimer=null;
+function syncProgress(chapId, prog, note){
+  clearTimeout(_syncTimer);
+  _syncTimer=setTimeout(()=>{
+    DB.upsert('progress',{user_id:USER_ID,chap_id:chapId,prog:prog||0,note:note||null,visited:true,updated_at:new Date().toISOString()});
+  },1000);
+}
+
+function syncSession(type, label){
+  DB.upsert('sessions',{user_id:USER_ID,type,label,created_at:new Date().toISOString()});
+}
+
+function syncFlashDone(cardKey){
+  DB.upsert('flashcards_done',{user_id:USER_ID,card_key:cardKey,updated_at:new Date().toISOString()});
+}
+
+// Load progress from Supabase on startup (merge with localStorage)
+async function loadFromSupabase(){
+  if(!SUPA_URL||!SUPA_KEY)return;
+  try{
+    const rows=await DB.select('progress','user_id=eq.'+USER_ID);
+    rows.forEach(r=>{
+      if(r.prog>0)localStorage.setItem('geo_v5_prog_'+r.chap_id,JSON.stringify(r.prog));
+      if(r.note)localStorage.setItem('geo_v5_note_'+r.chap_id,JSON.stringify(r.note));
+      if(r.visited){
+        const v=JSON.parse(localStorage.getItem('geo_v5_visited_chapters')||'[]');
+        if(!v.includes(r.chap_id)){v.push(r.chap_id);localStorage.setItem('geo_v5_visited_chapters',JSON.stringify(v));}
+      }
+    });
+    showToast('✓ Données synchronisées depuis le cloud');
+  }catch(e){console.log('Supabase load error:',e);}
+}
+
+// ══════════════════════════════════════════════════════
 // MEMORY
 // ══════════════════════════════════════════════════════
 const M={
@@ -1418,7 +1524,7 @@ function loadChap(id){
   // Track visit
   const visited=M.get('visited_chapters',[]);
   if(!visited.includes(id)){visited.push(id);M.set('visited_chapters',visited);}
-  if(M.get('prog_'+id,0)===0)M.set('prog_'+id,10);
+  if(M.get('prog_'+id,0)===0){M.set('prog_'+id,10);syncProgress(id,10,null);}
   logSession('chap',c.short+' — '+c.title);
 
   // Get content — from CHAPTERS_CONTENT (lazy) or saved edit
@@ -1514,7 +1620,7 @@ function toggleEditCours(id){
   }
 }
 function execCours(cmd,val){document.execCommand(cmd,false,val||null);}
-function setNote(id,val){if(val)M.set('note_'+id,parseInt(val));}
+function setNote(id,val){if(val){M.set('note_'+id,parseInt(val));syncProgress(id,M.get('prog_'+id,0),parseInt(val));}}
 function setProgress(id,val){if(isNaN(val))return;M.set('prog_'+id,val);const ci=document.getElementById('ci-'+id);if(ci){const p=ci.querySelector('.ci-prog');if(p){const col=val>70?'var(--grn)':val>30?'var(--gold)':val>0?'var(--org)':'var(--brd2)';p.textContent=val+'%';p.style.color=col;}}}
 function insertImgInBody(id){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const b=document.getElementById('cours-body-'+id);if(b){b.focus();document.execCommand('insertImage',false,e.target.result);}};r.readAsDataURL(f);};inp.click();}
 function associatePDF(id,inp){alert('PDF associé à '+CHAPTERS[id].short+'. (Dans la version déployée sur Vercel, le PDF sera affiché intégré directement.)');}
@@ -1694,7 +1800,7 @@ function flipCard(){flipped=!flipped;document.getElementById('fl-inner').classLi
 function nextCard(){flIdx=(flIdx+1)%flDeck.length;renderFlash();}
 function prevCard(){flIdx=(flIdx-1+flDeck.length)%flDeck.length;renderFlash();}
 function markCard(known){
-  if(known){const done=M.get('flash_done',[]);const k=flDeck[flIdx]?.q?.substring(0,40);if(k&&!done.includes(k)){done.push(k);M.set('flash_done',done);}}
+  if(known){const done=M.get('flash_done',[]);const k=flDeck[flIdx]?.q?.substring(0,40);if(k&&!done.includes(k)){done.push(k);M.set('flash_done',done);syncFlashDone(k);}}
   nextCard();
 }
 
@@ -2234,9 +2340,7 @@ const NOTION_PAGE=''; // Ajoute ton page ID dans Vercel env variables
 // ══════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════
-updateCd();
-renderObj();
-initDash();
+// Auth handles init via showApp()
 
 
 // ══════════════════════════════════════════════════════
@@ -2673,6 +2777,113 @@ function toggleCoursSb(){
       if(btn){btn.style.left='0';btn.textContent='›';}
     }
   });
+})();
+
+
+// ══════════════════════════════════════════════════════
+// AUTH SYSTEM
+// ══════════════════════════════════════════════════════
+let authMode = 'login';
+let currentUser = null;
+
+function switchAuthTab(mode){
+  authMode = mode;
+  const isLogin = mode === 'login';
+  document.getElementById('tab-login').style.background = isLogin ? 'var(--acc)' : 'var(--surf)';
+  document.getElementById('tab-login').style.color = isLogin ? '#fff' : 'var(--txt3)';
+  document.getElementById('tab-signup').style.background = !isLogin ? 'var(--acc)' : 'var(--surf)';
+  document.getElementById('tab-signup').style.color = !isLogin ? '#fff' : 'var(--txt3)';
+  document.getElementById('auth-btn').textContent = isLogin ? 'Se connecter' : 'Creer mon compte';
+  document.getElementById('auth-msg').textContent = '';
+}
+
+async function authSubmit(){
+  const email = document.getElementById('auth-email').value.trim();
+  const pwd = document.getElementById('auth-pwd').value;
+  const msg = document.getElementById('auth-msg');
+  const btn = document.getElementById('auth-btn');
+
+  if(!email || !pwd){ msg.textContent = 'Remplis les deux champs.'; return; }
+  if(pwd.length < 6){ msg.textContent = 'Mot de passe trop court (min. 6 caracteres).'; return; }
+  if(!SUPA_URL || !SUPA_KEY){ skipAuth(); return; }
+
+  btn.textContent = '...'; btn.disabled = true;
+  const endpoint = authMode === 'login'
+    ? SUPA_URL + '/auth/v1/token?grant_type=password'
+    : SUPA_URL + '/auth/v1/signup';
+
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','apikey':SUPA_KEY},
+      body: JSON.stringify({email, password: pwd})
+    });
+    const data = await res.json();
+
+    if(data.error || data.error_description || data.msg){
+      const errMsg = data.error_description || data.msg || data.error || 'Erreur';
+      if(errMsg.includes('Invalid login')) msg.textContent = 'Email ou mot de passe incorrect.';
+      else if(errMsg.includes('already registered')) msg.textContent = 'Email deja utilise. Connecte-toi.';
+      else if(errMsg.includes('Email not confirmed')) msg.textContent = 'Verifie ton email pour confirmer.';
+      else msg.textContent = errMsg;
+      btn.textContent = authMode === 'login' ? 'Se connecter' : 'Creer mon compte';
+      btn.disabled = false;
+      return;
+    }
+
+    if(authMode === 'signup' && !data.access_token){
+      msg.style.color = 'var(--grn)';
+      msg.textContent = 'Compte cree ! Verifie ton email puis connecte-toi.';
+      switchAuthTab('login');
+      btn.disabled = false;
+      return;
+    }
+
+    // Success
+    if(data.access_token){
+      localStorage.setItem('geo_auth_token', data.access_token);
+      localStorage.setItem('geo_user_id', data.user.id);
+      localStorage.setItem('geo_user_email', data.user.email);
+      currentUser = data.user;
+      showApp();
+    }
+  } catch(e){
+    msg.textContent = 'Erreur reseau. Verifie ta connexion.';
+    btn.textContent = authMode === 'login' ? 'Se connecter' : 'Creer mon compte';
+    btn.disabled = false;
+  }
+}
+
+function skipAuth(){
+  localStorage.setItem('geo_skip_auth','1');
+  showApp();
+}
+
+function showApp(){
+  document.getElementById('auth-overlay').style.display = 'none';
+  document.getElementById('main-app').style.display = 'flex';
+  updateCd(); renderObj(); initDash(); loadFromSupabase();
+  // Show user email in sidebar if logged in
+  const email = localStorage.getItem('geo_user_email');
+  const el = document.querySelector('.sb-foot .sf-user');
+  if(el && email) el.textContent = email.split('@')[0];
+}
+
+function logout(){
+  localStorage.removeItem('geo_auth_token');
+  localStorage.removeItem('geo_user_email');
+  localStorage.removeItem('geo_skip_auth');
+  location.reload();
+}
+
+// Check auth on load
+(function checkAuth(){
+  const token = localStorage.getItem('geo_auth_token');
+  const skip = localStorage.getItem('geo_skip_auth');
+  if(token || skip){
+    showApp();
+  }
+  // else: overlay stays visible
 })();
 
 </script>
