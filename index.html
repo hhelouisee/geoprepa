@@ -45,7 +45,7 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
@@ -90,7 +90,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;
 .ng-lbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txt4)}
 .ng-arr{font-size:9px;color:var(--txt4);transition:transform .15s}
 .ng-items{overflow:hidden;transition:max-height .2s ease}
-.ni{display:flex;align-items:center;gap:6px;padding:4px 8px;cursor:pointer;border-radius:4px;color:var(--txt3);font-size:12px;font-weight:400;transition:all .08s;white-space:nowrap;overflow:hidden}
+.ni{display:flex;align-items:center;gap:7px;padding:5px 9px;cursor:pointer;border-radius:5px;color:var(--txt3);font-size:12px;font-weight:400;transition:all .08s;white-space:nowrap;overflow:hidden}
 .ni:hover{background:rgba(0,0,0,.04);color:var(--txt)}
 .ni.on{background:rgba(35,131,226,.1);color:var(--acc);font-weight:500}
 .ni-ic{font-size:13px;flex-shrink:0;width:16px;text-align:center}
@@ -103,18 +103,18 @@ body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;
 .sf-btn:hover{background:var(--surf2);color:var(--txt)}
 
 /* ── CONTENT ── */
-.content{flex:1;overflow-y:auto;padding:28px 36px;background:var(--bg)}
+.content{flex:1;overflow-y:auto;padding:36px 48px;background:var(--bg)}
 .pg{display:none;animation:fi .15s ease}
 .pg.on{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
-.page-t{font-family:var(--ffd);font-size:24px;font-weight:700;color:var(--txt);margin-bottom:4px;letter-spacing:-.02em;opacity:.9}
-.page-s{font-size:12px;color:var(--txt3);margin-bottom:16px}
+.page-t{font-family:var(--ffd);font-size:32px;font-weight:700;color:var(--txt);margin-bottom:6px;letter-spacing:-.03em}
+.page-s{font-size:13px;color:var(--txt3);margin-bottom:22px;line-height:1.6}
 
 /* ── COMPONENTS ── */
-.card{background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:16px;transition:background .2s}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.card{background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:20px;transition:background .2s}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .pb{height:3px;background:var(--surf3);border-radius:2px;overflow:hidden}
 .pf{height:100%;border-radius:2px;transition:width .5s ease}
 .badge{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:20px;font-size:10px;font-weight:600}
@@ -129,8 +129,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:13px;
 .btn-red{background:var(--red);color:#fff}
 .btn-sm{padding:4px 8px;font-size:11px;border-radius:5px}
 .btn-xs{padding:2px 5px;font-size:10px;border-radius:4px}
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:16px}
-.sc{background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:13px;position:relative;overflow:hidden;transition:background .2s}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.sc{background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:18px;position:relative;overflow:hidden;transition:background .2s}
 .sc-stripe{position:absolute;top:0;left:0;right:0;height:2px}
 .sc .sl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3)}
 .sc .sv{font-size:24px;font-weight:700;line-height:1;margin:4px 0 2px;font-family:var(--ffm)}
@@ -607,7 +607,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="btn btn-g btn-xs" onclick="addFicheFolder()">+ Dossier</button>
     </div>
 
-    <div class="g3" id="fiches-grid"></div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px" id="fiches-grid"></div>
   </div>
 
   <!-- ════ FLASHCARDS ════ -->
@@ -1640,15 +1640,18 @@ function renderFiches(list){
     const pClass=c.priority==='indispensable'?'bi':c.priority==='tres-frequent'?'btf':'bf';
     const pl=c.priority==='indispensable'?'🔴 Indispensable':c.priority==='tres-frequent'?'🟠 Très fréquent':'🟡 Fréquent';
     const col=prog>70?'var(--grn)':prog>30?'var(--gold)':prog>0?'var(--org)':'var(--brd2)';
-    return `<div style="background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:13px;cursor:pointer;transition:all .1s" onmouseover="this.style.borderColor='var(--acc)';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='var(--brd)';this.style.transform=''" onclick="showFicheModal(${c.id})">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:6px">
-        <span class="badge ${pClass}" style="font-size:9px">${pl}</span>
-        ${note!==null?`<span style="font-size:10px;font-family:var(--ffm);font-weight:700;color:var(--gold)">${note}/20</span>`:''}
+    return `<div style="background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:22px;cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--acc)';this.style.boxShadow='var(--sh2)'" onmouseout="this.style.borderColor='var(--brd)';this.style.boxShadow=''" onclick="showFicheModal(${c.id})">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
+        <span class="badge ${pClass}">${pl}</span>
+        ${note!==null?`<span style="font-size:11px;font-family:var(--ffm);font-weight:700;color:var(--gold)">${note}/20</span>`:''}
       </div>
-      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--txt4);margin-bottom:2px">${c.short}</div>
-      <div style="font-size:12px;font-weight:700;line-height:1.3;margin-bottom:7px;color:var(--txt)">${c.title}</div>
-      <div class="pb" style="margin-bottom:5px"><div class="pf" style="width:${prog}%;background:${col}"></div></div>
-      <div style="font-size:10px;color:var(--acc);font-weight:600">📋 Cliquer pour la fiche →</div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt4);margin-bottom:5px">${c.short}</div>
+      <div style="font-size:15px;font-weight:700;line-height:1.4;margin-bottom:12px;color:var(--txt)">${c.title}</div>
+      <div class="pb" style="margin-bottom:10px;height:4px"><div class="pf" style="width:${prog}%;background:${col}"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:11px;color:var(--acc);font-weight:600">📋 Voir la fiche →</div>
+        <div style="font-size:10px;color:var(--txt4)">${prog}%</div>
+      </div>
     </div>`;
   }).join('');
 }
@@ -1666,6 +1669,8 @@ async function showFicheModal(id){
     <div class="tabs">
       <div class="tab on" onclick="stab(this,'mff-${id}')">📋 Fiche</div>
       <div class="tab" onclick="stab(this,'mfl-${id}')">🃏 Flashcards (${[...FLASHCARDS,...M.get('my_flashcards',[])].filter(f=>f.c===c.short).length})</div>
+      <button class="btn btn-g btn-sm" style="margin-left:auto" onclick="editFicheContent(${id})">✏️ Modifier</button>
+      <button class="btn btn-g btn-sm" style="color:var(--red)" onclick="deleteFicheCache(${id})">🗑 Effacer</button>
     </div>
     <div class="tc on" id="mff-${id}">
       <div id="fiche-bd-${id}"><div style="text-align:center;padding:22px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Génération de la fiche par IA…</div></div></div>
@@ -3008,6 +3013,38 @@ function openFichePersoDetail(i){
   </div></div>`;
   document.body.appendChild(m);
   m.addEventListener('click',e=>{if(e.target===m)m.remove();});
+}
+
+
+function editFicheContent(id){
+  const cached=M.get('fiche_'+id);
+  const m=document.createElement('div');m.className='modal-bg';
+  m.innerHTML=`<div class="modal-box" style="max-width:700px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">✏️ Modifier la fiche</div>
+      <button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button>
+    </div>
+    <div id="fiche-editor-${id}" class="my-editor-body" contenteditable="true" style="min-height:300px;border:1px solid var(--brd);border-radius:8px;padding:14px;font-size:13px;line-height:1.8;color:var(--txt2);outline:none">${cached||'<p>Génère d\'abord la fiche en cliquant sur le chapitre.</p>'}</div>
+    <div style="display:flex;gap:7px;margin-top:12px">
+      <button class="btn btn-p" onclick="saveFicheEdit(${id});this.closest('.modal-bg').remove()">💾 Sauvegarder</button>
+      <button class="btn btn-g" onclick="this.closest('.modal-bg').remove()">Annuler</button>
+    </div>
+  </div>`;
+  document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
+}
+
+function saveFicheEdit(id){
+  const el=document.getElementById('fiche-editor-'+id);
+  if(!el)return;
+  M.set('fiche_'+id,el.innerHTML);
+  showToast('✅ Fiche modifiée et sauvegardée !');
+}
+
+function deleteFicheCache(id){
+  if(!confirm('Effacer la fiche générée ? Elle sera régénérée par l\'IA au prochain clic.'))return;
+  localStorage.removeItem('geo_v5_fiche_'+id);
+  showToast('🗑 Fiche effacée — sera régénérée au prochain clic');
 }
 
 </script>
