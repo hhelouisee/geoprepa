@@ -1698,7 +1698,7 @@ Réponds UNIQUEMENT en JSON valide sans markdown :
 Contenu : ${content}`;
 
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
     const text=data.content?.map(i=>i.text||'').join('')||'';
@@ -1886,7 +1886,7 @@ async function genQuestion(){
   if(chapVal!=='all'){const c=CHAPTERS[parseInt(chapVal)];if(c)context+=`Chapitre : ${c.title}. `;}
   if(theme)context+=`Thème : ${theme}.`;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:200,messages:[{role:'user',content:`Tu es professeur de géopolitique ECG. Génère 1 sujet de dissertation BCE sur : ${context}\nRéponds UNIQUEMENT en JSON : {"question":"La question ?","badge":"indispensable","chapitre":"référence","theme":"thème"}`}]})});
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:200,messages:[{role:'user',content:`Tu es professeur de géopolitique ECG. Génère 1 sujet de dissertation BCE sur : ${context}\nRéponds UNIQUEMENT en JSON : {"question":"La question ?","badge":"indispensable","chapitre":"référence","theme":"thème"}`}]})});
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
     const p=JSON.parse(data.content?.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
@@ -1910,7 +1910,7 @@ async function submitTr(){
   document.getElementById('corr-i').textContent='Génération…';
   cb.scrollIntoView({behavior:'smooth',block:'start'});
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1400,messages:[{role:'user',content:`Tu es correcteur BCE exigeant en géopolitique ECG. Réponds UNIQUEMENT en JSON valide sans markdown :\n{"score":"X/20","points_solides":["p1","p2","p3"],"manques":["m1","m2","m3"],"erreurs":["e1"],"reponse_ideale":"Réponse 18/20 complète."}\nQuestion : "${q}"\nRéponse : "${ans.substring(0,1000)}"`}]})});
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1400,messages:[{role:'user',content:`Tu es correcteur BCE exigeant en géopolitique ECG. Réponds UNIQUEMENT en JSON valide sans markdown :\n{"score":"X/20","points_solides":["p1","p2","p3"],"manques":["m1","m2","m3"],"erreurs":["e1"],"reponse_ideale":"Réponse 18/20 complète."}\nQuestion : "${q}"\nRéponse : "${ans.substring(0,1000)}"`}]})});
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
     const p=JSON.parse(data.content?.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
@@ -1936,7 +1936,7 @@ function fmt(s){return `${String(Math.floor(s/3600)).padStart(2,'0')}:${String(M
 async function startSim(min){
   const theme=document.getElementById('sim-theme')?.value?.trim()||'';
   let sujet=SUJETS_BASE[Math.floor(Math.random()*SUJETS_BASE.length)];
-  if(theme){try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:100,messages:[{role:'user',content:`Génère 1 sujet de dissertation type BCE sur le thème "${theme}". Réponds uniquement avec le sujet.`}]})});if(res.ok){const data=await res.json();sujet=data.content?.map(i=>i.text||'').join('').trim()||sujet;}}catch{}}
+  if(theme){try{const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:100,messages:[{role:'user',content:`Génère 1 sujet de dissertation type BCE sur le thème "${theme}". Réponds uniquement avec le sujet.`}]})});if(res.ok){const data=await res.json();sujet=data.content?.map(i=>i.text||'').join('').trim()||sujet;}}catch{}}
   document.getElementById('sim-subj').textContent=sujet;
   document.getElementById('sim-intro').style.display='none';
   document.getElementById('sim-active').style.display='block';
@@ -2309,7 +2309,7 @@ async function loadNews(region){
   logSession('news',region);
   const prompt=`Expert en géopolitique. Génère 6 actualités géopolitiques importantes DU JOUR (${new Date().toLocaleDateString('fr-FR')}) pour la région "${region}" en lien avec le programme BCE ECG.\nRéponds UNIQUEMENT en JSON valide : {"news":[{"title":"titre","geo":"zone précise","importance":"lien avec BCE (1 phrase)","theme":"notion BCE"}]}`;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:900,messages:[{role:'user',content:prompt}]})});
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:900,messages:[{role:'user',content:prompt}]})});
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
     const p=JSON.parse(data.content?.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
@@ -2484,7 +2484,7 @@ async function _fichageIA(title,body,mcIdx){
   const content=body.replace(/<[^>]+>/g,' ').substring(0,4000);
   const prompt='Tu es un expert en géopolitique ECG. Génère une fiche synthèse pour ce cours perso.\nRéponds UNIQUEMENT en JSON valide:\n{"notions":[{"terme":"","def":"","auteur":"","date":""}],"chiffres":[""],"auteurs":[{"nom":"","oeuvre":"","these":""}],"erreurs":[""],"mobilisation":"","plan":"I.\\nII.\\nIII.","evaluation":""}\nTitre : '+JSON.stringify(title)+'\nContenu : '+JSON.stringify(content);
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
     if(!res.ok)throw new Error('HTTP '+res.status);
     const data=await res.json();
     const p=JSON.parse(data.content.map(x=>x.text||'').join('').replace(/```json|```/g,'').trim());
