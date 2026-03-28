@@ -361,6 +361,11 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 #fe-body .fe-img-wrap:hover .fe-img-del{opacity:1}
 #fe-body .fe-img-del{opacity:0;position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;border:none;border-radius:5px;padding:5px 10px;font-size:11px;cursor:pointer;transition:opacity .15s;font-family:var(--ff)}
 
+
+/* Mes cours full-screen overlay */
+#pg-mycours { display:none; }
+#pg-mycours.on { display:block; }
+
 </style>
 </head>
 <body>
@@ -875,7 +880,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 
   <!-- ════ MES COURS ════ -->
-  <div class="pg" id="pg-mycours" style="padding:0;margin:-36px -48px;background:var(--surf);position:fixed;inset:0;z-index:100;overflow-y:auto;display:none">
+  <div class="pg" id="pg-mycours" style="padding:0;margin:-36px -48px;background:var(--surf);position:fixed;inset:0;z-index:100;overflow-y:auto">
     
     <!-- Top bar -->
     <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:12px;z-index:10">
@@ -3383,8 +3388,7 @@ function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');i
 
 
 function closeMyCoursOverlay(){
-  document.getElementById('pg-mycours').style.display='none';
-  go('mycours'===curPage?'dash':curPage);
+  go('dash');
 }
 function insertMcPdf(inp){
   const f=inp.files[0];if(!f)return;
