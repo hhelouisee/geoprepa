@@ -345,7 +345,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 }
 
 /* ── FICHE EDITOR ── */
-#fe-title:empty::before{content:"Sans titre…";color:var(--txt4);pointer-events:none}
+#fe-title:empty::before{content:"Sans titre…";color:var(--txt4);pointer-events:none;font-weight:400}
 #fe-body:empty::before{content:"Commence à écrire ta fiche…";color:var(--txt4);pointer-events:none}
 #fe-body h2{font-family:var(--ffd);font-size:26px;font-weight:700;color:var(--txt);margin:32px 0 12px}
 #fe-body h3{font-family:var(--ffd);font-size:20px;font-weight:600;color:var(--txt2);margin:24px 0 8px;font-style:italic}
@@ -931,6 +931,13 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
           <select id="mf-p" style="flex:1;padding:4px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="indispensable">🔴 Indispensable</option><option value="tres-frequent">🟠 Très fréquent</option><option value="frequent">🟡 Fréquent</option></select>
           <input type="text" id="mf-c" placeholder="Chapitre" style="flex:1;padding:4px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
         </div>
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-img-inp').click()">🖼️ Image</button>
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-pdf-inp').click()">📄 PDF</button>
+          <input type="file" id="mf-img-inp" accept="image/*" style="display:none" onchange="attachToFlash(this,'image')">
+          <input type="file" id="mf-pdf-inp" accept=".pdf" style="display:none" onchange="attachToFlash(this,'pdf')">
+        </div>
+        <div id="mf-attach" style="margin-bottom:8px;font-size:11px;color:var(--txt3)"></div>
         <button class="btn btn-p" style="width:100%" onclick="saveMyFlash()">💾 Ajouter au deck</button>
       </div>
       <div class="card"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2);margin-bottom:9px">Stats</div><div id="mf-stats" style="font-size:12px;color:var(--txt3)"></div></div>
@@ -990,58 +997,65 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 
     <!-- ════ FICHE EDITOR ════ -->
-  <div class="pg" id="pg-fiche-editor" style="padding:0;margin:-36px -48px;min-height:100vh;background:#fff">
+  <div class="pg" id="pg-fiche-editor" style="padding:0;margin:-36px -48px;background:var(--surf);position:fixed;inset:0;z-index:100;overflow-y:auto;display:none">
     
-    <!-- Barre top fine -->
-    <div style="position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--brd);padding:10px 32px;display:flex;align-items:center;gap:12px">
-      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 10px;border-radius:5px;transition:background .1s" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">&#8592; Fiches</button>
+    <!-- Barre top -->
+    <div style="position:sticky;top:0;z-index:10;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:12px">
+      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px;transition:background .1s" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">&#8592; Fiches</button>
       <div style="flex:1"></div>
-      <select id="fe-prio" style="padding:5px 10px;border:1px solid var(--brd);border-radius:5px;font-size:12px;background:#fff;color:var(--txt);outline:none;font-family:var(--ff)">
+      <select id="fe-prio" style="padding:5px 10px;border:1px solid var(--brd);border-radius:5px;font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
         <option value="indispensable">&#128308; Indispensable</option>
         <option value="tres-frequent">&#128992; Très fréquent</option>
         <option value="frequent">&#129000; Fréquent</option>
       </select>
-      <button onclick="saveFicheEditor()" style="background:var(--acc);color:#fff;border:none;border-radius:5px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">Sauvegarder</button>
+      <button onclick="saveFicheEditor()" style="background:var(--acc);color:#fff;border:none;border-radius:5px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">Sauvegarder</button>
     </div>
 
-    <!-- Page blanche centrée -->
-    <div style="max-width:680px;margin:0 auto;padding:64px 32px 140px">
+    <!-- Zone d'écriture Notion pure -->
+    <div style="max-width:660px;margin:0 auto;padding:72px 0 160px">
 
       <!-- Titre -->
       <div id="fe-title" contenteditable="true"
-        style="font-family:var(--ffd);font-size:40px;font-weight:700;color:var(--txt);outline:none;margin-bottom:28px;line-height:1.2;letter-spacing:-.02em;min-height:52px;word-break:break-word">
+        style="font-family:var(--ffd);font-size:42px;font-weight:700;color:var(--txt);outline:none;margin-bottom:24px;line-height:1.15;letter-spacing:-.03em;min-height:56px;word-break:break-word">
       </div>
+
+      <!-- Séparateur fin -->
+      <div style="height:1px;background:var(--brd);margin-bottom:32px"></div>
 
       <!-- Corps -->
       <div id="fe-body" contenteditable="true"
-        style="font-size:16px;line-height:1.9;color:var(--txt2);outline:none;min-height:500px;word-break:break-word">
+        style="font-size:16px;line-height:2;color:var(--txt2);outline:none;min-height:60vh;word-break:break-word">
       </div>
+
+      <!-- Zone PDF/images attachés -->
+      <div id="fe-attachments" style="margin-top:32px;display:flex;flex-direction:column;gap:10px"></div>
 
     </div>
 
-    <!-- Toolbar flottante en bas au centre -->
-    <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--brd);border-radius:40px;padding:8px 18px;display:flex;gap:3px;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,.12);z-index:30">
+    <!-- Toolbar flottante centrée -->
+    <div style="position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 20px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:200">
       <button class="rtb" onclick="execFE('bold')"><strong>B</strong></button>
       <button class="rtb" onclick="execFE('italic')"><em>I</em></button>
       <button class="rtb" onclick="execFE('underline')"><u>U</u></button>
       <div class="rtb-sep"></div>
       <button class="rtb" onclick="execFE('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
-      <button class="rtb" onclick="execFE('formatBlock','h3')" style="font-size:10px;font-weight:700">Moyen</button>
+      <button class="rtb" onclick="execFE('formatBlock','h3')" style="font-size:10px">Moyen</button>
       <button class="rtb" onclick="execFE('formatBlock','p')" style="font-size:10px">Normal</button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execFE('insertUnorderedList')">• L</button>
+      <button class="rtb" onclick="execFE('insertUnorderedList')">&#8226; L</button>
       <button class="rtb" onclick="insertFEQuote()">&#10078;</button>
       <div class="rtb-sep"></div>
-      <div class="rtb-c" style="background:#b8806a" onclick="execFE('foreColor','#b8806a')" title="Pêche"></div>
-      <div class="rtb-c" style="background:#5b7fa6" onclick="execFE('foreColor','#5b7fa6')" title="Bleu"></div>
-      <div class="rtb-c" style="background:#7aab8a" onclick="execFE('foreColor','#7aab8a')" title="Vert"></div>
-      <div class="rtb-c" style="background:#c48a82" onclick="execFE('foreColor','#c48a82')" title="Rose"></div>
+      <div class="rtb-c" style="background:#b8806a" onclick="execFE('foreColor','#b8806a')"></div>
+      <div class="rtb-c" style="background:#5b7fa6" onclick="execFE('foreColor','#5b7fa6')"></div>
+      <div class="rtb-c" style="background:#7aab8a" onclick="execFE('foreColor','#7aab8a')"></div>
+      <div class="rtb-c" style="background:#c48a82" onclick="execFE('foreColor','#c48a82')"></div>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="addFicheImage()" title="Ajouter une image" style="font-size:13px">&#128247;</button>
-      <button class="rtb" onclick="execFE('removeFormat')" style="font-size:10px">Aa</button>
+      <button class="rtb" onclick="document.getElementById('fe-img-inp').click()" title="Image">&#128247;</button>
+      <button class="rtb" onclick="document.getElementById('fe-pdf-inp').click()" title="PDF">&#128196;</button>
     </div>
 
     <input type="file" id="fe-img-inp" accept="image/*" style="display:none" onchange="handleFEImage(this)">
+    <input type="file" id="fe-pdf-inp" accept=".pdf" style="display:none" onchange="handleFEPdf(this)">
   </div>
 
   </div><!-- /content -->
@@ -1639,6 +1653,10 @@ function loadChap(id){
     <div class="cours-actions">
       <button class="btn btn-g btn-sm" id="edit-btn-${id}" onclick="toggleEditCours(${id})">🖊️ Modifier</button>
       <button class="btn btn-g btn-sm" onclick="showFicheModal(${id})">📋 Fiche synthèse</button>
+      <button class="btn btn-g btn-sm" onclick="document.getElementById('cours-img-${id}').click()" title="Ajouter image">🖼️</button>
+      <button class="btn btn-g btn-sm" onclick="document.getElementById('cours-pdf2-${id}').click()" title="Ajouter PDF">📄</button>
+      <input type="file" id="cours-img-${id}" accept="image/*" style="display:none" onchange="insertCoursFile(${id},this,'image')">
+      <input type="file" id="cours-pdf2-${id}" accept=".pdf" style="display:none" onchange="insertCoursFile(${id},this,'pdf')">
       <div style="display:flex;align-items:center;gap:5px;margin-left:auto">
         <span style="font-size:10px;color:var(--txt3)">Note :</span>
         <select onchange="setNote(${id},this.value)" style="padding:3px 5px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
@@ -2059,11 +2077,7 @@ function initAnnales(){
 // ══════════════════════════════════════════════════════
 // COPIES
 // ══════════════════════════════════════════════════════
-const COPIES_DEMO=[
-  {title:'DST — Acteurs mondialisation',date:'12/01',score:13,c:{red:13,prob:11,tens:14,plan:14,aut:12,chif:11,ic:14,prec:13}},
-  {title:'Colle — Mondialisation financière',date:'20/01',score:14,c:{red:14,prob:13,tens:15,plan:14,aut:15,chif:13,ic:14,prec:14}},
-  {title:'DST — Construction européenne',date:'28/01',score:15,c:{red:15,prob:14,tens:15,plan:16,aut:14,chif:15,ic:15,prec:15}},
-];
+const COPIES_DEMO=[];
 const CK=['red','prob','tens','plan','aut','chif','ic','prec'];
 const CL=['Rédaction','Problémati.','Tension','Plan','Auteurs','Chiffres','I/C','Précision'];
 let copChart=null;
@@ -3005,10 +3019,8 @@ function openCreateFiche(editId=null){
   _feEditId = editId;
   const existing = editId!==null ? M.get('my_fiches',[])[editId] : null;
 
-  // Navigate to full-page editor
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.getElementById('pg-fiche-editor').classList.add('on');
-  document.getElementById('bc-p').textContent = editId!==null ? 'Modifier la fiche' : 'Nouvelle fiche';
+  // Show as full-screen overlay
+  document.getElementById('pg-fiche-editor').style.display='block';
 
   // Reset editor
   const titleEl = document.getElementById('fe-title');
@@ -3038,6 +3050,7 @@ function openCreateFiche(editId=null){
 }
 
 function closeFicheEditor(){
+  document.getElementById('pg-fiche-editor').style.display='none';
   go('fiches');
 }
 
@@ -3080,6 +3093,7 @@ function saveFicheEditor(){
   else fiches.unshift(entry);
   M.set('my_fiches',fiches);
   showToast('✅ Fiche sauvegardée !');
+  document.getElementById('pg-fiche-editor').style.display='none';
   go('fiches');
 }
 
@@ -3225,6 +3239,59 @@ function deleteFicheCache(id){
   if(!confirm('Effacer la fiche générée ? Elle sera régénérée par l\'IA au prochain clic.'))return;
   localStorage.removeItem('geo_v5_fiche_'+id);
   showToast('🗑 Fiche effacée — sera régénérée au prochain clic');
+}
+
+
+function handleFEPdf(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const att=document.getElementById('fe-attachments');
+    const div=document.createElement('div');
+    div.style.cssText='display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px';
+    div.innerHTML='<span style="font-size:20px">&#128196;</span><span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+f.name+'</span><button onclick="this.parentNode.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:12px;font-family:var(--ff)">&#128465; Supprimer</button>';
+    // Store pdf data
+    div.dataset.pdf=e.target.result;
+    att.appendChild(div);
+  };
+  r.readAsDataURL(f);
+  inp.value='';
+}
+
+
+function insertCoursFile(id,inp,type){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const body=document.getElementById('cours-body-'+id);
+    if(!body)return;
+    if(type==='image'){
+      body.focus();
+      document.execCommand('insertImage',false,e.target.result);
+    } else {
+      const div=document.createElement('div');
+      div.className='cours-ref';
+      div.innerHTML='<span>&#128196;</span><strong>'+f.name+'</strong><button onclick="this.parentNode.remove()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--red);font-size:11px">&#128465;</button>';
+      body.appendChild(div);
+    }
+    M.set('edit_chap_'+id,body.innerHTML);
+  };
+  r.readAsDataURL(f);
+  inp.value='';
+}
+
+
+let _flashAttach = null;
+function attachToFlash(inp,type){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    _flashAttach={name:f.name,data:e.target.result,type};
+    document.getElementById('mf-attach').innerHTML=
+      (type==='image'?'&#128247;':'&#128196;')+' '+f.name+
+      ' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">&#128465;</button>';
+  };
+  r.readAsDataURL(f);inp.value='';
 }
 
 </script>
