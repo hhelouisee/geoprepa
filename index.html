@@ -2555,7 +2555,7 @@ function exportMyCoursTxt(){
 
 function exportMyCoursHtml(){
   const {title,body}=getCurrentMcData();
-  const html=`<!DOCTYPE html><html><head><meta charset=UTF-8><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;color:#222}</style></head><body>${body}</body></html>\`;
+  const html=`<!DOCTYPE html><html><head><meta charset=UTF-8><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;color:#222}</style></head><body>${body}</body></html>`;
   dlFile((title||'cours')+'.html',html,'text/html');
   showToast('📄 Export HTML téléchargé');
 }
@@ -2566,7 +2566,7 @@ function getCurrentMcData(){
   return {title,body};
 }
 
-async async function fichageIA(){
+async function fichageIA(){
   const {title,body}=getCurrentMcData();
   if(!body.trim()){showToast('Écris d\'abord du contenu dans ton cours');return;}
   showToast('🤖 Génération de la fiche…');
@@ -2577,7 +2577,7 @@ async async function fichageIA(){
     })});
     const data=await res.json();
     const text=data.content?.map(i=>i.text||'').join('')||'';
-    const p=JSON.parse(text.replace(/\`\`\`json|\`\`\`/g,'').trim());
+    const p=JSON.parse(text.replace(/```json|```/g,'').trim());
     const html='<div style="max-width:680px;margin:0 auto;font-size:15px;line-height:1.9">'+
       '<div style="font-family:var(--ffd);font-size:26px;font-weight:700;margin-bottom:20px;color:var(--txt)">'+title+' — Fiche synthèse</div>'+
       '<div style="height:1px;background:var(--brd);margin-bottom:28px"></div>'+
@@ -2742,7 +2742,29 @@ function closeMyCoursOverlay(){document.querySelector('.topbar').style.display='
 function closeFicheEditor(){const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='none';document.querySelector('.topbar').style.display='';go('fiches');}
 function insertMcPdf(inp){const f=inp.files[0];if(!f)return;const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';document.getElementById('mc-body').appendChild(div);inp.value='';}
 function addFiAttachment(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const att=document.getElementById('fi-attachments');if(!att)return;const div=document.createElement('div');div.style.cssText='padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;position:relative';if(type==='image'){div.innerHTML='<img src="'+e.target.result+'" style="width:100%;border-radius:7px;display:block">';}else{div.innerHTML='<span style="font-size:18px">📄</span> <strong style="font-size:13px">'+f.name+'</strong>';}const del=document.createElement('button');del.textContent='🗑';del.onclick=()=>div.remove();del.style.cssText='position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;color:var(--red);font-size:13px';div.appendChild(del);att.appendChild(div);};r.readAsDataURL(f);inp.value='';}
-function handleFEImage(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const body=document.getElementById('fe-body');body.focus();const wrap=document.createElement('div');wrap.className='fe-img-wrap';wrap.innerHTML='<img src="'+e.target.result+'" style="max-width:100%;border-radius:8px;margin:12px 0;display:block"><button class="fe-img-del" onclick="this.closest('.fe-img-wrap').remove()">✕ Supprimer</button>';const sel=window.getSelection();if(sel.rangeCount){const range=sel.getRangeAt(0);range.insertNode(wrap);}else{body.appendChild(wrap);}};r.readAsDataURL(f);inp.value='';}
+function handleFEImage(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const body=document.getElementById('fe-body');
+    body.focus();
+    const wrap=document.createElement('div');
+    wrap.className='fe-img-wrap';
+    const img=document.createElement('img');
+    img.src=e.target.result;
+    img.style.cssText='max-width:100%;border-radius:8px;margin:12px 0;display:block';
+    const btn=document.createElement('button');
+    btn.className='fe-img-del';
+    btn.textContent='✕ Supprimer';
+    btn.onclick=()=>wrap.remove();
+    wrap.appendChild(img);wrap.appendChild(btn);
+    const sel=window.getSelection();
+    if(sel.rangeCount){sel.getRangeAt(0).insertNode(wrap);}
+    else{body.appendChild(wrap);}
+  };
+  r.readAsDataURL(f);inp.value='';
+}
+
 function handleFEPdf(inp){const f=inp.files[0];if(!f)return;const att=document.getElementById('fe-attachments');const div=document.createElement('div');div.style.cssText='display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px';div.innerHTML='<span style="font-size:20px">📄</span><span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+f.name+'</span><button onclick="this.parentNode.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:12px">🗑</button>';if(att)att.appendChild(div);inp.value='';}
 function saveFicheEditor(){const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');const title=(titleEl?.textContent||'').trim();const body=bodyEl?.innerHTML||'';if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}const fiches=M.get('my_fiches',[]);const entry={title,body,prio:prioSel?.value||'frequent',date:new Date().toLocaleString('fr-FR'),_custom:true};if(typeof _feEditId!=='undefined'&&_feEditId!==null)fiches[_feEditId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);showToast('✅ Fiche sauvegardée !');closeFicheEditor();}
 function execFE(cmd,val){document.execCommand(cmd,false,val||null);}
@@ -2754,7 +2776,20 @@ let _feEditId=null;
 function openCreateFiche(editId=null){_feEditId=editId;const existing=editId!==null?M.get('my_fiches',[])[editId]:null;const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='block';document.querySelector('.topbar').style.display='none';const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');if(existing){if(titleEl)titleEl.textContent=existing.title||'';if(bodyEl)bodyEl.innerHTML=existing.body||'';if(prioSel)prioSel.value=existing.prio||'frequent';}else{if(titleEl)titleEl.textContent='';if(bodyEl)bodyEl.innerHTML='';if(prioSel)prioSel.value='frequent';}setTimeout(()=>{if(titleEl)titleEl.focus();},100);}
 function saveFichePerso(editId){const title=document.getElementById('mf-title')?.value.trim();const content=document.getElementById('mf-content')?.value.trim();const prio=document.getElementById('mf-prio')?.value||'frequent';if(!title||!content){showToast('Remplis le titre et le contenu');return;}const fiches=M.get('my_fiches',[]);const entry={title,content,prio,date:new Date().toLocaleString('fr-FR'),_custom:true};if(editId!==null&&editId!==undefined)fiches[editId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('✅ Fiche sauvegardée !');}
 function deleteFichePerso(i){if(!confirm('Supprimer cette fiche ?'))return;const fiches=M.get('my_fiches',[]);fiches.splice(i,1);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('🗑 Fiche supprimée');}
-function openFichePersoDetail(i){const f=M.get('my_fiches',[])[i];if(!f)return;const m=document.createElement('div');m.className='modal-bg';m.innerHTML='<div class="modal-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">'+f.title+'</div><button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button></div><div style="font-size:13px;line-height:1.8;color:var(--txt2);white-space:pre-wrap">'+(f.body||f.content||'')+'</div><div style="display:flex;gap:7px;margin-top:14px"><button class="btn btn-p btn-sm" onclick="openCreateFiche('+i+');this.closest('.modal-bg').remove()">✏️ Modifier</button><button class="btn btn-g btn-sm" onclick="this.closest('.modal-bg').remove()">Fermer</button></div></div>';document.body.appendChild(m);m.addEventListener('click',e=>{if(e.target===m)m.remove();});}
+function openFichePersoDetail(i){
+  const f=M.get('my_fiches',[])[i];if(!f)return;
+  const m=document.createElement('div');
+  m.className='modal-bg';
+  const box=document.createElement('div');
+  box.className='modal-box';
+  box.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">'+f.title+'</div><button id="fp-close" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button></div><div style="font-size:13px;line-height:1.8;color:var(--txt2)">'+(f.body||f.content||'')+'</div>';
+  const close=()=>m.remove();
+  m.appendChild(box);
+  document.body.appendChild(m);
+  box.querySelector('#fp-close').onclick=close;
+  m.addEventListener('click',e=>{if(e.target===m)close();});
+}
+
 function deleteFriseItem(fi){const built=typeof FRISE!=='undefined'?FRISE:[];const custom=M.get('custom_frise',[]);const combined=[...built,...custom];const item=combined[fi];if(!item||!item._custom){showToast('Les dates officielles ne peuvent pas être supprimées');return;}const customIdx=custom.findIndex(c=>c.date===item.date&&c.event===item.event);if(customIdx>=0){custom.splice(customIdx,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}}
 function deleteDoc(i){if(!confirm('Supprimer ce document ?'))return;const docs=M.get('my_docs',[]);docs.splice(i,1);M.set('my_docs',docs);initDocs();showToast('🗑 Document supprimé');}
 function deleteCopy(i){if(!confirm('Supprimer cette copie ?'))return;const copies=M.get('copies',[]);copies.splice(i,1);M.set('copies',copies);initCopies();showToast('🗑 Copie supprimée');}
@@ -2762,6 +2797,7 @@ function insertCoursFile(id,inp,type){const f=inp.files[0];if(!f)return;const r=
 let _flashAttach=null;
 function attachToFlash(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{_flashAttach={name:f.name,data:e.target.result,type};document.getElementById('mf-attach').innerHTML=(type==='image'?'📷':'📄')+' '+f.name+' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">🗑</button>';};r.readAsDataURL(f);inp.value='';}
 // Auth overlay on load handled by checkAuth above
+// v887596
 </script>
 </body>
 </html>
