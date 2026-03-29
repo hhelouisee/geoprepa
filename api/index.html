@@ -361,6 +361,17 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 #fe-body .fe-img-wrap:hover .fe-img-del{opacity:1}
 #fe-body .fe-img-del{opacity:0;position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;border:none;border-radius:5px;padding:5px 10px;font-size:11px;cursor:pointer;transition:opacity .15s;font-family:var(--ff)}
 
+
+/* Mes cours full-screen overlay */
+#pg-mycours { display:none; }
+#pg-mycours.on { display:block; }
+
+
+/* Safe area for overlays on mobile */
+.overlay-bar {
+  padding-top: max(10px, env(safe-area-inset-top)) !important;
+}
+
 </style>
 </head>
 <body>
@@ -875,47 +886,61 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 
   <!-- ════ MES COURS ════ -->
-  <div class="pg" id="pg-mycours">
-    <div class="page-t">Mes cours personnels</div>
-    <div class="page-s">Éditeur riche · Export PDF/TXT · Fichage IA · Injection dans Cours complet</div>
-    <div style="display:flex;gap:7px;margin-bottom:11px;align-items:center;flex-wrap:wrap">
-      <input type="text" id="mc-title" placeholder="Titre du cours…" style="flex:1;min-width:180px;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:6px 9px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)">
-      <button class="btn btn-p" onclick="saveMyCours()">💾 Sauvegarder</button>
-      <button class="btn btn-g" onclick="newMyCours()">+ Nouveau</button>
-      <button class="btn btn-g" onclick="exportMyCoursTxt()" title="Export .txt">📄 TXT</button>
-      <button class="btn btn-g" onclick="exportMyCoursHtml()" title="Export HTML imprimable">🖨 PDF</button>
-      <button class="btn btn-g" onclick="fichageIA()" title="Ficher avec l'IA">🤖 Fiche IA</button>
-      <button class="btn btn-g" onclick="injectInCours()" title="Ajouter dans Cours complet">📚 → Cours complet</button>
+  <div class="pg" id="pg-mycours" style="padding:0;background:var(--surf);position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;overflow-y:auto;box-sizing:border-box">
+
+    <!-- Barre navigation haut — toujours visible -->
+    <div style="background:var(--surf);border-bottom:1px solid var(--brd);padding:14px 32px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <button onclick="closeMyCoursOverlay()" style="background:none;border:none;cursor:pointer;color:var(--txt2);font-size:14px;font-family:var(--ff);padding:6px 10px;border-radius:5px;display:flex;align-items:center;gap:6px;font-weight:500">← Mes cours</button>
+      <div style="flex:1"></div>
+      <button class="btn btn-g btn-sm" onclick="newMyCours()">+ Nouveau</button>
+      <button class="btn btn-g btn-sm" onclick="exportMyCoursTxt()">📄 TXT</button>
+      <button class="btn btn-g btn-sm" onclick="exportMyCoursHtml()">🖨 PDF</button>
+      <button class="btn btn-g btn-sm" onclick="fichageIA()">🤖 Fiche IA</button>
+      <button class="btn btn-g btn-sm" onclick="injectInCours()">📚 Injecter</button>
+      <button class="btn btn-p btn-sm" onclick="saveMyCours()">💾 Sauvegarder</button>
     </div>
-    <div class="my-editor" style="margin-bottom:13px">
-      <div class="my-editor-tb">
-        <button class="rtb" onclick="execCmd('bold')"><strong>B</strong></button>
-        <button class="rtb" onclick="execCmd('italic')"><em>I</em></button>
-        <button class="rtb" onclick="execCmd('underline')"><u>U</u></button>
-        <div class="rtb-sep"></div>
-        <button class="rtb" onclick="execCmd('formatBlock','h1')">H1</button>
-        <button class="rtb" onclick="execCmd('formatBlock','h2')">H2</button>
-        <button class="rtb" onclick="execCmd('formatBlock','h3')">H3</button>
-        <button class="rtb" onclick="execCmd('formatBlock','p')">¶</button>
-        <div class="rtb-sep"></div>
-        <button class="rtb" onclick="execCmd('insertUnorderedList')">• L</button>
-        <button class="rtb" onclick="execCmd('insertOrderedList')">1.</button>
-        <div class="rtb-sep"></div>
-        <div class="rtb-c" style="background:#2563eb" onclick="execCmd('foreColor','#2563eb')"></div>
-        <div class="rtb-c" style="background:#dc2626" onclick="execCmd('foreColor','#dc2626')"></div>
-        <div class="rtb-c" style="background:#16a34a" onclick="execCmd('foreColor','#16a34a')"></div>
-        <div class="rtb-c" style="background:#ca8a04" onclick="execCmd('foreColor','#ca8a04')"></div>
-        <div class="rtb-c" style="background:#7c3aed" onclick="execCmd('foreColor','#7c3aed')"></div>
-        <div class="rtb-sep"></div>
-        <button class="rtb" onclick="insertImage()">🖼️</button>
-        <button class="rtb" onclick="execCmd('removeFormat')">Aa</button>
-        <button class="rtb" onclick="execCmd('undo')">↩</button>
-        <button class="rtb" onclick="execCmd('redo')">↪</button>
+
+    <!-- Zone d'écriture -->
+    <div style="max-width:700px;margin:0 auto;padding:48px 32px 160px">
+      <input type="text" id="mc-title" placeholder="Titre du cours…"
+        style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
+      <div style="height:1px;background:var(--brd);margin-bottom:28px"></div>
+      <div id="mc-body" class="my-editor-body" contenteditable="true"
+        style="min-height:50vh;font-size:16px;line-height:1.9;color:var(--txt2);outline:none;word-break:break-word"
+        oninput="M.set('mc_draft_body',this.innerHTML)">
       </div>
-      <div id="mc-body" class="my-editor-body" contenteditable="true" placeholder="Commence à rédiger ton cours ici…" oninput="M.set('mc_draft',document.getElementById('mc-body').innerHTML)"></div>
+      <div style="height:80px"></div>
     </div>
-    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:7px">Mes cours sauvegardés</div>
-    <div class="g3" id="mc-list"></div>
+
+    <!-- Toolbar fixe en bas au centre -->
+    <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 18px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:99999">
+      <button class="rtb" onclick="execCmd('bold')"><strong>B</strong></button>
+      <button class="rtb" onclick="execCmd('italic')"><em>I</em></button>
+      <button class="rtb" onclick="execCmd('underline')"><u>U</u></button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execCmd('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execCmd('formatBlock','h3')" style="font-size:10px">Moyen</button>
+      <button class="rtb" onclick="execCmd('formatBlock','p')" style="font-size:10px">Normal</button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execCmd('insertUnorderedList')">• L</button>
+      <button class="rtb" onclick="execCmd('insertOrderedList')">1.</button>
+      <div class="rtb-sep"></div>
+      <div class="rtb-c" style="background:#b8806a" onclick="execCmd('foreColor','#b8806a')"></div>
+      <div class="rtb-c" style="background:#5b7fa6" onclick="execCmd('foreColor','#5b7fa6')"></div>
+      <div class="rtb-c" style="background:#7aab8a" onclick="execCmd('foreColor','#7aab8a')"></div>
+      <div class="rtb-c" style="background:#c48a82" onclick="execCmd('foreColor','#c48a82')"></div>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="insertImage()">🖼️</button>
+      <button class="rtb" onclick="execCmd('removeFormat')">Aa</button>
+      <button class="rtb" onclick="execCmd('undo')">↩</button>
+      <button class="rtb" onclick="execCmd('redo')">↪</button>
+    </div>
+
+    <!-- Cours sauvegardés -->
+    <div id="mc-list-wrap" style="display:none;max-width:700px;margin:0 auto;padding:0 32px 60px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:14px;padding-top:24px;border-top:1px solid var(--brd)">Cours sauvegardés</div>
+      <div class="g3" id="mc-list"></div>
+    </div>
   </div>
 
   <!-- ════ MES FLASHCARDS ════ -->
@@ -934,7 +959,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
         <div style="display:flex;gap:6px;margin-bottom:8px">
           <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-img-inp').click()">🖼️ Image</button>
           <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-pdf-inp').click()">📄 PDF</button>
-          <input type="file" id="mf-img-inp" accept="image/*" style="display:none" onchange="attachToFlash(this,'image')">
+          <input type="file" id="mf-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="attachToFlash(this,'image')">
           <input type="file" id="mf-pdf-inp" accept=".pdf" style="display:none" onchange="attachToFlash(this,'pdf')">
         </div>
         <div id="mf-attach" style="margin-bottom:8px;font-size:11px;color:var(--txt3)"></div>
@@ -1054,7 +1079,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="rtb" onclick="document.getElementById('fe-pdf-inp').click()" title="PDF">&#128196;</button>
     </div>
 
-    <input type="file" id="fe-img-inp" accept="image/*" style="display:none" onchange="handleFEImage(this)">
+    <input type="file" id="fe-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="handleFEImage(this)">
     <input type="file" id="fe-pdf-inp" accept=".pdf" style="display:none" onchange="handleFEPdf(this)">
   </div>
 
@@ -1622,7 +1647,7 @@ function loadChap(id){
   document.getElementById('ci-'+id)?.classList.add('on');
   // Show full-screen overlay
   const ov=document.getElementById('cours-overlay');
-  if(ov){ov.style.display='block';const t=document.getElementById('co-title');if(t)t.textContent=c.short+' — '+c.title.substring(0,50);}
+  if(ov){ov.style.display='block';document.querySelector('.topbar').style.display='none';const t=document.getElementById('co-title');if(t)t.textContent=c.short+' — '+c.title.substring(0,50);}
 
   // Track visit
   const visited=M.get('visited_chapters',[]);
@@ -1667,7 +1692,7 @@ function loadChap(id){
       <button class="btn btn-g btn-sm" onclick="showFicheModal(${id})">📋 Fiche synthèse</button>
       <button class="btn btn-g btn-sm" onclick="document.getElementById('cours-img-${id}').click()" title="Ajouter image">🖼️</button>
       <button class="btn btn-g btn-sm" onclick="document.getElementById('cours-pdf2-${id}').click()" title="Ajouter PDF">📄</button>
-      <input type="file" id="cours-img-${id}" accept="image/*" style="display:none" onchange="insertCoursFile(${id},this,'image')">
+      <input type="file" id="cours-img-${id}" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="insertCoursFile(${id},this,'image')">
       <input type="file" id="cours-pdf2-${id}" accept=".pdf" style="display:none" onchange="insertCoursFile(${id},this,'pdf')">
       <div style="display:flex;align-items:center;gap:5px;margin-left:auto">
         <span style="font-size:10px;color:var(--txt3)">Note :</span>
@@ -1729,7 +1754,7 @@ function toggleEditCours(id){
 function execCours(cmd,val){document.execCommand(cmd,false,val||null);}
 function setNote(id,val){if(val){M.set('note_'+id,parseInt(val));syncProgress(id,M.get('prog_'+id,0),parseInt(val));}}
 function setProgress(id,val){if(isNaN(val))return;M.set('prog_'+id,val);const ci=document.getElementById('ci-'+id);if(ci){const p=ci.querySelector('.ci-prog');if(p){const col=val>70?'var(--grn)':val>30?'var(--gold)':val>0?'var(--org)':'var(--brd2)';p.textContent=val+'%';p.style.color=col;}}}
-function insertImgInBody(id){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const b=document.getElementById('cours-body-'+id);if(b){b.focus();document.execCommand('insertImage',false,e.target.result);}};r.readAsDataURL(f);};inp.click();}
+function insertImgInBody(id){const inp=document.createElement('input');inp.type='file';inp.accept='image/png,image/jpeg,image/gif,image/webp';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const b=document.getElementById('cours-body-'+id);if(b){b.focus();document.execCommand('insertImage',false,e.target.result);}};r.readAsDataURL(f);};inp.click();}
 function associatePDF(id,inp){alert('PDF associé à '+CHAPTERS[id].short+'. (Dans la version déployée sur Vercel, le PDF sera affiché intégré directement.)');}
 
 // ══════════════════════════════════════════════════════
@@ -1772,6 +1797,7 @@ async function showFicheModal(id){
     document.body.appendChild(ov);
   }
   ov.style.display='block';
+  document.querySelector('.topbar').style.display='none';
 
   const prio=c.priority==='indispensable'?'bi':c.priority==='tres-frequent'?'btf':'bf';
   const prioLabel=c.priority==='indispensable'?'Indispensable':c.priority==='tres-frequent'?'Très fréquent':'Fréquent';
@@ -1779,8 +1805,8 @@ async function showFicheModal(id){
 
   // Build with template literal — safe because it's not inside another string
   ov.innerHTML = `
-    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:10px;z-index:10">
-      <button onclick="document.getElementById('fiche-overlay').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>
+    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 28px;padding-top:max(8px,env(safe-area-inset-top));min-height:52px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;z-index:10">
+      <button onclick="document.getElementById('fiche-overlay').style.display='none';document.querySelector('.topbar').style.display=''" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>
       <div style="flex:1"></div>
       <span class="badge ${prio}">${prioLabel}</span>
       <button onclick="editFicheContent(${id})" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:var(--ff);color:var(--txt2)">✏️ Modifier</button>
@@ -1806,7 +1832,7 @@ async function showFicheModal(id){
       <div class="tc" id="mfl-${id}">${renderChapCards(c.short)}</div>
       <div id="fi-attachments" style="margin-top:24px;display:flex;flex-direction:column;gap:10px"></div>
     </div>
-    <input type="file" id="fi-img-inp" accept="image/*" style="display:none" onchange="addFiAttachment(this,'image')">
+    <input type="file" id="fi-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="addFiAttachment(this,'image')">
     <input type="file" id="fi-pdf-inp" accept=".pdf" style="display:none" onchange="addFiAttachment(this,'pdf')">
   `;
 
@@ -1858,42 +1884,15 @@ Contenu : ${content}`;
     const text=data.content?.map(i=>i.text||'').join('')||'';
     const p=JSON.parse(text.replace(/```json|```/g,'').trim());
 
-    const html=`
-      <div class="g2" style="margin-bottom:9px">
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:6px">🔑 Notions clés</div>
-          ${(p.notions||[]).map(n=>`<div style="margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid var(--brd)"><strong style="font-size:12px;color:var(--txt)">${n.terme}</strong><br><span style="font-size:11px;color:var(--txt2)">${n.def}</span><br><span style="font-size:10px;color:var(--acc)">👤 ${n.auteur}${n.date?' ('+n.date+')':''}</span></div>`).join('')}
-        </div>
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:6px">📊 Chiffres</div>
-          ${(p.chiffres||[]).map(ch=>`<div style="padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px;color:var(--txt2)">📌 ${ch}</div>`).join('')}
-        </div>
+    const html=`<div style="max-width:680px;margin:0 auto;font-size:15px;line-height:1.9">
+      <div style="margin-bottom:36px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">🔑 Notions clés</div>
+        ${(p.notions||[]).map(n=>`<div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--brd)"><div style="font-size:17px;font-weight:700;color:var(--txt);margin-bottom:8px">${n.terme}</div><div style="color:var(--txt2);line-height:1.8;margin-bottom:8px">${n.def}</div>${n.auteur?`<div style="font-size:13px;color:var(--acc);font-weight:500">👤 ${n.auteur}</div>`:''}</div>`).join('')}
       </div>
-      <div class="g2" style="margin-bottom:9px">
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:6px">👤 Auteurs</div>
-          ${(p.auteurs||[]).map(a=>`<div style="margin-bottom:6px;font-size:11px"><strong style="color:var(--txt)">${a.nom}</strong> — <em>${a.oeuvre}</em><br><span style="color:var(--txt3)">${a.these}</span></div>`).join('')}
-        </div>
-        <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:6px">⚠️ Erreurs fréquentes</div>
-          ${(p.erreurs||[]).map(e=>`<div style="padding:3px 0;border-bottom:1px solid var(--red-m);font-size:11px;color:var(--txt2)">✗ ${e}</div>`).join('')}
-        </div>
-      </div>
-      <div style="background:var(--acc-l);border:1px solid var(--acc-m);border-radius:var(--r);padding:11px;margin-bottom:8px;transition:background .2s">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);margin-bottom:5px">🎯 Stratégie dissertation</div>
-        <div style="font-size:12px;font-style:italic;color:var(--txt2)">${p.mobilisation||''}</div>
-      </div>
-      <div class="g2">
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:5px">📝 Plan type</div>
-          <div style="font-size:11px;white-space:pre-line;color:var(--txt2)">${p.plan||''}</div>
-        </div>
-        <div style="background:var(--gold-l);border:1px solid var(--gold-m);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:5px">📈 Évaluation IA</div>
-          <div style="font-size:11px;color:var(--txt2)">${p.evaluation||''}</div>
-        </div>
-      </div>`;
-    el.innerHTML=html;
+      ${(p.chiffres||[]).length?`<div style="margin-bottom:36px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">📊 Chiffres clés</div>${p.chiffres.map(c=>`<div style="display:flex;gap:12px;margin-bottom:14px;align-items:flex-start"><span style="color:var(--red);flex-shrink:0">📌</span><span style="color:var(--txt2)">${c}</span></div>`).join('')}</div>`:''}
+      ${(p.erreurs||[]).length?`<div style="margin-bottom:36px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">⚠️ Erreurs fréquentes</div>${p.erreurs.map(e=>`<div style="background:var(--red-l);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:10px;color:var(--txt2)">${e}</div>`).join('')}</div>`:''}
+      ${(p.plan||[]).length?`<div style="margin-bottom:36px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">📋 Plan type</div>${p.plan.map((pt,i)=>`<div style="display:flex;gap:12px;margin-bottom:14px"><span style="background:var(--acc);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">${i+1}</span><span style="color:var(--txt2)">${pt}</span></div>`).join('')}</div>`:''}
+    </div>`
     M.set('fiche_'+id,html);
   } catch(e){
     el.innerHTML=`<div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:13px;text-align:center">
@@ -2236,8 +2235,13 @@ function initHistory(){
 // ══════════════════════════════════════════════════════
 let curMcId=null;
 function initMyCours(){
-  const draft=M.get('mc_draft','');
-  if(draft)document.getElementById('mc-body').innerHTML=draft;
+  const body=document.getElementById('mc-body');
+  const title=document.getElementById('mc-title');
+  if(body){const d=M.get('mc_draft_body','');if(d&&!body.innerHTML)body.innerHTML=d;}
+  if(title){const t=M.get('mc_draft_title','');if(t&&!title.value)title.value=t;}
+  const wrap=document.getElementById('mc-list-wrap');
+  const list=M.get('my_cours',[]);
+  if(wrap)wrap.style.display=list.length?'block':'none';
   renderMcList();
 }
 function renderMcList(){
@@ -2275,7 +2279,7 @@ function newMyCours(){curMcId=null;document.getElementById('mc-title').value='';
 function loadMyCours(i){const c=M.get('my_cours',[])[i];if(!c)return;curMcId=i;document.getElementById('mc-title').value=c.title;document.getElementById('mc-body').innerHTML=c.body;}
 function deleteMyCours(i){const list=M.get('my_cours',[]);list.splice(i,1);M.set('my_cours',list);renderMcList();}
 function execCmd(cmd,val){document.execCommand(cmd,false,val||null);}
-function insertImage(){const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{document.getElementById('mc-body').focus();document.execCommand('insertImage',false,e.target.result);};r.readAsDataURL(f);};inp.click();}
+function insertImage(){const inp=document.createElement('input');inp.type='file';inp.accept='image/png,image/jpeg,image/gif,image/webp';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{document.getElementById('mc-body').focus();document.execCommand('insertImage',false,e.target.result);};r.readAsDataURL(f);};inp.click();}
 
 // ══════════════════════════════════════════════════════
 // MES FLASHCARDS
@@ -2551,487 +2555,112 @@ function exportMyCoursTxt(){
 
 function exportMyCoursHtml(){
   const {title,body}=getCurrentMcData();
-  const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.8;color:#1a1a1a}h1{font-size:24px;border-bottom:2px solid #2563eb;padding-bottom:8px}h2{font-size:18px;color:#2563eb;margin-top:24px}h3{font-size:15px;font-weight:bold;margin-top:16px}blockquote{border-left:3px solid #ca8a04;padding:8px 14px;background:#fefce8;margin:10px 0}ul li{margin:4px 0;padding:4px 8px;background:#eff6ff;border-left:2px solid #2563eb}p{margin-bottom:10px}@media print{body{margin:0}}</style></head><body><h1>${title}</h1>${body}</body></html>`;
-  dlFile(title+'.html',html,'text/html');
-  showToast('🖨 Fichier HTML prêt — ouvre-le et imprime en PDF (Ctrl+P)');
+  const html=`<!DOCTYPE html><html><head><meta charset=UTF-8><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;color:#222}</style></head><body>${body}</body></html>`;
+  dlFile((title||'cours')+'.html',html,'text/html');
+  showToast('📄 Export HTML téléchargé');
 }
 
-function exportOneMC(i,fmt){
-  const list=M.get('my_cours',[]);
-  const c=list[i];if(!c)return;
-  if(fmt==='txt'){
-    const text=c.title+'\n'+'='.repeat(c.title.length)+'\n\n'+c.body.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
-    dlFile(c.title+'.txt',text,'text/plain');
-  } else {
-    const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>${c.title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.8;color:#1a1a1a}h1{font-size:24px;border-bottom:2px solid #2563eb;padding-bottom:8px}h2{font-size:18px;color:#2563eb}h3{font-size:15px;font-weight:bold}blockquote{border-left:3px solid #ca8a04;padding:8px 14px;background:#fefce8}ul li{margin:4px 0;padding:4px 8px;background:#eff6ff;border-left:2px solid #2563eb}@media print{body{margin:0}}</style></head><body><h1>${c.title}</h1>${c.body}</body></html>`;
-    dlFile(c.title+'.html',html,'text/html');
-  }
-  showToast(fmt==='txt'?'📄 TXT exporté':'🖨 HTML exporté → imprime en PDF');
-}
-
-function dlFile(name,content,type){
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([content],{type}));
-  a.download=name;a.click();
-}
-
-// ══════════════════════════════════════════════════════
-// MES COURS — INJECTION DANS COURS COMPLET
-// ══════════════════════════════════════════════════════
-function injectInCours(){
-  const title=document.getElementById('mc-title')?.value.trim();
-  const body=document.getElementById('mc-body')?.innerHTML;
-  if(!title||!body||body.length<10){showToast('⚠️ Sauvegarde d\'abord ton cours');return;}
-  _doInject(title,body);
-}
-
-function injectInCoursItem(i){
-  const list=M.get('my_cours',[]);
-  const c=list[i];if(!c)return;
-  _doInject(c.title,c.body);
-}
-
-function _doInject(title,body){
-  // Pick target folder
-  const folders=M.get('folders',[]);
-  const folderNames=folders.map((f,i)=>i+': '+f.name);
-  folderNames.push((folders.length)+': + Nouveau dossier "Mes cours perso"');
-  const choice=prompt('Dans quel dossier injecter ?\n\n'+folderNames.join('\n')+'\n\nEntrez le numéro :');
-  if(choice===null)return;
-  const idx=parseInt(choice);
-  if(isNaN(idx)||idx<0)return;
-
-  // Build new chapter entry
-  const newId=CHAPTERS.length; // virtual id
-  const newChap={
-    id:newId,short:'Perso',title,priority:'frequent',category:'perso',
-    _body:body,_custom:true
-  };
-
-  // Add to CHAPTERS array (runtime only — not persisted across reload)
-  CHAPTERS.push(newChap);
-  CHAPTERS_CONTENT[newId]=body;
-
-  // Save custom chapters persistently
-  const customChaps=M.get('custom_chapters',[]);
-  customChaps.push({id:newId,title,body,date:new Date().toLocaleString('fr-FR')});
-  M.set('custom_chapters',customChaps);
-
-  // Add to folder
-  if(idx<folders.length){
-    folders[idx].ids.push(newId);
-  } else {
-    folders.push({name:'Mes cours perso',ids:[newId]});
-  }
-  M.set('folders',folders);
-
-  // Refresh cours sidebar if open
-  coursInited=false;
-  if(curPage==='cours'){initCours();}
-
-  showToast('✅ "'+title+'" injecté dans Cours complet !');
-}
-
-// Load custom chapters on startup
-(function loadCustomChapters(){
-  const customChaps=M.get('custom_chapters',[]);
-  customChaps.forEach(c=>{
-    if(!CHAPTERS.find(x=>x.id===c.id)){
-      CHAPTERS.push({id:c.id,short:'Perso',title:c.title,priority:'frequent',category:'perso',_custom:true});
-      CHAPTERS_CONTENT[c.id]=c.body;
-    }
-  });
-})();
-
-// ══════════════════════════════════════════════════════
-// MES COURS — FICHAGE IA
-// ══════════════════════════════════════════════════════
-function fichageIA(){
-  const title=document.getElementById('mc-title')?.value.trim()||'Mon cours';
+function getCurrentMcData(){
+  const title=document.getElementById('mc-title')?.value.trim()||'';
   const body=document.getElementById('mc-body')?.innerHTML||'';
-  if(body.length<50){showToast('⚠️ Rédige d\'abord le cours');return;}
-  _fichageIA(title,body,-1);
+  return {title,body};
 }
 
-function fichageIAItem(i){
-  const list=M.get('my_cours',[]);
-  const c=list[i];if(!c)return;
-  _fichageIA(c.title,c.body,i);
-}
-
-async function _fichageIA(title,body,mcIdx){
-  showToast('🤖 Fichage en cours…',8000);
-  const content=body.replace(/<[^>]+>/g,' ').substring(0,4000);
-  const prompt='Tu es un expert en géopolitique ECG. Génère une fiche synthèse pour ce cours perso.\nRéponds UNIQUEMENT en JSON valide:\n{"notions":[{"terme":"","def":"","auteur":"","date":""}],"chiffres":[""],"auteurs":[{"nom":"","oeuvre":"","these":""}],"erreurs":[""],"mobilisation":"","plan":"I.\\nII.\\nIII.","evaluation":""}\nTitre : '+JSON.stringify(title)+'\nContenu : '+JSON.stringify(content);
+async function fichageIA(){
+  const {title,body}=getCurrentMcData();
+  if(!body.trim()){showToast('Écris d\'abord du contenu dans ton cours');return;}
+  showToast('🤖 Génération de la fiche…');
   try{
-    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})});
-    if(!res.ok)throw new Error('HTTP '+res.status);
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:1000,
+      messages:[{role:'user',content:'Tu es un expert BCE. Génère une fiche synthèse JSON pour ce cours de géopolitique.\nCours : "'+title+'"\nContenu : '+body.replace(/<[^>]+>/g,' ').substring(0,2000)+'\nRéponds UNIQUEMENT en JSON: {"notions":[{"terme":"...","def":"...","auteur":"..."}],"chiffres":["..."],"erreurs":["..."],"plan":["..."]}'}]
+    })});
     const data=await res.json();
-    const p=JSON.parse(data.content.map(x=>x.text||'').join('').replace(/```json|```/g,'').trim());
-
-    const html=`
-      <div style="font-family:var(--ff);max-width:780px">
-        <div style="font-family:var(--ffd);font-size:20px;font-weight:700;margin-bottom:14px;color:var(--txt)">${title} — Fiche synthèse</div>
-        <div class="g2" style="margin-bottom:10px">
-          <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:12px">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:7px">🔑 Notions clés</div>
-            ${(p.notions||[]).map(n=>`<div style="margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid var(--brd)"><strong style="font-size:12px;color:var(--txt)">${n.terme}</strong><br><span style="font-size:11px;color:var(--txt2)">${n.def}</span><br><span style="font-size:10px;color:var(--acc)">👤 ${n.auteur}${n.date?' ('+n.date+')':''}</span></div>`).join('')}
-          </div>
-          <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:12px">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:7px">📊 Chiffres</div>
-            ${(p.chiffres||[]).map(ch=>`<div style="padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px">📌 ${ch}</div>`).join('')}
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:7px;margin-top:10px">👤 Auteurs</div>
-            ${(p.auteurs||[]).map(a=>`<div style="margin-bottom:6px;font-size:11px"><strong>${a.nom}</strong> — <em>${a.oeuvre}</em><br><span style="color:var(--txt3)">${a.these}</span></div>`).join('')}
-          </div>
-        </div>
-        <div class="g2" style="margin-bottom:10px">
-          <div style="background:var(--acc-l);border:1px solid var(--acc-m);border-radius:var(--r);padding:12px">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);margin-bottom:5px">🎯 Stratégie dissertation</div>
-            <div style="font-size:12px;font-style:italic;color:var(--txt2)">${p.mobilisation||''}</div>
-          </div>
-          <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:12px">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:5px">⚠️ Erreurs fréquentes</div>
-            ${(p.erreurs||[]).map(e=>`<div style="padding:2px 0;font-size:11px">✗ ${e}</div>`).join('')}
-          </div>
-        </div>
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:12px">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:5px">📝 Plan type</div>
-          <div style="font-size:11px;white-space:pre-line;color:var(--txt2)">${p.plan||''}</div>
-        </div>
-      </div>`;
-
-    // Show in modal
-    const m=document.createElement('div');m.className='modal-bg';
-    m.innerHTML=`<div class="modal-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><span style="font-size:14px;font-weight:700;color:var(--txt)">🤖 Fiche IA — ${title}</span><button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button></div>${html}<div style="margin-top:14px;display:flex;gap:7px"><button class="btn btn-p" onclick="exportFicheIA(${JSON.stringify(html).replace(/'/g,'\'')});this.closest('.modal-bg').remove()">💾 Exporter</button><button class="btn btn-g" onclick="this.closest('.modal-bg').remove()">Fermer</button></div></div>`;
-    document.body.appendChild(m);
-    m.addEventListener('click',e=>{if(e.target===m)m.remove();});
-
-    // Cache
-    if(mcIdx>=0)M.set('fiche_mc_'+mcIdx,html);
-    renderMcList();
-    showToast('✅ Fiche générée !');
-  } catch(e){showToast('⚠️ Erreur API : '+e.message,4000);}
-}
-
-function exportFicheIA(html){
-  const doc=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Fiche</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.8;color:#1a1a1a}@media print{body{margin:0}}</style></head><body>${html}</body></html>`;
-  dlFile('fiche.html',doc,'text/html');
-}
-
-// ══════════════════════════════════════════════════════
-// TREE FOLDER SYSTEM — Fiches & Flashcards
-// Node: {id, name, parent:null|"id", open:bool, filter?, prio?, tag?, chapIds?, custom?}
-// ══════════════════════════════════════════════════════
-
-function renderTree(sidebarId, storageKey, activeKey, onSelectFn, onAddFn, defaultTree){
-  const el=document.getElementById(sidebarId);
-  if(!el)return;
-  const tree=M.get(storageKey,defaultTree);
-  const active=M.get(activeKey,'root');
-
-  function buildNodes(parentId, depth){
-    const items=tree.filter(n=>n.parent===(parentId===null?null:parentId));
-    if(!items.length)return'';
-    return items.map(node=>{
-      const isActive=active===node.id;
-      const hasKids=tree.some(n=>n.parent===node.id);
-      const open=node.open!==false;
-      const pl=(depth*14+4)+'px';
-      const icon=node.parent===null?'🗂️':hasKids?'📁':'📄';
-      return '<div>'+
-        '<div style="display:flex;align-items:center;gap:3px;padding:3px 5px 3px '+pl+';border-radius:5px;cursor:pointer;background:'+(isActive?'var(--acc-l)':'')+';transition:background .1s"'+
-          ' onmouseover="if(this.style.background!==\'var(--acc-l)\')this.style.background=\'var(--surf2)\'"'+
-          ' onmouseout="if(this.style.background!==\'var(--acc-l)\')this.style.background=\'\'"'+
-          ' onclick="treeSelect(\''+storageKey+'\',\''+activeKey+'\',\''+node.id+'\',\''+onSelectFn+'\')">' +
-          (hasKids?'<span onclick="event.stopPropagation();treeToggle(\''+storageKey+'\',\''+node.id+'\')" style="font-size:9px;color:var(--txt4);display:inline-block;transform:rotate('+(open?0:-90)+'deg);width:12px;text-align:center;transition:transform .15s">▾</span>':
-            '<span style="width:12px;display:inline-block"></span>')+
-          '<span style="font-size:11px;'+(isActive?'font-weight:700;color:var(--acc)':'color:var(--txt2)')+'">'+icon+' '+node.name+'</span>'+
-          (node.parent!==null?
-            '<div style="margin-left:auto;display:flex;gap:2px;opacity:.4" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.4">'+
-              '<span onclick="event.stopPropagation();treeAddSub(\''+storageKey+'\',\''+node.id+'\')" style="cursor:pointer;font-size:10px;padding:1px 3px;border-radius:3px;background:var(--surf2)" title="Sous-dossier">+</span>'+
-              '<span onclick="event.stopPropagation();treeDelete(\''+storageKey+'\',\''+activeKey+'\',\''+node.id+'\')" style="cursor:pointer;font-size:10px;padding:1px 3px;border-radius:3px;background:var(--surf2)" title="Supprimer">✕</span>'+
-            '</div>':'') +
-        '</div>'+
-        (open&&hasKids?'<div>'+buildNodes(node.id,depth+1)+'</div>':'')+
-      '</div>';
-    }).join('');
-  }
-
-  el.innerHTML=
-    '<div style="min-width:175px;max-width:200px;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:5px;flex-shrink:0;align-self:flex-start;position:sticky;top:0">'+
-      buildNodes(null,0)+
-      '<div onclick="'+onAddFn+'()" style="display:flex;align-items:center;gap:5px;padding:4px 6px;cursor:pointer;border-radius:4px;color:var(--txt4);font-size:11px;margin-top:3px" onmouseover="this.style.background=\'var(--surf2)\'" onmouseout="this.style.background=\'\'">'+
-        '<span>📁</span><span>+ Dossier</span>'+
+    const text=data.content?.map(i=>i.text||'').join('')||'';
+    const p=JSON.parse(text.replace(/```json|```/g,'').trim());
+    const html='<div style="max-width:680px;margin:0 auto;font-size:15px;line-height:1.9">'+
+      '<div style="font-family:var(--ffd);font-size:26px;font-weight:700;margin-bottom:20px;color:var(--txt)">'+title+' — Fiche synthèse</div>'+
+      '<div style="height:1px;background:var(--brd);margin-bottom:28px"></div>'+
+      '<div style="margin-bottom:32px">'+
+        '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">🔑 Notions clés</div>'+
+        (p.notions||[]).map(n=>'<div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--brd)"><div style="font-size:16px;font-weight:700;color:var(--txt);margin-bottom:6px">'+n.terme+'</div><div style="color:var(--txt2);line-height:1.8;margin-bottom:6px">'+n.def+'</div>'+(n.auteur?'<div style="font-size:12px;color:var(--acc)">👤 '+n.auteur+'</div>':'')+'</div>').join('')+
       '</div>'+
+      ((p.chiffres||[]).length?'<div style="margin-bottom:32px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📊 Chiffres clés</div>'+p.chiffres.map(c=>'<div style="display:flex;gap:10px;margin-bottom:12px"><span style="color:var(--red);flex-shrink:0">📌</span><span style="color:var(--txt2)">'+c+'</span></div>').join('')+'</div>':'')+
+      ((p.erreurs||[]).length?'<div style="margin-bottom:32px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">⚠️ Erreurs fréquentes</div>'+p.erreurs.map(e=>'<div style="background:var(--red-l);border-left:3px solid var(--red);padding:10px 14px;margin-bottom:8px;border-radius:0 6px 6px 0;color:var(--txt2)">'+e+'</div>').join('')+'</div>':'')+
+      ((p.plan||[]).length?'<div style="margin-bottom:32px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📋 Plan type</div>'+p.plan.map((pt,i)=>'<div style="display:flex;gap:10px;margin-bottom:12px"><span style="background:var(--acc);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">'+(i+1)+'</span><span style="color:var(--txt2)">'+pt+'</span></div>').join('')+'</div>':'')+
     '</div>';
+
+    // Show in overlay
+    let ov=document.getElementById('mc-fiche-overlay');
+    if(!ov){ov=document.createElement('div');ov.id='mc-fiche-overlay';ov.style.cssText='position:fixed;inset:0;z-index:99999;background:var(--surf);overflow-y:auto';document.body.appendChild(ov);}
+    ov.innerHTML='<div style="padding:20px 40px"><button onclick="document.getElementById(\'mc-fiche-overlay\').remove()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);margin-bottom:20px">← Retour</button>'+html+'</div>';
+    ov.style.display='block';
+  }catch(e){showToast('Erreur: '+e.message);}
 }
 
-function treeSelect(storageKey, activeKey, nodeId, onSelectFn){
-  M.set(activeKey,nodeId);
-  if(storageKey==='fiches_tree'){renderFichesFolders();}
-  else{renderFlashFolders();}
-  const tree=M.get(storageKey,[]);
-  const node=tree.find(n=>n.id===nodeId);
-  if(!node)return;
-  if(onSelectFn==='applyFicheFolder')applyFicheFolder(node);
-  else if(onSelectFn==='applyFlashFolder')applyFlashFolder(node);
+function injectInCours(){
+  const {title,body}=getCurrentMcData();
+  if(!title||!body){showToast('Titre et contenu requis');return;}
+  const chapId=parseInt(prompt('Dans quel chapitre injecter ? (numéro 0-29)'));
+  if(isNaN(chapId)||chapId<0||chapId>29){showToast('Numéro invalide');return;}
+  const existing=M.get('edit_chap_'+chapId,'');
+  M.set('edit_chap_'+chapId,existing+'<hr><h2>'+title+'</h2>'+body);
+  showToast('✅ Cours injecté dans Chap. '+(chapId+1));
+  closeMyCoursOverlay();
+  go('cours');
 }
-
-function treeToggle(storageKey, nodeId){
-  const tree=M.get(storageKey,[]);
-  const node=tree.find(n=>n.id===nodeId);
-  if(node)node.open=node.open===false;
-  M.set(storageKey,tree);
-  if(storageKey==='fiches_tree')renderFichesFolders();
-  else renderFlashFolders();
-}
-
-function treeAddSub(storageKey, parentId){
-  const name=prompt('Nom du sous-dossier :');
-  if(!name?.trim())return;
-  const tree=M.get(storageKey,[]);
-  const id='n'+Date.now();
-  tree.push({id,name:name.trim(),parent:parentId,open:true});
-  M.set(storageKey,tree);
-  if(storageKey==='fiches_tree')renderFichesFolders();
-  else renderFlashFolders();
-  showToast('📁 Sous-dossier créé');
-}
-
-function treeDelete(storageKey, activeKey, nodeId){
-  if(!confirm('Supprimer ce dossier et ses sous-dossiers ?'))return;
-  let tree=M.get(storageKey,[]);
-  function desc(id){const kids=tree.filter(n=>n.parent===id).map(n=>n.id);return[id,...kids.flatMap(k=>desc(k))];}
-  tree=tree.filter(n=>!desc(nodeId).includes(n.id));
-  M.set(storageKey,tree);M.set(activeKey,'root');
-  if(storageKey==='fiches_tree'){renderFichesFolders();renderFiches(CHAPTERS);}
-  else{renderFlashFolders();loadFlash();}
-  showToast('🗑 Dossier supprimé');
-}
-
-// ── FICHES TREE ──────────────────────────────────────
-function getDefaultFichesTree(){
-  return[
-    {id:'root',name:'Toutes les fiches',parent:null,open:true},
-    {id:'fi_indis',name:'🔴 Indispensables',parent:'root',open:true,filter:'indispensable'},
-    {id:'fi_tres',name:'🟠 Très fréquents',parent:'root',open:false,filter:'tres-frequent'},
-    {id:'fi_freq',name:'🟡 Fréquents',parent:'root',open:false,filter:'frequent'},
-    {id:'fi_geo',name:'Géopolitique & RI',parent:'root',open:false,chapIds:[0,1,2,3,7,8]},
-    {id:'fi_fr',name:'France',parent:'fi_geo',open:false,chapIds:[12,13,14,26]},
-    {id:'fi_eu',name:'Europe',parent:'fi_geo',open:false,chapIds:[15]},
-    {id:'fi_eco',name:'Économie mondiale',parent:'root',open:false,chapIds:[4,5,6,9,10,11,28]},
-    {id:'fi_ress',name:'Ressources & Enviro',parent:'root',open:false,chapIds:[10,11,20,23,24,25]},
-    {id:'fi_perso',name:'✏️ Mes fiches perso',parent:'root',open:false,custom:true},
-  ];
-}
-
-function renderFichesFolders(){
-  const sidebar=document.getElementById('fiches-tree-sidebar');
-  if(!sidebar){
-    // First call: restructure the page
-    const grid=document.getElementById('fiches-grid');
-    if(!grid)return;
-    const wrap=document.createElement('div');
-    wrap.style.cssText='display:flex;gap:13px;align-items:flex-start';
-    grid.parentNode.insertBefore(wrap,grid);
-    const treeDiv=document.createElement('div');
-    treeDiv.id='fiches-tree-sidebar';
-    wrap.appendChild(treeDiv);
-    wrap.appendChild(grid);
-  }
-  renderTree('fiches-tree-sidebar','fiches_tree','fiches_active_node','applyFicheFolder','addFicheFolder',getDefaultFichesTree());
-}
-
-function applyFicheFolder(node){
-  if(!node||node.id==='root'){renderFiches(CHAPTERS);return;}
-  if(node.filter)renderFiches(CHAPTERS.filter(c=>c.priority===node.filter));
-  else if(node.chapIds)renderFiches(CHAPTERS.filter(c=>node.chapIds.includes(c.id)));
-  else if(node.custom)renderFiches(CHAPTERS.filter(c=>c.category==='perso'));
-  else renderFiches(CHAPTERS);
-}
-
-function addFicheFolder(){
-  const name=prompt('Nom du dossier (ex: Puissance, Ressources…) :');
-  if(!name?.trim())return;
-  const tree=M.get('fiches_tree',getDefaultFichesTree());
-  const active=M.get('fiches_active_node','root');
-  const id='fn'+Date.now();
-  tree.push({id,name:name.trim(),parent:active||'root',open:true,chapIds:[]});
-  M.set('fiches_tree',tree);
-  renderFichesFolders();
-  showToast('📁 Dossier "'+name+'" créé');
-}
-
-// ── FLASHCARDS TREE ──────────────────────────────────
-function getDefaultFlashTree(){
-  return[
-    {id:'root',name:'Toutes les cartes',parent:null,open:true},
-    {id:'fl_indis',name:'🔴 Indispensables',parent:'root',open:true,prio:'indispensable'},
-    {id:'fl_tres',name:'🟠 Très fréquents',parent:'root',open:false,prio:'tres-frequent'},
-    {id:'fl_geo',name:'Géopolitique & RI',parent:'root',open:false,tag:'géopolitique'},
-    {id:'fl_puis',name:'Puissance',parent:'fl_geo',open:false,tag:'puissance'},
-    {id:'fl_eu',name:'Europe',parent:'fl_geo',open:false,tag:'europe'},
-    {id:'fl_eco',name:'Économie',parent:'root',open:false,tag:'mondialisation'},
-    {id:'fl_ftn',name:'FTN',parent:'fl_eco',open:false,tag:'ftn'},
-    {id:'fl_perso',name:'✏️ Mes cartes',parent:'root',open:true,custom:true},
-  ];
-}
-
-function renderFlashFolders(){
-  const sidebar=document.getElementById('flash-tree-sidebar');
-  if(!sidebar){
-    const flashWrap=document.querySelector('.flash-wrap');
-    if(!flashWrap)return;
-    const pg=document.getElementById('pg-flash');
-    const wrap=document.createElement('div');
-    wrap.style.cssText='display:flex;gap:13px;align-items:flex-start';
-    flashWrap.parentNode.insertBefore(wrap,flashWrap);
-    const treeDiv=document.createElement('div');
-    treeDiv.id='flash-tree-sidebar';
-    wrap.appendChild(treeDiv);
-    const mainDiv=document.createElement('div');
-    mainDiv.style.cssText='flex:1;min-width:0';
-    mainDiv.appendChild(flashWrap);
-    wrap.appendChild(mainDiv);
-  }
-  renderTree('flash-tree-sidebar','flash_tree','flash_active_node','applyFlashFolder','addFlashFolder',getDefaultFlashTree());
-}
-
-function applyFlashFolder(node){
-  if(!node||node.id==='root'){
-    document.getElementById('fl-prio').value='all';
-    document.getElementById('fl-theme').value='';
-    loadFlash();return;
-  }
-  if(node.prio){document.getElementById('fl-prio').value=node.prio;document.getElementById('fl-theme').value='';loadFlash();}
-  else if(node.tag){document.getElementById('fl-theme').value=node.tag;document.getElementById('fl-prio').value='all';loadFlash();}
-  else if(node.custom){
-    const myCards=M.get('my_flashcards',[]);
-    if(!myCards.length){showToast('Aucune flashcard personnelle encore');return;}
-    flDeck=[...myCards].sort(()=>Math.random()-.5);flIdx=0;flipped=false;
-    document.getElementById('fl-count').textContent=flDeck.length+' cartes perso';
-    renderFlash();
-  } else loadFlash();
-}
-
-function addFlashFolder(){
-  const name=prompt('Nom du dossier de flashcards :');
-  if(!name?.trim())return;
-  const tag=prompt('Mot-clé filtre auto (ex: "puissance", "Nye"…) — optionnel :');
-  const tree=M.get('flash_tree',getDefaultFlashTree());
-  const active=M.get('flash_active_node','root');
-  const id='fl'+Date.now();
-  tree.push({id,name:name.trim(),parent:active||'root',open:true,tag:(tag||'').trim()});
-  M.set('flash_tree',tree);
-  renderFlashFolders();
-  showToast('📁 Dossier "'+name+'" créé');
-}
-// initFlashFoldersDefault replaced by getDefaultFlashTree
-
-
-// ══════════════════════════════════════════════════════
-// COURS SIDEBAR TOGGLE
-// ══════════════════════════════════════════════════════
-function toggleCoursSb(){
-  const panel=document.getElementById('cours-sb-panel');
-  const btn=document.getElementById('csb-toggle');
-  if(!panel||!btn)return;
-  const collapsed=panel.classList.toggle('collapsed');
-  M.set('csb_collapsed',collapsed);
-  // Move toggle button
-  btn.style.left=collapsed?'0':'244px';
-  btn.textContent=collapsed?'›':'‹';
-  btn.title=collapsed?'Afficher les chapitres':'Masquer les chapitres';
-}
-
-// Restore cours sidebar state on load
-(function restoreCoursSb(){
-  const collapsed=M.get('csb_collapsed',false);
-  if(!collapsed)return;
-  // Applied when cours page opens
-  document.addEventListener('DOMContentLoaded',()=>{
-    const panel=document.getElementById('cours-sb-panel');
-    const btn=document.getElementById('csb-toggle');
-    if(panel&&collapsed){
-      panel.classList.add('collapsed');
-      if(btn){btn.style.left='0';btn.textContent='›';}
-    }
-  });
-})();
 
 
 // ══════════════════════════════════════════════════════
 // AUTH SYSTEM
 // ══════════════════════════════════════════════════════
-let authMode = 'login';
-let currentUser = null;
+let authMode='login';
+let currentUser=null;
 
 function switchAuthTab(mode){
-  authMode = mode;
-  const isLogin = mode === 'login';
-  document.getElementById('tab-login').style.background = isLogin ? 'var(--acc)' : 'var(--surf)';
-  document.getElementById('tab-login').style.color = isLogin ? '#fff' : 'var(--txt3)';
-  document.getElementById('tab-signup').style.background = !isLogin ? 'var(--acc)' : 'var(--surf)';
-  document.getElementById('tab-signup').style.color = !isLogin ? '#fff' : 'var(--txt3)';
-  document.getElementById('auth-btn').textContent = isLogin ? 'Se connecter' : 'Creer mon compte';
-  document.getElementById('auth-msg').textContent = '';
+  authMode=mode;
+  const isLogin=mode==='login';
+  document.getElementById('tab-login').style.background=isLogin?'var(--acc)':'var(--surf)';
+  document.getElementById('tab-login').style.color=isLogin?'#fff':'var(--txt3)';
+  document.getElementById('tab-signup').style.background=!isLogin?'var(--acc)':'var(--surf)';
+  document.getElementById('tab-signup').style.color=!isLogin?'#fff':'var(--txt3)';
+  document.getElementById('auth-btn').textContent=isLogin?'Se connecter':'Creer mon compte';
+  document.getElementById('auth-msg').textContent='';
 }
 
 async function authSubmit(){
-  const email = document.getElementById('auth-email').value.trim();
-  const pwd = document.getElementById('auth-pwd').value;
-  const msg = document.getElementById('auth-msg');
-  const btn = document.getElementById('auth-btn');
-
-  if(!email || !pwd){ msg.textContent = 'Remplis les deux champs.'; return; }
-  if(pwd.length < 6){ msg.textContent = 'Mot de passe trop court (min. 6 caracteres).'; return; }
-  if(!SUPA_URL || !SUPA_KEY){ skipAuth(); return; }
-
-  btn.textContent = '...'; btn.disabled = true;
-  const endpoint = authMode === 'login'
-    ? SUPA_URL + '/auth/v1/token?grant_type=password'
-    : SUPA_URL + '/auth/v1/signup';
-
-  try {
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json','apikey':SUPA_KEY},
-      body: JSON.stringify({email, password: pwd})
-    });
-    const data = await res.json();
-
-    if(data.error || data.error_description || data.msg){
-      const errMsg = data.error_description || data.msg || data.error || 'Erreur';
-      if(errMsg.includes('Invalid login')) msg.textContent = 'Email ou mot de passe incorrect.';
-      else if(errMsg.includes('already registered')) msg.textContent = 'Email deja utilise. Connecte-toi.';
-      else if(errMsg.includes('Email not confirmed')) msg.textContent = 'Verifie ton email pour confirmer.';
-      else msg.textContent = errMsg;
-      btn.textContent = authMode === 'login' ? 'Se connecter' : 'Creer mon compte';
-      btn.disabled = false;
-      return;
+  const email=document.getElementById('auth-email').value.trim();
+  const pwd=document.getElementById('auth-pwd').value;
+  const msg=document.getElementById('auth-msg');
+  const btn=document.getElementById('auth-btn');
+  if(!email||!pwd){msg.textContent='Remplis les deux champs.';return;}
+  if(pwd.length<6){msg.textContent='Mot de passe trop court (min. 6 caracteres).';return;}
+  if(!SUPA_URL||!SUPA_KEY){skipAuth();return;}
+  btn.textContent='...';btn.disabled=true;
+  const endpoint=authMode==='login'?SUPA_URL+'/auth/v1/token?grant_type=password':SUPA_URL+'/auth/v1/signup';
+  try{
+    const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd})});
+    const data=await res.json();
+    if(data.error||data.error_description||data.msg){
+      const errMsg=data.error_description||data.msg||data.error||'Erreur';
+      if(errMsg.includes('Invalid login'))msg.textContent='Email ou mot de passe incorrect.';
+      else if(errMsg.includes('already registered'))msg.textContent='Email deja utilise.';
+      else if(errMsg.includes('Email not confirmed'))msg.textContent='Verifie ton email pour confirmer.';
+      else msg.textContent=errMsg;
+      btn.textContent=authMode==='login'?'Se connecter':'Creer mon compte';
+      btn.disabled=false;return;
     }
-
-    if(authMode === 'signup' && !data.access_token){
-      msg.style.color = 'var(--grn)';
-      msg.textContent = 'Compte cree ! Verifie ton email puis connecte-toi.';
-      switchAuthTab('login');
-      btn.disabled = false;
-      return;
+    if(authMode==='signup'&&!data.access_token){
+      msg.style.color='var(--grn)';msg.textContent='Compte cree ! Verifie ton email.';
+      switchAuthTab('login');btn.disabled=false;return;
     }
-
-    // Success
     if(data.access_token){
-      localStorage.setItem('geo_auth_token', data.access_token);
-      localStorage.setItem('geo_user_id', data.user.id);
-      localStorage.setItem('geo_user_email', data.user.email);
-      currentUser = data.user;
-      showApp();
+      localStorage.setItem('geo_auth_token',data.access_token);
+      localStorage.setItem('geo_user_id',data.user.id);
+      localStorage.setItem('geo_user_email',data.user.email);
+      currentUser=data.user;showApp();
     }
-  } catch(e){
-    msg.textContent = 'Erreur reseau. Verifie ta connexion.';
-    btn.textContent = authMode === 'login' ? 'Se connecter' : 'Creer mon compte';
-    btn.disabled = false;
-  }
+  }catch(e){msg.textContent='Erreur reseau.';btn.textContent=authMode==='login'?'Se connecter':'Creer mon compte';btn.disabled=false;}
 }
 
 function skipAuth(){
@@ -3040,13 +2669,9 @@ function skipAuth(){
 }
 
 function showApp(){
-  document.getElementById('auth-overlay').style.display = 'none';
-  document.getElementById('main-app').style.display = 'flex';
-  updateCd(); renderObj(); initDash(); loadFromSupabase();
-  // Show user email in sidebar if logged in
-  const email = localStorage.getItem('geo_user_email');
-  const el = document.querySelector('.sb-foot .sf-user');
-  if(el && email) el.textContent = email.split('@')[0];
+  document.getElementById('auth-overlay').style.display='none';
+  document.getElementById('main-app').style.display='flex';
+  updateCd();renderObj();initDash();loadFromSupabase();
 }
 
 function logout(){
@@ -3056,304 +2681,93 @@ function logout(){
   location.reload();
 }
 
-// Check auth on load
+// checkAuth on load
 (function checkAuth(){
-  const token = localStorage.getItem('geo_auth_token');
-  const skip = localStorage.getItem('geo_skip_auth');
-  if(token || skip){
-    showApp();
-  }
-  // else: overlay stays visible
+  const token=localStorage.getItem('geo_auth_token');
+  const skip=localStorage.getItem('geo_skip_auth');
+  if(token||skip){showApp();}
 })();
 
-
-// ══════════════════════════════════════════════════════
-// FICHES PERSO — Create, Edit, Delete
-// ══════════════════════════════════════════════════════
-let _feEditId = null;
-
-function openCreateFiche(editId=null){
-  _feEditId = editId;
-  const existing = editId!==null ? M.get('my_fiches',[])[editId] : null;
-
-  // Show as full-screen overlay
-  document.getElementById('pg-fiche-editor').style.display='block';
-
-  // Reset editor
-  const titleEl = document.getElementById('fe-title');
-  const bodyEl = document.getElementById('fe-body');
-  const iconEl = document.getElementById('fe-icon-wrap');
-  const coverWrap = document.getElementById('fe-cover-wrap');
-  const coverImg = document.getElementById('fe-cover-img');
-  const prioSel = document.getElementById('fe-prio');
-
-  if(existing){
-    titleEl.textContent = existing.title || '';
-    bodyEl.innerHTML = existing.body || '';
-    iconEl.textContent = existing.icon || '📋';
-    prioSel.value = existing.prio || 'frequent';
-    if(existing.cover){coverImg.src=existing.cover;coverWrap.style.display='block';}
-    else coverWrap.style.display='none';
-  } else {
-    titleEl.textContent = '';
-    bodyEl.innerHTML = '';
-    iconEl.textContent = '📋';
-    prioSel.value = 'frequent';
-    coverWrap.style.display = 'none';
-  }
-
-  // Focus title
-  setTimeout(()=>{ titleEl.focus(); },100);
+// renderChapCards
+function renderChapCards(chapShort){
+  const cards=[...FLASHCARDS,...M.get('my_flashcards',[])].filter(f=>f.c===chapShort);
+  if(!cards.length)return'<div style="padding:20px;text-align:center;color:var(--txt3);font-size:13px">Aucune flashcard pour ce chapitre.</div>';
+  return'<div style="display:flex;flex-direction:column;gap:10px">'+cards.map(f=>'<div style="background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:14px"><div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:8px">'+f.q+'</div><div style="font-size:12px;color:var(--txt3);line-height:1.7;padding-top:8px;border-top:1px solid var(--brd)">'+f.a+'</div></div>').join('')+'</div>';
 }
 
-function closeFicheEditor(){
-  document.getElementById('pg-fiche-editor').style.display='none';
-  go('fiches');
+// Cours sidebar toggle
+function toggleCoursSb(){
+  const panel=document.getElementById('cours-sb-panel');
+  const btn=document.getElementById('csb-toggle');
+  if(!panel||!btn)return;
+  const collapsed=panel.classList.toggle('collapsed');
+  M.set('csb_collapsed',collapsed);
+  btn.style.left=collapsed?'0':'244px';
+  btn.textContent=collapsed?'>':'<';
 }
 
-function saveFichePerso(editId){
-  const title=document.getElementById('mf-title')?.value.trim();
-  const content=document.getElementById('mf-content')?.value.trim();
-  const prio=document.getElementById('mf-prio')?.value||'frequent';
-  if(!title||!content){showToast('Remplis le titre et le contenu');return;}
-  const fiches=M.get('my_fiches',[]);
-  const entry={title,content,prio,date:new Date().toLocaleString('fr-FR'),_custom:true};
-  if(editId!==null&&editId!==undefined)fiches[editId]=entry;
-  else fiches.unshift(entry);
-  M.set('my_fiches',fiches);
-  renderFiches(CHAPTERS);
-  showToast('✅ Fiche sauvegardée !');
-}
-
-function saveFicheEditor(){
-  const titleEl=document.getElementById('fe-title');
-  const bodyEl=document.getElementById('fe-body');
-  const prioSel=document.getElementById('fe-prio');
-  const iconEl=document.getElementById('fe-icon-wrap');
-  const coverImg=document.getElementById('fe-cover-img');
-  const coverWrap=document.getElementById('fe-cover-wrap');
-
-  const title=(titleEl?.textContent||'').trim();
-  const body=bodyEl?.innerHTML||'';
-  if(!title){showToast('Ajoute un titre à ta fiche');titleEl?.focus();return;}
-
-  const fiches=M.get('my_fiches',[]);
-  const entry={
-    title, body,
-    prio: prioSel?.value||'frequent',
-    icon: iconEl?.textContent||'📋',
-    cover: coverWrap?.style.display!=='none' ? coverImg?.src : null,
-    date: new Date().toLocaleString('fr-FR'),
-    _custom: true
-  };
-  if(_feEditId!==null)fiches[_feEditId]=entry;
-  else fiches.unshift(entry);
-  M.set('my_fiches',fiches);
-  showToast('✅ Fiche sauvegardée !');
-  document.getElementById('pg-fiche-editor').style.display='none';
-  go('fiches');
-}
-
-function execFE(cmd,val){document.execCommand(cmd,false,val||null);}
-
-function insertFEQuote(){
-  document.getElementById('fe-body').focus();
-  document.execCommand('formatBlock',false,'blockquote');
-}
-
-function pickFicheIcon(){
-  const picker=document.getElementById('fe-icon-picker');
-  picker.style.display=picker.style.display==='none'?'flex':'none';
-}
-
-function setFicheIcon(emoji){
-  document.getElementById('fe-icon-wrap').textContent=emoji;
-  document.getElementById('fe-icon-picker').style.display='none';
-}
-
-function addFicheCover(){
-  document.getElementById('fe-cover-inp').click();
-}
-function handleFECover(inp){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    const img=document.getElementById('fe-cover-img');
-    const wrap=document.getElementById('fe-cover-wrap');
-    img.src=e.target.result;
-    wrap.style.display='block';
-  };
-  r.readAsDataURL(f);
-}
-function removeFicheCover(){
-  document.getElementById('fe-cover-wrap').style.display='none';
-  document.getElementById('fe-cover-img').src='';
-}
-
-function addFicheImage(){
-  document.getElementById('fe-img-inp').click();
-}
+// Tree folder system stubs (already defined above in main JS)
+function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');if(ov)ov.style.display='none';document.querySelector('.topbar').style.display='';}
+function closeMyCoursOverlay(){document.querySelector('.topbar').style.display='';go('dash');}
+function closeFicheEditor(){const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='none';document.querySelector('.topbar').style.display='';go('fiches');}
+function insertMcPdf(inp){const f=inp.files[0];if(!f)return;const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';document.getElementById('mc-body').appendChild(div);inp.value='';}
+function addFiAttachment(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const att=document.getElementById('fi-attachments');if(!att)return;const div=document.createElement('div');div.style.cssText='padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;position:relative';if(type==='image'){div.innerHTML='<img src="'+e.target.result+'" style="width:100%;border-radius:7px;display:block">';}else{div.innerHTML='<span style="font-size:18px">📄</span> <strong style="font-size:13px">'+f.name+'</strong>';}const del=document.createElement('button');del.textContent='🗑';del.onclick=()=>div.remove();del.style.cssText='position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;color:var(--red);font-size:13px';div.appendChild(del);att.appendChild(div);};r.readAsDataURL(f);inp.value='';}
 function handleFEImage(inp){
   const f=inp.files[0];if(!f)return;
   const r=new FileReader();
   r.onload=e=>{
     const body=document.getElementById('fe-body');
     body.focus();
-    // Insert image with delete button wrapper
     const wrap=document.createElement('div');
     wrap.className='fe-img-wrap';
-    wrap.innerHTML=`<img src="${e.target.result}" style="max-width:100%;border-radius:8px;margin:12px 0;display:block">
-      <button class="fe-img-del" onclick="this.closest('.fe-img-wrap').remove()">✕ Supprimer</button>`;
-    // Insert at cursor
+    const img=document.createElement('img');
+    img.src=e.target.result;
+    img.style.cssText='max-width:100%;border-radius:8px;margin:12px 0;display:block';
+    const btn=document.createElement('button');
+    btn.className='fe-img-del';
+    btn.textContent='✕ Supprimer';
+    btn.onclick=()=>wrap.remove();
+    wrap.appendChild(img);wrap.appendChild(btn);
     const sel=window.getSelection();
-    if(sel.rangeCount){
-      const range=sel.getRangeAt(0);
-      range.insertNode(wrap);
-      range.collapse(false);
-    } else {
-      body.appendChild(wrap);
-    }
-  };
-  r.readAsDataURL(f);
-}
-
-function deleteFichePerso(i){
-  if(!confirm('Supprimer cette fiche ?'))return;
-  const fiches=M.get('my_fiches',[]);fiches.splice(i,1);M.set('my_fiches',fiches);
-  renderFiches(CHAPTERS);showToast('🗑 Fiche supprimée');
-}
-
-// Override renderFiches to also show personal fiches
-const _origRenderFiches = renderFiches;
-renderFiches = function(list){
-  _origRenderFiches(list);
-  const myFiches=M.get('my_fiches',[]);
-  if(!myFiches.length)return;
-  const grid=document.getElementById('fiches-grid');
-  if(!grid)return;
-  const persoHTML=myFiches.map((f,i)=>`
-    <div style="background:var(--surf);border:1px solid var(--acc-m);border-radius:12px;padding:22px;transition:all .15s;border-left:3px solid var(--acc)" onmouseover="this.style.boxShadow='var(--sh2)'" onmouseout="this.style.boxShadow=''">
-      ${f.cover?`<img src="${f.cover}" style="width:100%;height:100px;object-fit:cover;border-radius:7px;margin-bottom:12px;display:block">`:'' }
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
-        <span class="badge ${f.prio==='indispensable'?'bi':f.prio==='tres-frequent'?'btf':'bf'}">${f.prio==='indispensable'?'🔴 Indispensable':f.prio==='tres-frequent'?'🟠 Très fréquent':'🟡 Fréquent'}</span>
-        <span style="font-size:10px;background:var(--acc-l);color:var(--acc);padding:2px 7px;border-radius:8px;font-weight:600">✏️ Perso</span>
-      </div>
-      <div style="font-size:22px;margin-bottom:6px">${f.icon||'📋'}</div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:5px;color:var(--txt);line-height:1.3">${f.title}</div>
-      <div style="font-size:11px;color:var(--txt3);margin-bottom:12px">${f.date}</div>
-      <div style="display:flex;gap:6px">
-        <button class="btn btn-g btn-sm" onclick="openFichePersoDetail(${i})">👁 Voir</button>
-        <button class="btn btn-g btn-sm" onclick="openCreateFiche(${i})">✏️ Modifier</button>
-        <button class="btn btn-g btn-sm" style="color:var(--red)" onclick="deleteFichePerso(${i})">🗑</button>
-      </div>
-    </div>`).join('');
-  grid.insertAdjacentHTML('afterbegin', persoHTML);
-};
-
-function openFichePersoDetail(i){
-  const f=M.get('my_fiches',[])[i];if(!f)return;
-  const m=document.createElement('div');m.className='modal-bg';
-  m.innerHTML=`<div class="modal-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">${f.title}</div>
-    <button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button>
-  </div>
-  <div style="font-size:13px;line-height:1.8;color:var(--txt2);white-space:pre-wrap">${f.content}</div>
-  <div style="display:flex;gap:7px;margin-top:14px">
-    <button class="btn btn-p btn-sm" onclick="openCreateFiche(${i});this.closest('.modal-bg').remove()">✏️ Modifier</button>
-    <button class="btn btn-g btn-sm" onclick="this.closest('.modal-bg').remove()">Fermer</button>
-  </div></div>`;
-  document.body.appendChild(m);
-  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
-}
-
-
-function editFicheContent(id){
-  const cached=M.get('fiche_'+id);
-  const m=document.createElement('div');m.className='modal-bg';
-  m.innerHTML=`<div class="modal-box" style="max-width:700px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-      <div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">✏️ Modifier la fiche</div>
-      <button onclick="this.closest('.modal-bg').remove()" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button>
-    </div>
-    <div id="fiche-editor-${id}" class="my-editor-body" contenteditable="true" style="min-height:300px;border:1px solid var(--brd);border-radius:8px;padding:14px;font-size:13px;line-height:1.8;color:var(--txt2);outline:none">${cached||'<p>Génère d\'abord la fiche en cliquant sur le chapitre.</p>'}</div>
-    <div style="display:flex;gap:7px;margin-top:12px">
-      <button class="btn btn-p" onclick="saveFicheEdit(${id});this.closest('.modal-bg').remove()">💾 Sauvegarder</button>
-      <button class="btn btn-g" onclick="this.closest('.modal-bg').remove()">Annuler</button>
-    </div>
-  </div>`;
-  document.body.appendChild(m);
-  m.addEventListener('click',e=>{if(e.target===m)m.remove();});
-}
-
-function saveFicheEdit(id){
-  const el=document.getElementById('fiche-editor-'+id);
-  if(!el)return;
-  M.set('fiche_'+id,el.innerHTML);
-  showToast('✅ Fiche modifiée et sauvegardée !');
-}
-
-function deleteFicheCache(id){
-  if(!confirm('Effacer la fiche générée ? Elle sera régénérée par l\'IA au prochain clic.'))return;
-  localStorage.removeItem('geo_v5_fiche_'+id);
-  showToast('🗑 Fiche effacée — sera régénérée au prochain clic');
-}
-
-
-function handleFEPdf(inp){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    const att=document.getElementById('fe-attachments');
-    const div=document.createElement('div');
-    div.style.cssText='display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px';
-    div.innerHTML='<span style="font-size:20px">&#128196;</span><span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+f.name+'</span><button onclick="this.parentNode.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:12px;font-family:var(--ff)">&#128465; Supprimer</button>';
-    // Store pdf data
-    div.dataset.pdf=e.target.result;
-    att.appendChild(div);
-  };
-  r.readAsDataURL(f);
-  inp.value='';
-}
-
-
-function insertCoursFile(id,inp,type){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    const body=document.getElementById('cours-body-'+id);
-    if(!body)return;
-    if(type==='image'){
-      body.focus();
-      document.execCommand('insertImage',false,e.target.result);
-    } else {
-      const div=document.createElement('div');
-      div.className='cours-ref';
-      div.innerHTML='<span>&#128196;</span><strong>'+f.name+'</strong><button onclick="this.parentNode.remove()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--red);font-size:11px">&#128465;</button>';
-      body.appendChild(div);
-    }
-    M.set('edit_chap_'+id,body.innerHTML);
-  };
-  r.readAsDataURL(f);
-  inp.value='';
-}
-
-
-let _flashAttach = null;
-function attachToFlash(inp,type){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    _flashAttach={name:f.name,data:e.target.result,type};
-    document.getElementById('mf-attach').innerHTML=
-      (type==='image'?'&#128247;':'&#128196;')+' '+f.name+
-      ' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">&#128465;</button>';
+    if(sel.rangeCount){sel.getRangeAt(0).insertNode(wrap);}
+    else{body.appendChild(wrap);}
   };
   r.readAsDataURL(f);inp.value='';
 }
 
+function handleFEPdf(inp){const f=inp.files[0];if(!f)return;const att=document.getElementById('fe-attachments');const div=document.createElement('div');div.style.cssText='display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px';div.innerHTML='<span style="font-size:20px">📄</span><span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+f.name+'</span><button onclick="this.parentNode.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:12px">🗑</button>';if(att)att.appendChild(div);inp.value='';}
+function saveFicheEditor(){const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');const title=(titleEl?.textContent||'').trim();const body=bodyEl?.innerHTML||'';if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}const fiches=M.get('my_fiches',[]);const entry={title,body,prio:prioSel?.value||'frequent',date:new Date().toLocaleString('fr-FR'),_custom:true};if(typeof _feEditId!=='undefined'&&_feEditId!==null)fiches[_feEditId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);showToast('✅ Fiche sauvegardée !');closeFicheEditor();}
+function execFE(cmd,val){document.execCommand(cmd,false,val||null);}
+function insertFEQuote(){document.getElementById('fe-body').focus();document.execCommand('formatBlock',false,'blockquote');}
+function addFicheImage(){document.getElementById('fe-img-inp').click();}
+function editFicheContent(id){showToast('Cliquer sur ✏️ Modifier dans la fiche ouverte');}
+function deleteFicheCache(id){if(!confirm('Effacer la fiche ?'))return;localStorage.removeItem('geo_v5_fiche_'+id);showToast('🗑 Fiche effacée');}
+let _feEditId=null;
+function openCreateFiche(editId=null){_feEditId=editId;const existing=editId!==null?M.get('my_fiches',[])[editId]:null;const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='block';document.querySelector('.topbar').style.display='none';const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');if(existing){if(titleEl)titleEl.textContent=existing.title||'';if(bodyEl)bodyEl.innerHTML=existing.body||'';if(prioSel)prioSel.value=existing.prio||'frequent';}else{if(titleEl)titleEl.textContent='';if(bodyEl)bodyEl.innerHTML='';if(prioSel)prioSel.value='frequent';}setTimeout(()=>{if(titleEl)titleEl.focus();},100);}
+function saveFichePerso(editId){const title=document.getElementById('mf-title')?.value.trim();const content=document.getElementById('mf-content')?.value.trim();const prio=document.getElementById('mf-prio')?.value||'frequent';if(!title||!content){showToast('Remplis le titre et le contenu');return;}const fiches=M.get('my_fiches',[]);const entry={title,content,prio,date:new Date().toLocaleString('fr-FR'),_custom:true};if(editId!==null&&editId!==undefined)fiches[editId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('✅ Fiche sauvegardée !');}
+function deleteFichePerso(i){if(!confirm('Supprimer cette fiche ?'))return;const fiches=M.get('my_fiches',[]);fiches.splice(i,1);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('🗑 Fiche supprimée');}
+function openFichePersoDetail(i){
+  const f=M.get('my_fiches',[])[i];if(!f)return;
+  const m=document.createElement('div');
+  m.className='modal-bg';
+  const box=document.createElement('div');
+  box.className='modal-box';
+  box.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">'+f.title+'</div><button id="fp-close" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button></div><div style="font-size:13px;line-height:1.8;color:var(--txt2)">'+(f.body||f.content||'')+'</div>';
+  const close=()=>m.remove();
+  m.appendChild(box);
+  document.body.appendChild(m);
+  box.querySelector('#fp-close').onclick=close;
+  m.addEventListener('click',e=>{if(e.target===m)close();});
+}
 
-function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');if(ov)ov.style.display='none';}
-
+function deleteFriseItem(fi){const built=typeof FRISE!=='undefined'?FRISE:[];const custom=M.get('custom_frise',[]);const combined=[...built,...custom];const item=combined[fi];if(!item||!item._custom){showToast('Les dates officielles ne peuvent pas être supprimées');return;}const customIdx=custom.findIndex(c=>c.date===item.date&&c.event===item.event);if(customIdx>=0){custom.splice(customIdx,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}}
+function deleteDoc(i){if(!confirm('Supprimer ce document ?'))return;const docs=M.get('my_docs',[]);docs.splice(i,1);M.set('my_docs',docs);initDocs();showToast('🗑 Document supprimé');}
+function deleteCopy(i){if(!confirm('Supprimer cette copie ?'))return;const copies=M.get('copies',[]);copies.splice(i,1);M.set('copies',copies);initCopies();showToast('🗑 Copie supprimée');}
+function insertCoursFile(id,inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const body=document.getElementById('cours-body-'+id);if(!body)return;if(type==='image'){body.focus();document.execCommand('insertImage',false,e.target.result);}else{const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';body.appendChild(div);}M.set('edit_chap_'+id,body.innerHTML);};r.readAsDataURL(f);inp.value='';}
+let _flashAttach=null;
+function attachToFlash(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{_flashAttach={name:f.name,data:e.target.result,type};document.getElementById('mf-attach').innerHTML=(type==='image'?'📷':'📄')+' '+f.name+' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">🗑</button>';};r.readAsDataURL(f);inp.value='';}
+// Auth overlay on load handled by checkAuth above
+// v887596
 </script>
 </body>
 </html>
