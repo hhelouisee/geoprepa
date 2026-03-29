@@ -2179,7 +2179,22 @@ function deleteCopy(i){
   const copies=M.get('copies',COPIES_DEMO);copies.splice(i,1);M.set('copies',copies);initCopies();showToast('🗑 Copie supprimée');
 }
 function handleDrop(e,type){e.preventDefault();const f=e.dataTransfer.files[0];if(f){if(type==='copy')uploadCopy(f);else uploadDoc(f);}}
-function uploadCopy(f){if(!f)return;alert(`📄 "${f.name}" reçu.`);logSession('copy',f.name);}
+function uploadCopy(f){
+  if(!f)return;
+  const copies=M.get('copies',[]);
+  const copy={
+    title:f.name.replace(/\.(pdf|jpg|png|jpeg)$/i,''),
+    date:new Date().toLocaleDateString('fr-FR'),
+    score:null,
+    c:{red:0,prob:0,tens:0,plan:0,aut:0,chif:0,ic:0,prec:0}
+  };
+  copies.push(copy);
+  M.set('copies',copies);
+  logSession('copy',f.name);
+  showToast('📄 Copie "'+copy.title+'" reçue — analyse IA en cours…');
+  initCopies();
+  analyzeCopyAI(copies.length-1);
+}
 
 // ══════════════════════════════════════════════════════
 // REVISION
