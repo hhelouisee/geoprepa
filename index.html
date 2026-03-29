@@ -2176,7 +2176,11 @@ function initCopies(){
 }
 function deleteCopy(i){
   if(!confirm('Supprimer cette copie ?'))return;
-  const copies=M.get('copies',COPIES_DEMO);copies.splice(i,1);M.set('copies',copies);initCopies();showToast('🗑 Copie supprimée');
+  const copies=M.get('copies',[]);
+  copies.splice(i,1);
+  M.set('copies',copies);
+  initCopies();
+  showToast('🗑 Copie supprimée');
 }
 function handleDrop(e,type){e.preventDefault();const f=e.dataTransfer.files[0];if(f){if(type==='copy')uploadCopy(f);else uploadDoc(f);}}
 function uploadCopy(f){
