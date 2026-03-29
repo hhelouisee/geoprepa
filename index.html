@@ -2894,6 +2894,99 @@ async function analyzeCopy(idx){
 }
 
 // ══════════════════════════════════════════════════════
+// FICHES FOLDERS SYSTEM
+// ══════════════════════════════════════════════════════
+function getDefaultFichesTree(){
+  return[
+    {id:'root',name:'Toutes les fiches',parent:null,open:true},
+    {id:'fi_indis',name:'🔴 Indispensables',parent:'root',open:true,filter:'indispensable'},
+    {id:'fi_tres',name:'🟠 Très fréquents',parent:'root',open:false,filter:'tres-frequent'},
+    {id:'fi_freq',name:'🟡 Fréquents',parent:'root',open:false,filter:'frequent'},
+    {id:'fi_geo',name:'Géopolitique',parent:'root',open:false,chapIds:[0,1,2,3,7,8]},
+    {id:'fi_eco',name:'Économie',parent:'root',open:false,chapIds:[4,5,6,9,10]},
+    {id:'fi_fr',name:'France',parent:'fi_geo',open:false,chapIds:[12,13,14]},
+    {id:'fi_eu',name:'Europe',parent:'fi_geo',open:false,chapIds:[15]},
+  ];
+}
+
+function renderFichesFolders(){
+  let sidebar=document.getElementById('fiches-tree-sidebar');
+  if(!sidebar){
+    const grid=document.getElementById('fiches-grid');
+    if(!grid)return;
+    const wrap=document.createElement('div');
+    wrap.style.cssText='display:flex;gap:13px;align-items:flex-start;margin-bottom:14px';
+    grid.parentNode.insertBefore(wrap,grid);
+    const treeDiv=document.createElement('div');
+    treeDiv.id='fiches-tree-sidebar';
+    wrap.appendChild(treeDiv);
+    wrap.appendChild(grid);
+    sidebar=treeDiv;
+  }
+  renderTree('fiches-tree-sidebar','fiches_tree','fiches_active_node','applyFicheFolder','addFicheFolder',getDefaultFichesTree());
+}
+
+function applyFicheFolder(node){
+  if(!node||node.id==='root'){renderFiches(CHAPTERS);return;}
+  if(node.filter)renderFiches(CHAPTERS.filter(c=>c.priority===node.filter));
+  else if(node.chapIds)renderFiches(CHAPTERS.filter(c=>node.chapIds.includes(c.id)));
+  else renderFiches(CHAPTERS);
+}
+
+// ══════════════════════════════════════════════════════
+// FLASH FOLDERS SYSTEM
+// ══════════════════════════════════════════════════════
+function getDefaultFlashTree(){
+  return[
+    {id:'root',name:'Toutes les cartes',parent:null,open:true},
+    {id:'fl_indis',name:'🔴 Indispensables',parent:'root',open:true,prio:'indispensable'},
+    {id:'fl_tres',name:'🟠 Très fréquents',parent:'root',open:false,prio:'tres-frequent'},
+    {id:'fl_geo',name:'Géopolitique',parent:'root',open:false,tag:'géopolitique'},
+    {id:'fl_puis',name:'Puissance',parent:'fl_geo',open:false,tag:'puissance'},
+    {id:'fl_eu',name:'Europe',parent:'fl_geo',open:false,tag:'europe'},
+    {id:'fl_eco',name:'Économie',parent:'root',open:false,tag:'mondialisation'},
+    {id:'fl_perso',name:'✏️ Mes cartes',parent:'root',open:true,custom:true},
+  ];
+}
+
+function renderFlashFolders(){
+  let sidebar=document.getElementById('flash-tree-sidebar');
+  if(!sidebar){
+    const wrap=document.querySelector('.flash-wrap');
+    if(!wrap)return;
+    const container=document.createElement('div');
+    container.style.cssText='display:flex;gap:13px;align-items:flex-start';
+    wrap.parentNode.insertBefore(container,wrap);
+    const treeDiv=document.createElement('div');
+    treeDiv.id='flash-tree-sidebar';
+    const mainDiv=document.createElement('div');
+    mainDiv.style.cssText='flex:1;min-width:0';
+    mainDiv.appendChild(wrap);
+    container.appendChild(treeDiv);
+    container.appendChild(mainDiv);
+    sidebar=treeDiv;
+  }
+  renderTree('flash-tree-sidebar','flash_tree','flash_active_node','applyFlashFolder','addFlashFolder',getDefaultFlashTree());
+}
+
+function applyFlashFolder(node){
+  if(!node||node.id==='root'){
+    document.getElementById('fl-prio').value='all';
+    document.getElementById('fl-theme').value='';
+    loadFlash();return;
+  }
+  if(node.prio){document.getElementById('fl-prio').value=node.prio;document.getElementById('fl-theme').value='';loadFlash();}
+  else if(node.tag){document.getElementById('fl-theme').value=node.tag;document.getElementById('fl-prio').value='all';loadFlash();}
+  else if(node.custom){
+    const myCards=M.get('my_flashcards',[]);
+    if(!myCards.length){showToast('Aucune flashcard personnelle encore');return;}
+    flDeck=[...myCards].sort(()=>Math.random()-.5);flIdx=0;flipped=false;
+    document.getElementById('fl-count').textContent=flDeck.length+' cartes perso';
+    renderFlash();
+  }else loadFlash();
+}
+
+// ══════════════════════════════════════════════════════
 // TREE FOLDER SYSTEM
 // ══════════════════════════════════════════════════════
 function renderTree(sid, sk, ak, fn, af, def){
