@@ -2161,6 +2161,13 @@ function initCopies(){
       <div class="crit-g">
         ${CK.map((k,i)=>`<div class="crit"><div class="crit-n">${CL[i]}</div><div class="crit-v" style="color:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'}">${c.c[k]}</div><div class="crit-pb"><div style="height:100%;border-radius:1px;background:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'};width:${c.c[k]/20*100}%"></div></div></div>`).join('')}
       </div>
+      ${c.score!==null&&c.score!==undefined?`
+        <div style="margin-top:8px;padding:10px;background:var(--surf2);border-radius:6px">
+          <div style="font-size:13px;font-weight:700;color:var(--acc);margin-bottom:6px">Note estimée: ${c.score}/20</div>
+          ${c.points_forts?.length?`<div style="font-size:11px;color:var(--grn);margin-bottom:4px">✓ ${c.points_forts.join(' · ')}</div>`:''}
+          ${c.points_ameliorer?.length?`<div style="font-size:11px;color:var(--org);margin-bottom:4px">⚠ ${c.points_ameliorer.join(' · ')}</div>`:''}
+          ${c.conseil?`<div style="font-size:11px;color:var(--txt2);font-style:italic">${c.conseil}</div>`:''}
+        </div>`:'<div style="font-size:11px;color:var(--txt4);margin-top:6px;font-style:italic">Analyse en attente…</div>'}
       <button class="btn btn-g btn-xs" style="margin-top:7px;color:var(--red)" onclick="deleteCopy(ci)">🗑 Supprimer</button>
     </div>`).join('');
   document.getElementById('nb-copies').textContent=copies.length;
