@@ -2003,12 +2003,14 @@ function deleteFriseItem(fi){
 }
 function addFrise(){
   const d=document.getElementById('fa-d').value.trim();
+  const d2=document.getElementById('fa-d2')?.value.trim()||'';
   const e=document.getElementById('fa-e').value.trim();
   if(!d||!e){alert('Renseigne la date et l\'événement.');return;}
   const custom=M.get('custom_frise',[]);
-  custom.push({date:d,event:e,detail:document.getElementById('fa-det').value.trim(),type:document.getElementById('fa-t').value,must:document.getElementById('fa-m').value==='true',_custom:true});
+  const dateLabel=d2?d+'–'+d2:d;
+  custom.push({date:dateLabel,dateStart:parseInt(d)||9999,event:e,detail:document.getElementById('fa-det').value.trim(),type:document.getElementById('fa-t').value,must:document.getElementById('fa-m').value==='true',_custom:true});
   M.set('custom_frise',custom);
-  ['fa-d','fa-e','fa-det'].forEach(id=>document.getElementById(id).value='');
+  ['fa-d','fa-d2','fa-e','fa-det'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   renderFrise();
 }
 
