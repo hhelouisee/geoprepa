@@ -1548,7 +1548,7 @@ function initDash(){
   document.getElementById('st-flash').textContent=flDone.length;
   document.getElementById('st-score').textContent=avgScore;
   document.getElementById('st-todo').textContent=urgent.length;
-  document.getElementById('nb-copies').textContent=copies.length;
+  const nbEl=document.getElementById('nb-copies');if(nbEl)nbEl.textContent=copies.length;
   document.getElementById('nb-rev').textContent=urgent.length;
 
   document.getElementById('dash-prog').innerHTML=CHAPTERS.slice(0,7).map(c=>{
@@ -2150,8 +2150,8 @@ const CL=['Rédaction','Problémati.','Tension','Plan','Auteurs','Chiffres','I/C
 let copChart=null;
 function initCopies(){
   const copies=M.get('copies',COPIES_DEMO);
+  // Rendre la liste d'abord (indépendamment du graphique)
   const ctx=document.getElementById('perf-chart');
-  if(!ctx)return;
   if(copChart)copChart.destroy();
   copChart=new Chart(ctx,{type:'radar',data:{labels:CL,datasets:copies.slice(-3).map((c,i)=>({label:c.date,data:CK.map(k=>c.c[k]),borderColor:i===0?'var(--red)':i===1?'var(--gold)':'var(--grn)',backgroundColor:i===0?'rgba(220,38,38,.05)':i===1?'rgba(202,138,4,.05)':'rgba(22,163,74,.05)',tension:.3,fill:true,pointRadius:3}))},options:{responsive:true,scales:{r:{min:0,max:20,ticks:{stepSize:5,font:{size:8}},pointLabels:{font:{size:8}}}},plugins:{legend:{labels:{font:{size:9},boxWidth:8}}}}});
   document.getElementById('copies-list').innerHTML=copies.slice(-4).reverse().map((c,ci)=>`
@@ -2172,7 +2172,7 @@ function initCopies(){
         </div>`:'<div style="font-size:11px;color:var(--txt4);margin-top:6px;font-style:italic">Analyse en attente…</div>'}
       <button class="btn btn-g btn-xs" style="margin-top:7px;color:var(--red)" onclick="deleteCopy(ci)">🗑 Supprimer</button>
     </div>`).join('');
-  document.getElementById('nb-copies').textContent=copies.length;
+  const nbEl=document.getElementById('nb-copies');if(nbEl)nbEl.textContent=copies.length;
 }
 function deleteCopy(i){
   if(!confirm('Supprimer cette copie ?'))return;
