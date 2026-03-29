@@ -366,6 +366,12 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 #pg-mycours { display:none; }
 #pg-mycours.on { display:block; }
 
+
+/* Safe area for overlays on mobile */
+.overlay-bar {
+  padding-top: max(10px, env(safe-area-inset-top)) !important;
+}
+
 </style>
 </head>
 <body>
@@ -1648,7 +1654,7 @@ function loadChap(id){
   document.getElementById('ci-'+id)?.classList.add('on');
   // Show full-screen overlay
   const ov=document.getElementById('cours-overlay');
-  if(ov){ov.style.display='block';const t=document.getElementById('co-title');if(t)t.textContent=c.short+' — '+c.title.substring(0,50);}
+  if(ov){ov.style.display='block';document.querySelector('.topbar').style.display='none';const t=document.getElementById('co-title');if(t)t.textContent=c.short+' — '+c.title.substring(0,50);}
 
   // Track visit
   const visited=M.get('visited_chapters',[]);
@@ -1798,6 +1804,7 @@ async function showFicheModal(id){
     document.body.appendChild(ov);
   }
   ov.style.display='block';
+  document.querySelector('.topbar').style.display='none';
 
   const prio=c.priority==='indispensable'?'bi':c.priority==='tres-frequent'?'btf':'bf';
   const prioLabel=c.priority==='indispensable'?'Indispensable':c.priority==='tres-frequent'?'Très fréquent':'Fréquent';
@@ -1805,8 +1812,8 @@ async function showFicheModal(id){
 
   // Build with template literal — safe because it's not inside another string
   ov.innerHTML = `
-    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:10px 28px;min-height:52px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;z-index:10">
-      <button onclick="document.getElementById('fiche-overlay').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>
+    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 28px;padding-top:max(8px,env(safe-area-inset-top));min-height:52px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;z-index:10">
+      <button onclick="document.getElementById('fiche-overlay').style.display='none';document.querySelector('.topbar').style.display=''" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>
       <div style="flex:1"></div>
       <span class="badge ${prio}">${prioLabel}</span>
       <button onclick="editFicheContent(${id})" style="background:none;border:1px solid var(--brd);border-radius:5px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:var(--ff);color:var(--txt2)">✏️ Modifier</button>
@@ -1885,41 +1892,50 @@ Contenu : ${content}`;
     const p=JSON.parse(text.replace(/```json|```/g,'').trim());
 
     const html=`
-      <div class="g2" style="margin-bottom:9px">
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:6px">🔑 Notions clés</div>
-          ${(p.notions||[]).map(n=>`<div style="margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid var(--brd)"><strong style="font-size:12px;color:var(--txt)">${n.terme}</strong><br><span style="font-size:11px;color:var(--txt2)">${n.def}</span><br><span style="font-size:10px;color:var(--acc)">👤 ${n.auteur}${n.date?' ('+n.date+')':''}</span></div>`).join('')}
+      <div style="max-width:680px;margin:0 auto">
+
+        <!-- Notions clés -->
+        <div style="margin-bottom:32px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">🔑 Notions clés</div>
+          ${p.notions?.map(n=>`
+            <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--brd)">
+              <div style="font-size:16px;font-weight:700;color:var(--txt);margin-bottom:6px">${n.terme}</div>
+              <div style="font-size:14px;color:var(--txt2);line-height:1.75;margin-bottom:8px">${n.def}</div>
+              ${n.auteur?`<div style="font-size:12px;color:var(--acc);font-weight:500">👤 ${n.auteur}</div>`:''}
+            </div>`).join('')||''}
         </div>
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:6px">📊 Chiffres</div>
-          ${(p.chiffres||[]).map(ch=>`<div style="padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px;color:var(--txt2)">📌 ${ch}</div>`).join('')}
-        </div>
-      </div>
-      <div class="g2" style="margin-bottom:9px">
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:6px">👤 Auteurs</div>
-          ${(p.auteurs||[]).map(a=>`<div style="margin-bottom:6px;font-size:11px"><strong style="color:var(--txt)">${a.nom}</strong> — <em>${a.oeuvre}</em><br><span style="color:var(--txt3)">${a.these}</span></div>`).join('')}
-        </div>
-        <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:6px">⚠️ Erreurs fréquentes</div>
-          ${(p.erreurs||[]).map(e=>`<div style="padding:3px 0;border-bottom:1px solid var(--red-m);font-size:11px;color:var(--txt2)">✗ ${e}</div>`).join('')}
-        </div>
-      </div>
-      <div style="background:var(--acc-l);border:1px solid var(--acc-m);border-radius:var(--r);padding:11px;margin-bottom:8px;transition:background .2s">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);margin-bottom:5px">🎯 Stratégie dissertation</div>
-        <div style="font-size:12px;font-style:italic;color:var(--txt2)">${p.mobilisation||''}</div>
-      </div>
-      <div class="g2">
-        <div style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:5px">📝 Plan type</div>
-          <div style="font-size:11px;white-space:pre-line;color:var(--txt2)">${p.plan||''}</div>
-        </div>
-        <div style="background:var(--gold-l);border:1px solid var(--gold-m);border-radius:var(--r);padding:11px;transition:background .2s">
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:5px">📈 Évaluation IA</div>
-          <div style="font-size:11px;color:var(--txt2)">${p.evaluation||''}</div>
-        </div>
+
+        <!-- Chiffres clés -->
+        ${p.chiffres?.length?`
+        <div style="margin-bottom:32px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📊 Chiffres clés</div>
+          ${p.chiffres.map(c=>`
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px">
+              <span style="color:var(--red);font-size:14px;flex-shrink:0">📌</span>
+              <span style="font-size:14px;color:var(--txt2);line-height:1.6">${c}</span>
+            </div>`).join('')}
+        </div>`:''}
+
+        <!-- Erreurs à éviter -->
+        ${p.erreurs?.length?`
+        <div style="margin-bottom:32px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">⚠️ Erreurs fréquentes</div>
+          ${p.erreurs.map(e=>`
+            <div style="background:var(--red-l);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:13px;color:var(--txt2);line-height:1.65">${e}</div>`).join('')}
+        </div>`:''}
+
+        <!-- Plan type -->
+        ${p.plan?.length?`
+        <div style="margin-bottom:32px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📋 Plan type</div>
+          ${p.plan.map((pt,i)=>`
+            <div style="display:flex;gap:12px;margin-bottom:12px;align-items:flex-start">
+              <span style="background:var(--acc);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px">${i+1}</span>
+              <span style="font-size:14px;color:var(--txt2);line-height:1.6">${pt}</span>
+            </div>`).join('')}
+        </div>`:''}
+
       </div>`;
-    el.innerHTML=html;
     M.set('fiche_'+id,html);
   } catch(e){
     el.innerHTML=`<div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:13px;text-align:center">
@@ -3105,6 +3121,7 @@ function openCreateFiche(editId=null){
 
   // Show as full-screen overlay
   document.getElementById('pg-fiche-editor').style.display='block';
+  document.querySelector('.topbar').style.display='none';
 
   // Reset editor
   const titleEl = document.getElementById('fe-title');
@@ -3136,6 +3153,7 @@ function openCreateFiche(editId=null){
 function closeFicheEditor(){
   const el=document.getElementById('pg-fiche-editor');
   if(el)el.style.display='none';
+  document.querySelector('.topbar').style.display='';
   // Restore main app pages
   document.querySelectorAll('.pg').forEach(p=>{
     if(p.id!=='pg-fiche-editor'&&p.id!=='pg-mycours')p.style.display='';
@@ -3384,10 +3402,11 @@ function attachToFlash(inp,type){
 }
 
 
-function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');if(ov)ov.style.display='none';}
+function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');if(ov)ov.style.display='none';document.querySelector('.topbar').style.display='';}
 
 
 function closeMyCoursOverlay(){
+  document.querySelector('.topbar').style.display='';
   go('dash');
 }
 function insertMcPdf(inp){
