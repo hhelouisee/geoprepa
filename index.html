@@ -144,7 +144,7 @@ textarea:focus{border-color:var(--acc)}
 
 /* ── COURS LAYOUT ── */
 .cours-lay{display:flex;height:calc(100vh - var(--top-h))}
-.cours-sb{width:256px;flex-shrink:0;border-right:1px solid var(--brd);background:var(--surf);display:flex;flex-direction:column;overflow:hidden;transition:width .22s ease,border-color .22s ease,background .2s}
+.cours-sb{width:300px;flex-shrink:0;border-right:1px solid var(--brd);background:var(--surf);display:flex;flex-direction:column;overflow:hidden;transition:width .22s ease,border-color .22s ease,background .2s}
 .cours-sb.collapsed{width:0;border-right-color:transparent}
 .csb-top{padding:8px;border-bottom:1px solid var(--brd);background:var(--surf);position:sticky;top:0;z-index:2;display:flex;flex-direction:column;gap:5px}
 .csb-top input{width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:6px 8px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)}
@@ -925,13 +925,25 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="rtb" onclick="execCmd('insertUnorderedList')">• L</button>
       <button class="rtb" onclick="execCmd('insertOrderedList')">1.</button>
       <div class="rtb-sep"></div>
-      <div class="rtb-c" style="background:#b8806a" onclick="execCmd('foreColor','#b8806a')"></div>
-      <div class="rtb-c" style="background:#5b7fa6" onclick="execCmd('foreColor','#5b7fa6')"></div>
-      <div class="rtb-c" style="background:#7aab8a" onclick="execCmd('foreColor','#7aab8a')"></div>
-      <div class="rtb-c" style="background:#c48a82" onclick="execCmd('foreColor','#c48a82')"></div>
+      <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd('foreColor','#8B4A6B')"></div>
+      <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd('foreColor','#2C5F8A')"></div>
+      <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd('foreColor','#2D6B4A')"></div>
+      <div class="rtb-c" style="background:#A63D40" onclick="execCmd('foreColor','#A63D40')"></div>
       <div class="rtb-sep"></div>
       <button class="rtb" onclick="insertImage()">🖼️</button>
       <button class="rtb" onclick="execCmd('removeFormat')">Aa</button>
+          <div class="rtb-sep"></div>
+          <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd('foreColor','#2C5F8A')" title="Bleu nuit"></div>
+          <div class="rtb-c" style="background:#6B5EA8" onclick="execCmd('foreColor','#6B5EA8')" title="Lavande"></div>
+          <div class="rtb-c" style="background:#A63D40" onclick="execCmd('foreColor','#A63D40')" title="Rouge"></div>
+          <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd('foreColor','#8B4A6B')" title="Mauve"></div>
+          <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd('foreColor','#2D6B4A')" title="Vert"></div>
+          <div class="rtb-c" style="background:#6B3A2A" onclick="execCmd('foreColor','#6B3A2A')" title="Marron"></div>
+          <div class="rtb-sep"></div>
+          <div class="rtb-c" style="background:#BDD7F5;border:1px solid #aaa" onclick="execCmd('hiliteColor','#BDD7F5')" title="Surligner bleu">S</div>
+          <div class="rtb-c" style="background:#F5E6BD;border:1px solid #aaa" onclick="execCmd('hiliteColor','#F5E6BD')" title="Surligner jaune">S</div>
+          <div class="rtb-c" style="background:#D4F5BD;border:1px solid #aaa" onclick="execCmd('hiliteColor','#D4F5BD')" title="Surligner vert">S</div>
+          <div class="rtb-c" style="background:#F5BDD4;border:1px solid #aaa" onclick="execCmd('hiliteColor','#F5BDD4')" title="Surligner rose">S</div>
       <button class="rtb" onclick="execCmd('undo')">↩</button>
       <button class="rtb" onclick="execCmd('redo')">↪</button>
     </div>
@@ -1070,10 +1082,10 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="rtb" onclick="execFE('insertUnorderedList')">&#8226; L</button>
       <button class="rtb" onclick="insertFEQuote()">&#10078;</button>
       <div class="rtb-sep"></div>
-      <div class="rtb-c" style="background:#b8806a" onclick="execFE('foreColor','#b8806a')"></div>
-      <div class="rtb-c" style="background:#5b7fa6" onclick="execFE('foreColor','#5b7fa6')"></div>
-      <div class="rtb-c" style="background:#7aab8a" onclick="execFE('foreColor','#7aab8a')"></div>
-      <div class="rtb-c" style="background:#c48a82" onclick="execFE('foreColor','#c48a82')"></div>
+      <div class="rtb-c" style="background:#8B4A6B" onclick="execFE('foreColor','#8B4A6B')"></div>
+      <div class="rtb-c" style="background:#2C5F8A" onclick="execFE('foreColor','#2C5F8A')"></div>
+      <div class="rtb-c" style="background:#2D6B4A" onclick="execFE('foreColor','#2D6B4A')"></div>
+      <div class="rtb-c" style="background:#A63D40" onclick="execFE('foreColor','#A63D40')"></div>
       <div class="rtb-sep"></div>
       <button class="rtb" onclick="document.getElementById('fe-img-inp').click()" title="Image">&#128247;</button>
       <button class="rtb" onclick="document.getElementById('fe-pdf-inp').click()" title="PDF">&#128196;</button>
@@ -2766,6 +2778,114 @@ function deleteCopy(i){if(!confirm('Supprimer cette copie ?'))return;const copie
 function insertCoursFile(id,inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const body=document.getElementById('cours-body-'+id);if(!body)return;if(type==='image'){body.focus();document.execCommand('insertImage',false,e.target.result);}else{const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';body.appendChild(div);}M.set('edit_chap_'+id,body.innerHTML);};r.readAsDataURL(f);inp.value='';}
 let _flashAttach=null;
 function attachToFlash(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{_flashAttach={name:f.name,data:e.target.result,type};document.getElementById('mf-attach').innerHTML=(type==='image'?'📷':'📄')+' '+f.name+' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">🗑</button>';};r.readAsDataURL(f);inp.value='';}
+
+// ── FICHES DOSSIERS ──────────────────────────────────────────────────────
+function addFicheFolder(){
+  const name=prompt('Nom du dossier (ex: Puissance, Ressources…) :');
+  if(!name?.trim())return;
+  const tree=M.get('fiches_tree',getDefaultFichesTree());
+  const active=M.get('fiches_active_node','root');
+  const id='fn'+Date.now();
+  tree.push({id,name:name.trim(),parent:active||'root',open:true,chapIds:[]});
+  M.set('fiches_tree',tree);
+  renderFichesFolders();
+  showToast('📁 Dossier "'+name+'" créé');
+}
+
+function addFlashFolderBtn(){
+  const name=prompt('Nom du dossier de flashcards :');
+  if(!name?.trim())return;
+  const tag=prompt('Mot-clé filtre auto (ex: "puissance", "Nye"…) — optionnel :');
+  const tree=M.get('flash_tree',getDefaultFlashTree());
+  const active=M.get('flash_active_node','root');
+  const id='fl'+Date.now();
+  tree.push({id,name:name.trim(),parent:active||'root',open:true,tag:(tag||'').trim()});
+  M.set('flash_tree',tree);
+  renderFlashFolders();
+  showToast('📁 Dossier "'+name+'" créé');
+}
+
+function treeAddSub(storageKey, parentId){
+  const name=prompt('Nom du sous-dossier :');
+  if(!name?.trim())return;
+  const tree=M.get(storageKey,[]);
+  const id='n'+Date.now();
+  tree.push({id,name:name.trim(),parent:parentId,open:true});
+  M.set(storageKey,tree);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+  showToast('📁 Sous-dossier créé');
+}
+
+function treeDelete(storageKey, activeKey, nodeId){
+  if(!confirm('Supprimer ce dossier et ses sous-dossiers ?'))return;
+  let tree=M.get(storageKey,[]);
+  function desc(id){const kids=tree.filter(n=>n.parent===id).map(n=>n.id);return[id,...kids.flatMap(k=>desc(k))];}
+  tree=tree.filter(n=>!desc(nodeId).includes(n.id));
+  M.set(storageKey,tree);M.set(activeKey,'root');
+  if(storageKey==='fiches_tree'){renderFichesFolders();renderFiches(CHAPTERS);}
+  else{renderFlashFolders();loadFlash();}
+  showToast('🗑 Dossier supprimé');
+}
+
+// ── FICHES PERSO DANS LA GRILLE ─────────────────────────────────────────
+function renderFichesPerso(){
+  const myFiches=M.get('my_fiches',[]);
+  const grid=document.getElementById('fiches-grid');
+  if(!grid||!myFiches.length)return;
+  const persoHTML=myFiches.map((f,i)=>`
+    <div style="background:var(--surf);border:1px solid var(--acc-m);border-radius:12px;padding:22px;transition:all .15s;border-left:3px solid var(--acc)">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
+        <span class="badge ${f.prio==='indispensable'?'bi':f.prio==='tres-frequent'?'btf':'bf'}">${f.prio==='indispensable'?'🔴 Indispensable':f.prio==='tres-frequent'?'🟠 Très fréquent':'🟡 Fréquent'}</span>
+        <span style="font-size:10px;background:var(--acc-l);color:var(--acc);padding:2px 7px;border-radius:8px;font-weight:600">✏️ Perso</span>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:5px;color:var(--txt);line-height:1.3">${f.title}</div>
+      <div style="font-size:11px;color:var(--txt3);margin-bottom:12px">${f.date||''}</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-g btn-sm" onclick="openFichePersoDetail(${i})">👁 Voir</button>
+        <button class="btn btn-g btn-sm" onclick="openCreateFiche(${i})">✏️ Modifier</button>
+        <button class="btn btn-g btn-sm" style="color:var(--red)" onclick="deleteFichePerso(${i})">🗑</button>
+      </div>
+    </div>`).join('');
+  grid.insertAdjacentHTML('afterbegin', persoHTML);
+}
+
+// Patch renderFiches pour inclure les fiches perso
+const _rF = renderFiches;
+renderFiches = function(list){
+  _rF(list);
+  renderFichesPerso();
+};
+
+// ── ANALYSE COPIES ───────────────────────────────────────────────────────
+async function analyzeCopy(idx){
+  const copies=M.get('copies',[]);
+  const copy=copies[idx];
+  if(!copy)return;
+  
+  const el=document.getElementById('copy-analysis-'+idx);
+  if(el)el.innerHTML='<div style="text-align:center;padding:10px;color:var(--txt3)"><div class="dots" style="justify-content:center"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px;margin-top:5px">Analyse en cours…</div></div>';
+  
+  try{
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:1000,
+      messages:[{role:'user',content:'Tu es un correcteur BCE géopolitique. Donne une analyse concise de cette copie en JSON avec les champs: {note:number, points_forts:[string], points_ameliorer:[string], conseil:string}. Copie: '+(copy.text||copy.title||'Copie sans texte')}]
+    })});
+    const data=await res.json();
+    const text=data.content?.map(i=>i.text||'').join('')||'';
+    const p=JSON.parse(text.replace(/```json|```/g,'').trim());
+    if(el)el.innerHTML=`
+      <div style="margin-top:10px;padding:12px;background:var(--surf2);border-radius:8px">
+        <div style="font-size:13px;font-weight:700;color:var(--acc);margin-bottom:8px">Note estimée: ${p.note}/20</div>
+        <div style="font-size:12px;color:var(--grn);margin-bottom:6px"><strong>Points forts:</strong> ${(p.points_forts||[]).join(' · ')}</div>
+        <div style="font-size:12px;color:var(--org);margin-bottom:6px"><strong>À améliorer:</strong> ${(p.points_ameliorer||[]).join(' · ')}</div>
+        <div style="font-size:12px;color:var(--txt2)"><strong>Conseil:</strong> ${p.conseil||''}</div>
+      </div>`;
+  }catch(e){
+    if(el)el.innerHTML='<div style="color:var(--red);font-size:11px;padding:8px">Erreur analyse: '+e.message+'</div>';
+  }
+}
+
 // Auth overlay on load handled by checkAuth above
 // v887596
 </script>
