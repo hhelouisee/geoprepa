@@ -886,66 +886,59 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 
   <!-- ════ MES COURS ════ -->
-  <div class="pg" id="pg-mycours" style="padding:0;background:var(--surf);position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;overflow-y:auto">
-    
-    <!-- Top bar -->
-    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:12px 32px;display:flex;align-items:center;gap:12px;z-index:10;border-bottom:1px solid var(--brd)">
-      <button onclick="closeMyCoursOverlay()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px;transition:background .1s" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">← Mes cours</button>
+  <div class="pg" id="pg-mycours" style="padding:0;background:var(--surf);position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;overflow-y:auto;box-sizing:border-box">
+
+    <!-- Barre navigation haut — toujours visible -->
+    <div style="background:var(--surf);border-bottom:1px solid var(--brd);padding:14px 32px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <button onclick="closeMyCoursOverlay()" style="background:none;border:none;cursor:pointer;color:var(--txt2);font-size:14px;font-family:var(--ff);padding:6px 10px;border-radius:5px;display:flex;align-items:center;gap:6px;font-weight:500">← Mes cours</button>
       <div style="flex:1"></div>
-      <button class="btn btn-p btn-sm" onclick="saveMyCours()">💾 Sauvegarder</button>
       <button class="btn btn-g btn-sm" onclick="newMyCours()">+ Nouveau</button>
-      <button class="btn btn-g btn-sm" onclick="exportMyCoursTxt()" title="Export TXT">📄 TXT</button>
-      <button class="btn btn-g btn-sm" onclick="exportMyCoursHtml()" title="Export PDF">🖨 PDF</button>
-      <button class="btn btn-g btn-sm" onclick="fichageIA()" title="Fiche IA">🤖 Fiche IA</button>
-      <button class="btn btn-g btn-sm" onclick="injectInCours()" title="→ Cours complet">📚 Injecter</button>
+      <button class="btn btn-g btn-sm" onclick="exportMyCoursTxt()">📄 TXT</button>
+      <button class="btn btn-g btn-sm" onclick="exportMyCoursHtml()">🖨 PDF</button>
+      <button class="btn btn-g btn-sm" onclick="fichageIA()">🤖 Fiche IA</button>
+      <button class="btn btn-g btn-sm" onclick="injectInCours()">📚 Injecter</button>
+      <button class="btn btn-p btn-sm" onclick="saveMyCours()">💾 Sauvegarder</button>
     </div>
 
-    <!-- Zone d'édition -->
-    <div style="max-width:720px;margin:0 auto;padding:48px 40px 120px">
-      
-      <!-- Titre -->
+    <!-- Zone d'écriture -->
+    <div style="max-width:700px;margin:0 auto;padding:48px 32px 160px">
       <input type="text" id="mc-title" placeholder="Titre du cours…"
-        style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:24px;padding:0;line-height:1.2">
-      
+        style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
       <div style="height:1px;background:var(--brd);margin-bottom:28px"></div>
-
-      <!-- Éditeur riche -->
-      <div class="my-editor" style="border:none;border-radius:0;background:transparent">
-        <div class="my-editor-tb" style="position:sticky;top:48px;z-index:5;border-radius:8px;margin-bottom:20px">
-          <button class="rtb" onclick="execCmd('bold')"><strong>B</strong></button>
-          <button class="rtb" onclick="execCmd('italic')"><em>I</em></button>
-          <button class="rtb" onclick="execCmd('underline')"><u>U</u></button>
-          <div class="rtb-sep"></div>
-          <button class="rtb" onclick="execCmd('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
-          <button class="rtb" onclick="execCmd('formatBlock','h3')" style="font-size:10px">Moyen</button>
-          <button class="rtb" onclick="execCmd('formatBlock','p')" style="font-size:10px">Normal</button>
-          <div class="rtb-sep"></div>
-          <button class="rtb" onclick="execCmd('insertUnorderedList')">• L</button>
-          <button class="rtb" onclick="execCmd('insertOrderedList')">1.</button>
-          <div class="rtb-sep"></div>
-          <div class="rtb-c" style="background:#b8806a" onclick="execCmd('foreColor','#b8806a')"></div>
-          <div class="rtb-c" style="background:#5b7fa6" onclick="execCmd('foreColor','#5b7fa6')"></div>
-          <div class="rtb-c" style="background:#7aab8a" onclick="execCmd('foreColor','#7aab8a')"></div>
-          <div class="rtb-c" style="background:#c48a82" onclick="execCmd('foreColor','#c48a82')"></div>
-          <div class="rtb-sep"></div>
-          <button class="rtb" onclick="insertImage()">🖼️</button>
-          <button class="rtb" onclick="document.getElementById('mc-pdf-inp').click()">📄</button>
-          <button class="rtb" onclick="execCmd('removeFormat')">Aa</button>
-          <button class="rtb" onclick="execCmd('undo')">↩</button>
-          <button class="rtb" onclick="execCmd('redo')">↪</button>
-          <input type="file" id="mc-pdf-inp" accept=".pdf" style="display:none" onchange="insertMcPdf(this)">
-        </div>
-        <div id="mc-body" class="my-editor-body" contenteditable="true"
-          placeholder="Commence à rédiger ton cours ici…"
-          style="min-height:500px;font-size:16px;line-height:1.9;padding:0"
-          oninput="M.set('mc_draft',document.getElementById('mc-body').innerHTML)">
-        </div>
+      <div id="mc-body" class="my-editor-body" contenteditable="true"
+        style="min-height:50vh;font-size:16px;line-height:1.9;color:var(--txt2);outline:none;word-break:break-word"
+        oninput="M.set('mc_draft_body',this.innerHTML)">
       </div>
+      <div style="height:80px"></div>
     </div>
 
-    <!-- Mes cours sauvegardés en bas -->
-    <div style="max-width:720px;margin:0 auto;padding:0 40px 60px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:12px;padding-top:20px;border-top:1px solid var(--brd)">Cours sauvegardés</div>
+    <!-- Toolbar fixe en bas au centre -->
+    <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 18px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:99999">
+      <button class="rtb" onclick="execCmd('bold')"><strong>B</strong></button>
+      <button class="rtb" onclick="execCmd('italic')"><em>I</em></button>
+      <button class="rtb" onclick="execCmd('underline')"><u>U</u></button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execCmd('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execCmd('formatBlock','h3')" style="font-size:10px">Moyen</button>
+      <button class="rtb" onclick="execCmd('formatBlock','p')" style="font-size:10px">Normal</button>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="execCmd('insertUnorderedList')">• L</button>
+      <button class="rtb" onclick="execCmd('insertOrderedList')">1.</button>
+      <div class="rtb-sep"></div>
+      <div class="rtb-c" style="background:#b8806a" onclick="execCmd('foreColor','#b8806a')"></div>
+      <div class="rtb-c" style="background:#5b7fa6" onclick="execCmd('foreColor','#5b7fa6')"></div>
+      <div class="rtb-c" style="background:#7aab8a" onclick="execCmd('foreColor','#7aab8a')"></div>
+      <div class="rtb-c" style="background:#c48a82" onclick="execCmd('foreColor','#c48a82')"></div>
+      <div class="rtb-sep"></div>
+      <button class="rtb" onclick="insertImage()">🖼️</button>
+      <button class="rtb" onclick="execCmd('removeFormat')">Aa</button>
+      <button class="rtb" onclick="execCmd('undo')">↩</button>
+      <button class="rtb" onclick="execCmd('redo')">↪</button>
+    </div>
+
+    <!-- Cours sauvegardés -->
+    <div id="mc-list-wrap" style="display:none;max-width:700px;margin:0 auto;padding:0 32px 60px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:14px;padding-top:24px;border-top:1px solid var(--brd)">Cours sauvegardés</div>
       <div class="g3" id="mc-list"></div>
     </div>
   </div>
@@ -1891,51 +1884,15 @@ Contenu : ${content}`;
     const text=data.content?.map(i=>i.text||'').join('')||'';
     const p=JSON.parse(text.replace(/```json|```/g,'').trim());
 
-    const html=`
-      <div style="max-width:680px;margin:0 auto">
-
-        <!-- Notions clés -->
-        <div style="margin-bottom:32px">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">🔑 Notions clés</div>
-          ${p.notions?.map(n=>`
-            <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--brd)">
-              <div style="font-size:16px;font-weight:700;color:var(--txt);margin-bottom:6px">${n.terme}</div>
-              <div style="font-size:14px;color:var(--txt2);line-height:1.75;margin-bottom:8px">${n.def}</div>
-              ${n.auteur?`<div style="font-size:12px;color:var(--acc);font-weight:500">👤 ${n.auteur}</div>`:''}
-            </div>`).join('')||''}
-        </div>
-
-        <!-- Chiffres clés -->
-        ${p.chiffres?.length?`
-        <div style="margin-bottom:32px">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📊 Chiffres clés</div>
-          ${p.chiffres.map(c=>`
-            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px">
-              <span style="color:var(--red);font-size:14px;flex-shrink:0">📌</span>
-              <span style="font-size:14px;color:var(--txt2);line-height:1.6">${c}</span>
-            </div>`).join('')}
-        </div>`:''}
-
-        <!-- Erreurs à éviter -->
-        ${p.erreurs?.length?`
-        <div style="margin-bottom:32px">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">⚠️ Erreurs fréquentes</div>
-          ${p.erreurs.map(e=>`
-            <div style="background:var(--red-l);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;font-size:13px;color:var(--txt2);line-height:1.65">${e}</div>`).join('')}
-        </div>`:''}
-
-        <!-- Plan type -->
-        ${p.plan?.length?`
-        <div style="margin-bottom:32px">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📋 Plan type</div>
-          ${p.plan.map((pt,i)=>`
-            <div style="display:flex;gap:12px;margin-bottom:12px;align-items:flex-start">
-              <span style="background:var(--acc);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px">${i+1}</span>
-              <span style="font-size:14px;color:var(--txt2);line-height:1.6">${pt}</span>
-            </div>`).join('')}
-        </div>`:''}
-
-      </div>`;
+    const html=`<div style="max-width:680px;margin:0 auto;font-size:15px;line-height:1.9">
+      <div style="margin-bottom:36px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">🔑 Notions clés</div>
+        ${(p.notions||[]).map(n=>`<div style="margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--brd)"><div style="font-size:17px;font-weight:700;color:var(--txt);margin-bottom:8px">${n.terme}</div><div style="color:var(--txt2);line-height:1.8;margin-bottom:8px">${n.def}</div>${n.auteur?`<div style="font-size:13px;color:var(--acc);font-weight:500">👤 ${n.auteur}</div>`:''}</div>`).join('')}
+      </div>
+      ${(p.chiffres||[]).length?`<div style="margin-bottom:36px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">📊 Chiffres clés</div>${p.chiffres.map(c=>`<div style="display:flex;gap:12px;margin-bottom:14px;align-items:flex-start"><span style="color:var(--red);flex-shrink:0">📌</span><span style="color:var(--txt2)">${c}</span></div>`).join('')}</div>`:''}
+      ${(p.erreurs||[]).length?`<div style="margin-bottom:36px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">⚠️ Erreurs fréquentes</div>${p.erreurs.map(e=>`<div style="background:var(--red-l);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:10px;color:var(--txt2)">${e}</div>`).join('')}</div>`:''}
+      ${(p.plan||[]).length?`<div style="margin-bottom:36px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:20px">📋 Plan type</div>${p.plan.map((pt,i)=>`<div style="display:flex;gap:12px;margin-bottom:14px"><span style="background:var(--acc);color:#fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">${i+1}</span><span style="color:var(--txt2)">${pt}</span></div>`).join('')}</div>`:''}
+    </div>`
     M.set('fiche_'+id,html);
   } catch(e){
     el.innerHTML=`<div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:13px;text-align:center">
@@ -2278,9 +2235,13 @@ function initHistory(){
 // ══════════════════════════════════════════════════════
 let curMcId=null;
 function initMyCours(){
-  const draft=M.get('mc_draft','');
   const body=document.getElementById('mc-body');
-  if(body&&draft&&!body.innerHTML)body.innerHTML=draft;
+  const title=document.getElementById('mc-title');
+  if(body){const d=M.get('mc_draft_body','');if(d&&!body.innerHTML)body.innerHTML=d;}
+  if(title){const t=M.get('mc_draft_title','');if(t&&!title.value)title.value=t;}
+  const wrap=document.getElementById('mc-list-wrap');
+  const list=M.get('my_cours',[]);
+  if(wrap)wrap.style.display=list.length?'block':'none';
   renderMcList();
 }
 function renderMcList(){
