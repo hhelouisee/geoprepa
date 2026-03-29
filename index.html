@@ -2886,6 +2886,114 @@ async function analyzeCopy(idx){
   }
 }
 
+// ══════════════════════════════════════════════════════
+// TREE FOLDER SYSTEM
+// ══════════════════════════════════════════════════════
+function renderTree(sid, sk, ak, fn, af, def){
+  const el=document.getElementById(sid);
+  if(!el)return;
+  const tree=M.get(sk,def);
+  const active=M.get(ak,'root');
+
+  function nodes(pid, d){
+    return tree.filter(n=>n.parent===pid).map(n=>{
+      const act=active===n.id;
+      const kids=tree.some(c=>c.parent===n.id);
+      const open=n.open!==false;
+      const icon=n.parent===null?'🗂️':kids?'📁':'📄';
+      const pad=(d*14+4)+'px';
+      let s='<div>';
+      s+='<div style="display:flex;align-items:center;gap:3px;padding:3px 5px 3px '+pad+';border-radius:5px;cursor:pointer;background:'+(act?'var(--acc-l)':'')+'"'+
+         ' data-sk="'+sk+'" data-ak="'+ak+'" data-id="'+n.id+'" data-fn="'+fn+'" onclick="treeNodeClick(this)">';
+      s+=kids?'<span style="font-size:9px;color:var(--txt4);width:12px;text-align:center;display:inline-block" data-sk="'+sk+'" data-id="'+n.id+'" onclick="event.stopPropagation();treeNodeToggle(this)">▾</span>':
+              '<span style="width:12px;display:inline-block"></span>';
+      s+='<span style="font-size:11px;'+(act?'font-weight:700;color:var(--acc)':'color:var(--txt2)')+'">'+icon+' '+n.name+'</span>';
+      s+='</div>';
+      if(open&&kids)s+='<div>'+nodes(n.id,d+1)+'</div>';
+      s+='</div>';
+      return s;
+    }).join('');
+  }
+
+  el.innerHTML='<div style="min-width:175px;max-width:200px;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:5px;flex-shrink:0">'+
+    nodes(null,0)+
+    '<div onclick="'+af+'()" style="display:flex;align-items:center;gap:5px;padding:4px 6px;cursor:pointer;border-radius:4px;color:var(--txt4);font-size:11px;margin-top:3px">📁 + Dossier</div>'+
+  '</div>';
+}
+
+function treeNodeClick(el){
+  const sk=el.dataset.sk,ak=el.dataset.ak,id=el.dataset.id,fn=el.dataset.fn;
+  M.set(ak,id);
+  if(sk==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+  const node=M.get(sk,[]).find(n=>n.id===id);
+  if(!node)return;
+  if(fn==='applyFicheFolder')applyFicheFolder(node);
+  else if(fn==='applyFlashFolder')applyFlashFolder(node);
+}
+
+function treeNodeToggle(el){
+  const sk=el.dataset.sk,id=el.dataset.id;
+  const tree=M.get(sk,[]);
+  const node=tree.find(n=>n.id===id);
+  if(node)node.open=node.open===false?true:false;
+  M.set(sk,tree);
+  if(sk==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+}
+
+// Alias pour compatibilité
+function treeSelect(el){treeNodeClick(el);}
+function treeToggle(sk,id){const t=M.get(sk,[]);const n=t.find(x=>x.id===id);if(n)n.open=!n.open;M.set(sk,t);if(sk==='fiches_tree')renderFichesFolders();else renderFlashFolders();}
+
+
+function treeSelect(el){
+  const storageKey=el.dataset.key;const activeKey=el.dataset.akey;
+  const nodeId=el.dataset.nid;const onSelectFn=el.dataset.fn;
+  M.set(activeKey,nodeId);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(!node)return;
+  if(onSelectFn==='applyFicheFolder')applyFicheFolder(node);
+  else if(onSelectFn==='applyFlashFolder')applyFlashFolder(node);
+}
+
+function treeToggleNode(el){
+  const storageKey=el.dataset.key;const nodeId=el.dataset.nid;
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(node)node.open=node.open===false?true:false;
+  M.set(storageKey,tree);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+}
+
+function treeAddSubBtn(storageKey, parentId){treeAddSub(storageKey,parentId);}
+function treeDeleteBtn(storageKey, activeKey, nodeId){treeDelete(storageKey,activeKey,nodeId);}
+
+
+function treeSelect(storageKey, activeKey, nodeId, onSelectFn){
+  M.set(activeKey,nodeId);
+  if(storageKey==='fiches_tree'){renderFichesFolders();}
+  else{renderFlashFolders();}
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(!node)return;
+  if(onSelectFn==='applyFicheFolder')applyFicheFolder(node);
+  else if(onSelectFn==='applyFlashFolder')applyFlashFolder(node);
+}
+
+function treeToggle(storageKey, nodeId){
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(node)node.open=node.open===false?true:false;
+  M.set(storageKey,tree);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+}
+
 // Auth overlay on load handled by checkAuth above
 // v887596
 </script>
