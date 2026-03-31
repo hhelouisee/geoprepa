@@ -2170,7 +2170,7 @@ function initCopies(){
           ${c.points_ameliorer?.length?`<div style="font-size:11px;color:var(--org);margin-bottom:4px">⚠ ${c.points_ameliorer.join(' · ')}</div>`:''}
           ${c.conseil?`<div style="font-size:11px;color:var(--txt2);font-style:italic">${c.conseil}</div>`:''}
         </div>`:'<div style="font-size:11px;color:var(--txt4);margin-top:6px;font-style:italic">Analyse en attente…</div>'}
-      <button class="btn btn-g btn-xs" style="margin-top:7px;color:var(--red)" onclick="deleteCopy('+ci+')">🗑 Supprimer</button>
+      <button class="btn btn-g btn-xs" style="margin-top:7px" onclick="renameCopy('+ci+')">✏️ Renommer</button> <button class="btn btn-g btn-xs" style="margin-top:7px;color:var(--red)" onclick="deleteCopy('+ci+')">🗑 Supprimer</button>
     </div>`).join('');
   const nbEl=document.getElementById('nb-copies');if(nbEl)nbEl.textContent=copies.length;
 }
@@ -3150,6 +3150,17 @@ function treeToggle(storageKey, nodeId){
 
 // Auth overlay on load handled by checkAuth above
 // v887596
+
+function renameCopy(i){
+  const copies=M.get('copies',[]);
+  if(i<0||i>=copies.length)return;
+  const name=prompt('Nouveau nom :',copies[i].title);
+  if(!name||!name.trim())return;
+  copies[i].title=name.trim();
+  M.set('copies',copies);
+  initCopies();
+  showToast('Copie renommee');
+}
 </script>
 </body>
 </html>
