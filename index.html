@@ -372,18 +372,6 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   padding-top: max(10px, env(safe-area-inset-top)) !important;
 }
 
-
-/* Titres à la ligne */
-#mc-title, #fe-title, .cours-title-input {
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
-}
-/* Texte plein page */
-.my-editor-body {
-  max-width: 100% !important;
-}
-
 </style>
 </head>
 <body>
@@ -800,7 +788,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div style="font-family:var(--ffd);font-size:19px;font-weight:700;color:var(--red);margin-bottom:7px">Simulation Concours BCE</div>
       <div style="margin-bottom:13px">
         <label style="font-size:11px;color:var(--txt3);font-weight:600;display:block;margin-bottom:4px">Thème (optionnel)</label>
-        <input type="text" id="sim-theme" placeholder="Ex: mondialisation, puissance, Europe…" style="width:100%;max-width:380px;padding:8px 12px;border:1px solid var(--brd);border-radius:var(--r);font-size:13px;color:var(--txt);background:var(--surf2);outline:none;font-family:var(--ff);cursor:text" onclick="this.focus()">
+        <input type="text" id="sim-theme" placeholder="Ex: mondialisation, puissance, Europe…" style="width:100%;max-width:380px;padding:5px 9px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
       </div>
       <div style="display:flex;gap:7px;justify-content:center;flex-wrap:wrap">
         <button class="btn btn-red" onclick="startSim(240)">🚨 4h — Réel</button>
@@ -830,14 +818,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
   <!-- ════ COPIES ════ -->
   <div class="pg" id="pg-copies">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-      <div class="page-t" style="margin:0">Mes copies</div>
-      <div style="display:flex;gap:6px;margin-left:auto">
-        <button onclick="filterCopies('')" class="btn btn-g btn-sm" id="cf-all">Toutes</button>
-        <button onclick="filterCopies('bizuth')" class="btn btn-g btn-sm" id="cf-biz">🔴 Bizuth</button>
-        <button onclick="filterCopies('carre')" class="btn btn-g btn-sm" id="cf-car">🟣 Carré</button>
-      </div>
-    </div>
+    <div class="page-t">Mes copies</div>
     <div class="page-s">Upload tes copies annotées — le système apprend le style de ton prof</div>
     <div class="g2" style="margin-bottom:14px">
       <div>
@@ -920,9 +901,9 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     </div>
 
     <!-- Zone d'écriture -->
-    <div style="max-width:100%;margin:0 auto;padding:48px 5vw 160px">
+    <div style="max-width:700px;margin:0 auto;padding:48px 32px 160px">
       <input type="text" id="mc-title" placeholder="Titre du cours…"
-        style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block;white-space:pre-wrap;word-break:break-word;overflow-wrap:break-word">
+        style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
       <div style="height:1px;background:var(--brd);margin-bottom:28px"></div>
       <div id="mc-body" class="my-editor-body" contenteditable="true"
         style="min-height:50vh;font-size:16px;line-height:1.9;color:var(--txt2);outline:none;word-break:break-word"
@@ -968,7 +949,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     </div>
 
     <!-- Cours sauvegardés -->
-    <div id="mc-list-wrap" style="display:none;max-width:100%;margin:0 auto;padding:0 5vw 60px">
+    <div id="mc-list-wrap" style="display:none;max-width:700px;margin:0 auto;padding:0 32px 60px">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:14px;padding-top:24px;border-top:1px solid var(--brd)">Cours sauvegardés</div>
       <div class="g3" id="mc-list"></div>
     </div>
@@ -1296,10 +1277,7 @@ const ANNALES=[
   {school:"HEC 2021",title:"Le retour de la puissance militaire",prio:"tres-frequent",tip:"Ukraine 2022 = hard power revival. Kagan (Mars vs V\u00e9nus), OTAN 2% PIB."},
   {school:"ESSEC 2021",title:"Les ressources naturelles, mal\u00e9diction ou atout ?",prio:"tres-frequent",tip:"Paradoxe de l'abondance (Sachs & Warner). Contre-ex : Norv\u00e8ge, Botswana."},
 ];
-
-// ══════════════════════════════════════════════════════
-// AUTH SYSTEM
-// ══════════════════════════════════════════════════════</script>
+</script>
 
 <script>
 // ══════════════════════════════════════════════════════
@@ -2171,43 +2149,29 @@ const CK=['red','prob','tens','plan','aut','chif','ic','prec'];
 const CL=['Rédaction','Problémati.','Tension','Plan','Auteurs','Chiffres','I/C','Précision'];
 let copChart=null;
 function initCopies(){
-  let copies=M.get('copies',[]);const _cf=M.get('copies_filter','');if(_cf)copies=copies.filter(c=>c.folder===_cf);
+  const copies=M.get('copies',COPIES_DEMO);
   // Rendre la liste d'abord (indépendamment du graphique)
   const ctx=document.getElementById('perf-chart');
   if(copChart)copChart.destroy();
   copChart=new Chart(ctx,{type:'radar',data:{labels:CL,datasets:copies.slice(-3).map((c,i)=>({label:c.date,data:CK.map(k=>c.c[k]),borderColor:i===0?'var(--red)':i===1?'var(--gold)':'var(--grn)',backgroundColor:i===0?'rgba(220,38,38,.05)':i===1?'rgba(202,138,4,.05)':'rgba(22,163,74,.05)',tension:.3,fill:true,pointRadius:3}))},options:{responsive:true,scales:{r:{min:0,max:20,ticks:{stepSize:5,font:{size:8}},pointLabels:{font:{size:8}}}},plugins:{legend:{labels:{font:{size:9},boxWidth:8}}}}});
-  document.getElementById('copies-list').innerHTML=copies.length?copies.map((c,ci)=>{
-  const scoreColor=c.score>=15?'var(--grn)':c.score>=13?'var(--gold)':'var(--red)';
-  const scoreHtml=c.score!=null?'<span style="background:'+scoreColor+';color:#fff;padding:3px 9px;border-radius:13px;font-size:13px;font-weight:700">'+c.score+'/20</span>':'<span style="color:var(--txt4)">—/20</span>';
-  const imgHtml=c.imageData?'<img src="'+c.imageData+'" style="width:100%;border-radius:8px;margin-bottom:10px;cursor:pointer" onclick="viewCopyImage('+ci+')" title="Voir">':'';
-  const folderOpts='<option value=""'+((!c.folder)?'selected':'')+'>📁 Sans dossier</option><option value="bizuth"'+((c.folder==='bizuth')?'selected':'')+'>🔴 Bizuth</option><option value="carre"'+((c.folder==='carre')?'selected':'')+'>🟣 Carré</option>';
-  const analysisHtml=c.score!=null?
-    '<div style="padding:10px;background:var(--surf2);border-radius:6px;margin-top:8px">'+
-      (c.points_forts?.length?'<div style="font-size:11px;color:var(--grn);margin-bottom:4px">✓ '+(c.points_forts||[]).join(' · ')+'</div>':'')+
-      (c.points_ameliorer?.length?'<div style="font-size:11px;color:var(--org);margin-bottom:4px">⚠ '+(c.points_ameliorer||[]).join(' · ')+'</div>':'')+
-      (c.conseil?'<div style="font-size:11px;color:var(--txt2);font-style:italic">'+c.conseil+'</div>':'')+
-    '</div>':
-    '<div style="font-size:11px;color:var(--txt4);margin:8px 0;font-style:italic">Analyse en attente…</div>';
-  return '<div class="card" style="position:relative">'+
-    '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;gap:10px">'+
-      '<div style="flex:1">'+
-        '<div style="display:flex;align-items:center;gap:6px">'+
-          '<div style="font-size:14px;font-weight:700;color:var(--txt)">'+c.title+'</div>'+
-          '<button onclick="renameCopy('+ci+')" style="background:none;border:none;cursor:pointer;color:var(--txt4);font-size:11px;padding:2px 5px;border-radius:4px" title="Renommer">✏️</button>'+
-        '</div>'+
-        '<div style="display:flex;gap:6px;align-items:center;margin-top:2px">'+
-          '<div style="font-size:10px;color:var(--txt3)">'+c.date+'</div>'+
-          '<select onchange="moveCopyToFolder('+ci+',this.value)" style="font-size:10px;background:var(--surf2);border:1px solid var(--brd);border-radius:4px;padding:1px 4px;color:var(--txt2)">'+folderOpts+'</select>'+
-        '</div>'+
-      '</div>'+
-      '<div style="display:flex;align-items:center;gap:6px">'+
-        scoreHtml+
-        '<button onclick="deleteCopy('+ci+')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:16px;padding:2px 6px" title="Supprimer">🗑</button>'+
-      '</div>'+
-    '</div>'+
-    imgHtml+analysisHtml+
-  '</div>';
-}).join(''):'<div style="color:var(--txt3);font-size:13px;text-align:center;padding:20px">Aucune copie. Dépose une image JPG pour commencer.</div>';
+  document.getElementById('copies-list').innerHTML=copies.slice(-4).reverse().map((c,ci)=>`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:7px">
+        <div><div style="font-size:13px;font-weight:700;color:var(--txt)">${c.title}</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">${c.date}</div></div>
+        <div style="background:${c.score>=15?'var(--grn)':c.score>=13?'var(--gold)':'var(--red)'};color:#fff;padding:3px 9px;border-radius:13px;font-size:13px;font-weight:700;font-family:var(--ffm)">${c.score}/20</div>
+      </div>
+      <div class="crit-g">
+        ${CK.map((k,i)=>`<div class="crit"><div class="crit-n">${CL[i]}</div><div class="crit-v" style="color:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'}">${c.c[k]}</div><div class="crit-pb"><div style="height:100%;border-radius:1px;background:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'};width:${c.c[k]/20*100}%"></div></div></div>`).join('')}
+      </div>
+      ${c.score!==null&&c.score!==undefined?`
+        <div style="margin-top:8px;padding:10px;background:var(--surf2);border-radius:6px">
+          <div style="font-size:13px;font-weight:700;color:var(--acc);margin-bottom:6px">Note estimée: ${c.score}/20</div>
+          ${c.points_forts?.length?`<div style="font-size:11px;color:var(--grn);margin-bottom:4px">✓ ${c.points_forts.join(' · ')}</div>`:''}
+          ${c.points_ameliorer?.length?`<div style="font-size:11px;color:var(--org);margin-bottom:4px">⚠ ${c.points_ameliorer.join(' · ')}</div>`:''}
+          ${c.conseil?`<div style="font-size:11px;color:var(--txt2);font-style:italic">${c.conseil}</div>`:''}
+        </div>`:'<div style="font-size:11px;color:var(--txt4);margin-top:6px;font-style:italic">Analyse en attente…</div>'}
+      <button class="btn btn-g btn-xs" style="margin-top:7px;color:var(--red)" onclick="deleteCopy(ci)">🗑 Supprimer</button>
+    </div>`).join('');
   const nbEl=document.getElementById('nb-copies');if(nbEl)nbEl.textContent=copies.length;
 }
 function deleteCopy(i){
@@ -2222,92 +2186,503 @@ function handleDrop(e,type){e.preventDefault();const f=e.dataTransfer.files[0];i
 function uploadCopy(f){
   if(!f)return;
   const isImage=f.type.startsWith('image/');
-  if(!isImage){
-    // PDF: juste métadonnées
-    const copies=M.get('copies',[]);
-    copies.push({title:f.name.replace(/\.(pdf)$/i,''),date:new Date().toLocaleDateString('fr-FR'),score:null,folder:'',c:{red:0,prob:0,tens:0,plan:0,aut:0,chif:0,ic:0,prec:0}});
-    M.set('copies',copies);
-    initCopies();
-    showToast('📄 Copie reçue. Pour analyse IA, utilise une image JPG.');
-    return;
-  }
-  // Image: lire et analyser
-  const r=new FileReader();
-  r.onload=async e=>{
-    const dataUrl=e.target.result;
-    const base64=dataUrl.split(',')[1];
-    const mediaType=f.type;
-    const title=f.name.replace(/\.(jpg|jpeg|png)$/i,'');
-    // Sauvegarder sans l'image d'abord (évite de dépasser localStorage)
-    const copies=M.get('copies',[]);
-    const idx=copies.length;
-    copies.push({title,date:new Date().toLocaleDateString('fr-FR'),score:null,folder:'',c:{red:0,prob:0,tens:0,plan:0,aut:0,chif:0,ic:0,prec:0}});
-    M.set('copies',copies);
-    initCopies();
-    showToast('📷 Analyse en cours…');
-    // Analyse IA
-    try{
-      const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:800,
-        messages:[{role:'user',content:[
-          {type:'image',source:{type:'base64',media_type:mediaType,data:base64}},
-          {type:'text',text:'Correcteur BCE géopolitique. Analyse cette copie. JSON uniquement: {"score":number,"c":{"red":number,"prob":number,"tens":number,"plan":number,"aut":number,"chif":number,"ic":number,"prec":number},"points_forts":["..."],"points_ameliorer":["..."],"conseil":"..."}. Scores sur 20.'}
-        ]}]
-      })});
-      const data=await res.json();
-      const text=data.content?.map(i=>i.text||'').join('')||'';
-      const p=JSON.parse(text.replace(/```json|```/g,'').trim());
-      const c2=M.get('copies',[]);
-      if(c2[idx]){c2[idx].score=p.score;c2[idx].c=p.c;c2[idx].points_forts=p.points_forts;c2[idx].points_ameliorer=p.points_ameliorer;c2[idx].conseil=p.conseil;}
-      // Sauvegarder l'image en dernier (peut échouer si trop lourd)
-      try{c2[idx].imageData=dataUrl;}catch(e){}
-      M.set('copies',c2);
-      initCopies();
-      showToast('✅ Analyse terminée — '+p.score+'/20');
-    }catch(e){
-      showToast('Erreur analyse: '+e.message);
-    }
+  const copies=M.get('copies',[]);
+  const copy={
+    title:f.name.replace(/\.(pdf|jpg|png|jpeg)$/i,''),
+    date:new Date().toLocaleDateString('fr-FR'),
+    score:null,
+    c:{red:0,prob:0,tens:0,plan:0,aut:0,chif:0,ic:0,prec:0}
   };
-  r.readAsDataURL(f);
-}
-function renameCopy(i){
-  const copies=M.get('copies',[]);
-  if(i<0||i>=copies.length)return;
-  const name=prompt('Nouveau nom :',copies[i].title);
-  if(!name?.trim())return;
-  copies[i].title=name.trim();
+  copies.push(copy);
   M.set('copies',copies);
+  logSession('copy',f.name);
   initCopies();
-  showToast('✅ Copie renommée');
+
+  if(isImage){
+    // Lire l'image et l'envoyer à Claude pour analyse visuelle
+    const r=new FileReader();
+    r.onload=async e=>{
+      showToast('📷 Image reçue — analyse en cours…');
+      const base64=e.target.result.split(',')[1];
+      const mediaType=f.type;
+      try{
+        const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',max_tokens:1000,
+          messages:[{role:'user',content:[
+            {type:'image',source:{type:'base64',media_type:mediaType,data:base64}},
+            {type:'text',text:'Tu es un correcteur BCE géopolitique exigeant. Analyse cette copie annotée et retourne UNIQUEMENT du JSON valide: {"score":number,"c":{"red":number,"prob":number,"tens":number,"plan":number,"aut":number,"chif":number,"ic":number,"prec":number},"points_forts":["..."],"points_ameliorer":["..."],"conseil":"..."}. Tous les critères sur 20. red=rédaction, prob=problématique, tens=tension, plan=plan, aut=auteurs, chif=chiffres, ic=introduction/conclusion, prec=précision.'}
+          ]}]
+        })});
+        const data=await res.json();
+        const text=data.content?.map(i=>i.text||'').join('')||'';
+        const p=JSON.parse(text.replace(/```json|```/g,'').trim());
+        const idx=copies.length-1;
+        copies[idx].score=p.score;copies[idx].c=p.c;
+        copies[idx].points_forts=p.points_forts;
+        copies[idx].points_ameliorer=p.points_ameliorer;
+        copies[idx].conseil=p.conseil;
+        M.set('copies',copies);
+        initCopies();
+        showToast('✅ Analyse terminée — '+p.score+'/20');
+      }catch(e){showToast('Erreur: '+e.message);}
+    };
+    r.readAsDataURL(f);
+  } else {
+    showToast('📄 Copie "'+copy.title+'" reçue. Pour une analyse IA, utilise une image JPG.');
+    analyzeCopyAI(copies.length-1);
+  }
 }
 
-function viewCopyImage(i){
-  const copies=M.get('copies',[]);
-  const c=copies[i];
-  if(!c?.imageData)return;
-  const ov=document.createElement('div');
-  ov.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;cursor:zoom-out';
-  ov.onclick=()=>ov.remove();
-  const img=document.createElement('img');
-  img.src=c.imageData;
-  img.style.cssText='max-width:95vw;max-height:95vh;border-radius:8px;object-fit:contain';
-  ov.appendChild(img);
-  document.body.appendChild(ov);
+// ══════════════════════════════════════════════════════
+// REVISION
+// ══════════════════════════════════════════════════════
+function initRevision(){
+  const urgent=CHAPTERS.filter(c=>c.priority==='indispensable'&&M.get('prog_'+c.id,0)<30);
+  const consolid=CHAPTERS.filter(c=>M.get('prog_'+c.id,0)>=30&&M.get('prog_'+c.id,0)<70);
+  const ok=CHAPTERS.filter(c=>M.get('prog_'+c.id,0)>=70);
+  const ri=(items,col)=>items.length?items.slice(0,4).map(c=>`
+    <div onclick="loadChap(${c.id});go('cours')" style="display:flex;align-items:center;gap:7px;padding:5px 7px;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);cursor:pointer;margin-bottom:4px;transition:border-color .1s" onmouseover="this.style.borderColor='var(--acc)'" onmouseout="this.style.borderColor='var(--brd)'">
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--${col});flex-shrink:0"></div>
+      <div style="flex:1;font-size:11px;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.short} — ${c.title}</div>
+      <div style="font-size:10px;color:var(--txt3);font-family:var(--ffm);flex-shrink:0">${M.get('prog_'+c.id,0)}%</div>
+    </div>`).join(''):`<div style="font-size:11px;color:var(--txt3);text-align:center;padding:7px">Aucun</div>`;
+  document.getElementById('rev-u').innerHTML=ri(urgent.length?urgent:[CHAPTERS[0]],'red');
+  document.getElementById('rev-c').innerHTML=ri(consolid,'org');
+  document.getElementById('rev-o').innerHTML=ri(ok,'grn');
+  document.getElementById('nb-rev').textContent=urgent.length;
 }
 
-function moveCopyToFolder(i,folder){
-  const copies=M.get('copies',[]);
-  if(i>=0&&i<copies.length){copies[i].folder=folder;M.set('copies',copies);showToast(folder?'📁 Déplacé':'📁 Retiré du dossier');}
+// ══════════════════════════════════════════════════════
+// SCREEN TIME
+// ══════════════════════════════════════════════════════
+let timeChart=null;
+function initScreenTime(){
+  const times=M.get('daily_times',{});
+  const today=new Date().toLocaleDateString('fr-FR');
+  const acts=M.get('daily_acts',{});
+  const todayTime=(times[today]||0)+curMins;
+  const todayActs=acts[today]||[];
+  document.getElementById('today-summary').innerHTML=`
+    <div style="font-size:30px;font-weight:700;font-family:var(--ffm);color:var(--acc);margin-bottom:3px">${todayTime} min</div>
+    <div style="font-size:11px;color:var(--txt3);margin-bottom:10px">de révision aujourd'hui</div>
+    ${todayActs.slice(0,6).map(a=>`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px"><span style="color:var(--txt2)">${a.label.substring(0,35)}</span><span style="color:var(--txt3);font-family:var(--ffm)">${a.time}</span></div>`).join('')||'<div style="font-size:11px;color:var(--txt4)">Aucune activité enregistrée</div>'}`;
+
+  const last7=[];
+  for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const key=d.toLocaleDateString('fr-FR');last7.push({label:d.toLocaleDateString('fr-FR',{weekday:'short'}),val:times[key]||0});}
+  const ctx=document.getElementById('time-chart');
+  if(timeChart)timeChart.destroy();
+  timeChart=new Chart(ctx,{type:'bar',data:{labels:last7.map(d=>d.label),datasets:[{data:last7.map(d=>d.val),backgroundColor:last7.map((_,i)=>i===6?'var(--acc)':'rgba(37,99,235,.2)'),borderRadius:4}]},options:{responsive:true,scales:{y:{beginAtZero:true,ticks:{font:{size:9},callback:v=>v+'m'}},x:{ticks:{font:{size:9}}}},plugins:{legend:{display:false}}}});
+
+  const allDays=Object.keys(times).sort().reverse().slice(0,14);
+  document.getElementById('daily-log').innerHTML=allDays.map(day=>{
+    const dayActs=(acts[day]||[]);
+    const chapsSeen=dayActs.filter(a=>a.type==='chap').map(a=>a.label.split('—')[0].trim());
+    const corrections=dayActs.filter(a=>a.type==='correction');
+    return `<div style="padding:9px 0;border-bottom:1px solid var(--brd)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:12px;font-weight:700;color:var(--txt)">${day}</span>
+        <span style="font-size:11px;font-family:var(--ffm);color:${times[day]>=60?'var(--grn)':times[day]>=20?'var(--gold)':'var(--red)'}">${times[day]||0} min</span>
+      </div>
+      <div style="font-size:11px;color:var(--txt3)">
+        ${chapsSeen.length?`📖 ${chapsSeen.join(', ')} · `:''}
+        ${corrections.length?`✍️ ${corrections.length} correction(s) · `:''}
+        ${dayActs.length===0?'😴 Aucune activité enregistrée':''}
+      </div>
+    </div>`;
+  }).join('')||'<div style="font-size:12px;color:var(--txt3);text-align:center;padding:14px">Aucune donnée encore</div>';
 }
 
-function filterCopies(folder){
-  M.set('copies_filter',folder);
-  initCopies();
-  ['cf-all','cf-biz','cf-car'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='btn btn-g btn-sm';});
-  const map={'':'cf-all','bizuth':'cf-biz','carre':'cf-car'};
-  const active=document.getElementById(map[folder]);
-  if(active)active.className='btn btn-p btn-sm';
+// ══════════════════════════════════════════════════════
+// HISTORY
+// ══════════════════════════════════════════════════════
+function initHistory(){
+  const sessions=M.get('sessions',[]);
+  const el=document.getElementById('history-list');
+  if(!sessions.length){el.innerHTML='<div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune session enregistrée</div>';return;}
+  const icons={nav:'🧭',chap:'📖',fiche:'📋',flash:'🃏',correction:'✍️',sim:'🚨',copy:'📄',news:'📰'};
+  el.innerHTML=sessions.slice(0,60).map(s=>`<div class="sess-item"><div class="sess-ic">${icons[s.type]||'•'}</div><div class="sess-lbl">${s.label}</div><div class="sess-time">${s.date}</div></div>`).join('');
 }
+
+// ══════════════════════════════════════════════════════
+// MES COURS
+// ══════════════════════════════════════════════════════
+let curMcId=null;
+function initMyCours(){
+  const body=document.getElementById('mc-body');
+  const title=document.getElementById('mc-title');
+  if(body){const d=M.get('mc_draft_body','');if(d&&!body.innerHTML)body.innerHTML=d;}
+  if(title){const t=M.get('mc_draft_title','');if(t&&!title.value)title.value=t;}
+  const wrap=document.getElementById('mc-list-wrap');
+  const list=M.get('my_cours',[]);
+  if(wrap)wrap.style.display=list.length?'block':'none';
+  renderMcList();
+}
+function renderMcList(){
+  const list=M.get('my_cours',[]);
+  const el=document.getElementById('mc-list');
+  if(!el)return;
+  if(!list.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3)">Aucun cours sauvegardé. Rédige ton premier cours ci-dessus.</div>';return;}
+  el.innerHTML=list.map((c,i)=>{
+    const hasAI=M.get('fiche_mc_'+i);
+    return `<div class="card" style="cursor:pointer;transition:all .1s;position:relative" onmouseover="this.style.borderColor='var(--acc)'" onmouseout="this.style.borderColor='var(--brd)'" onclick="loadMyCours(${i})">
+      ${c.folder?`<div style="font-size:9px;color:var(--acc);font-weight:700;margin-bottom:3px">📁 ${c.folder}</div>`:''}
+      <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:var(--txt)">${c.title||'Sans titre'}</div>
+      <div style="font-size:10px;color:var(--txt3);margin-bottom:7px">${c.date}</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        <button class="btn btn-g btn-xs" onclick="event.stopPropagation();exportOneMC(${i},'txt')" title="Export TXT">📄</button>
+        <button class="btn btn-g btn-xs" onclick="event.stopPropagation();exportOneMC(${i},'html')" title="Export PDF">🖨</button>
+        <button class="btn btn-g btn-xs ${hasAI?'':''}'" onclick="event.stopPropagation();fichageIAItem(${i})" title="Fiche IA">🤖${hasAI?' ✓':''}</button>
+        <button class="btn btn-g btn-xs" onclick="event.stopPropagation();injectInCoursItem(${i})" title="Injecter dans Cours complet">📚</button>
+        <button class="btn btn-g btn-xs" onclick="event.stopPropagation();deleteMyCours(${i})" title="Supprimer">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function saveMyCours(){
+  const title=document.getElementById('mc-title').value.trim()||'Sans titre';
+  const body=document.getElementById('mc-body').innerHTML;
+  const list=M.get('my_cours',[]);
+  const entry={title,body,date:new Date().toLocaleString('fr-FR'),folder:''};
+  if(curMcId!==null)list[curMcId]={...list[curMcId],...entry};
+  else list.unshift(entry);
+  M.set('my_cours',list);M.set('mc_draft','');renderMcList();
+  showToast('✅ Cours sauvegardé !');
+}
+function newMyCours(){curMcId=null;document.getElementById('mc-title').value='';document.getElementById('mc-body').innerHTML='';M.set('mc_draft','');}
+function loadMyCours(i){const c=M.get('my_cours',[])[i];if(!c)return;curMcId=i;document.getElementById('mc-title').value=c.title;document.getElementById('mc-body').innerHTML=c.body;}
+function deleteMyCours(i){const list=M.get('my_cours',[]);list.splice(i,1);M.set('my_cours',list);renderMcList();}
+function execCmd(cmd,val){document.execCommand(cmd,false,val||null);}
+function insertImage(){const inp=document.createElement('input');inp.type='file';inp.accept='image/png,image/jpeg,image/gif,image/webp';inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{document.getElementById('mc-body').focus();document.execCommand('insertImage',false,e.target.result);};r.readAsDataURL(f);};inp.click();}
+
+// ══════════════════════════════════════════════════════
+// MES FLASHCARDS
+// ══════════════════════════════════════════════════════
+function initMyFlash(){
+  renderMyFlashList();
+  const myCards=M.get('my_flashcards',[]);
+  document.getElementById('mf-stats').innerHTML=`<div style="margin-bottom:5px">🃏 <strong>${myCards.length}</strong> cartes créées</div><div style="margin-bottom:5px">📚 <strong>${FLASHCARDS.length}</strong> cartes du programme</div><div style="margin-bottom:5px">✅ <strong>${M.get('flash_done',[]).length}</strong> cartes validées</div><div style="color:var(--grn);font-weight:600;font-size:11px">🔀 Tes cartes sont mélangées automatiquement au deck général</div>`;
+}
+function saveMyFlash(){
+  const q=document.getElementById('mf-q').value.trim();
+  const a=document.getElementById('mf-a').value.trim();
+  if(!q||!a){alert('Renseigne la question ET la réponse.');return;}
+  const cards=M.get('my_flashcards',[]);
+  cards.unshift({q,a,p:document.getElementById('mf-p').value,c:document.getElementById('mf-c').value.trim()||'Perso'});
+  M.set('my_flashcards',cards);
+  document.getElementById('mf-q').value='';document.getElementById('mf-a').value='';
+  renderMyFlashList();alert('✅ Flashcard ajoutée au deck !');
+}
+function renderMyFlashList(){
+  const cards=M.get('my_flashcards',[]);
+  const el=document.getElementById('mf-list');
+  if(!cards.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3)">Aucune flashcard créée</div>';return;}
+  el.innerHTML=cards.map((f,i)=>`<div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge ${f.p==='indispensable'?'bi':'btf'}" style="font-size:9px">${f.p==='indispensable'?'Indispensable':'Très fréquent'}</span><button onclick="deleteMyFlash(${i})" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">${f.q}</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">${f.a.substring(0,80)}…</div></div>`).join('');
+}
+function deleteMyFlash(i){const cards=M.get('my_flashcards',[]);cards.splice(i,1);M.set('my_flashcards',cards);renderMyFlashList();}
+
+// ══════════════════════════════════════════════════════
+// DOCS
+// ══════════════════════════════════════════════════════
+function initDocs(){
+  const saved=M.get('my_docs',[]);
+  const demos=[{title:'Rapport jury HEC 2024',date:'14/01/2026',prio:'btf',status:'Fiché · 5 notions · 3 auteurs',demo:true}];
+  const all=[...demos,...saved];
+  document.getElementById('docs-grid').innerHTML=all.map((d,i)=>`
+    <div class="card" style="transition:all .1s">
+      <div style="font-size:10px;color:var(--txt3);margin-bottom:2px">${d.date}</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;color:var(--txt)">${d.title}</div>
+      <span class="badge ${d.prio}">${d.prio==='bi'?'Indispensable':'Très fréquent'}</span>
+      <div style="font-size:11px;color:var(--grn);margin-top:6px">✓ ${d.status}</div>
+      ${!d.demo?`<button class="btn btn-g btn-xs" style="margin-top:8px;color:var(--red)" onclick="deleteDoc(${i-demos.length})">🗑 Supprimer</button>`:''}
+    </div>`).join('');
+}
+function deleteDoc(i){
+  if(!confirm('Supprimer ce document ?'))return;
+  const docs=M.get('my_docs',[]);docs.splice(i,1);M.set('my_docs',docs);initDocs();showToast('🗑 Document supprimé');
+}
+function uploadDoc(f){
+  if(!f)return;
+  const docs=M.get('my_docs',[]);
+  docs.unshift({title:f.name,date:new Date().toLocaleDateString('fr-FR'),prio:'btf',status:'Fichage en cours…'});
+  M.set('my_docs',docs);
+  setTimeout(()=>{docs[0].status='Fiché par IA';M.set('my_docs',docs);initDocs();},2500);
+  initDocs();
+}
+
+// ══════════════════════════════════════════════════════
+// MAP — Static region cards (no zoom/drag/globe)
+// ══════════════════════════════════════════════════════
+const REGIONS = {
+  europe:{
+    label:'🇪🇺 Europe',color:'#2383e2',
+    pins:[
+      {short:'Fiche Europe',title:"L'UE : puissance, crises, intégration",prio:'indispensable',desc:'Maastricht (1992), Brexit (2016), PESC, euro. Puissance normative (Manners). Autonomie stratégique post-Ukraine.'},
+      {short:'Chap. 17',title:'La France : puissance européenne',prio:'tres-frequent',desc:'Axe franco-allemand. Réarmement post-2022. Soft power culturel. Dissuasion nucléaire.'},
+      {short:'Chap. 5',title:'Guerre en Ukraine (2022)',prio:'indispensable',desc:'Invasion russe fév. 2022. Sanctions SWIFT. +2% OTAN. Remise en cause de la stabilité européenne.'},
+    ]},
+  ameriques:{
+    label:'🌎 Amériques',color:'#e03e3e',
+    pins:[
+      {short:'Chap. 2',title:'Hégémonie américaine (1945-2000)',prio:'indispensable',desc:'Plan Marshall, Bretton Woods, OTAN. Doctrine Monroe. Hyperpuissance post-Guerre froide.'},
+      {short:'Chap. 7',title:'Bretton Woods & système monétaire',prio:'indispensable',desc:'1944 : dollar=or, FMI, BIRD. Fin 1971 (Nixon). Naissance du libéralisme économique mondial.'},
+      {short:'Chap. 5',title:'Déclin relatif & America First',prio:'tres-frequent',desc:'Retrait accords de Paris. Protectionnisme. Tensions sino-américaines. Trump II (2025).'},
+    ]},
+  asie:{
+    label:'🌏 Asie-Pacifique',color:'#e67e22',
+    pins:[
+      {short:'Chap. 5',title:'Émergence de la Chine',prio:'indispensable',desc:'Belt & Road Initiative (2013). Piège de Thucydide (Allison). BRICS leader. 2e PIB mondial.'},
+      {short:'Chap. 5',title:'Inde — puissance émergente',prio:'tres-frequent',desc:'1,4 Md hab. BRICS. Non-alignement. Puissance nucléaire. Dividende démographique.'},
+      {short:'Chap. 9',title:'Modèles asiatiques de croissance',prio:'tres-frequent',desc:'Miracle économique (Japon, Corée, Singapour). État développeur. Export-led growth.'},
+    ]},
+  afrique:{
+    label:'🌍 Afrique',color:'#27ae60',
+    pins:[
+      {short:'Chap. 5',title:"L'Afrique dans la mondialisation",prio:'tres-frequent',desc:"Union africaine. Présence chinoise (BRI). Ressources stratégiques. 2050 : 2,5 Mds d'hab."},
+      {short:'Fiche Démo',title:'Transition démographique',prio:'tres-frequent',desc:'Fécondité 4,5 enfants/femme. Dividende démographique possible. Urbanisation rapide.'},
+      {short:'Fiche Alim',title:'Enjeux alimentaires',prio:'tres-frequent',desc:'Land grabbing. FAO : 733 M sous-alimentés (2023). Sécurité alimentaire enjeu stratégique.'},
+    ]},
+  'moyen-orient':{
+    label:'🌙 PMO',color:'#8e44ad',
+    pins:[
+      {short:'Fiche Mers',title:'Bab-el-Mandeb & Houthis (2023)',prio:'indispensable',desc:'Attaques houthies nov. 2023 : -40% trafic Suez. Détour cap : +14 jours. Chaînes d\'approvisionnement.'},
+      {short:'Fiche Énergie',title:'Pétrole & OPEP',prio:'tres-frequent',desc:"OPEP+ : 40% production mondiale. Détroit d'Ormuz : 21% pétrole mondial. Arme géoéconomique."},
+      {short:'Chap. 14',title:'Ressources stratégiques',prio:'tres-frequent',desc:'Terres rares, eau, hydrocarbures. Paradoxe de l\'abondance (Sachs & Warner).'},
+    ]}
+};
+
+const _PC={indispensable:'var(--red)','tres-frequent':'var(--org)',frequent:'var(--gold)'};
+const _PL={indispensable:'🔴 Indispensable','tres-frequent':'🟠 Très fréquent',frequent:'🟡 Fréquent'};
+
+function filterMapRegion(region){
+  document.querySelectorAll('[id^="mr-"]').forEach(b=>{
+    b.style.background='var(--surf)';b.style.borderColor='var(--brd)';
+    b.style.color='var(--txt2)';b.style.fontWeight='500';
+  });
+  const ab=document.getElementById('mr-'+region);
+  if(ab){ab.style.background='var(--acc-l)';ab.style.borderColor='var(--acc-m)';ab.style.color='var(--acc)';ab.style.fontWeight='600';}
+  const el=document.getElementById('map-region-cards');
+  if(!el)return;
+  const list=region==='all'
+    ? Object.values(REGIONS)
+    : REGIONS[region]?[REGIONS[region]]:[];
+  if(!list.length){el.innerHTML='';return;}
+  el.innerHTML=list.map(reg=>
+    '<div class="card" style="border-top:3px solid '+reg.color+'">'+
+      '<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px">'+reg.label+'</div>'+
+      reg.pins.map(p=>
+        '<div onclick="go(\'cours\')" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)"'+
+          ' onmouseover="this.style.background=\'var(--acc-l)\'" onmouseout="this.style.background=\'var(--surf2)\'">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px">'+
+            '<span style="font-size:10px;font-weight:700;color:var(--txt3)">'+p.short+'</span>'+
+            '<span style="font-size:9px;background:'+(_PC[p.prio]||_PC.frequent)+';color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">'+(_PL[p.prio]||p.prio)+'</span>'+
+          '</div>'+
+          '<div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">'+p.title+'</div>'+
+          '<div style="font-size:11px;color:var(--txt3);line-height:1.5">'+p.desc+'</div>'+
+        '</div>'
+      ).join('')+
+    '</div>'
+  ).join('');
+}
+
+// Stubs so existing references do not crash
+function renderMap(r){filterMapRegion(r||'all');}
+function toggleMapMode(){}
+function mapZoom(){}
+function mapReset(){}
+function globeZoom(){}
+function initGlobe(){}
+
+// ══════════════════════════════════════════════════════
+// NOTION — with paste fallback
+// ══════════════════════════════════════════════════════
+async function loadNotion(){
+  const el=document.getElementById('notion-content');
+  const status=document.getElementById('notion-status');
+  el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Connexion à Notion…</div></div>`;
+  status.textContent='Synchronisation…';
+  try{
+    // Use our server-side proxy — no CORS issues
+    const res=await fetch('/api/notion');
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    const blocks=data.results||[];
+    status.textContent='✓ Synchronisé — '+blocks.length+' blocs';
+    el.innerHTML=blocks.map(b=>{
+      const type=b.type;
+      if(type==='_subpage_title')return'<h1 style="margin-top:32px;padding:12px 16px;background:var(--acc-l);border-left:4px solid var(--acc);border-radius:0 8px 8px 0;font-family:var(--ffd);font-size:22px;color:var(--txt)">📄 '+b._title+'</h1>';
+      if(type==='divider')return'<hr style="margin:20px 0">';
+      if(type==='child_page')return'';
+      const content=b[type];
+      const text=(content?.rich_text||[]).map(t=>t.plain_text).join('')||'';
+      if(!text)return'';
+      if(type==='heading_1')return'<h2>'+text+'</h2>';
+      if(type==='heading_2')return'<h3>'+text+'</h3>';
+      if(type==='heading_3')return'<h4 style="font-size:14px;font-weight:600;margin:10px 0 4px;color:var(--txt2)">'+text+'</h4>';
+      if(type==='bulleted_list_item')return'<li>'+text+'</li>';
+      if(type==='numbered_list_item')return'<li>'+text+'</li>';
+      if(type==='quote')return'<blockquote>'+text+'</blockquote>';
+      return'<p>'+text+'</p>';
+    }).filter(Boolean).join('');
+    logSession('notion','Sync Notion — '+blocks.length+' blocs');
+  } catch(e){
+    status.textContent='⚠️ Erreur';
+    el.innerHTML=`<div style="background:var(--gold-l);border:1px solid var(--gold-m);border-radius:var(--r);padding:14px;font-size:12px;color:var(--txt2)">
+      <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:7px">⚠️ Erreur de connexion Notion</div>
+      <p style="margin-bottom:10px">Vérifie que ta clé Notion et ton page ID sont bien configurés dans Vercel (Environment Variables).</p>
+      <button class="btn btn-p" onclick="pasteNotion()">📋 Coller du contenu Notion manuellement</button>
+      <div style="font-size:10px;color:var(--txt4);margin-top:7px;font-family:var(--ffm)">${e.message}</div>
+    </div>`;
+  }
+}
+
+
+function pasteNotion(){
+  const text=prompt('Colle ici le contenu copié depuis Notion (Ctrl+A puis Ctrl+C sur ta page Notion) :');
+  if(!text)return;
+  const el=document.getElementById('notion-content');
+  document.getElementById('notion-status').textContent='✓ Contenu collé manuellement';
+  // Format pasted text nicely
+  el.innerHTML=text.split('\n').map(line=>{
+    const t=line.trim();
+    if(!t)return'';
+    if(t.startsWith('# '))return`<h1>${t.slice(2)}</h1>`;
+    if(t.startsWith('## '))return`<h2>${t.slice(3)}</h2>`;
+    if(t.startsWith('### '))return`<h3>${t.slice(4)}</h3>`;
+    if(t.startsWith('- ')||t.startsWith('• '))return`<li>${t.slice(2)}</li>`;
+    if(t.startsWith('> '))return`<blockquote>${t.slice(2)}</blockquote>`;
+    if(t==='---')return'<hr>';
+    return`<p>${t}</p>`;
+  }).filter(Boolean).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// NEWS
+// ══════════════════════════════════════════════════════
+let newsInterval=null;
+async function loadNews(region){
+  const el=document.getElementById('news-list');
+  el.innerHTML=`<div style="text-align:center;padding:18px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Chargement…</div></div>`;
+  logSession('news',region);
+  const prompt=`Expert en géopolitique. Génère 6 actualités géopolitiques importantes DU JOUR (${new Date().toLocaleDateString('fr-FR')}) pour la région "${region}" en lien avec le programme BCE ECG.\nRéponds UNIQUEMENT en JSON valide : {"news":[{"title":"titre","geo":"zone précise","importance":"lien avec BCE (1 phrase)","theme":"notion BCE"}]}`;
+  try{
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:900,messages:[{role:'user',content:prompt}]})});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    const p=JSON.parse(data.content?.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
+    el.innerHTML=(p.news||[]).map(n=>`
+      <div style="padding:11px 0;border-bottom:1px solid var(--brd)">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+          <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3)">${n.geo}</span>
+          <span style="font-size:9px;background:var(--acc-l);color:var(--acc);border:1px solid var(--acc-m);padding:1px 4px;border-radius:8px;font-weight:600">${n.theme}</span>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px;line-height:1.4">${n.title}</div>
+        <div style="font-size:11px;color:var(--grn)">🎯 BCE : ${n.importance}</div>
+      </div>`).join('')||'<div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune actualité</div>';
+  } catch(e){
+    el.innerHTML=`<div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:13px;text-align:center;font-size:12px"><div style="font-weight:700;color:var(--red);margin-bottom:4px">Connexion API requise</div><div style="color:var(--txt3)">Déploie sur Vercel pour activer les news.</div></div>`;
+  }
+}
+function toggleNewsAuto(on){
+  if(on)newsInterval=setInterval(()=>loadNews('all'),30*60*1000);
+  else{clearInterval(newsInterval);newsInterval=null;}
+}
+
+// ══════════════════════════════════════════════════════
+// NOTION CONSTANTS
+// ══════════════════════════════════════════════════════
+const NOTION_KEY=''; // Ajoute ta clé dans Vercel env variables
+const NOTION_PAGE=''; // Ajoute ton page ID dans Vercel env variables
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+// Auth handles init via showApp()
+
+
+// ══════════════════════════════════════════════════════
+// TOAST NOTIFICATION
+// ══════════════════════════════════════════════════════
+function showToast(msg, dur=2500){
+  let t=document.getElementById('_toast');
+  if(!t){t=document.createElement('div');t.id='_toast';t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--txt);color:var(--bg);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;z-index:9999;transition:opacity .2s;pointer-events:none';document.body.appendChild(t);}
+  t.textContent=msg;t.style.opacity='1';
+  clearTimeout(t._to);t._to=setTimeout(()=>t.style.opacity='0',dur);
+}
+
+// ══════════════════════════════════════════════════════
+// MES COURS — EXPORT
+// ══════════════════════════════════════════════════════
+function getCurrentMcData(){
+  const title=document.getElementById('mc-title')?.value.trim()||'Sans titre';
+  const body=document.getElementById('mc-body')?.innerHTML||'';
+  return{title,body};
+}
+
+function exportMyCoursTxt(){
+  const {title,body}=getCurrentMcData();
+  const text=title+'\n'+'='.repeat(title.length)+'\n\n'+body.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+  dlFile(title+'.txt',text,'text/plain');
+  showToast('📄 Export TXT téléchargé');
+}
+
+function exportMyCoursHtml(){
+  const {title,body}=getCurrentMcData();
+  const html=`<!DOCTYPE html><html><head><meta charset=UTF-8><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;color:#222}</style></head><body>${body}</body></html>`;
+  dlFile((title||'cours')+'.html',html,'text/html');
+  showToast('📄 Export HTML téléchargé');
+}
+
+function getCurrentMcData(){
+  const title=document.getElementById('mc-title')?.value.trim()||'';
+  const body=document.getElementById('mc-body')?.innerHTML||'';
+  return {title,body};
+}
+
+async function fichageIA(){
+  const {title,body}=getCurrentMcData();
+  if(!body.trim()){showToast('Écris d\'abord du contenu dans ton cours');return;}
+  showToast('🤖 Génération de la fiche…');
+  try{
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:1000,
+      messages:[{role:'user',content:'Tu es un expert BCE. Génère une fiche synthèse JSON pour ce cours de géopolitique.\nCours : "'+title+'"\nContenu : '+body.replace(/<[^>]+>/g,' ').substring(0,2000)+'\nRéponds UNIQUEMENT en JSON: {"notions":[{"terme":"...","def":"...","auteur":"..."}],"chiffres":["..."],"erreurs":["..."],"plan":["..."]}'}]
+    })});
+    const data=await res.json();
+    const text=data.content?.map(i=>i.text||'').join('')||'';
+    const p=JSON.parse(text.replace(/```json|```/g,'').trim());
+    const html='<div style="max-width:680px;margin:0 auto;font-size:15px;line-height:1.9">'+
+      '<div style="font-family:var(--ffd);font-size:26px;font-weight:700;margin-bottom:20px;color:var(--txt)">'+title+' — Fiche synthèse</div>'+
+      '<div style="height:1px;background:var(--brd);margin-bottom:28px"></div>'+
+      '<div style="margin-bottom:32px">'+
+        '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">🔑 Notions clés</div>'+
+        (p.notions||[]).map(n=>'<div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--brd)"><div style="font-size:16px;font-weight:700;color:var(--txt);margin-bottom:6px">'+n.terme+'</div><div style="color:var(--txt2);line-height:1.8;margin-bottom:6px">'+n.def+'</div>'+(n.auteur?'<div style="font-size:12px;color:var(--acc)">👤 '+n.auteur+'</div>':'')+'</div>').join('')+
+      '</div>'+
+      ((p.chiffres||[]).length?'<div style="margin-bottom:32px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📊 Chiffres clés</div>'+p.chiffres.map(c=>'<div style="display:flex;gap:10px;margin-bottom:12px"><span style="color:var(--red);flex-shrink:0">📌</span><span style="color:var(--txt2)">'+c+'</span></div>').join('')+'</div>':'')+
+      ((p.erreurs||[]).length?'<div style="margin-bottom:32px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">⚠️ Erreurs fréquentes</div>'+p.erreurs.map(e=>'<div style="background:var(--red-l);border-left:3px solid var(--red);padding:10px 14px;margin-bottom:8px;border-radius:0 6px 6px 0;color:var(--txt2)">'+e+'</div>').join('')+'</div>':'')+
+      ((p.plan||[]).length?'<div style="margin-bottom:32px"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt4);margin-bottom:16px">📋 Plan type</div>'+p.plan.map((pt,i)=>'<div style="display:flex;gap:10px;margin-bottom:12px"><span style="background:var(--acc);color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0">'+(i+1)+'</span><span style="color:var(--txt2)">'+pt+'</span></div>').join('')+'</div>':'')+
+    '</div>';
+
+    // Show in overlay
+    let ov=document.getElementById('mc-fiche-overlay');
+    if(!ov){ov=document.createElement('div');ov.id='mc-fiche-overlay';ov.style.cssText='position:fixed;inset:0;z-index:99999;background:var(--surf);overflow-y:auto';document.body.appendChild(ov);}
+    ov.innerHTML='<div style="padding:20px 40px"><button onclick="document.getElementById(\'mc-fiche-overlay\').remove()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);margin-bottom:20px">← Retour</button>'+html+'</div>';
+    ov.style.display='block';
+  }catch(e){showToast('Erreur: '+e.message);}
+}
+
+function injectInCours(){
+  const {title,body}=getCurrentMcData();
+  if(!title||!body){showToast('Titre et contenu requis');return;}
+  const chapId=parseInt(prompt('Dans quel chapitre injecter ? (numéro 0-29)'));
+  if(isNaN(chapId)||chapId<0||chapId>29){showToast('Numéro invalide');return;}
+  const existing=M.get('edit_chap_'+chapId,'');
+  M.set('edit_chap_'+chapId,existing+'<hr><h2>'+title+'</h2>'+body);
+  showToast('✅ Cours injecté dans Chap. '+(chapId+1));
+  closeMyCoursOverlay();
+  go('cours');
+}
+
 
 // ══════════════════════════════════════════════════════
 // AUTH SYSTEM
@@ -2318,40 +2693,39 @@ let currentUser=null;
 function switchAuthTab(mode){
   authMode=mode;
   const isLogin=mode==='login';
-  const tl=document.getElementById('tab-login');
-  const ts=document.getElementById('tab-signup');
-  if(tl){tl.style.background=isLogin?'var(--acc)':'var(--surf)';tl.style.color=isLogin?'#fff':'var(--txt3)';}
-  if(ts){ts.style.background=!isLogin?'var(--acc)':'var(--surf)';ts.style.color=!isLogin?'#fff':'var(--txt3)';}
-  const btn=document.getElementById('auth-btn');
-  if(btn)btn.textContent=isLogin?'Se connecter':'Créer mon compte';
-  const msg=document.getElementById('auth-msg');
-  if(msg)msg.textContent='';
+  document.getElementById('tab-login').style.background=isLogin?'var(--acc)':'var(--surf)';
+  document.getElementById('tab-login').style.color=isLogin?'#fff':'var(--txt3)';
+  document.getElementById('tab-signup').style.background=!isLogin?'var(--acc)':'var(--surf)';
+  document.getElementById('tab-signup').style.color=!isLogin?'#fff':'var(--txt3)';
+  document.getElementById('auth-btn').textContent=isLogin?'Se connecter':'Creer mon compte';
+  document.getElementById('auth-msg').textContent='';
 }
 
 async function authSubmit(){
-  const email=document.getElementById('auth-email')?.value.trim();
-  const pwd=document.getElementById('auth-pwd')?.value;
+  const email=document.getElementById('auth-email').value.trim();
+  const pwd=document.getElementById('auth-pwd').value;
   const msg=document.getElementById('auth-msg');
   const btn=document.getElementById('auth-btn');
-  if(!email||!pwd){if(msg)msg.textContent='Remplis les deux champs.';return;}
-  if(pwd.length<6){if(msg)msg.textContent='Mot de passe trop court (min. 6 caractères).';return;}
-  const SUPA_URL=(typeof process!=='undefined'&&process.env?.SUPABASE_URL)||window.__SUPA_URL__||'';
-  const SUPA_KEY=(typeof process!=='undefined'&&process.env?.SUPABASE_ANON_KEY)||window.__SUPA_KEY__||'';
+  if(!email||!pwd){msg.textContent='Remplis les deux champs.';return;}
+  if(pwd.length<6){msg.textContent='Mot de passe trop court (min. 6 caracteres).';return;}
   if(!SUPA_URL||!SUPA_KEY){skipAuth();return;}
-  if(btn){btn.textContent='...';btn.disabled=true;}
+  btn.textContent='...';btn.disabled=true;
   const endpoint=authMode==='login'?SUPA_URL+'/auth/v1/token?grant_type=password':SUPA_URL+'/auth/v1/signup';
   try{
     const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd})});
     const data=await res.json();
     if(data.error||data.error_description||data.msg){
       const errMsg=data.error_description||data.msg||data.error||'Erreur';
-      if(msg){if(errMsg.includes('Invalid login'))msg.textContent='Email ou mot de passe incorrect.';else msg.textContent=errMsg;}
-      if(btn){btn.textContent=authMode==='login'?'Se connecter':'Créer mon compte';btn.disabled=false;}
-      return;
+      if(errMsg.includes('Invalid login'))msg.textContent='Email ou mot de passe incorrect.';
+      else if(errMsg.includes('already registered'))msg.textContent='Email deja utilise.';
+      else if(errMsg.includes('Email not confirmed'))msg.textContent='Verifie ton email pour confirmer.';
+      else msg.textContent=errMsg;
+      btn.textContent=authMode==='login'?'Se connecter':'Creer mon compte';
+      btn.disabled=false;return;
     }
     if(authMode==='signup'&&!data.access_token){
-      if(msg){msg.style.color='var(--grn)';msg.textContent='Compte créé ! Vérifie ton email.';}
-      switchAuthTab('login');if(btn)btn.disabled=false;return;
+      msg.style.color='var(--grn)';msg.textContent='Compte cree ! Verifie ton email.';
+      switchAuthTab('login');btn.disabled=false;return;
     }
     if(data.access_token){
       localStorage.setItem('geo_auth_token',data.access_token);
@@ -2359,19 +2733,17 @@ async function authSubmit(){
       localStorage.setItem('geo_user_email',data.user.email);
       currentUser=data.user;showApp();
     }
-  }catch(e){
-    if(msg)msg.textContent='Erreur réseau.';
-    if(btn){btn.textContent=authMode==='login'?'Se connecter':'Créer mon compte';btn.disabled=false;}
-  }
+  }catch(e){msg.textContent='Erreur reseau.';btn.textContent=authMode==='login'?'Se connecter':'Creer mon compte';btn.disabled=false;}
 }
 
-function skipAuth(){localStorage.setItem('geo_skip_auth','1');showApp();}
+function skipAuth(){
+  localStorage.setItem('geo_skip_auth','1');
+  showApp();
+}
 
 function showApp(){
-  const authOv=document.getElementById('auth-overlay');
-  const mainApp=document.getElementById('main-app');
-  if(authOv)authOv.style.display='none';
-  if(mainApp)mainApp.style.display='flex';
+  document.getElementById('auth-overlay').style.display='none';
+  document.getElementById('main-app').style.display='flex';
   updateCd();renderObj();initDash();loadFromSupabase();
 }
 
@@ -2382,148 +2754,402 @@ function logout(){
   location.reload();
 }
 
-(function(){
+// checkAuth on load
+(function checkAuth(){
   const token=localStorage.getItem('geo_auth_token');
   const skip=localStorage.getItem('geo_skip_auth');
   if(token||skip){showApp();}
 })();
 
-
-// ══════════════════════════════════════════════════════
-// MES COURS
-// ══════════════════════════════════════════════════════
-function closeMyCoursOverlay(){
-  document.querySelector('.topbar')?.style.setProperty('display','');
-  go('dash');
+// renderChapCards
+function renderChapCards(chapShort){
+  const cards=[...FLASHCARDS,...M.get('my_flashcards',[])].filter(f=>f.c===chapShort);
+  if(!cards.length)return'<div style="padding:20px;text-align:center;color:var(--txt3);font-size:13px">Aucune flashcard pour ce chapitre.</div>';
+  return'<div style="display:flex;flex-direction:column;gap:10px">'+cards.map(f=>'<div style="background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:14px"><div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:8px">'+f.q+'</div><div style="font-size:12px;color:var(--txt3);line-height:1.7;padding-top:8px;border-top:1px solid var(--brd)">'+f.a+'</div></div>').join('')+'</div>';
 }
 
-function initMyCours(){
-  const body=document.getElementById('mc-body');
-  const title=document.getElementById('mc-title');
-  if(body){const d=M.get('mc_draft_body','');if(d&&!body.innerHTML)body.innerHTML=d;}
-  if(title){const t=M.get('mc_draft_title','');if(t&&!title.value)title.value=t;}
-  renderMcList();
+// Cours sidebar toggle
+function toggleCoursSb(){
+  const panel=document.getElementById('cours-sb-panel');
+  const btn=document.getElementById('csb-toggle');
+  if(!panel||!btn)return;
+  const collapsed=panel.classList.toggle('collapsed');
+  M.set('csb_collapsed',collapsed);
+  btn.style.left=collapsed?'0':'244px';
+  btn.textContent=collapsed?'>':'<';
 }
 
-function renderMcList(){
-  const list=M.get('my_cours',[]);
-  const el=document.getElementById('mc-list');
-  if(!el)return;
-  const wrap=document.getElementById('mc-list-wrap');
-  if(wrap)wrap.style.display=list.length?'block':'none';
-  if(!list.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3)">Aucun cours sauvegardé.</div>';return;}
-  el.innerHTML=list.map((c,i)=>'<div class="card" style="cursor:pointer" onclick="loadMyCours('+i+')">'+'<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px">'+c.title+'</div>'+'<div style="font-size:10px;color:var(--txt3)">'+c.date+'</div>'+'<button onclick="event.stopPropagation();deleteMyCours('+i+')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:11px;margin-top:5px">🗑 Supprimer</button>'+'</div>').join('');
+// Tree folder system stubs (already defined above in main JS)
+function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');if(ov)ov.style.display='none';document.querySelector('.topbar').style.display='';}
+function closeMyCoursOverlay(){document.querySelector('.topbar').style.display='';go('dash');}
+function closeFicheEditor(){const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='none';document.querySelector('.topbar').style.display='';go('fiches');}
+function insertMcPdf(inp){const f=inp.files[0];if(!f)return;const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';document.getElementById('mc-body').appendChild(div);inp.value='';}
+function addFiAttachment(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const att=document.getElementById('fi-attachments');if(!att)return;const div=document.createElement('div');div.style.cssText='padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;position:relative';if(type==='image'){div.innerHTML='<img src="'+e.target.result+'" style="width:100%;border-radius:7px;display:block">';}else{div.innerHTML='<span style="font-size:18px">📄</span> <strong style="font-size:13px">'+f.name+'</strong>';}const del=document.createElement('button');del.textContent='🗑';del.onclick=()=>div.remove();del.style.cssText='position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;color:var(--red);font-size:13px';div.appendChild(del);att.appendChild(div);};r.readAsDataURL(f);inp.value='';}
+function handleFEImage(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const body=document.getElementById('fe-body');
+    body.focus();
+    const wrap=document.createElement('div');
+    wrap.className='fe-img-wrap';
+    const img=document.createElement('img');
+    img.src=e.target.result;
+    img.style.cssText='max-width:100%;border-radius:8px;margin:12px 0;display:block';
+    const btn=document.createElement('button');
+    btn.className='fe-img-del';
+    btn.textContent='✕ Supprimer';
+    btn.onclick=()=>wrap.remove();
+    wrap.appendChild(img);wrap.appendChild(btn);
+    const sel=window.getSelection();
+    if(sel.rangeCount){sel.getRangeAt(0).insertNode(wrap);}
+    else{body.appendChild(wrap);}
+  };
+  r.readAsDataURL(f);inp.value='';
 }
 
-let curMcId=null;
-function saveMyCours(){
-  const titleEl=document.getElementById('mc-title');
-  const bodyEl=document.getElementById('mc-body');
-  const title=(titleEl?.value||'').trim()||'Sans titre';
-  const body=bodyEl?.innerHTML||'';
-  M.set('mc_draft_title',title);
-  M.set('mc_draft_body',body);
-  const list=M.get('my_cours',[]);
-  const entry={title,body,date:new Date().toLocaleDateString('fr-FR')};
-  if(curMcId!==null)list[curMcId]=entry;
-  else{list.unshift(entry);curMcId=0;}
-  M.set('my_cours',list);
-  renderMcList();
-  showToast('✅ Cours sauvegardé');
+function handleFEPdf(inp){const f=inp.files[0];if(!f)return;const att=document.getElementById('fe-attachments');const div=document.createElement('div');div.style.cssText='display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px';div.innerHTML='<span style="font-size:20px">📄</span><span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+f.name+'</span><button onclick="this.parentNode.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:12px">🗑</button>';if(att)att.appendChild(div);inp.value='';}
+function saveFicheEditor(){const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');const title=(titleEl?.textContent||'').trim();const body=bodyEl?.innerHTML||'';if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}const fiches=M.get('my_fiches',[]);const entry={title,body,prio:prioSel?.value||'frequent',date:new Date().toLocaleString('fr-FR'),_custom:true};if(typeof _feEditId!=='undefined'&&_feEditId!==null)fiches[_feEditId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);showToast('✅ Fiche sauvegardée !');closeFicheEditor();}
+function execFE(cmd,val){document.execCommand(cmd,false,val||null);}
+function insertFEQuote(){document.getElementById('fe-body').focus();document.execCommand('formatBlock',false,'blockquote');}
+function addFicheImage(){document.getElementById('fe-img-inp').click();}
+function editFicheContent(id){showToast('Cliquer sur ✏️ Modifier dans la fiche ouverte');}
+function deleteFicheCache(id){if(!confirm('Effacer la fiche ?'))return;localStorage.removeItem('geo_v5_fiche_'+id);showToast('🗑 Fiche effacée');}
+let _feEditId=null;
+function openCreateFiche(editId=null){_feEditId=editId;const existing=editId!==null?M.get('my_fiches',[])[editId]:null;const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='block';document.querySelector('.topbar').style.display='none';const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');if(existing){if(titleEl)titleEl.textContent=existing.title||'';if(bodyEl)bodyEl.innerHTML=existing.body||'';if(prioSel)prioSel.value=existing.prio||'frequent';}else{if(titleEl)titleEl.textContent='';if(bodyEl)bodyEl.innerHTML='';if(prioSel)prioSel.value='frequent';}setTimeout(()=>{if(titleEl)titleEl.focus();},100);}
+function saveFichePerso(editId){const title=document.getElementById('mf-title')?.value.trim();const content=document.getElementById('mf-content')?.value.trim();const prio=document.getElementById('mf-prio')?.value||'frequent';if(!title||!content){showToast('Remplis le titre et le contenu');return;}const fiches=M.get('my_fiches',[]);const entry={title,content,prio,date:new Date().toLocaleString('fr-FR'),_custom:true};if(editId!==null&&editId!==undefined)fiches[editId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('✅ Fiche sauvegardée !');}
+function deleteFichePerso(i){if(!confirm('Supprimer cette fiche ?'))return;const fiches=M.get('my_fiches',[]);fiches.splice(i,1);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('🗑 Fiche supprimée');}
+function openFichePersoDetail(i){
+  const f=M.get('my_fiches',[])[i];if(!f)return;
+  const m=document.createElement('div');
+  m.className='modal-bg';
+  const box=document.createElement('div');
+  box.className='modal-box';
+  box.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">'+f.title+'</div><button id="fp-close" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button></div><div style="font-size:13px;line-height:1.8;color:var(--txt2)">'+(f.body||f.content||'')+'</div>';
+  const close=()=>m.remove();
+  m.appendChild(box);
+  document.body.appendChild(m);
+  box.querySelector('#fp-close').onclick=close;
+  m.addEventListener('click',e=>{if(e.target===m)close();});
 }
 
-function newMyCours(){
-  curMcId=null;
-  const b=document.getElementById('mc-body');
-  const t=document.getElementById('mc-title');
-  if(b)b.innerHTML='';
-  if(t)t.value='';
-  M.remove('mc_draft_body');M.remove('mc_draft_title');
+function deleteFriseItem(fi){const built=typeof FRISE!=='undefined'?FRISE:[];const custom=M.get('custom_frise',[]);const combined=[...built,...custom];const item=combined[fi];if(!item||!item._custom){showToast('Les dates officielles ne peuvent pas être supprimées');return;}const customIdx=custom.findIndex(c=>c.date===item.date&&c.event===item.event);if(customIdx>=0){custom.splice(customIdx,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}}
+function deleteDoc(i){if(!confirm('Supprimer ce document ?'))return;const docs=M.get('my_docs',[]);docs.splice(i,1);M.set('my_docs',docs);initDocs();showToast('🗑 Document supprimé');}
+function deleteCopy(i){if(!confirm('Supprimer cette copie ?'))return;const copies=M.get('copies',[]);copies.splice(i,1);M.set('copies',copies);initCopies();showToast('🗑 Copie supprimée');}
+function insertCoursFile(id,inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const body=document.getElementById('cours-body-'+id);if(!body)return;if(type==='image'){body.focus();document.execCommand('insertImage',false,e.target.result);}else{const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';body.appendChild(div);}M.set('edit_chap_'+id,body.innerHTML);};r.readAsDataURL(f);inp.value='';}
+let _flashAttach=null;
+function attachToFlash(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{_flashAttach={name:f.name,data:e.target.result,type};document.getElementById('mf-attach').innerHTML=(type==='image'?'📷':'📄')+' '+f.name+' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">🗑</button>';};r.readAsDataURL(f);inp.value='';}
+
+// ── FICHES DOSSIERS ──────────────────────────────────────────────────────
+function addFicheFolder(){
+  const name=prompt('Nom du dossier (ex: Puissance, Ressources…) :');
+  if(!name?.trim())return;
+  const tree=M.get('fiches_tree',getDefaultFichesTree());
+  const active=M.get('fiches_active_node','root');
+  const id='fn'+Date.now();
+  tree.push({id,name:name.trim(),parent:active||'root',open:true,chapIds:[]});
+  M.set('fiches_tree',tree);
+  renderFichesFolders();
+  showToast('📁 Dossier "'+name+'" créé');
 }
 
-function loadMyCours(i){
-  const list=M.get('my_cours',[]);
-  const c=list[i];if(!c)return;
-  curMcId=i;
-  const b=document.getElementById('mc-body');
-  const t=document.getElementById('mc-title');
-  if(b)b.innerHTML=c.body||'';
-  if(t)t.value=c.title||'';
+function addFlashFolderBtn(){
+  const name=prompt('Nom du dossier de flashcards :');
+  if(!name?.trim())return;
+  const tag=prompt('Mot-clé filtre auto (ex: "puissance", "Nye"…) — optionnel :');
+  const tree=M.get('flash_tree',getDefaultFlashTree());
+  const active=M.get('flash_active_node','root');
+  const id='fl'+Date.now();
+  tree.push({id,name:name.trim(),parent:active||'root',open:true,tag:(tag||'').trim()});
+  M.set('flash_tree',tree);
+  renderFlashFolders();
+  showToast('📁 Dossier "'+name+'" créé');
 }
 
-function deleteMyCours(i){
-  if(!confirm('Supprimer ce cours ?'))return;
-  const list=M.get('my_cours',[]);
-  list.splice(i,1);M.set('my_cours',list);
-  if(curMcId===i)newMyCours();
-  renderMcList();showToast('🗑 Cours supprimé');
+function treeAddSub(storageKey, parentId){
+  const name=prompt('Nom du sous-dossier :');
+  if(!name?.trim())return;
+  const tree=M.get(storageKey,[]);
+  const id='n'+Date.now();
+  tree.push({id,name:name.trim(),parent:parentId,open:true});
+  M.set(storageKey,tree);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+  showToast('📁 Sous-dossier créé');
 }
 
-function exportMyCoursTxt(){
-  const title=document.getElementById('mc-title')?.value||'cours';
-  const body=document.getElementById('mc-body')?.innerText||'';
-  dlFile(title+'.txt',body,'text/plain');
-  showToast('📄 Export TXT téléchargé');
+function treeDelete(storageKey, activeKey, nodeId){
+  if(!confirm('Supprimer ce dossier et ses sous-dossiers ?'))return;
+  let tree=M.get(storageKey,[]);
+  function desc(id){const kids=tree.filter(n=>n.parent===id).map(n=>n.id);return[id,...kids.flatMap(k=>desc(k))];}
+  tree=tree.filter(n=>!desc(nodeId).includes(n.id));
+  M.set(storageKey,tree);M.set(activeKey,'root');
+  if(storageKey==='fiches_tree'){renderFichesFolders();renderFiches(CHAPTERS);}
+  else{renderFlashFolders();loadFlash();}
+  showToast('🗑 Dossier supprimé');
 }
 
-function exportMyCoursHtml(){
-  const title=document.getElementById('mc-title')?.value||'cours';
-  const body=document.getElementById('mc-body')?.innerHTML||'';
-  const html='<!DOCTYPE html><html><head><meta charset=UTF-8><title>'+title+'</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;color:#222}</style></head><body>'+body+'</body></html>';
-  dlFile(title+'.html',html,'text/html');
-  showToast('📄 Export HTML téléchargé');
+// ── FICHES PERSO DANS LA GRILLE ─────────────────────────────────────────
+function renderFichesPerso(){
+  const myFiches=M.get('my_fiches',[]);
+  const grid=document.getElementById('fiches-grid');
+  if(!grid||!myFiches.length)return;
+  const persoHTML=myFiches.map((f,i)=>`
+    <div style="background:var(--surf);border:1px solid var(--acc-m);border-radius:12px;padding:22px;transition:all .15s;border-left:3px solid var(--acc)">
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
+        <span class="badge ${f.prio==='indispensable'?'bi':f.prio==='tres-frequent'?'btf':'bf'}">${f.prio==='indispensable'?'🔴 Indispensable':f.prio==='tres-frequent'?'🟠 Très fréquent':'🟡 Fréquent'}</span>
+        <span style="font-size:10px;background:var(--acc-l);color:var(--acc);padding:2px 7px;border-radius:8px;font-weight:600">✏️ Perso</span>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:5px;color:var(--txt);line-height:1.3">${f.title}</div>
+      <div style="font-size:11px;color:var(--txt3);margin-bottom:12px">${f.date||''}</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-g btn-sm" onclick="openFichePersoDetail(${i})">👁 Voir</button>
+        <button class="btn btn-g btn-sm" onclick="openCreateFiche(${i})">✏️ Modifier</button>
+        <button class="btn btn-g btn-sm" style="color:var(--red)" onclick="deleteFichePerso(${i})">🗑</button>
+      </div>
+    </div>`).join('');
+  grid.insertAdjacentHTML('afterbegin', persoHTML);
 }
 
-async function fichageIA(){
-  const title=document.getElementById('mc-title')?.value||'';
-  const body=document.getElementById('mc-body')?.innerHTML||'';
-  if(!body.trim()){showToast('Écris d\'abord du contenu');return;}
-  showToast('🤖 Génération de la fiche…');
+// Patch renderFiches pour inclure les fiches perso
+const _rF = renderFiches;
+renderFiches = function(list){
+  _rF(list);
+  renderFichesPerso();
+};
+
+// ── ANALYSE COPIES ───────────────────────────────────────────────────────
+async function analyzeCopy(idx){
+  const copies=M.get('copies',[]);
+  const copy=copies[idx];
+  if(!copy)return;
+  
+  const el=document.getElementById('copy-analysis-'+idx);
+  if(el)el.innerHTML='<div style="text-align:center;padding:10px;color:var(--txt3)"><div class="dots" style="justify-content:center"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px;margin-top:5px">Analyse en cours…</div></div>';
+  
   try{
     const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       model:'claude-sonnet-4-20250514',max_tokens:1000,
-      messages:[{role:'user',content:'Génère une fiche synthèse JSON pour ce cours. JSON uniquement: {"notions":[{"terme":"...","def":"...","auteur":"..."}],"chiffres":["..."],"erreurs":["..."],"plan":["..."]}. Cours: "'+title+'" '+body.replace(/<[^>]+>/g,' ').substring(0,2000)}]
+      messages:[{role:'user',content:'Tu es un correcteur BCE géopolitique. Donne une analyse concise de cette copie en JSON avec les champs: {note:number, points_forts:[string], points_ameliorer:[string], conseil:string}. Copie: '+(copy.text||copy.title||'Copie sans texte')}]
     })});
     const data=await res.json();
     const text=data.content?.map(i=>i.text||'').join('')||'';
     const p=JSON.parse(text.replace(/```json|```/g,'').trim());
-    showToast('✅ Fiche générée !');
-    // Afficher dans une modale simple
-    const d=document.createElement('div');
-    d.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center';
-    d.innerHTML='<div style="background:var(--surf);border-radius:12px;padding:24px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto"><h2 style="margin-top:0">'+title+' — Fiche</h2>'+(p.notions||[]).map(n=>'<div style="margin-bottom:12px"><strong>'+n.terme+'</strong><p style="margin:4px 0">'+n.def+'</p>'+(n.auteur?'<em>'+n.auteur+'</em>':'')+'</div>').join('')+'<button onclick="this.closest(\'[style]\').remove()" style="margin-top:16px;padding:8px 16px;background:var(--acc);color:#fff;border:none;border-radius:6px;cursor:pointer">Fermer</button></div>';
-    document.body.appendChild(d);
-  }catch(e){showToast('Erreur: '+e.message);}
-}
-
-function injectInCours(){
-  const title=document.getElementById('mc-title')?.value||'';
-  const body=document.getElementById('mc-body')?.innerHTML||'';
-  if(!title||!body){showToast('Titre et contenu requis');return;}
-  const chapId=parseInt(prompt('Dans quel chapitre injecter ? (numéro 1-30)'));
-  if(isNaN(chapId)||chapId<1||chapId>30){showToast('Numéro invalide');return;}
-  const existing=M.get('edit_chap_'+(chapId-1),'');
-  M.set('edit_chap_'+(chapId-1),existing+'<hr><h2>'+title+'</h2>'+body);
-  showToast('✅ Injecté dans Chap. '+chapId);
-  closeMyCoursOverlay();
-  go('cours');
+    if(el)el.innerHTML=`
+      <div style="margin-top:10px;padding:12px;background:var(--surf2);border-radius:8px">
+        <div style="font-size:13px;font-weight:700;color:var(--acc);margin-bottom:8px">Note estimée: ${p.note}/20</div>
+        <div style="font-size:12px;color:var(--grn);margin-bottom:6px"><strong>Points forts:</strong> ${(p.points_forts||[]).join(' · ')}</div>
+        <div style="font-size:12px;color:var(--org);margin-bottom:6px"><strong>À améliorer:</strong> ${(p.points_ameliorer||[]).join(' · ')}</div>
+        <div style="font-size:12px;color:var(--txt2)"><strong>Conseil:</strong> ${p.conseil||''}</div>
+      </div>`;
+  }catch(e){
+    if(el)el.innerHTML='<div style="color:var(--red);font-size:11px;padding:8px">Erreur analyse: '+e.message+'</div>';
+  }
 }
 
 // ══════════════════════════════════════════════════════
-// RÉVISION
+// FICHES FOLDERS SYSTEM
 // ══════════════════════════════════════════════════════
-function initRevision(){
-  const urgent=CHAPTERS.filter(c=>c.priority==='indispensable'&&M.get('prog_'+c.id,0)<30);
-  const consolid=CHAPTERS.filter(c=>M.get('prog_'+c.id,0)>=30&&M.get('prog_'+c.id,0)<70);
-  const ok=CHAPTERS.filter(c=>M.get('prog_'+c.id,0)>=70);
-  const elU=document.getElementById('rev-urgent');
-  const elC=document.getElementById('rev-consolid');
-  const elO=document.getElementById('rev-ok');
-  if(elU)elU.innerHTML=urgent.map(c=>'<div class="card" style="cursor:pointer" onclick="go(\'cours\');setTimeout(()=>openCours('+c.id+'),50)"><span class="badge bi">'+c.short+'</span><div style="font-size:12px;margin-top:5px;color:var(--txt2)">'+c.title.substring(0,50)+'</div></div>').join('')||'<div style="color:var(--txt3);font-size:12px">Aucun chapitre urgent 🎉</div>';
-  if(elC)elC.innerHTML=consolid.map(c=>'<div class="card" style="cursor:pointer" onclick="go(\'cours\');setTimeout(()=>openCours('+c.id+'),50)"><span class="badge btf">'+c.short+'</span><div style="font-size:12px;margin-top:5px;color:var(--txt2)">'+c.title.substring(0,50)+'</div></div>').join('')||'<div style="color:var(--txt3);font-size:12px">Aucun chapitre en consolidation</div>';
-  if(elO)elO.innerHTML=ok.length+'/'+(CHAPTERS.length)+' chapitres maîtrisés';
+function getDefaultFichesTree(){
+  return[
+    {id:'root',name:'Toutes les fiches',parent:null,open:true},
+    {id:'fi_indis',name:'🔴 Indispensables',parent:'root',open:true,filter:'indispensable'},
+    {id:'fi_tres',name:'🟠 Très fréquents',parent:'root',open:false,filter:'tres-frequent'},
+    {id:'fi_freq',name:'🟡 Fréquents',parent:'root',open:false,filter:'frequent'},
+    {id:'fi_geo',name:'Géopolitique',parent:'root',open:false,chapIds:[0,1,2,3,7,8]},
+    {id:'fi_eco',name:'Économie',parent:'root',open:false,chapIds:[4,5,6,9,10]},
+    {id:'fi_fr',name:'France',parent:'fi_geo',open:false,chapIds:[12,13,14]},
+    {id:'fi_eu',name:'Europe',parent:'fi_geo',open:false,chapIds:[15]},
+  ];
 }
 
+function renderFichesFolders(){
+  let sidebar=document.getElementById('fiches-tree-sidebar');
+  if(!sidebar){
+    const grid=document.getElementById('fiches-grid');
+    if(!grid)return;
+    const wrap=document.createElement('div');
+    wrap.style.cssText='display:flex;gap:13px;align-items:flex-start;margin-bottom:14px';
+    grid.parentNode.insertBefore(wrap,grid);
+    const treeDiv=document.createElement('div');
+    treeDiv.id='fiches-tree-sidebar';
+    wrap.appendChild(treeDiv);
+    wrap.appendChild(grid);
+    sidebar=treeDiv;
+  }
+  renderTree('fiches-tree-sidebar','fiches_tree','fiches_active_node','applyFicheFolder','addFicheFolder',getDefaultFichesTree());
+}
+
+function applyFicheFolder(node){
+  if(!node||node.id==='root'){renderFiches(CHAPTERS);return;}
+  if(node.filter)renderFiches(CHAPTERS.filter(c=>c.priority===node.filter));
+  else if(node.chapIds)renderFiches(CHAPTERS.filter(c=>node.chapIds.includes(c.id)));
+  else renderFiches(CHAPTERS);
+}
+
+// ══════════════════════════════════════════════════════
+// FLASH FOLDERS SYSTEM
+// ══════════════════════════════════════════════════════
+function getDefaultFlashTree(){
+  return[
+    {id:'root',name:'Toutes les cartes',parent:null,open:true},
+    {id:'fl_indis',name:'🔴 Indispensables',parent:'root',open:true,prio:'indispensable'},
+    {id:'fl_tres',name:'🟠 Très fréquents',parent:'root',open:false,prio:'tres-frequent'},
+    {id:'fl_geo',name:'Géopolitique',parent:'root',open:false,tag:'géopolitique'},
+    {id:'fl_puis',name:'Puissance',parent:'fl_geo',open:false,tag:'puissance'},
+    {id:'fl_eu',name:'Europe',parent:'fl_geo',open:false,tag:'europe'},
+    {id:'fl_eco',name:'Économie',parent:'root',open:false,tag:'mondialisation'},
+    {id:'fl_perso',name:'✏️ Mes cartes',parent:'root',open:true,custom:true},
+  ];
+}
+
+function renderFlashFolders(){
+  let sidebar=document.getElementById('flash-tree-sidebar');
+  if(!sidebar){
+    const wrap=document.querySelector('.flash-wrap');
+    if(!wrap)return;
+    const container=document.createElement('div');
+    container.style.cssText='display:flex;gap:13px;align-items:flex-start';
+    wrap.parentNode.insertBefore(container,wrap);
+    const treeDiv=document.createElement('div');
+    treeDiv.id='flash-tree-sidebar';
+    const mainDiv=document.createElement('div');
+    mainDiv.style.cssText='flex:1;min-width:0';
+    mainDiv.appendChild(wrap);
+    container.appendChild(treeDiv);
+    container.appendChild(mainDiv);
+    sidebar=treeDiv;
+  }
+  renderTree('flash-tree-sidebar','flash_tree','flash_active_node','applyFlashFolder','addFlashFolder',getDefaultFlashTree());
+}
+
+function applyFlashFolder(node){
+  if(!node||node.id==='root'){
+    document.getElementById('fl-prio').value='all';
+    document.getElementById('fl-theme').value='';
+    loadFlash();return;
+  }
+  if(node.prio){document.getElementById('fl-prio').value=node.prio;document.getElementById('fl-theme').value='';loadFlash();}
+  else if(node.tag){document.getElementById('fl-theme').value=node.tag;document.getElementById('fl-prio').value='all';loadFlash();}
+  else if(node.custom){
+    const myCards=M.get('my_flashcards',[]);
+    if(!myCards.length){showToast('Aucune flashcard personnelle encore');return;}
+    flDeck=[...myCards].sort(()=>Math.random()-.5);flIdx=0;flipped=false;
+    document.getElementById('fl-count').textContent=flDeck.length+' cartes perso';
+    renderFlash();
+  }else loadFlash();
+}
+
+// ══════════════════════════════════════════════════════
+// TREE FOLDER SYSTEM
+// ══════════════════════════════════════════════════════
+function renderTree(sid, sk, ak, fn, af, def){
+  const el=document.getElementById(sid);
+  if(!el)return;
+  const tree=M.get(sk,def);
+  const active=M.get(ak,'root');
+
+  function nodes(pid, d){
+    return tree.filter(n=>n.parent===pid).map(n=>{
+      const act=active===n.id;
+      const kids=tree.some(c=>c.parent===n.id);
+      const open=n.open!==false;
+      const icon=n.parent===null?'🗂️':kids?'📁':'📄';
+      const pad=(d*14+4)+'px';
+      let s='<div>';
+      s+='<div style="display:flex;align-items:center;gap:3px;padding:3px 5px 3px '+pad+';border-radius:5px;cursor:pointer;background:'+(act?'var(--acc-l)':'')+'"'+
+         ' data-sk="'+sk+'" data-ak="'+ak+'" data-id="'+n.id+'" data-fn="'+fn+'" onclick="treeNodeClick(this)">';
+      s+=kids?'<span style="font-size:9px;color:var(--txt4);width:12px;text-align:center;display:inline-block" data-sk="'+sk+'" data-id="'+n.id+'" onclick="event.stopPropagation();treeNodeToggle(this)">▾</span>':
+              '<span style="width:12px;display:inline-block"></span>';
+      s+='<span style="font-size:11px;'+(act?'font-weight:700;color:var(--acc)':'color:var(--txt2)')+'">'+icon+' '+n.name+'</span>';
+      s+='</div>';
+      if(open&&kids)s+='<div>'+nodes(n.id,d+1)+'</div>';
+      s+='</div>';
+      return s;
+    }).join('');
+  }
+
+  el.innerHTML='<div style="min-width:175px;max-width:200px;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:5px;flex-shrink:0">'+
+    nodes(null,0)+
+    '<div onclick="'+af+'()" style="display:flex;align-items:center;gap:5px;padding:4px 6px;cursor:pointer;border-radius:4px;color:var(--txt4);font-size:11px;margin-top:3px">📁 + Dossier</div>'+
+  '</div>';
+}
+
+function treeNodeClick(el){
+  const sk=el.dataset.sk,ak=el.dataset.ak,id=el.dataset.id,fn=el.dataset.fn;
+  M.set(ak,id);
+  if(sk==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+  const node=M.get(sk,[]).find(n=>n.id===id);
+  if(!node)return;
+  if(fn==='applyFicheFolder')applyFicheFolder(node);
+  else if(fn==='applyFlashFolder')applyFlashFolder(node);
+}
+
+function treeNodeToggle(el){
+  const sk=el.dataset.sk,id=el.dataset.id;
+  const tree=M.get(sk,[]);
+  const node=tree.find(n=>n.id===id);
+  if(node)node.open=node.open===false?true:false;
+  M.set(sk,tree);
+  if(sk==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+}
+
+// Alias pour compatibilité
+function treeSelect(el){treeNodeClick(el);}
+function treeToggle(sk,id){const t=M.get(sk,[]);const n=t.find(x=>x.id===id);if(n)n.open=!n.open;M.set(sk,t);if(sk==='fiches_tree')renderFichesFolders();else renderFlashFolders();}
+
+
+function treeSelect(el){
+  const storageKey=el.dataset.key;const activeKey=el.dataset.akey;
+  const nodeId=el.dataset.nid;const onSelectFn=el.dataset.fn;
+  M.set(activeKey,nodeId);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(!node)return;
+  if(onSelectFn==='applyFicheFolder')applyFicheFolder(node);
+  else if(onSelectFn==='applyFlashFolder')applyFlashFolder(node);
+}
+
+function treeToggleNode(el){
+  const storageKey=el.dataset.key;const nodeId=el.dataset.nid;
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(node)node.open=node.open===false?true:false;
+  M.set(storageKey,tree);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+}
+
+function treeAddSubBtn(storageKey, parentId){treeAddSub(storageKey,parentId);}
+function treeDeleteBtn(storageKey, activeKey, nodeId){treeDelete(storageKey,activeKey,nodeId);}
+
+
+function treeSelect(storageKey, activeKey, nodeId, onSelectFn){
+  M.set(activeKey,nodeId);
+  if(storageKey==='fiches_tree'){renderFichesFolders();}
+  else{renderFlashFolders();}
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(!node)return;
+  if(onSelectFn==='applyFicheFolder')applyFicheFolder(node);
+  else if(onSelectFn==='applyFlashFolder')applyFlashFolder(node);
+}
+
+function treeToggle(storageKey, nodeId){
+  const tree=M.get(storageKey,[]);
+  const node=tree.find(n=>n.id===nodeId);
+  if(node)node.open=node.open===false?true:false;
+  M.set(storageKey,tree);
+  if(storageKey==='fiches_tree')renderFichesFolders();
+  else renderFlashFolders();
+}
+
+// Auth overlay on load handled by checkAuth above
+// v887596
 </script>
 </body>
 </html>
