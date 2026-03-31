@@ -2388,6 +2388,142 @@ function logout(){
   if(token||skip){showApp();}
 })();
 
+
+// ══════════════════════════════════════════════════════
+// MES COURS
+// ══════════════════════════════════════════════════════
+function closeMyCoursOverlay(){
+  document.querySelector('.topbar')?.style.setProperty('display','');
+  go('dash');
+}
+
+function initMyCours(){
+  const body=document.getElementById('mc-body');
+  const title=document.getElementById('mc-title');
+  if(body){const d=M.get('mc_draft_body','');if(d&&!body.innerHTML)body.innerHTML=d;}
+  if(title){const t=M.get('mc_draft_title','');if(t&&!title.value)title.value=t;}
+  renderMcList();
+}
+
+function renderMcList(){
+  const list=M.get('my_cours',[]);
+  const el=document.getElementById('mc-list');
+  if(!el)return;
+  const wrap=document.getElementById('mc-list-wrap');
+  if(wrap)wrap.style.display=list.length?'block':'none';
+  if(!list.length){el.innerHTML='<div style="font-size:12px;color:var(--txt3)">Aucun cours sauvegardé.</div>';return;}
+  el.innerHTML=list.map((c,i)=>'<div class="card" style="cursor:pointer" onclick="loadMyCours('+i+')">'+'<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px">'+c.title+'</div>'+'<div style="font-size:10px;color:var(--txt3)">'+c.date+'</div>'+'<button onclick="event.stopPropagation();deleteMyCours('+i+')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:11px;margin-top:5px">🗑 Supprimer</button>'+'</div>').join('');
+}
+
+let curMcId=null;
+function saveMyCours(){
+  const titleEl=document.getElementById('mc-title');
+  const bodyEl=document.getElementById('mc-body');
+  const title=(titleEl?.value||'').trim()||'Sans titre';
+  const body=bodyEl?.innerHTML||'';
+  M.set('mc_draft_title',title);
+  M.set('mc_draft_body',body);
+  const list=M.get('my_cours',[]);
+  const entry={title,body,date:new Date().toLocaleDateString('fr-FR')};
+  if(curMcId!==null)list[curMcId]=entry;
+  else{list.unshift(entry);curMcId=0;}
+  M.set('my_cours',list);
+  renderMcList();
+  showToast('✅ Cours sauvegardé');
+}
+
+function newMyCours(){
+  curMcId=null;
+  const b=document.getElementById('mc-body');
+  const t=document.getElementById('mc-title');
+  if(b)b.innerHTML='';
+  if(t)t.value='';
+  M.remove('mc_draft_body');M.remove('mc_draft_title');
+}
+
+function loadMyCours(i){
+  const list=M.get('my_cours',[]);
+  const c=list[i];if(!c)return;
+  curMcId=i;
+  const b=document.getElementById('mc-body');
+  const t=document.getElementById('mc-title');
+  if(b)b.innerHTML=c.body||'';
+  if(t)t.value=c.title||'';
+}
+
+function deleteMyCours(i){
+  if(!confirm('Supprimer ce cours ?'))return;
+  const list=M.get('my_cours',[]);
+  list.splice(i,1);M.set('my_cours',list);
+  if(curMcId===i)newMyCours();
+  renderMcList();showToast('🗑 Cours supprimé');
+}
+
+function exportMyCoursTxt(){
+  const title=document.getElementById('mc-title')?.value||'cours';
+  const body=document.getElementById('mc-body')?.innerText||'';
+  dlFile(title+'.txt',body,'text/plain');
+  showToast('📄 Export TXT téléchargé');
+}
+
+function exportMyCoursHtml(){
+  const title=document.getElementById('mc-title')?.value||'cours';
+  const body=document.getElementById('mc-body')?.innerHTML||'';
+  const html='<!DOCTYPE html><html><head><meta charset=UTF-8><title>'+title+'</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:20px;line-height:1.8;color:#222}</style></head><body>'+body+'</body></html>';
+  dlFile(title+'.html',html,'text/html');
+  showToast('📄 Export HTML téléchargé');
+}
+
+async function fichageIA(){
+  const title=document.getElementById('mc-title')?.value||'';
+  const body=document.getElementById('mc-body')?.innerHTML||'';
+  if(!body.trim()){showToast('Écris d\'abord du contenu');return;}
+  showToast('🤖 Génération de la fiche…');
+  try{
+    const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:1000,
+      messages:[{role:'user',content:'Génère une fiche synthèse JSON pour ce cours. JSON uniquement: {"notions":[{"terme":"...","def":"...","auteur":"..."}],"chiffres":["..."],"erreurs":["..."],"plan":["..."]}. Cours: "'+title+'" '+body.replace(/<[^>]+>/g,' ').substring(0,2000)}]
+    })});
+    const data=await res.json();
+    const text=data.content?.map(i=>i.text||'').join('')||'';
+    const p=JSON.parse(text.replace(/```json|```/g,'').trim());
+    showToast('✅ Fiche générée !');
+    // Afficher dans une modale simple
+    const d=document.createElement('div');
+    d.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center';
+    d.innerHTML='<div style="background:var(--surf);border-radius:12px;padding:24px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto"><h2 style="margin-top:0">'+title+' — Fiche</h2>'+(p.notions||[]).map(n=>'<div style="margin-bottom:12px"><strong>'+n.terme+'</strong><p style="margin:4px 0">'+n.def+'</p>'+(n.auteur?'<em>'+n.auteur+'</em>':'')+'</div>').join('')+'<button onclick="this.closest(\'[style]\').remove()" style="margin-top:16px;padding:8px 16px;background:var(--acc);color:#fff;border:none;border-radius:6px;cursor:pointer">Fermer</button></div>';
+    document.body.appendChild(d);
+  }catch(e){showToast('Erreur: '+e.message);}
+}
+
+function injectInCours(){
+  const title=document.getElementById('mc-title')?.value||'';
+  const body=document.getElementById('mc-body')?.innerHTML||'';
+  if(!title||!body){showToast('Titre et contenu requis');return;}
+  const chapId=parseInt(prompt('Dans quel chapitre injecter ? (numéro 1-30)'));
+  if(isNaN(chapId)||chapId<1||chapId>30){showToast('Numéro invalide');return;}
+  const existing=M.get('edit_chap_'+(chapId-1),'');
+  M.set('edit_chap_'+(chapId-1),existing+'<hr><h2>'+title+'</h2>'+body);
+  showToast('✅ Injecté dans Chap. '+chapId);
+  closeMyCoursOverlay();
+  go('cours');
+}
+
+// ══════════════════════════════════════════════════════
+// RÉVISION
+// ══════════════════════════════════════════════════════
+function initRevision(){
+  const urgent=CHAPTERS.filter(c=>c.priority==='indispensable'&&M.get('prog_'+c.id,0)<30);
+  const consolid=CHAPTERS.filter(c=>M.get('prog_'+c.id,0)>=30&&M.get('prog_'+c.id,0)<70);
+  const ok=CHAPTERS.filter(c=>M.get('prog_'+c.id,0)>=70);
+  const elU=document.getElementById('rev-urgent');
+  const elC=document.getElementById('rev-consolid');
+  const elO=document.getElementById('rev-ok');
+  if(elU)elU.innerHTML=urgent.map(c=>'<div class="card" style="cursor:pointer" onclick="go(\'cours\');setTimeout(()=>openCours('+c.id+'),50)"><span class="badge bi">'+c.short+'</span><div style="font-size:12px;margin-top:5px;color:var(--txt2)">'+c.title.substring(0,50)+'</div></div>').join('')||'<div style="color:var(--txt3);font-size:12px">Aucun chapitre urgent 🎉</div>';
+  if(elC)elC.innerHTML=consolid.map(c=>'<div class="card" style="cursor:pointer" onclick="go(\'cours\');setTimeout(()=>openCours('+c.id+'),50)"><span class="badge btf">'+c.short+'</span><div style="font-size:12px;margin-top:5px;color:var(--txt2)">'+c.title.substring(0,50)+'</div></div>').join('')||'<div style="color:var(--txt3);font-size:12px">Aucun chapitre en consolidation</div>';
+  if(elO)elO.innerHTML=ok.length+'/'+(CHAPTERS.length)+' chapitres maîtrisés';
+}
+
 </script>
 </body>
 </html>
