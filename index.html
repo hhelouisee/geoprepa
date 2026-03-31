@@ -3152,6 +3152,7 @@ function treeToggle(storageKey, nodeId){
 // v887596
 
 function renameCopy(i){
+  i=parseInt(i);
   const copies=M.get('copies',[]);
   if(i<0||i>=copies.length)return;
   const name=prompt('Nouveau nom :',copies[i].title);
