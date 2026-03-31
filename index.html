@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///Users/huyuan/Downloads/geoprepa_v5_FIXED_7.html -->
+<!-- saved from url=(0055)file:///Users/huyuan/Downloads/geoprepa_v5_FIXED_2.html -->
 <html lang="fr" data-theme="light" data-font="geist"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GéoPrepa BCE</title>
-<link href="./Geoprepa v5 fixed_files/css2" rel="stylesheet">
-<script src="./Geoprepa v5 fixed_files/chart.umd.min.js"></script>
+<link href="./geoprepa v5 FIXED_files/css2" rel="stylesheet">
+<script src="./geoprepa v5 FIXED_files/chart.umd.min.js"></script>
 <style>
 /* ═══════════ FONT SYSTEM ═══════════ */
 [data-font="geist"]   { --ff: 'Geist', sans-serif;      --ffd: 'Lora', serif; }
@@ -388,7 +388,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 </head>
 <body>
 <!-- ████ AUTH OVERLAY ████ -->
-<div id="auth-overlay" style="position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:var(--ff)">
+<div id="auth-overlay" style="position: fixed; inset: 0px; background: var(--bg); z-index: 9999; display: none; align-items: center; justify-content: center; font-family: var(--ff);">
   <div style="width:100%;max-width:380px;padding:20px">
     <div style="text-align:center;margin-bottom:28px">
       <div style="width:44px;height:44px;background:var(--acc);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--ffd);font-style:italic;font-size:20px;color:#fff;font-weight:700;margin:0 auto 10px">G</div>
@@ -419,7 +419,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 </div>
 
-<div class="app" id="main-app" style="display:none">
+<div class="app" id="main-app" style="display: flex;">
 
 <!-- ████ SIDEBAR ████ -->
 <aside class="sb" id="sb">
@@ -1284,6 +1284,96 @@ const ANNALES=[
   {school:"HEC 2021",title:"Le retour de la puissance militaire",prio:"tres-frequent",tip:"Ukraine 2022 = hard power revival. Kagan (Mars vs V\u00e9nus), OTAN 2% PIB."},
   {school:"ESSEC 2021",title:"Les ressources naturelles, mal\u00e9diction ou atout ?",prio:"tres-frequent",tip:"Paradoxe de l'abondance (Sachs & Warner). Contre-ex : Norv\u00e8ge, Botswana."},
 ];
+
+// ══════════════════════════════════════════════════════
+// AUTH SYSTEM
+// ══════════════════════════════════════════════════════
+let authMode='login';
+let currentUser=null;
+
+function switchAuthTab(mode){
+  authMode=mode;
+  const isLogin=mode==='login';
+  const tl=document.getElementById('tab-login');
+  const ts=document.getElementById('tab-signup');
+  if(tl){tl.style.background=isLogin?'var(--acc)':'var(--surf)';tl.style.color=isLogin?'#fff':'var(--txt3)';}
+  if(ts){ts.style.background=!isLogin?'var(--acc)':'var(--surf)';ts.style.color=!isLogin?'#fff':'var(--txt3)';}
+  const btn=document.getElementById('auth-btn');
+  if(btn)btn.textContent=isLogin?'Se connecter':'Créer mon compte';
+  const msg=document.getElementById('auth-msg');
+  if(msg)msg.textContent='';
+}
+
+async function authSubmit(){
+  const email=document.getElementById('auth-email')?.value.trim();
+  const pwd=document.getElementById('auth-pwd')?.value;
+  const msg=document.getElementById('auth-msg');
+  const btn=document.getElementById('auth-btn');
+  if(!email||!pwd){if(msg)msg.textContent='Remplis les deux champs.';return;}
+  if(pwd.length<6){if(msg)msg.textContent='Mot de passe trop court (min. 6 caractères).';return;}
+  const SUPA_URL=(typeof process!=='undefined'&&process.env?.SUPABASE_URL)||window.__SUPA_URL__||'';
+  const SUPA_KEY=(typeof process!=='undefined'&&process.env?.SUPABASE_ANON_KEY)||window.__SUPA_KEY__||'';
+  if(!SUPA_URL||!SUPA_KEY){skipAuth();return;}
+  if(btn){btn.textContent='...';btn.disabled=true;}
+  const endpoint=authMode==='login'?SUPA_URL+'/auth/v1/token?grant_type=password':SUPA_URL+'/auth/v1/signup';
+  try{
+    const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPA_KEY},body:JSON.stringify({email,password:pwd})});
+    const data=await res.json();
+    if(data.error||data.error_description||data.msg){
+      const errMsg=data.error_description||data.msg||data.error||'Erreur';
+      if(msg){
+        if(errMsg.includes('Invalid login'))msg.textContent='Email ou mot de passe incorrect.';
+        else if(errMsg.includes('already registered'))msg.textContent='Email déjà utilisé.';
+        else if(errMsg.includes('Email not confirmed'))msg.textContent='Vérifie ton email pour confirmer.';
+        else msg.textContent=errMsg;
+      }
+      if(btn){btn.textContent=authMode==='login'?'Se connecter':'Créer mon compte';btn.disabled=false;}
+      return;
+    }
+    if(authMode==='signup'&&!data.access_token){
+      if(msg){msg.style.color='var(--grn)';msg.textContent='Compte créé ! Vérifie ton email.';}
+      switchAuthTab('login');if(btn)btn.disabled=false;return;
+    }
+    if(data.access_token){
+      localStorage.setItem('geo_auth_token',data.access_token);
+      localStorage.setItem('geo_user_id',data.user.id);
+      localStorage.setItem('geo_user_email',data.user.email);
+      currentUser=data.user;
+      showApp();
+    }
+  }catch(e){
+    if(msg)msg.textContent='Erreur réseau.';
+    if(btn){btn.textContent=authMode==='login'?'Se connecter':'Créer mon compte';btn.disabled=false;}
+  }
+}
+
+function skipAuth(){
+  localStorage.setItem('geo_skip_auth','1');
+  showApp();
+}
+
+function showApp(){
+  const authOv=document.getElementById('auth-overlay');
+  const mainApp=document.getElementById('main-app');
+  if(authOv)authOv.style.display='none';
+  if(mainApp)mainApp.style.display='flex';
+  updateCd();renderObj();initDash();loadFromSupabase();
+}
+
+function logout(){
+  localStorage.removeItem('geo_auth_token');
+  localStorage.removeItem('geo_user_email');
+  localStorage.removeItem('geo_skip_auth');
+  location.reload();
+}
+
+// Check auth on load
+(function(){
+  const token=localStorage.getItem('geo_auth_token');
+  const skip=localStorage.getItem('geo_skip_auth');
+  if(token||skip){showApp();}
+})();
+
 </script>
 
 <script>
@@ -2161,41 +2251,38 @@ function initCopies(){
   const ctx=document.getElementById('perf-chart');
   if(copChart)copChart.destroy();
   copChart=new Chart(ctx,{type:'radar',data:{labels:CL,datasets:copies.slice(-3).map((c,i)=>({label:c.date,data:CK.map(k=>c.c[k]),borderColor:i===0?'var(--red)':i===1?'var(--gold)':'var(--grn)',backgroundColor:i===0?'rgba(220,38,38,.05)':i===1?'rgba(202,138,4,.05)':'rgba(22,163,74,.05)',tension:.3,fill:true,pointRadius:3}))},options:{responsive:true,scales:{r:{min:0,max:20,ticks:{stepSize:5,font:{size:8}},pointLabels:{font:{size:8}}}},plugins:{legend:{labels:{font:{size:9},boxWidth:8}}}}});
-  document.getElementById('copies-list').innerHTML=copies.map((c,ci)=>`
-    <div class="card" style="position:relative">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;gap:10px">
-        <div style="flex:1">
-          <div style="display:flex;align-items:center;gap:6px">
-            <div id="copy-title-${ci}" style="font-size:14px;font-weight:700;color:var(--txt)">${c.title}</div>
-            <button onclick="renameCopy(${ci})" style="background:none;border:none;cursor:pointer;color:var(--txt4);font-size:11px;padding:2px 5px;border-radius:4px" title="Renommer">✏️</button>
-          </div>
-          <div style="display:flex;gap:6px;align-items:center;margin-top:2px">
-            <div style="font-size:10px;color:var(--txt3)">${c.date}</div>
-            <select onchange="moveCopyToFolder(${ci},this.value)" style="font-size:10px;background:var(--surf2);border:1px solid var(--brd);border-radius:4px;padding:1px 4px;color:var(--txt2);cursor:pointer">
-              <option value="" ${!c.folder?'selected':''}>📁 Sans dossier</option>
-              <option value="bizuth" ${c.folder==='bizuth'?'selected':''}>🔴 Bizuth</option>
-              <option value="carre" ${c.folder==='carre'?'selected':''}>🟣 Carré</option>
-            </select>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px">
-          ${c.score!==null&&c.score!==undefined?`<div style="background:${c.score>=15?'var(--grn)':c.score>=13?'var(--gold)':'var(--red)'};color:#fff;padding:3px 9px;border-radius:13px;font-size:13px;font-weight:700">${c.score}/20</div>`:'<div style="color:var(--txt4);font-size:12px">—/20</div>'}
-          <button onclick="deleteCopy(${ci})" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:16px;padding:2px 6px" title="Supprimer">🗑</button>
-        </div>
-      </div>
-      ${c.imageData?`<img src="${c.imageData}" style="width:100%;border-radius:8px;margin-bottom:10px;cursor:pointer" onclick="viewCopyImage(${ci})" title="Voir la copie">`:``}
-      ${c.score!==null&&c.score!==undefined?`
-        <div style="margin-bottom:10px">
-          <div class="crit-g">
-            ${CK.map((k,i)=>`<div class="crit"><div class="crit-n">${CL[i]}</div><div class="crit-v" style="color:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'}">${c.c[k]||0}</div><div class="crit-pb"><div style="height:100%;border-radius:1px;background:${c.c[k]>=15?'var(--grn)':c.c[k]>=12?'var(--gold)':'var(--red)'};width:${(c.c[k]||0)/20*100}%"></div></div></div>`).join('')}
-          </div>
-          <div style="padding:10px;background:var(--surf2);border-radius:6px;margin-top:8px">
-            ${c.points_forts?.length?`<div style="font-size:11px;color:var(--grn);margin-bottom:4px">✓ ${c.points_forts.join(' · ')}</div>`:''}
-            ${c.points_ameliorer?.length?`<div style="font-size:11px;color:var(--org);margin-bottom:4px">⚠ ${c.points_ameliorer.join(' · ')}</div>`:''}
-            ${c.conseil?`<div style="font-size:11px;color:var(--txt2);font-style:italic">${c.conseil}</div>`:''}
-          </div>
-        </div>`:`<div style="font-size:11px;color:var(--txt4);margin:8px 0;font-style:italic">Analyse en attente…</div>`}
-    </div>`).join('');
+  document.getElementById('copies-list').innerHTML=copies.length?copies.map((c,ci)=>{
+  const scoreColor=c.score>=15?'var(--grn)':c.score>=13?'var(--gold)':'var(--red)';
+  const scoreHtml=c.score!=null?'<span style="background:'+scoreColor+';color:#fff;padding:3px 9px;border-radius:13px;font-size:13px;font-weight:700">'+c.score+'/20</span>':'<span style="color:var(--txt4)">—/20</span>';
+  const imgHtml=c.imageData?'<img src="'+c.imageData+'" style="width:100%;border-radius:8px;margin-bottom:10px;cursor:pointer" onclick="viewCopyImage('+ci+')" title="Voir">':'';
+  const folderOpts='<option value=""'+((!c.folder)?'selected':'')+'>📁 Sans dossier</option><option value="bizuth"'+((c.folder==='bizuth')?'selected':'')+'>🔴 Bizuth</option><option value="carre"'+((c.folder==='carre')?'selected':'')+'>🟣 Carré</option>';
+  const analysisHtml=c.score!=null?
+    '<div style="padding:10px;background:var(--surf2);border-radius:6px;margin-top:8px">'+
+      (c.points_forts?.length?'<div style="font-size:11px;color:var(--grn);margin-bottom:4px">✓ '+(c.points_forts||[]).join(' · ')+'</div>':'')+
+      (c.points_ameliorer?.length?'<div style="font-size:11px;color:var(--org);margin-bottom:4px">⚠ '+(c.points_ameliorer||[]).join(' · ')+'</div>':'')+
+      (c.conseil?'<div style="font-size:11px;color:var(--txt2);font-style:italic">'+c.conseil+'</div>':'')+
+    '</div>':
+    '<div style="font-size:11px;color:var(--txt4);margin:8px 0;font-style:italic">Analyse en attente…</div>';
+  return '<div class="card" style="position:relative">'+
+    '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px;gap:10px">'+
+      '<div style="flex:1">'+
+        '<div style="display:flex;align-items:center;gap:6px">'+
+          '<div style="font-size:14px;font-weight:700;color:var(--txt)">'+c.title+'</div>'+
+          '<button onclick="renameCopy('+ci+')" style="background:none;border:none;cursor:pointer;color:var(--txt4);font-size:11px;padding:2px 5px;border-radius:4px" title="Renommer">✏️</button>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;align-items:center;margin-top:2px">'+
+          '<div style="font-size:10px;color:var(--txt3)">'+c.date+'</div>'+
+          '<select onchange="moveCopyToFolder('+ci+',this.value)" style="font-size:10px;background:var(--surf2);border:1px solid var(--brd);border-radius:4px;padding:1px 4px;color:var(--txt2)">'+folderOpts+'</select>'+
+        '</div>'+
+      '</div>'+
+      '<div style="display:flex;align-items:center;gap:6px">'+
+        scoreHtml+
+        '<button onclick="deleteCopy('+ci+')" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:16px;padding:2px 6px" title="Supprimer">🗑</button>'+
+      '</div>'+
+    '</div>'+
+    imgHtml+analysisHtml+
+  '</div>';
+}).join(''):'<div style="color:var(--txt3);font-size:13px;text-align:center;padding:20px">Aucune copie. Dépose une image JPG pour commencer.</div>';
   const nbEl=document.getElementById('nb-copies');if(nbEl)nbEl.textContent=copies.length;
 }
 function deleteCopy(i){
