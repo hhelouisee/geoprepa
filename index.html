@@ -691,6 +691,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="btn btn-g btn-sm" onclick="filterFrise('p')">☮️ Paix</button>
       <button class="btn btn-g btn-sm" onclick="filterFrise('c')">💥 Crises</button>
       <button class="btn btn-g btn-sm" onclick="filterFrise('o')">🏛️ Orgs</button>
+            <button class="btn btn-g btn-sm" onclick="filterFrise('a')">📌 Autres</button>
     </div>
     <div class="card" style="margin-bottom:11px">
       <div class="frise-wrap"><div class="frise-line"></div><div id="frise-items"></div></div>
@@ -1980,7 +1981,7 @@ function renderFrise(filter='all'){
   // Combine built-in FRISE + custom
   let items=[...(typeof FRISE!=='undefined'?FRISE:[]),...M.get('custom_frise',[])];items.sort((a,b)=>{const ya=parseInt((a.date||'').match(/\d{4}/)?.[0])||0,yb=parseInt((b.date||'').match(/\d{4}/)?.[0])||0;return ya-yb;});
   if(filter==='must')items=items.filter(f=>f.must);
-  else if(filter!=='all')items=items.filter(f=>f.type===filter);
+  else if(filter==='a')items=items.filter(f=>!['w','p','c','o'].includes(f.type));else if(filter!=='all')items=items.filter(f=>f.type===filter);
   if(!items.length){el.innerHTML='<div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune entrée pour ce filtre</div>';return;}
   el.innerHTML=items.map((f,fi)=>`
     <div class="fi">
