@@ -1978,7 +1978,7 @@ function renderFrise(filter='all'){
   const el=document.getElementById('frise-items');
   if(!el)return;
   // Combine built-in FRISE + custom
-  let items=[...(typeof FRISE!=='undefined'?FRISE:[]),...M.get('custom_frise',[])];items.sort((a,b)=>{const ya=parseInt(a.date)||0,yb=parseInt(b.date)||0;return ya-yb;});
+  let items=[...(typeof FRISE!=='undefined'?FRISE:[]),...M.get('custom_frise',[])];items.sort((a,b)=>{const ya=parseInt((a.date||'').match(/\d{4}/)?.[0])||0,yb=parseInt((b.date||'').match(/\d{4}/)?.[0])||0;return ya-yb;});
   if(filter==='must')items=items.filter(f=>f.must);
   else if(filter!=='all')items=items.filter(f=>f.type===filter);
   if(!items.length){el.innerHTML='<div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune entrée pour ce filtre</div>';return;}
