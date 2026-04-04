@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0041)file:///Users/huyuan/Downloads/index.html -->
+<!-- saved from url=(0043)file:///Users/huyuan/Downloads/index_2.html -->
 <html lang="fr" data-theme="light" data-font="dm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -680,7 +680,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="ng">
       <div class="ng-hd" onclick="togNG(&#39;suivi&#39;)"><span class="ng-lbl">Suivi</span><span class="ng-arr" id="na-suivi">▾</span></div>
       <div class="ng-items" id="ni-suivi" style="max-height:500px">
-        <div class="ni" id="ni-copies" onclick="go(&#39;copies&#39;)"><span class="ni-ic">📊</span><span class="ni-lb">Mes copies</span><span class="nbadge nb-g" id="nb-copies">1</span></div>
+        <div class="ni" id="ni-copies" onclick="go(&#39;copies&#39;)"><span class="ni-ic">📊</span><span class="ni-lb">Mes copies</span><span class="nbadge nb-g" id="nb-copies">0</span></div>
         <div class="ni" id="ni-revision" onclick="go(&#39;revision&#39;)"><span class="ni-ic">🔁</span><span class="ni-lb">Révisions urgentes</span><span class="nbadge nb-r" id="nb-rev">7</span></div>
         <div class="ni" id="ni-screentime" onclick="go(&#39;screentime&#39;)"><span class="ni-ic">⏱</span><span class="ni-lb">Temps de révision</span></div>
         <div class="ni" id="ni-history" onclick="go(&#39;history&#39;)"><span class="ni-ic">🕐</span><span class="ni-lb">Historique</span></div>
@@ -795,7 +795,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="stat-row">
       <div class="sc"><div class="sc-stripe" style="background:var(--acc)"></div><div class="sl">Chapitres vus</div><div class="sv" style="color:var(--acc)" id="st-chap">11</div><div class="ss">sur 30</div></div>
       <div class="sc"><div class="sc-stripe" style="background:var(--grn)"></div><div class="sl">Flashcards</div><div class="sv" style="color:var(--grn)" id="st-flash">0</div><div class="ss">validées</div></div>
-      <div class="sc"><div class="sc-stripe" style="background:var(--gold)"></div><div class="sl">Score moyen</div><div class="sv" style="color:var(--gold)" id="st-score">0.0</div><div class="ss">/20 copies</div></div>
+      <div class="sc"><div class="sc-stripe" style="background:var(--gold)"></div><div class="sl">Score moyen</div><div class="sv" style="color:var(--gold)" id="st-score">—</div><div class="ss">/20 copies</div></div>
       <div class="sc"><div class="sc-stripe" style="background:var(--red)"></div><div class="sl">Urgent</div><div class="sv" style="color:var(--red)" id="st-todo">7</div><div class="ss">chapitres</div></div>
     </div>
     <div class="g2" style="margin-bottom:13px">
@@ -808,29 +808,32 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       </div>
       <div class="card">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:9px">Scores copies</div>
-        <canvas id="dash-chart" height="396" style="display: block; box-sizing: border-box; height: 198.3px; width: 457.5px;" width="915"></canvas>
+        <canvas id="dash-chart" height="130"></canvas>
       </div>
     </div>
     <div class="card">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:11px">Accès rapides</div>
-      <div class="g4" id="dash-actions"><div onclick="go(&#39;cours&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📖</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Cours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">30 chapitres</div></div><div onclick="go(&#39;fiches&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📋</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Fiches IA</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Synthèses</div></div><div onclick="go(&#39;flash&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🃏</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Flashcards</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">62 cartes</div></div><div onclick="go(&#39;training&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">✍️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Entraînement</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Correction BCE</div></div><div onclick="go(&#39;sim&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🚨</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Concours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Mode réel</div></div><div onclick="go(&#39;copies&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📊</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Copies</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">1 analysées</div></div><div onclick="go(&#39;map&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🗺️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Carte &amp; Globe</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">3D dispo</div></div><div onclick="go(&#39;news&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📰</div><div style="font-size:11px;font-weight:700;color:var(--txt)">News géopo</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Actualité IA</div></div></div>
+      <div class="g4" id="dash-actions"><div onclick="go(&#39;cours&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📖</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Cours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">30 chapitres</div></div><div onclick="go(&#39;fiches&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📋</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Fiches IA</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Synthèses</div></div><div onclick="go(&#39;flash&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🃏</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Flashcards</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">62 cartes</div></div><div onclick="go(&#39;training&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">✍️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Entraînement</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Correction BCE</div></div><div onclick="go(&#39;sim&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🚨</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Concours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Mode réel</div></div><div onclick="go(&#39;copies&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📊</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Copies</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">0 analysées</div></div><div onclick="go(&#39;map&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🗺️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Carte &amp; Globe</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">3D dispo</div></div><div onclick="go(&#39;news&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📰</div><div style="font-size:11px;font-weight:700;color:var(--txt)">News géopo</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Actualité IA</div></div></div>
     </div>
   </div>
 
   <!-- ════ COURS ════ -->
   <div class="pg" id="pg-cours">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
-      <div class="page-t">Cours complet</div>
-      <button class="btn btn-p btn-sm" onclick="document.getElementById(&#39;pdf-upload-inp&#39;).click()">📎 Ajouter un PDF</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="page-t" style="margin-bottom:0">Cours complet</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-g btn-sm" id="cours-new-folder-btn" onclick="pdfCreateFolder()" style="display:none">📁 Dossier</button>
+        <button class="btn btn-g btn-sm" id="cours-new-subfolder-btn" onclick="pdfCreateSubFolder()" style="display:none">📁 Sous-dossier</button>
+        <button class="btn btn-p btn-sm" onclick="document.getElementById(&#39;pdf-upload-inp&#39;).click()" id="cours-add-pdf-btn">📎 Ajouter un PDF</button>
+      </div>
     </div>
-    <div class="page-s">Tes PDFs de cours · Renommables · Supprimables</div>
     <input type="file" id="pdf-upload-inp" accept=".pdf" style="display:none" multiple="" onchange="uploadPDFs(this.files)">
-    <div id="pdf-dropzone" onclick="document.getElementById(&#39;pdf-upload-inp&#39;).click()" ondragover="event.preventDefault();this.style.borderColor=&#39;var(--acc)&#39;" ondragleave="this.style.borderColor=&#39;var(--brd2)&#39;" ondrop="event.preventDefault();this.style.borderColor=&#39;var(--brd2)&#39;;uploadPDFs(event.dataTransfer.files)" style="border:2px dashed var(--brd2);border-radius:var(--rl);padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surf);margin-bottom:18px">
-      <div style="font-size:28px;margin-bottom:7px">📄</div>
-      <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px">Déposer des PDFs ici</div>
-      <div style="font-size:11px;color:var(--txt3)">ou cliquer pour sélectionner · Plusieurs fichiers acceptés</div>
+    <!-- Breadcrumb -->
+    <div id="pdf-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)">
+      <span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="pdfGoRoot()">📂 Cours</span>
     </div>
-    <div id="pdf-list"></div>
+    <!-- Finder grid -->
+    <div id="pdf-finder" style="min-height:300px"></div>
   </div>
 
   <!-- ════ FICHES ════ -->
@@ -3749,172 +3752,212 @@ function initCours(){
 
 function uploadPDFs(files){
   if(!files||!files.length) return;
-  const pdfs = M.get('my_pdfs',[]);
+  const data = pdfGetData();
   Array.from(files).forEach(f => {
-    if(!f.name.toLowerCase().endsWith('.pdf')){showToast('⚠️ Seulement les PDF sont acceptés');return;}
+    if(!f.name.toLowerCase().endsWith('.pdf')){showToast('⚠️ Seulement les PDF');return;}
     const reader = new FileReader();
     reader.onload = e => {
       try {
-        pdfs.push({
+        data.files[pdfCurFolder||'root'] = data.files[pdfCurFolder||'root']||[];
+        data.files[pdfCurFolder||'root'].unshift({
+          id:'pdf_'+Date.now()+'_'+Math.random().toString(36).slice(2),
           name: f.name.replace(/\.pdf$/i,''),
           data: e.target.result,
           date: new Date().toLocaleDateString('fr-FR'),
-          size: Math.round(f.size/1024)+'kb',
-          folder: null
+          size: Math.round(f.size/1024)+'kb'
         });
-        M.set('my_pdfs', pdfs);
-        renderPDFList();
-        showToast('✅ PDF ajouté — '+ f.name.replace(/\.pdf$/i,''));
-      } catch(err) {
-        showToast('⚠️ PDF trop lourd pour le stockage local (max ~4MB)');
-      }
+        pdfSaveData(data);
+        renderPDFFinder();
+        showToast('✅ '+f.name.replace(/\.pdf$/i,''));
+      } catch(err){ showToast('⚠️ PDF trop lourd (max ~4MB)'); }
     };
-    reader.onerror = () => showToast('⚠️ Erreur lecture du fichier');
+    reader.onerror = ()=>showToast('⚠️ Erreur lecture');
     reader.readAsDataURL(f);
   });
-  const inp = document.getElementById('pdf-upload-inp');
-  if(inp) inp.value='';
+  const inp=document.getElementById('pdf-upload-inp');if(inp)inp.value='';
 }
 
-function renderPDFList(){
-  const pdfs = M.get('my_pdfs',[]);
-  const folders = M.get('pdf_folders', []);
-  const el = document.getElementById('pdf-list');
+// ── PDF FINDER DATA ───────────────────────────────────
+let pdfCurFolder = null;
+let pdfFolderStack = [];
+
+function pdfGetData(){
+  return M.get('pdf_finder_data',{folders:[],files:{}});
+}
+function pdfSaveData(d){ M.set('pdf_finder_data',d); }
+
+function pdfGoRoot(){
+  pdfCurFolder=null; pdfFolderStack=[];
+  renderPDFFinder(); pdfRenderBreadcrumb();
+  // Show/hide buttons
+  document.getElementById('cours-new-folder-btn').style.display='inline-flex';
+  document.getElementById('cours-new-subfolder-btn').style.display='none';
+}
+
+function pdfOpenFolder(fid, fname){
+  pdfFolderStack.push({id:fid,name:fname});
+  pdfCurFolder=fid;
+  renderPDFFinder(); pdfRenderBreadcrumb();
+  document.getElementById('cours-new-folder-btn').style.display='none';
+  document.getElementById('cours-new-subfolder-btn').style.display='inline-flex';
+}
+
+function pdfGoBack(){
+  if(!pdfFolderStack.length){ pdfGoRoot(); return; }
+  pdfFolderStack.pop();
+  const prev=pdfFolderStack[pdfFolderStack.length-1];
+  pdfCurFolder=prev?prev.id:null;
+  renderPDFFinder(); pdfRenderBreadcrumb();
+  if(!pdfCurFolder){
+    document.getElementById('cours-new-folder-btn').style.display='inline-flex';
+    document.getElementById('cours-new-subfolder-btn').style.display='none';
+  }
+}
+
+function pdfGoToLevel(i){
+  if(i<0){ pdfGoRoot(); return; }
+  const step=pdfFolderStack[i];
+  pdfFolderStack=pdfFolderStack.slice(0,i+1);
+  pdfCurFolder=step.id;
+  renderPDFFinder(); pdfRenderBreadcrumb();
+}
+
+function pdfRenderBreadcrumb(){
+  const el=document.getElementById('pdf-breadcrumb');
   if(!el) return;
+  let html='<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="pdfGoRoot()">📂 Cours</span>';
+  pdfFolderStack.forEach((step,i)=>{
+    html+='<span style="color:var(--txt3)"> › </span>';
+    if(i<pdfFolderStack.length-1){
+      html+=`<span style="cursor:pointer;color:var(--acc)" onclick="pdfGoToLevel(${i})">${step.name}</span>`;
+    } else {
+      html+=`<span style="font-weight:600;color:var(--txt)">${step.name}</span>`;
+    }
+  });
+  el.innerHTML=html;
+}
 
-  // Build folder UI
-  let html = '';
+function renderPDFFinder(){
+  const el=document.getElementById('pdf-finder');
+  if(!el) return;
+  const d=pdfGetData();
+  const cur=pdfCurFolder;
+  let html='<div class="finder-toolbar">';
+  if(cur){
+    html+='<button class="finder-back-btn" onclick="pdfGoBack()">‹ Retour</button>';
+    const fn=d.folders.find(f=>f.id===cur)?.name||'';
+    html+=`<span style="font-size:13px;font-weight:700;color:var(--txt)">${fn}</span>`;
+  }
+  html+='</div>';
 
-  // "Créer un dossier" bar
-  html += `<div style="display:flex;gap:7px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
-    <button class="btn btn-g btn-sm" onclick="pdfCreateFolder()">📁 Nouveau dossier</button>
-    <span style="font-size:11px;color:var(--txt3)">${pdfs.length} PDF · ${folders.length} dossier${folders.length>1?'s':''}</span>
+  // Drop zone (always visible)
+  html+=`<div ondragover="event.preventDefault();this.style.borderColor='var(--acc)'"
+    ondragleave="this.style.borderColor='var(--brd2)'"
+    ondrop="event.preventDefault();this.style.borderColor='var(--brd2)';uploadPDFs(event.dataTransfer.files)"
+    onclick="document.getElementById('pdf-upload-inp').click()"
+    style="border:2px dashed var(--brd2);border-radius:var(--rl);padding:14px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:14px">
+    <span style="font-size:13px;color:var(--txt3)">📎 Déposer un PDF ici ou cliquer</span>
   </div>`;
 
-  if(!pdfs.length && !folders.length){
-    html += '<div style="text-align:center;padding:30px;color:var(--txt3);font-size:13px">Aucun PDF — glisse ou clique pour en ajouter</div>';
-    el.innerHTML = html;
-    return;
-  }
+  html+='<div class="finder-grid">';
 
-  // Folders
-  folders.forEach((folder, fi) => {
-    const folderPdfs = pdfs.filter(p=>p.folder===folder.id);
-    html += `<div style="margin-bottom:10px">
-      <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;cursor:pointer"
-           onclick="pdfToggleFolder('${folder.id}')">
-        <div class="finder-folder" style="width:28px;height:24px;flex-shrink:0">
-          <div class="finder-folder-tab" style="width:12px;height:5px"></div>
-          <div class="finder-folder-body" style="width:28px;height:20px;border-radius:2px 4px 4px 4px"></div>
-        </div>
-        <span style="font-size:13px;font-weight:600;color:var(--txt);flex:1">${folder.name}</span>
-        <span style="font-size:11px;color:var(--txt3)">${folderPdfs.length} PDF</span>
-        <button onclick="event.stopPropagation();pdfRenameFolder(${fi})" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--txt3);padding:2px 5px">✏️</button>
-        <button onclick="event.stopPropagation();pdfDeleteFolder(${fi})" style="background:none;border:none;cursor:pointer;font-size:12px;color:var(--red);padding:2px 5px">🗑</button>
-      </div>
-      <div id="pdf-folder-${folder.id}" style="display:${folder.open?'block':'none'};padding-left:16px;border-left:2px solid var(--folder-pink);margin-left:14px">
-        ${folderPdfs.length?folderPdfs.map((p,_)=>{const i=pdfs.indexOf(p);return pdfItemHTML(p,i);}).join('')
-        :'<div style="padding:10px 12px;font-size:12px;color:var(--txt3)">Glisse un PDF ici pour l\'ajouter à ce dossier</div>'}
-      </div>
-    </div>`;
-  });
-
-  // PDFs without folder
-  const unfiled = pdfs.filter(p=>!p.folder);
-  if(unfiled.length){
-    if(folders.length) html += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin:14px 0 8px">Non classés</div>';
-    unfiled.forEach(p=>{ html += pdfItemHTML(p, pdfs.indexOf(p)); });
-  }
-
-  el.innerHTML = html;
-
-  // Add drag/drop to folder zones
-  el.querySelectorAll('[id^="pdf-folder-"]').forEach(zone => {
-    const fid = zone.id.replace('pdf-folder-','');
-    zone.addEventListener('dragover', e=>{ e.preventDefault(); zone.style.background='var(--folder-pink-light)'; });
-    zone.addEventListener('dragleave', ()=>{ zone.style.background=''; });
-    zone.addEventListener('drop', e=>{
-      e.preventDefault(); zone.style.background='';
-      const pdfIdx = parseInt(e.dataTransfer.getData('pdf-idx'));
-      if(isNaN(pdfIdx)) return;
-      const pdfs2 = M.get('my_pdfs',[]);
-      pdfs2[pdfIdx].folder = fid;
-      M.set('my_pdfs', pdfs2);
-      renderPDFList();
-      showToast('✅ PDF rangé dans le dossier');
+  if(!cur){
+    // Root — show top-level folders
+    d.folders.filter(f=>!f.parent).forEach(f=>{
+      const fcount=(d.files[f.id]||[]).length;
+      const scount=d.folders.filter(sf=>sf.parent===f.id).length;
+      const info=[fcount?fcount+' PDF':'',scount?scount+' doss.':''].filter(Boolean).join(' · ');
+      html+=`<div class="finder-item" onclick="pdfOpenFolder('${f.id}','${f.name}')" oncontextmenu="pdfFolderCtx(event,'${f.id}','${f.name}')">
+        <div class="finder-folder-icon">${folderSVG()}</div>
+        <div class="finder-label">${f.name}${info?'<br><span style=\\"font-size:9px;color:var(--txt3)\\">'+info+'</span>':''}</div>
+      </div>`;
     });
+    // Root PDFs
+    (d.files['root']||[]).forEach(p=>{
+      html+=pdfFileItemHTML(p,'root');
+    });
+  } else {
+    // Inside folder — sub-folders first, then PDFs
+    d.folders.filter(f=>f.parent===cur).forEach(f=>{
+      const fcount=(d.files[f.id]||[]).length;
+      html+=`<div class="finder-item" onclick="pdfOpenFolder('${f.id}','${f.name}')" oncontextmenu="pdfFolderCtx(event,'${f.id}','${f.name}')">
+        <div class="finder-folder-icon">${folderSVG()}</div>
+        <div class="finder-label">${f.name}${fcount?'<br><span style=\\"font-size:9px;color:var(--txt3)\\">'+fcount+' PDF</span>':''}</div>
+      </div>`;
+    });
+    (d.files[cur]||[]).forEach(p=>{
+      html+=pdfFileItemHTML(p,cur);
+    });
+    if(!d.folders.some(f=>f.parent===cur)&&!(d.files[cur]||[]).length){
+      html+='<div style="color:var(--txt3);font-size:13px;padding:20px;grid-column:1/-1">Dossier vide</div>';
+    }
+  }
+
+  html+='</div>';
+  el.innerHTML=html;
+
+  // Drag/drop: files draggable, folders as drop targets
+  el.querySelectorAll('.finder-item').forEach(item=>{
+    const isFolder=!!item.querySelector('.finder-folder-icon');
+    const oc=item.getAttribute('onclick')||'';
+    if(!isFolder&&oc.includes('pdfOpenFile')){
+      const m=oc.match(/pdfOpenFile\('([^']+)','([^']+)'\)/);
+      if(!m) return;
+      const [,fid,pid]=m;
+      item.setAttribute('draggable','true');
+      item.addEventListener('dragstart',e=>{
+        e.dataTransfer.setData('pdf-id',pid);
+        e.dataTransfer.setData('pdf-src-folder',fid);
+        item.classList.add('dragging');
+      });
+      item.addEventListener('dragend',()=>item.classList.remove('dragging'));
+      // Reorder
+      item.addEventListener('dragover',e=>{
+        if(e.dataTransfer.types.includes('pdf-id')){ e.preventDefault(); item.style.outline='2px dashed var(--folder-pink-dark)'; }
+      });
+      item.addEventListener('dragleave',()=>item.style.outline='');
+      item.addEventListener('drop',e=>{
+        item.style.outline='';
+        const srcId=e.dataTransfer.getData('pdf-id');
+        const srcFolder=e.dataTransfer.getData('pdf-src-folder');
+        const tgtId=pid;
+        if(srcId===tgtId||srcFolder!==fid) return;
+        e.preventDefault(); e.stopPropagation();
+        pdfReorder(fid,srcId,tgtId);
+      });
+    }
+    if(isFolder){
+      const m=oc.match(/pdfOpenFolder\('([^']+)'/);
+      if(!m) return;
+      const folderId=m[1];
+      item.addEventListener('dragover',e=>{ e.preventDefault(); item.classList.add('drag-over'); });
+      item.addEventListener('dragleave',()=>item.classList.remove('drag-over'));
+      item.addEventListener('drop',e=>{
+        e.preventDefault(); item.classList.remove('drag-over');
+        const pdfId=e.dataTransfer.getData('pdf-id');
+        const srcFolder=e.dataTransfer.getData('pdf-src-folder');
+        if(!pdfId||srcFolder===folderId) return;
+        pdfMoveFile(srcFolder,folderId,pdfId);
+      });
+    }
   });
 }
 
-function pdfItemHTML(p, i){
-  return `<div style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:12px 14px;margin-bottom:7px;display:flex;align-items:center;gap:10px"
-    draggable="true"
-    ondragstart="event.dataTransfer.setData('pdf-idx','${i}');this.style.opacity='.4'"
-    ondragend="this.style.opacity='1'">
-    <span style="font-size:22px;flex-shrink:0">📄</span>
-    <div style="flex:1;min-width:0">
-      <div style="font-size:13px;font-weight:600;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</div>
-      <div style="font-size:10px;color:var(--txt4);margin-top:2px">${p.date} · ${p.size}</div>
-    </div>
-    <div style="display:flex;gap:5px;flex-shrink:0">
-      <button class="btn btn-g btn-sm" onclick="openPDF(${i})">👁</button>
-      <button class="btn btn-g btn-sm" onclick="renamePDF(${i})">✏️</button>
-      <button class="btn btn-g btn-sm" style="color:var(--red)" onclick="deletePDF(${i})">🗑</button>
-    </div>
+function pdfFileItemHTML(p, folderId){
+  return `<div class="finder-item" onclick="pdfOpenFile('${folderId}','${p.id}')" oncontextmenu="pdfFileCtx(event,'${folderId}','${p.id}')">
+    <div class="finder-file-icon">${fileSVG()}</div>
+    <div class="finder-label">${p.name}</div>
   </div>`;
 }
 
-function pdfCreateFolder(){
-  const name = prompt('Nom du dossier :');
-  if(!name?.trim()) return;
-  const folders = M.get('pdf_folders',[]);
-  folders.push({id:'pf_'+Date.now(), name:name.trim(), open:true});
-  M.set('pdf_folders', folders);
-  renderPDFList();
-  showToast('📁 Dossier créé');
-}
-
-function pdfToggleFolder(fid){
-  const folders = M.get('pdf_folders',[]);
-  const f = folders.find(f=>f.id===fid);
-  if(f) f.open = !f.open;
-  M.set('pdf_folders', folders);
-  const zone = document.getElementById('pdf-folder-'+fid);
-  if(zone) zone.style.display = f?.open?'block':'none';
-}
-
-function pdfRenameFolder(fi){
-  const folders = M.get('pdf_folders',[]);
-  if(!folders[fi]) return;
-  const name = prompt('Nouveau nom :', folders[fi].name);
-  if(!name?.trim()) return;
-  folders[fi].name = name.trim();
-  M.set('pdf_folders', folders);
-  renderPDFList();
-}
-
-function pdfDeleteFolder(fi){
-  if(!confirm('Supprimer ce dossier ? Les PDFs seront déclassés.')) return;
-  const folders = M.get('pdf_folders',[]);
-  const fid = folders[fi]?.id;
-  folders.splice(fi,1);
-  M.set('pdf_folders', folders);
-  // Unfile PDFs
-  const pdfs = M.get('my_pdfs',[]);
-  pdfs.forEach(p=>{ if(p.folder===fid) p.folder=null; });
-  M.set('my_pdfs', pdfs);
-  renderPDFList();
-  showToast('🗑 Dossier supprimé');
-}
-
-function openPDF(i){
-  const pdfs = M.get('my_pdfs',[]);
-  const p = pdfs[i];
+function pdfOpenFile(folderId, pdfId){
+  const d=pdfGetData();
+  const p=(d.files[folderId]||[]).find(x=>x.id===pdfId);
   if(!p) return;
-  const ov = document.createElement('div');
-  ov.style.cssText = 'position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.85);display:flex;flex-direction:column';
-  ov.innerHTML = `
-    <div style="background:var(--surf);border-bottom:1px solid var(--brd);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0">
+  const ov=document.createElement('div');
+  ov.style.cssText='position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.85);display:flex;flex-direction:column';
+  ov.innerHTML=`
+    <div style="background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0">
       <button onclick="this.closest('[style*=fixed]').remove()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Retour</button>
       <div style="font-size:13px;font-weight:700;color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</div>
       <a href="${p.data}" download="${p.name}.pdf" class="btn btn-g btn-sm">⬇️ Télécharger</a>
@@ -3923,477 +3966,107 @@ function openPDF(i){
   document.body.appendChild(ov);
 }
 
-function renamePDF(i){
-  const pdfs = M.get('my_pdfs',[]);
-  if(!pdfs[i]) return;
-  const name = prompt('Nouveau nom :', pdfs[i].name);
-  if(!name||!name.trim()) return;
-  pdfs[i].name = name.trim();
-  M.set('my_pdfs', pdfs);
-  renderPDFList();
-  showToast('✅ Renommé');
-}
-
-function deletePDF(i){
-  if(!confirm('Supprimer ce PDF ?')) return;
-  const pdfs = M.get('my_pdfs',[]);
-  pdfs.splice(i,1);
-  M.set('my_pdfs', pdfs);
-  renderPDFList();
-  showToast('🗑 PDF supprimé');
-}
-
-
-// ══════════════════════════════════════════════════════
-// FICHE DÉMOGRAPHIE — FONCTIONS GLOBALES
-// (tabs, accordéons, filtres)
-// ══════════════════════════════════════════════════════
-function dfTab(btn, id) {
-  var tabs = btn.closest('.df-tabs');
-  if(tabs) tabs.querySelectorAll('.df-tab').forEach(function(t){t.classList.remove('on');});
-  btn.classList.add('on');
-  // find panels in same container
-  var container = btn.closest('.df-panel, [id^="fiche-perso-overlay"], [id^="fe-body"], .modal-box, body');
-  if(!container) container = document;
-  container.querySelectorAll('.df-panel').forEach(function(p){p.classList.remove('on');});
-  var el = document.getElementById(id);
-  if(el) el.classList.add('on');
-  dfFilter(0, null);
-}
-
-function dfAcc(hd) {
-  var bd = hd.nextElementSibling;
-  var icon = hd.querySelector('span:last-child');
-  var wrap = hd.parentElement;
-  var n = (wrap && wrap.dataset.n) || '1';
-  var isOpen = bd && bd.style.display === 'block';
-  if(bd) bd.style.display = isOpen ? 'none' : 'block';
-  if(icon) icon.textContent = isOpen ? '+' : '−';
-  hd.className = isOpen ? 'df-acc-hd' : 'df-acc-hd op' + n;
-  if(bd) bd.className = isOpen ? 'df-acc-bd' : 'df-acc-bd op' + n;
-}
-
-function dfFilter(n, btn) {
-  if(btn) {
-    var filterBar = btn.closest('.df-filter');
-    if(filterBar) filterBar.querySelectorAll('.df-fbtn').forEach(function(b){
-      b.style.background = 'var(--surf)';
-      b.style.fontWeight = '500';
-    });
-    btn.style.background = n===1 ? 'var(--red-l)' : n===2 ? 'var(--org-l)' : n===3 ? 'var(--acc-l)' : 'var(--surf)';
-    btn.style.fontWeight = '700';
-  }
-  // Only filter within the currently visible overlay or panel
-  var scope = document.getElementById('fiche-perso-overlay');
-  if(!scope || scope.style.display === 'none') scope = document;
-  scope.querySelectorAll('[data-n]').forEach(function(el){
-    if(n === 0 || parseInt(el.dataset.n) === n) {
-      el.classList.remove('df-hidden');
-    } else {
-      el.classList.add('df-hidden');
-    }
-  });
-}
-
-
-// ══════════════════════════════════════════════════════
-// FINDER SYSTEM — Fiches & Mes Cours
-// ══════════════════════════════════════════════════════
-
-// SVG icons
-function folderSVG(label=''){
-  return `<svg viewBox="0 0 62 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 10C2 7.8 3.8 6 6 6H22L27 12H56C58.2 12 60 13.8 60 16V46C60 48.2 58.2 50 56 50H6C3.8 50 2 48.2 2 46V10Z" fill="#f2c4ce"/>
-    <path d="M2 10C2 7.8 3.8 6 6 6H22L27 12H56C58.2 12 60 13.8 60 16V46C60 48.2 58.2 50 56 50H6C3.8 50 2 48.2 2 46V10Z" fill="url(#fp)" fill-opacity=".4"/>
-    <path d="M2 16H60V46C60 48.2 58.2 50 56 50H6C3.8 50 2 48.2 2 46V16Z" fill="#f7d6dd"/>
-    <path d="M2 10C2 7.8 3.8 6 6 6H22L27 12H56C58.2 12 60 13.8 60 16H2V10Z" fill="#f2c4ce"/>
-    <defs><linearGradient id="fp" x1="31" y1="6" x2="31" y2="50" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#000" stop-opacity=".05"/></linearGradient></defs>
-  </svg>`;
-}
-
-function fileSVG(){
-  return `<svg viewBox="0 0 48 58" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 2H32L46 16V54C46 56.2 44.2 58 42 58H6C3.8 58 2 56.2 2 54V6C2 3.8 3.8 2 6 2Z" fill="#fff" stroke="#ddd8d0" stroke-width="1.5"/>
-    <path d="M32 2L46 16H34C32.9 16 32 15.1 32 14V2Z" fill="#ece8e2"/>
-    <line x1="10" y1="26" x2="38" y2="26" stroke="#c4b0a0" stroke-width="1.2" stroke-linecap="round"/>
-    <line x1="10" y1="32" x2="38" y2="32" stroke="#c4b0a0" stroke-width="1.2" stroke-linecap="round"/>
-    <line x1="10" y1="38" x2="28" y2="38" stroke="#c4b0a0" stroke-width="1.2" stroke-linecap="round"/>
-  </svg>`;
-}
-
-// ── FICHES FINDER ────────────────────────────────────
-const FICHE_FIXED_FOLDERS = ['Bizuth', 'Carré'];
-let ficheCurFolder = null; // null = root
-
-function ficheGetData(){
-  return M.get('fiche_finder_data', {
-    folders: FICHE_FIXED_FOLDERS.map(n=>({id:'ff_'+n.toLowerCase(),name:n,fixed:true})),
-    files: {} // key = folder_id | 'root', value = [{id, ficheIdx}]
-  });
-}
-function ficheSaveData(d){ M.set('fiche_finder_data', d); }
-
-function ficheGoRoot(){
-  ficheCurFolder = null;
-  renderFicheFinder();
-  document.getElementById('fiche-finder-breadcrumb').innerHTML =
-    '<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>';
-}
-
-function ficheOpenFolder(fid, fname){
-  ficheCurFolder = fid;
-  renderFicheFinder();
-  document.getElementById('fiche-finder-breadcrumb').innerHTML =
-    '<span style="cursor:pointer;color:var(--acc)" onclick="ficheGoRoot()">📂 Fiches</span>' +
-    '<span style="color:var(--txt3)"> › </span>' +
-    '<span style="font-weight:600;color:var(--txt)">' + fname + '</span>';
-}
-
-function renderFicheFinder(){
-  const el = document.getElementById('fiche-finder');
-  if(!el) return;
-  const d = ficheGetData();
-  const myFiches = M.get('my_fiches', []);
-  let html = '<div class="finder-toolbar">';
-  if(ficheCurFolder){
-    html += '<button class="finder-back-btn" onclick="ficheGoRoot()">‹ Fiches</button>';
-  }
-  html += '</div><div class="finder-grid">';
-
-  if(!ficheCurFolder){
-    // Root: show folders
-    d.folders.forEach(f=>{
-      html += `<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')" oncontextmenu="ficheFolderCtx(event,'${f.id}','${f.name}')">
-        <div class="finder-folder-icon">${folderSVG()}</div>
-        <div class="finder-label">${f.name}</div>
-      </div>`;
-    });
-    // Also show unorganised fiches (not in any folder)
-    const organised = new Set(Object.values(d.files).flat().map(f=>f.ficheIdx));
-    myFiches.forEach((fi, idx)=>{
-      if(!organised.has(idx)){
-        html += ficheFileItem(fi, idx, null);
-      }
-    });
-  } else {
-    // Inside folder: show files
-    const fileRefs = (d.files[ficheCurFolder]||[]);
-    fileRefs.forEach(ref=>{
-      const fi = myFiches[ref.ficheIdx];
-      if(fi) html += ficheFileItem(fi, ref.ficheIdx, ficheCurFolder);
-    });
-  }
-  html += '</div>';
-  el.innerHTML = html;
-}
-
-function ficheFileItem(fi, idx, folderId){
-  const badge = fi.prio==='indispensable'?'🔴':fi.prio==='tres-frequent'?'🟠':'🟡';
-  return `<div class="finder-item" onclick="openFichePersoDetail(${idx})" oncontextmenu="ficheFileCtx(event,${idx},'${folderId||''}')">
-    <div class="finder-file-icon">${fileSVG()}</div>
-    <div class="finder-label">${badge} ${fi.title}</div>
-  </div>`;
-}
-
-function ficheCreateInFolder(){
-  // If in a folder, create and place there; else create at root
-  const targetFolder = ficheCurFolder;
-  _feEditId = null;
-  openCreateFiche();
-  // After save, we'll place it in targetFolder
-  window._ficheTargetFolder = targetFolder;
-}
-
-// Override saveFicheEditor to place file in folder
-const _origSaveFicheEditor2 = typeof saveFicheEditor === 'function' ? saveFicheEditor : null;
-window.saveFicheEditor = function(){
-  const titleEl = document.getElementById('fe-title');
-  const bodyEl = document.getElementById('fe-body');
-  const prioSel = document.getElementById('fe-prio');
-  const title = (titleEl?.textContent||'').trim();
-  if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}
-  const fiches = M.get('my_fiches',[]);
-  const existing = (_feEditId!==null&&_feEditId!==undefined)?fiches[_feEditId]:null;
-  const body = existing&&existing._demo ? existing.body : (bodyEl?.innerHTML||'');
-  const entry = {title,body,prio:prioSel?.value||'frequent',date:existing?.date||new Date().toLocaleString('fr-FR'),_custom:true,_demo:existing?._demo||false};
-  if(typeof _feEditId!=='undefined'&&_feEditId!==null) fiches[_feEditId]=entry;
-  else {
-    fiches.unshift(entry);
-    // Place in target folder if applicable
-    const tFolder = window._ficheTargetFolder;
-    if(tFolder){
-      const d = ficheGetData();
-      if(!d.files[tFolder]) d.files[tFolder]=[];
-      d.files[tFolder].push({ficheIdx:0, id:'fi_'+Date.now()});
-      // Shift all existing refs +1
-      Object.keys(d.files).forEach(k=>{
-        d.files[k] = d.files[k].map(r=>({...r, ficheIdx: r.ficheIdx+1}));
-        // But the new one at idx 0 stays at 0
-      });
-      d.files[tFolder] = d.files[tFolder].map((r,i)=> i===d.files[tFolder].length-1 ? {...r,ficheIdx:0} : r);
-      ficheSaveData(d);
-    }
-    window._ficheTargetFolder = null;
-  }
-  M.set('my_fiches', fiches);
-  showToast('✅ Fiche sauvegardée !');
-  closeFicheEditor();
-  renderFicheFinder();
-};
-
-function ficheFileCtx(e, idx, folderId){
-  e.preventDefault();
-  showCtxMenu(e, [
-    {label:'👁 Ouvrir', fn:()=>openFichePersoDetail(idx)},
-    {label:'✏️ Modifier', fn:()=>openCreateFiche(idx)},
-    {sep:true},
-    {label:'🗑 Supprimer', danger:true, fn:()=>{
-      if(!confirm('Supprimer cette fiche ?')) return;
-      const fiches = M.get('my_fiches',[]);
-      fiches.splice(idx,1);
-      M.set('my_fiches',fiches);
-      // Remove from finder data too
-      const d = ficheGetData();
-      Object.keys(d.files).forEach(k=>{
-        d.files[k] = d.files[k].filter(r=>r.ficheIdx!==idx).map(r=>({...r,ficheIdx:r.ficheIdx>idx?r.ficheIdx-1:r.ficheIdx}));
-      });
-      ficheSaveData(d);
-      renderFicheFinder();
-      showToast('🗑 Fiche supprimée');
-    }}
-  ]);
-}
-
-function ficheFolderCtx(e, fid, fname){
-  e.preventDefault();
-  if(FICHE_FIXED_FOLDERS.map(n=>'ff_'+n.toLowerCase()).includes(fid)) return; // fixed folders
-  showCtxMenu(e,[{label:'🗑 Supprimer le dossier', danger:true, fn:()=>{
-    if(!confirm('Supprimer le dossier "'+fname+'" ?')) return;
-    const d=ficheGetData();
-    d.folders=d.folders.filter(f=>f.id!==fid);
-    delete d.files[fid];
-    ficheSaveData(d);
-    renderFicheFinder();
-    showToast('🗑 Dossier supprimé');
-  }}]);
-}
-
-function initFiches(){
-  ficheCurFolder = null;
-  renderFicheFinder();
-}
-
-// ── MES COURS FINDER ─────────────────────────────────
-const MC_FIXED_FOLDERS = ['Bizuth', 'Carré'];
-let mcCurFolder = null;
-let mcCurFileId = null;
-
-function mcGetData(){
-  return M.get('mc_finder_data', {
-    folders: MC_FIXED_FOLDERS.map(n=>({id:'mcf_'+n.toLowerCase(),name:n,fixed:true})),
-    files: {} // folder_id -> [{id, title, body, date, prio}]
-  });
-}
-function mcSaveData(d){ M.set('mc_finder_data', d); }
-
-function mcGoRoot(){
-  mcCurFolder = null;
-  mcCurFileId = null;
-  document.getElementById('mc-editor-zone').style.display = 'none';
-  document.getElementById('mc-editor-bar').style.display = 'none';
-  document.getElementById('mc-finder-view').style.display = 'block';
-  document.getElementById('mc-topbar-finder').style.display = 'flex';
-  renderMcFinder();
-}
-
-function mcCloseEditor(){
-  mcGoRoot();
-}
-
-function mcOpenFolder(fid, fname){
-  mcCurFolder = fid;
-  document.getElementById('mc-breadcrumb').innerHTML =
-    '<span style="cursor:pointer;color:var(--acc)" onclick="mcGoRoot()">📂 Mes cours</span>' +
-    '<span style="color:var(--txt3)"> › </span>' +
-    '<span style="font-weight:600;color:var(--txt)">' + fname + '</span>';
-  renderMcFinder();
-}
-
-function mcOpenFile(fid, fileId){
-  const d = mcGetData();
-  const files = d.files[fid]||[];
-  const file = files.find(f=>f.id===fileId);
-  if(!file) return;
-  mcCurFolder = fid;
-  mcCurFileId = fileId;
-  document.getElementById('mc-finder-view').style.display = 'none';
-  document.getElementById('mc-editor-zone').style.display = 'block';
-  document.getElementById('mc-editor-bar').style.display = 'flex';
-  document.getElementById('mc-topbar-finder').style.display = 'none';
-  document.getElementById('mc-title').value = file.title||'';
-  document.getElementById('mc-body').innerHTML = file.body||'';
-}
-
-function mcCreateFileInFolder(){
-  if(!mcCurFolder){showToast("Ouvre d'abord un dossier");return;}
-  const d = mcGetData();
-  if(!d.files[mcCurFolder]) d.files[mcCurFolder]=[];
-  const id = 'mcfile_'+Date.now();
-  d.files[mcCurFolder].unshift({id,title:'Nouveau fichier',body:'',date:new Date().toLocaleDateString('fr-FR')});
-  mcSaveData(d);
-  renderMcFinder();
-  mcOpenFile(mcCurFolder, id);
-}
-
-function renderMcFinder(){
-  const el = document.getElementById('mc-finder-view');
-  if(!el) return;
-  const d = mcGetData();
-  let html = '<div class="finder-toolbar">';
-  if(mcCurFolder){
-    const fn = d.folders.find(f=>f.id===mcCurFolder)?.name||'';
-    html += '<button class="finder-back-btn" onclick="mcGoRoot()">‹ Mes cours</button>';
-    html += '<span style="font-size:13px;font-weight:700;color:var(--txt)">'+fn+'</span>';
-  }
-  html += '</div><div class="finder-grid">';
-
-  if(!mcCurFolder){
-    d.folders.filter(f=>!f.parent).forEach(f=>{
-      const count = (d.files[f.id]||[]).length;
-      html += `<div class="finder-item" onclick="mcOpenFolder('${f.id}','${f.name}')" oncontextmenu="mcFolderCtx(event,'${f.id}','${f.name}')">
-        <div class="finder-folder-icon">${folderSVG()}</div>
-        <div class="finder-label">${f.name}${count?' <span style=\"font-size:9px;color:var(--txt3)\">'+count+'</span>':''}</div>
-      </div>`;
-    });
-  } else {
-    d.folders.filter(f=>f.parent===mcCurFolder).forEach(f=>{
-      const count=(d.files[f.id]||[]).length;
-      html+=`<div class="finder-item" onclick="mcOpenFolder('${f.id}','${f.name}')" oncontextmenu="mcFolderCtx(event,'${f.id}','${f.name}')">
-        <div class="finder-folder-icon">${folderSVG()}</div>
-        <div class="finder-label">${f.name}${count?'<br><span style=\"font-size:9px;color:var(--txt3)\">'+count+' fich.</span>':''}</div>
-      </div>`;
-    });
-    const files = d.files[mcCurFolder]||[];
-    if(!files.length){
-      html += '<div style="color:var(--txt3);font-size:13px;padding:20px">Dossier vide — crée un fichier ou un sous-dossier</div>';
-    }
-    files.forEach(f=>{
-      html += `<div class="finder-item" onclick="mcOpenFile('${mcCurFolder}','${f.id}')" oncontextmenu="mcFileCtx(event,'${mcCurFolder}','${f.id}')">
-        <div class="finder-file-icon">${fileSVG()}</div>
-        <div class="finder-label">${f.title||'Sans titre'}</div>
-      </div>`;
-    });
-  }
-  html += '</div>';
-  el.innerHTML = html;
-}
-
-function mcGoBack(){
-  if(!mcFolderStack||mcFolderStack.length<=1){ mcGoRoot(); return; }
-  mcFolderStack.pop();
-  const prev=mcFolderStack[mcFolderStack.length-1];
-  mcCurFolder=prev?prev.id:null;
-  mcCurFileId=null;
-  if(!mcCurFolder){ mcGoRoot(); return; }
-  document.getElementById('mc-editor-zone').style.display='none';
-  document.getElementById('mc-editor-bar').style.display='none';
-  document.getElementById('mc-finder-view').style.display='block';
-  document.getElementById('mc-topbar-finder').style.display='flex';
-  renderMcFinder();
-  if(typeof mcRenderBreadcrumb==='function') mcRenderBreadcrumb();
-}
-
-function mcFileCtx(e, folderId, fileId){
+function pdfFileCtx(e, folderId, pdfId){
   e.preventDefault();
   showCtxMenu(e,[
-    {label:'✏️ Ouvrir', fn:()=>mcOpenFile(folderId, fileId)},
+    {label:'👁 Ouvrir', fn:()=>pdfOpenFile(folderId,pdfId)},
     {label:'✏️ Renommer', fn:()=>{
-      const d=mcGetData();
-      const files=d.files[folderId]||[];
-      const f=files.find(x=>x.id===fileId);
-      if(!f)return;
-      const n=prompt('Nouveau nom :',f.title);
-      if(!n||!n.trim())return;
-      f.title=n.trim();
-      mcSaveData(d);renderMcFinder();
+      const d=pdfGetData();
+      const p=(d.files[folderId]||[]).find(x=>x.id===pdfId);
+      if(!p) return;
+      const n=prompt('Nouveau nom :',p.name);
+      if(!n?.trim()) return;
+      p.name=n.trim(); pdfSaveData(d); renderPDFFinder();
     }},
     {sep:true},
     {label:'🗑 Supprimer', danger:true, fn:()=>{
-      if(!confirm('Supprimer ce fichier ?'))return;
-      const d=mcGetData();
-      d.files[folderId]=(d.files[folderId]||[]).filter(f=>f.id!==fileId);
-      mcSaveData(d);renderMcFinder();showToast('🗑 Fichier supprimé');
+      if(!confirm('Supprimer ce PDF ?')) return;
+      const d=pdfGetData();
+      d.files[folderId]=(d.files[folderId]||[]).filter(x=>x.id!==pdfId);
+      pdfSaveData(d); renderPDFFinder(); showToast('🗑 PDF supprimé');
     }}
   ]);
 }
 
-function mcFolderCtx(e, fid, fname){
+function pdfFolderCtx(e, fid, fname){
   e.preventDefault();
-  if(MC_FIXED_FOLDERS.map(n=>'mcf_'+n.toLowerCase()).includes(fid)) return;
-  showCtxMenu(e,[{label:'🗑 Supprimer', danger:true, fn:()=>{
-    if(!confirm('Supprimer le dossier "'+fname+'" ?'))return;
-    const d=mcGetData();
-    d.folders=d.folders.filter(f=>f.id!==fid);
-    delete d.files[fid];
-    mcSaveData(d);renderMcFinder();
-  }}]);
+  showCtxMenu(e,[
+    {label:'✏️ Renommer', fn:()=>{
+      const d=pdfGetData();
+      const f=d.folders.find(x=>x.id===fid);
+      if(!f) return;
+      const n=prompt('Nouveau nom :',f.name);
+      if(!n?.trim()) return;
+      f.name=n.trim(); pdfSaveData(d); renderPDFFinder();
+    }},
+    {sep:true},
+    {label:'🗑 Supprimer', danger:true, fn:()=>{
+      if(!confirm('Supprimer ce dossier et son contenu ?')) return;
+      const d=pdfGetData();
+      // Collect all descendant folder ids
+      function desc(id){ return [id,...d.folders.filter(f=>f.parent===id).flatMap(f=>desc(f.id))]; }
+      const ids=desc(fid);
+      d.folders=d.folders.filter(f=>!ids.includes(f.id));
+      ids.forEach(id=>delete d.files[id]);
+      pdfSaveData(d);
+      if(ids.includes(pdfCurFolder)) pdfGoRoot();
+      else renderPDFFinder();
+      showToast('🗑 Dossier supprimé');
+    }}
+  ]);
 }
 
-// Override saveMyCours for finder system
-window.saveMyCours = function(){
-  if(!mcCurFolder||!mcCurFileId){
-    showToast('Ouvre un fichier pour sauvegarder');return;
-  }
-  const d=mcGetData();
-  const files=d.files[mcCurFolder]||[];
-  const f=files.find(x=>x.id===mcCurFileId);
-  if(!f)return;
-  f.title=document.getElementById('mc-title')?.value?.trim()||'Sans titre';
-  f.body=document.getElementById('mc-body')?.innerHTML||'';
-  f.date=new Date().toLocaleDateString('fr-FR');
-  mcSaveData(d);
-  showToast('✅ Sauvegardé');
-};
-
-function deleteCurMyCours(){
-  if(!mcCurFolder||!mcCurFileId)return;
-  if(!confirm('Supprimer ce fichier ?'))return;
-  const d=mcGetData();
-  d.files[mcCurFolder]=(d.files[mcCurFolder]||[]).filter(f=>f.id!==mcCurFileId);
-  mcSaveData(d);
-  mcGoRoot();
-  showToast('🗑 Fichier supprimé');
+function pdfCreateFolder(){
+  const name=prompt('Nom du dossier :');
+  if(!name?.trim()) return;
+  const d=pdfGetData();
+  d.folders.push({id:'pf_'+Date.now(),name:name.trim(),parent:null});
+  pdfSaveData(d); renderPDFFinder(); showToast('📁 Dossier créé');
 }
 
-function initMyCours(){
-  mcCurFolder=null;mcCurFileId=null;
-  document.getElementById('mc-editor-zone').style.display='none';
-  document.getElementById('mc-editor-bar').style.display='none';
-  document.getElementById('mc-topbar-finder').style.display='flex';
-  document.getElementById('mc-finder-view').style.display='block';
-  renderMcFinder();
+function pdfCreateSubFolder(){
+  if(!pdfCurFolder){ showToast('Ouvre un dossier d\'abord'); return; }
+  const name=prompt('Nom du sous-dossier :');
+  if(!name?.trim()) return;
+  const d=pdfGetData();
+  d.folders.push({id:'pf_'+Date.now(),name:name.trim(),parent:pdfCurFolder});
+  pdfSaveData(d); renderPDFFinder(); showToast('📁 Sous-dossier créé');
 }
 
-// ── CONTEXT MENU ─────────────────────────────────────
-function showCtxMenu(e, items){
-  closeCtxMenu();
-  const m=document.createElement('div');
-  m.className='finder-ctx-menu';
-  m.id='_finder_ctx';
-  m.style.left=Math.min(e.clientX, window.innerWidth-180)+'px';
-  m.style.top=Math.min(e.clientY, window.innerHeight-200)+'px';
-  items.forEach(item=>{
-    if(item.sep){const s=document.createElement('div');s.className='finder-ctx-sep';m.appendChild(s);return;}
-    const d=document.createElement('div');
-    d.className='finder-ctx-item'+(item.danger?' danger':'');
-    d.textContent=item.label;
-    d.onclick=()=>{closeCtxMenu();item.fn();};
-    m.appendChild(d);
-  });
-  document.body.appendChild(m);
-  setTimeout(()=>document.addEventListener('click',closeCtxMenu,{once:true}),10);
+function pdfMoveFile(srcFolder, dstFolder, pdfId){
+  const d=pdfGetData();
+  const src=d.files[srcFolder]||[];
+  const p=src.find(x=>x.id===pdfId);
+  if(!p) return;
+  d.files[srcFolder]=src.filter(x=>x.id!==pdfId);
+  d.files[dstFolder]=d.files[dstFolder]||[];
+  d.files[dstFolder].unshift(p);
+  pdfSaveData(d); renderPDFFinder();
+  showToast('✅ PDF déplacé');
 }
-function closeCtxMenu(){const m=document.getElementById('_finder_ctx');if(m)m.remove();}
+
+function pdfReorder(folderId, srcId, tgtId){
+  const d=pdfGetData();
+  const files=d.files[folderId]||[];
+  const si=files.findIndex(f=>f.id===srcId);
+  const ti=files.findIndex(f=>f.id===tgtId);
+  if(si===-1||ti===-1||si===ti) return;
+  const [moved]=files.splice(si,1);
+  files.splice(ti,0,moved);
+  d.files[folderId]=files;
+  pdfSaveData(d); renderPDFFinder();
+}
+
+// Override openPDF / renamePDF / deletePDF for backward compat
+function openPDF(i){ const pdfs=M.get('my_pdfs',[]); const p=pdfs[i]; if(!p) return; pdfOpenFile('root',p.id||'legacy_'+i); }
+function renamePDF(i){ const pdfs=M.get('my_pdfs',[]); if(!pdfs[i]) return; const n=prompt('Nouveau nom :',pdfs[i].name); if(!n?.trim()) return; pdfs[i].name=n.trim(); M.set('my_pdfs',pdfs); renderPDFFinder(); }
+function deletePDF(i){ if(!confirm('Supprimer ce PDF ?')) return; const pdfs=M.get('my_pdfs',[]); pdfs.splice(i,1); M.set('my_pdfs',pdfs); renderPDFFinder(); showToast('🗑 PDF supprimé'); }
+
+function initCours(){
+  pdfGoRoot();
+}
+
+
 // ══════════════════════════════════════════════════════
 // DRAG & DROP + SOUS-DOSSIERS + RÉORDONNANCEMENT
 // ══════════════════════════════════════════════════════
