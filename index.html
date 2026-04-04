@@ -3731,6 +3731,7 @@ const DEMO_FICHE_BODY = `
   });
   localStorage.setItem('geo_v5_my_fiches', JSON.stringify(fiches));
   localStorage.setItem(key, '1');
+  console.log('[GéoPrepa] Fiche Démographie injectée. Total fiches:', fiches.length);
 })();
 
 function renameCopy(i){
@@ -4172,11 +4173,19 @@ function renderFicheFinder(){
         <div class="finder-label">${f.name}${info?'<br><span style=\"font-size:9px;color:var(--txt3)\">'+info+'</span>':''}</div>
       </div>`;
     });
-    // Unorganised fiches at root
-    const organised=new Set(Object.values(d.files).flat().map(r=>r.ficheIdx));
+    // Toutes les fiches à la racine (non rangées dans un dossier)
+    const organised=new Set(
+      Object.values(d.files).flat()
+        .filter(r=>typeof r.ficheIdx==='number')
+        .map(r=>r.ficheIdx)
+    );
     myFiches.forEach((fi,idx)=>{
-      if(!organised.has(idx)) html+=ficheFileItem(fi,idx,null);
+      if(fi && !organised.has(idx)) html+=ficheFileItem(fi,idx,null);
     });
+    // Si aucune fiche et aucun dossier, afficher un message
+    if(!myFiches.length && !d.folders.filter(f=>!f.parent).length){
+      html+='<div style="color:var(--txt3);font-size:13px;padding:20px;grid-column:1/-1">Aucune fiche — clique sur ✏️ Nouvelle fiche pour commencer</div>';
+    }
   } else {
     // Sub-folders first
     d.folders.filter(f=>f.parent===ficheCurFolder).forEach(f=>{
