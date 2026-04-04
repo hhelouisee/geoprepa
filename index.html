@@ -437,7 +437,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="ng">
       <div class="ng-hd" onclick="togNG('prog')"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog">▾</span></div>
       <div class="ng-items" id="ni-prog" style="max-height:500px">
-        <div class="ni" id="ni-cours-p" onclick="go('cours')"><span class="ni-ic">📖</span><span class="ni-lb">Cours complet (30)</span></div>
+        <div class="ni" id="ni-cours-p" onclick="go('cours')"><span class="ni-ic">📖</span><span class="ni-lb">Cours complet</span></div>
         <div class="ni" id="ni-fiches" onclick="go('fiches')"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
         <div class="ni" id="ni-flash" onclick="go('flash')"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
         <div class="ni" id="ni-frise" onclick="go('frise')"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
@@ -3458,37 +3458,7 @@ const DEMO_FICHE_BODY = `
   <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Hiver démographique</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Ralentissement ou décroissance de la population dans les PDEM (et certains émergents). Coexiste avec explosion en Afrique.</div></div>
 </div>
 
-<script>
-function dfTab(btn,id){
-  btn.closest('.df-tabs').querySelectorAll('.df-tab').forEach(t=>t.classList.remove('on'));
-  btn.classList.add('on');
-  btn.closest('div').parentNode.querySelectorAll('.df-panel').forEach(p=>p.classList.remove('on'));
-  var el=document.getElementById(id);if(el)el.classList.add('on');
-  dfFilter(0,null);
-}
-function dfAcc(hd){
-  var bd=hd.nextElementSibling;
-  var icon=hd.querySelector('span:last-child');
-  var wrap=hd.parentElement;
-  var n=wrap.dataset.n||'1';
-  var isOpen=bd.style.display==='block';
-  bd.style.display=isOpen?'none':'block';
-  icon.textContent=isOpen?'+':'−';
-  hd.className=isOpen?'df-acc-hd':'df-acc-hd op'+n;
-  bd.className=isOpen?'df-acc-bd':'df-acc-bd op'+n;
-}
-function dfFilter(n,btn){
-  if(btn){
-    btn.closest('.df-filter').querySelectorAll('.df-fbtn').forEach(b=>{b.style.background='var(--surf)';b.style.fontWeight='500';});
-    btn.style.background=n===1?'var(--red-l)':n===2?'var(--org-l)':n===3?'var(--acc-l)':'var(--surf)';
-    btn.style.fontWeight='700';
-  }
-  document.querySelectorAll('[data-n]').forEach(function(el){
-    if(n===0||parseInt(el.dataset.n)===n){el.classList.remove('df-hidden');}
-    else{el.classList.add('df-hidden');}
-  });
-}
-<\/script>
+
 `;
 
 (function injectDemoFiche(){
@@ -3658,6 +3628,58 @@ function deletePDF(i){
   M.set('my_pdfs', pdfs);
   renderPDFList();
   showToast('🗑 PDF supprimé');
+}
+
+
+// ══════════════════════════════════════════════════════
+// FICHE DÉMOGRAPHIE — FONCTIONS GLOBALES
+// (tabs, accordéons, filtres)
+// ══════════════════════════════════════════════════════
+function dfTab(btn, id) {
+  var tabs = btn.closest('.df-tabs');
+  if(tabs) tabs.querySelectorAll('.df-tab').forEach(function(t){t.classList.remove('on');});
+  btn.classList.add('on');
+  // find panels in same container
+  var container = btn.closest('.df-panel, [id^="fiche-perso-overlay"], [id^="fe-body"], .modal-box, body');
+  if(!container) container = document;
+  container.querySelectorAll('.df-panel').forEach(function(p){p.classList.remove('on');});
+  var el = document.getElementById(id);
+  if(el) el.classList.add('on');
+  dfFilter(0, null);
+}
+
+function dfAcc(hd) {
+  var bd = hd.nextElementSibling;
+  var icon = hd.querySelector('span:last-child');
+  var wrap = hd.parentElement;
+  var n = (wrap && wrap.dataset.n) || '1';
+  var isOpen = bd && bd.style.display === 'block';
+  if(bd) bd.style.display = isOpen ? 'none' : 'block';
+  if(icon) icon.textContent = isOpen ? '+' : '−';
+  hd.className = isOpen ? 'df-acc-hd' : 'df-acc-hd op' + n;
+  if(bd) bd.className = isOpen ? 'df-acc-bd' : 'df-acc-bd op' + n;
+}
+
+function dfFilter(n, btn) {
+  if(btn) {
+    var filterBar = btn.closest('.df-filter');
+    if(filterBar) filterBar.querySelectorAll('.df-fbtn').forEach(function(b){
+      b.style.background = 'var(--surf)';
+      b.style.fontWeight = '500';
+    });
+    btn.style.background = n===1 ? 'var(--red-l)' : n===2 ? 'var(--org-l)' : n===3 ? 'var(--acc-l)' : 'var(--surf)';
+    btn.style.fontWeight = '700';
+  }
+  // Only filter within the currently visible overlay or panel
+  var scope = document.getElementById('fiche-perso-overlay');
+  if(!scope || scope.style.display === 'none') scope = document;
+  scope.querySelectorAll('[data-n]').forEach(function(el){
+    if(n === 0 || parseInt(el.dataset.n) === n) {
+      el.classList.remove('df-hidden');
+    } else {
+      el.classList.add('df-hidden');
+    }
+  });
 }
 
 </script>
