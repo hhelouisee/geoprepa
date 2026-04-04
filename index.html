@@ -4172,7 +4172,7 @@ function renderMcFinder(){
   html += '</div><div class="finder-grid">';
 
   if(!mcCurFolder){
-    d.folders.forEach(f=>{
+    d.folders.filter(f=>!f.parent).forEach(f=>{
       const count = (d.files[f.id]||[]).length;
       html += `<div class="finder-item" onclick="mcOpenFolder('${f.id}','${f.name}')" oncontextmenu="mcFolderCtx(event,'${f.id}','${f.name}')">
         <div class="finder-folder-icon">${folderSVG()}</div>
@@ -4180,9 +4180,16 @@ function renderMcFinder(){
       </div>`;
     });
   } else {
+    d.folders.filter(f=>f.parent===mcCurFolder).forEach(f=>{
+      const count=(d.files[f.id]||[]).length;
+      html+=`<div class="finder-item" onclick="mcOpenFolder('${f.id}','${f.name}')" oncontextmenu="mcFolderCtx(event,'${f.id}','${f.name}')">
+        <div class="finder-folder-icon">${folderSVG()}</div>
+        <div class="finder-label">${f.name}${count?'<br><span style=\"font-size:9px;color:var(--txt3)\">'+count+' fich.</span>':''}</div>
+      </div>`;
+    });
     const files = d.files[mcCurFolder]||[];
     if(!files.length){
-      html += '<div style="color:var(--txt3);font-size:13px;padding:20px">Aucun fichier · Double-cliquer pour en créer un</div>';
+      html += '<div style="color:var(--txt3);font-size:13px;padding:20px">Dossier vide — crée un fichier ou un sous-dossier</div>';
     }
     files.forEach(f=>{
       html += `<div class="finder-item" onclick="mcOpenFile('${mcCurFolder}','${f.id}')" oncontextmenu="mcFileCtx(event,'${mcCurFolder}','${f.id}')">
@@ -4193,6 +4200,21 @@ function renderMcFinder(){
   }
   html += '</div>';
   el.innerHTML = html;
+}
+
+function mcGoBack(){
+  if(!mcFolderStack||mcFolderStack.length<=1){ mcGoRoot(); return; }
+  mcFolderStack.pop();
+  const prev=mcFolderStack[mcFolderStack.length-1];
+  mcCurFolder=prev?prev.id:null;
+  mcCurFileId=null;
+  if(!mcCurFolder){ mcGoRoot(); return; }
+  document.getElementById('mc-editor-zone').style.display='none';
+  document.getElementById('mc-editor-bar').style.display='none';
+  document.getElementById('mc-finder-view').style.display='block';
+  document.getElementById('mc-topbar-finder').style.display='flex';
+  renderMcFinder();
+  if(typeof mcRenderBreadcrumb==='function') mcRenderBreadcrumb();
 }
 
 function mcFileCtx(e, folderId, fileId){
@@ -4287,33 +4309,145 @@ function showCtxMenu(e, items){
 }
 function closeCtxMenu(){const m=document.getElementById('_finder_ctx');if(m)m.remove();}
 // ══════════════════════════════════════════════════════
-// DRAG & DROP — FINDER
+// DRAG & DROP + SOUS-DOSSIERS + RÉORDONNANCEMENT
 // ══════════════════════════════════════════════════════
 
-// Patch renderMcFinder to add drag/drop via event delegation after render
+// ── Navigation stack (for sub-folders breadcrumb) ────
+let mcFolderStack = []; // [{id, name}] — chemin depuis root
+let ficheFolderStack = [];
+
+// ── Override mcGoRoot / mcOpenFolder to use stack ────
+const _mcGoRoot0 = mcGoRoot;
+mcGoRoot = function(){
+  mcFolderStack = [];
+  _mcGoRoot0();
+};
+const _mcOpenFolder0 = mcOpenFolder;
+mcOpenFolder = function(fid, fname){
+  mcFolderStack.push({id: fid, name: fname});
+  _mcOpenFolder0(fid, fname);
+};
+
+// Re-render breadcrumb with full path
+function mcRenderBreadcrumb(){
+  const el = document.getElementById('mc-breadcrumb');
+  if(!el) return;
+  let html = '<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="mcGoRoot()">📂 Mes cours</span>';
+  mcFolderStack.forEach((step, i) => {
+    html += '<span style="color:var(--txt3)"> › </span>';
+    if(i < mcFolderStack.length - 1){
+      html += `<span style="cursor:pointer;color:var(--acc)" onclick="mcGoToStackLevel(${i})">${step.name}</span>`;
+    } else {
+      html += `<span style="font-weight:600;color:var(--txt)">${step.name}</span>`;
+    }
+  });
+  el.innerHTML = html;
+}
+
+function mcGoToStackLevel(i){
+  const step = mcFolderStack[i];
+  mcFolderStack = mcFolderStack.slice(0, i+1);
+  mcCurFolder = step.id;
+  mcCurFileId = null;
+  document.getElementById('mc-editor-zone').style.display = 'none';
+  document.getElementById('mc-editor-bar').style.display = 'none';
+  document.getElementById('mc-finder-view').style.display = 'block';
+  document.getElementById('mc-topbar-finder').style.display = 'flex';
+  renderMcFinder();
+  mcRenderBreadcrumb();
+}
+
+// Add sub-folder creation
+function mcCreateSubFolder(){
+  if(!mcCurFolder){ showToast('Ouvre un dossier d\'abord'); return; }
+  const name = prompt('Nom du sous-dossier :');
+  if(!name?.trim()) return;
+  const d = mcGetData();
+  const id = 'mcf_sub_' + Date.now();
+  d.folders.push({id, name: name.trim(), parent: mcCurFolder});
+  mcSaveData(d);
+  renderMcFinder();
+  showToast('📁 Sous-dossier "'+name+'" créé');
+}
+
+function ficheCreateSubFolder(){
+  if(!ficheCurFolder){ showToast('Ouvre un dossier d\'abord'); return; }
+  const name = prompt('Nom du sous-dossier :');
+  if(!name?.trim()) return;
+  const d = ficheGetData();
+  const id = 'ff_sub_' + Date.now();
+  d.folders.push({id, name: name.trim(), parent: ficheCurFolder});
+  ficheSaveData(d);
+  renderFicheFinder();
+  showToast('📁 Sous-dossier "'+name+'" créé');
+}
+
+
+// Patch renderMcFinder — drag/drop + reorder + sub-folders + breadcrumb
 const _origRenderMcFinder = renderMcFinder;
 renderMcFinder = function(){
   _origRenderMcFinder();
+  mcRenderBreadcrumb();
   const el = document.getElementById('mc-finder-view');
   if(!el) return;
+  const d = mcGetData();
 
-  // Make files draggable
-  el.querySelectorAll('.finder-item').forEach(item => {
-    const isFolder = item.querySelector('.finder-folder-icon, .finder-folder');
+  // Add "Nouveau dossier" button inside a folder
+  if(mcCurFolder){
+    const toolbar = el.querySelector('.finder-toolbar');
+    if(toolbar && !toolbar.querySelector('.btn-new-subfolder')){
+      const btn = document.createElement('button');
+      btn.className = 'btn btn-g btn-sm btn-new-subfolder';
+      btn.textContent = '📁 Sous-dossier';
+      btn.onclick = mcCreateSubFolder;
+      toolbar.appendChild(btn);
+    }
+  }
+
+  let dragSrcIdx = null;
+
+  el.querySelectorAll('.finder-item').forEach((item, itemIdx) => {
+    const isFolder = !!item.querySelector('.finder-folder-icon, .finder-folder');
     const fileClick = item.getAttribute('onclick')||'';
+
     if(!isFolder && fileClick.includes('mcOpenFile')) {
-      // Extract folder and file id from onclick
+      // Files: draggable for reorder + move to folder
       const m = fileClick.match(/mcOpenFile\('([^']+)','([^']+)'\)/);
       if(!m) return;
       const [,folderId, fileId] = m;
       item.setAttribute('draggable','true');
+      item.dataset.fileId = fileId;
+      item.dataset.srcFolder = folderId;
+      item.dataset.itemIdx = itemIdx;
+
       item.addEventListener('dragstart', e=>{
+        dragSrcIdx = itemIdx;
         e.dataTransfer.setData('mc-file-id', fileId);
         e.dataTransfer.setData('mc-src-folder', folderId);
+        e.dataTransfer.effectAllowed = 'move';
         item.classList.add('dragging');
       });
-      item.addEventListener('dragend', ()=>item.classList.remove('dragging'));
+      item.addEventListener('dragend', ()=>{ item.classList.remove('dragging'); dragSrcIdx=null; });
+
+      // Reorder: drop on another file
+      item.addEventListener('dragover', e=>{
+        if(e.dataTransfer.getData('mc-src-folder')===folderId || dragSrcIdx!==null){
+          e.preventDefault();
+          item.style.outline = '2px dashed var(--folder-pink-dark)';
+        }
+      });
+      item.addEventListener('dragleave', ()=>{ item.style.outline=''; });
+      item.addEventListener('drop', e=>{
+        item.style.outline='';
+        const srcFileId = e.dataTransfer.getData('mc-file-id');
+        const srcFolder = e.dataTransfer.getData('mc-src-folder');
+        if(srcFolder !== folderId) return; // different folder = move, not reorder
+        e.preventDefault();
+        e.stopPropagation();
+        mcReorderFiles(folderId, srcFileId, fileId);
+      });
     }
+
     if(isFolder) {
       const m = (item.getAttribute('onclick')||'').match(/mcOpenFolder\('([^']+)'/);
       if(!m) return;
@@ -4325,7 +4459,8 @@ renderMcFinder = function(){
         item.classList.remove('drag-over');
         const fileId = e.dataTransfer.getData('mc-file-id');
         const srcFolder = e.dataTransfer.getData('mc-src-folder');
-        if(!fileId || srcFolder === folderId) return;
+        if(!fileId) return;
+        if(srcFolder === folderId){ return; } // same folder
         mcMoveFile(srcFolder, folderId, fileId);
       });
     }
@@ -4382,8 +4517,22 @@ function mcMoveFile(srcFolderId, dstFolderId, fileId){
   if(!d.files[dstFolderId]) d.files[dstFolderId]=[];
   d.files[dstFolderId].unshift(file);
   mcSaveData(d);
-  mcGoRoot();
-  showToast('✅ Fichier déplacé vers '+( d.folders.find(f=>f.id===dstFolderId)?.name||dstFolderId));
+  renderMcFinder();
+  showToast('✅ Fichier déplacé vers '+(d.folders.find(f=>f.id===dstFolderId)?.name||dstFolderId));
+}
+
+// Reorder MC files within a folder
+function mcReorderFiles(folderId, srcFileId, targetFileId){
+  const d = mcGetData();
+  const files = d.files[folderId]||[];
+  const srcIdx = files.findIndex(f=>f.id===srcFileId);
+  const tgtIdx = files.findIndex(f=>f.id===targetFileId);
+  if(srcIdx===-1||tgtIdx===-1||srcIdx===tgtIdx) return;
+  const [moved] = files.splice(srcIdx, 1);
+  files.splice(tgtIdx, 0, moved);
+  d.files[folderId] = files;
+  mcSaveData(d);
+  renderMcFinder();
 }
 
 // Move fiche to folder
