@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///Users/huyuan/Downloads/index_2.html -->
-<html lang="fr" data-theme="light" data-font="dm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="fr" data-theme="light" data-font="geist">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GéoPrepa BCE</title>
-<link href="./index_files/css2" rel="stylesheet">
-<script src="./index_files/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <style>
 /* ═══════════ FONT SYSTEM ═══════════ */
 [data-font="geist"]   { --ff: 'Geist', sans-serif;      --ffd: 'Lora', serif; }
@@ -603,7 +603,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 </head>
 <body>
 <!-- ████ AUTH OVERLAY ████ -->
-<div id="auth-overlay" style="position: fixed; inset: 0px; background: var(--bg); z-index: 9999; display: none; align-items: center; justify-content: center; font-family: var(--ff);">
+<div id="auth-overlay" style="position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:var(--ff)">
   <div style="width:100%;max-width:380px;padding:20px">
     <div style="text-align:center;margin-bottom:28px">
       <div style="width:44px;height:44px;background:var(--acc);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--ffd);font-style:italic;font-size:20px;color:#fff;font-weight:700;margin:0 auto 10px">G</div>
@@ -611,19 +611,24 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div style="font-size:12px;color:var(--txt3);margin-top:3px">Geopolitique - ECG</div>
     </div>
     <div style="display:flex;border:1px solid var(--brd);border-radius:8px;overflow:hidden;margin-bottom:18px">
-      <button id="tab-login" onclick="switchAuthTab(&#39;login&#39;)" style="flex:1;padding:8px;font-size:13px;font-weight:600;background:var(--acc);color:#fff;border:none;cursor:pointer;font-family:var(--ff)">Connexion</button>
-      <button id="tab-signup" onclick="switchAuthTab(&#39;signup&#39;)" style="flex:1;padding:8px;font-size:13px;font-weight:500;background:var(--surf);color:var(--txt3);border:none;cursor:pointer;font-family:var(--ff)">Creer un compte</button>
+      <button id="tab-login" onclick="switchAuthTab('login')" style="flex:1;padding:8px;font-size:13px;font-weight:600;background:var(--acc);color:#fff;border:none;cursor:pointer;font-family:var(--ff)">Connexion</button>
+      <button id="tab-signup" onclick="switchAuthTab('signup')" style="flex:1;padding:8px;font-size:13px;font-weight:500;background:var(--surf);color:var(--txt3);border:none;cursor:pointer;font-family:var(--ff)">Creer un compte</button>
     </div>
     <div style="background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:20px">
       <div style="margin-bottom:12px">
         <label style="font-size:11px;font-weight:600;color:var(--txt3);display:block;margin-bottom:5px">EMAIL</label>
-        <input id="auth-email" type="email" placeholder="ton@email.com" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)authSubmit()">
+        <input id="auth-email" type="email" placeholder="ton@email.com"
+          style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)"
+          onkeydown="if(event.key==='Enter')authSubmit()">
       </div>
       <div style="margin-bottom:16px">
         <label style="font-size:11px;font-weight:600;color:var(--txt3);display:block;margin-bottom:5px">MOT DE PASSE</label>
-        <input id="auth-pwd" type="password" placeholder="min. 6 caracteres" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)authSubmit()">
+        <input id="auth-pwd" type="password" placeholder="min. 6 caracteres"
+          style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)"
+          onkeydown="if(event.key==='Enter')authSubmit()">
       </div>
-      <button onclick="authSubmit()" id="auth-btn" style="width:100%;padding:10px;background:var(--acc);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">
+      <button onclick="authSubmit()" id="auth-btn"
+        style="width:100%;padding:10px;background:var(--acc);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">
         Se connecter
       </button>
       <div id="auth-msg" style="margin-top:10px;font-size:12px;text-align:center;color:var(--red);min-height:16px"></div>
@@ -634,7 +639,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 </div>
 
-<div class="app" id="main-app" style="display: flex;">
+<div class="app" id="main-app" style="display:none">
 
 <!-- ████ SIDEBAR ████ -->
 <aside class="sb" id="sb">
@@ -645,62 +650,62 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div><div class="logo-txt">GéoPrepa BCE</div><div style="font-size:9px;color:var(--txt4)">Géopolitique · ECG</div></div>
     </div>
     <div class="sb-cd" onclick="openCd()">
-      <div class="cd-n" id="cd-n">10</div>
-      <div style="flex:1"><div class="cd-lbl">jours BCE</div><div class="cd-sub" id="cd-s">14 avril</div></div>
+      <div class="cd-n" id="cd-n">—</div>
+      <div style="flex:1"><div class="cd-lbl">jours BCE</div><div class="cd-sub" id="cd-s">Définir la date</div></div>
       <span style="font-size:10px;color:var(--txt4)">✏️</span>
     </div>
   </div>
 
   <nav class="nav">
     <div style="padding:2px 6px">
-      <div class="ni on" id="ni-dash" onclick="go(&#39;dash&#39;)"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
+      <div class="ni on" id="ni-dash" onclick="go('dash')"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG(&#39;prog&#39;)"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog">▾</span></div>
+      <div class="ng-hd" onclick="togNG('prog')"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog">▾</span></div>
       <div class="ng-items" id="ni-prog" style="max-height:500px">
-        <div class="ni" id="ni-cours-p" onclick="go(&#39;cours&#39;)"><span class="ni-ic">📖</span><span class="ni-lb">Cours complet</span></div>
-        <div class="ni" id="ni-fiches" onclick="go(&#39;fiches&#39;)"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
-        <div class="ni" id="ni-flash" onclick="go(&#39;flash&#39;)"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
-        <div class="ni" id="ni-frise" onclick="go(&#39;frise&#39;)"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
-        <div class="ni" id="ni-notion" onclick="go(&#39;notion&#39;)"><span class="ni-ic">📓</span><span class="ni-lb">Notes Notion</span></div>
-        <div class="ni" id="ni-search" onclick="go(&#39;search&#39;)"><span class="ni-ic">🔍</span><span class="ni-lb">Recherche</span></div>
+        <div class="ni" id="ni-cours-p" onclick="go('cours')"><span class="ni-ic">📖</span><span class="ni-lb">Cours complet</span></div>
+        <div class="ni" id="ni-fiches" onclick="go('fiches')"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
+        <div class="ni" id="ni-flash" onclick="go('flash')"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
+        <div class="ni" id="ni-frise" onclick="go('frise')"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
+        <div class="ni" id="ni-notion" onclick="go('notion')"><span class="ni-ic">📓</span><span class="ni-lb">Notes Notion</span></div>
+        <div class="ni" id="ni-search" onclick="go('search')"><span class="ni-ic">🔍</span><span class="ni-lb">Recherche</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG(&#39;train&#39;)"><span class="ng-lbl">Entraînement</span><span class="ng-arr" id="na-train">▾</span></div>
+      <div class="ng-hd" onclick="togNG('train')"><span class="ng-lbl">Entraînement</span><span class="ng-arr" id="na-train">▾</span></div>
       <div class="ng-items" id="ni-train" style="max-height:500px">
-        <div class="ni" id="ni-training" onclick="go(&#39;training&#39;)"><span class="ni-ic">✍️</span><span class="ni-lb">Questions ouvertes</span></div>
-        <div class="ni" id="ni-sim" onclick="go(&#39;sim&#39;)"><span class="ni-ic">🚨</span><span class="ni-lb">Mode Concours BCE</span><span class="nbadge nb-r">BCE</span></div>
-        <div class="ni" id="ni-annales" onclick="go(&#39;annales&#39;)"><span class="ni-ic">📂</span><span class="ni-lb">Annales</span></div>
+        <div class="ni" id="ni-training" onclick="go('training')"><span class="ni-ic">✍️</span><span class="ni-lb">Questions ouvertes</span></div>
+        <div class="ni" id="ni-sim" onclick="go('sim')"><span class="ni-ic">🚨</span><span class="ni-lb">Mode Concours BCE</span><span class="nbadge nb-r">BCE</span></div>
+        <div class="ni" id="ni-annales" onclick="go('annales')"><span class="ni-ic">📂</span><span class="ni-lb">Annales</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG(&#39;suivi&#39;)"><span class="ng-lbl">Suivi</span><span class="ng-arr" id="na-suivi">▾</span></div>
+      <div class="ng-hd" onclick="togNG('suivi')"><span class="ng-lbl">Suivi</span><span class="ng-arr" id="na-suivi">▾</span></div>
       <div class="ng-items" id="ni-suivi" style="max-height:500px">
-        <div class="ni" id="ni-copies" onclick="go(&#39;copies&#39;)"><span class="ni-ic">📊</span><span class="ni-lb">Mes copies</span><span class="nbadge nb-g" id="nb-copies">0</span></div>
-        <div class="ni" id="ni-revision" onclick="go(&#39;revision&#39;)"><span class="ni-ic">🔁</span><span class="ni-lb">Révisions urgentes</span><span class="nbadge nb-r" id="nb-rev">7</span></div>
-        <div class="ni" id="ni-screentime" onclick="go(&#39;screentime&#39;)"><span class="ni-ic">⏱</span><span class="ni-lb">Temps de révision</span></div>
-        <div class="ni" id="ni-history" onclick="go(&#39;history&#39;)"><span class="ni-ic">🕐</span><span class="ni-lb">Historique</span></div>
+        <div class="ni" id="ni-copies" onclick="go('copies')"><span class="ni-ic">📊</span><span class="ni-lb">Mes copies</span><span class="nbadge nb-g" id="nb-copies">0</span></div>
+        <div class="ni" id="ni-revision" onclick="go('revision')"><span class="ni-ic">🔁</span><span class="ni-lb">Révisions urgentes</span><span class="nbadge nb-r" id="nb-rev">0</span></div>
+        <div class="ni" id="ni-screentime" onclick="go('screentime')"><span class="ni-ic">⏱</span><span class="ni-lb">Temps de révision</span></div>
+        <div class="ni" id="ni-history" onclick="go('history')"><span class="ni-ic">🕐</span><span class="ni-lb">Historique</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG(&#39;create&#39;)"><span class="ng-lbl">Créer</span><span class="ng-arr" id="na-create">▾</span></div>
+      <div class="ng-hd" onclick="togNG('create')"><span class="ng-lbl">Créer</span><span class="ng-arr" id="na-create">▾</span></div>
       <div class="ng-items" id="ni-create" style="max-height:500px">
-        <div class="ni" id="ni-mycours" onclick="go(&#39;mycours&#39;)"><span class="ni-ic">✏️</span><span class="ni-lb">Mes cours</span></div>
-        <div class="ni" id="ni-myflash" onclick="go(&#39;myflash&#39;)"><span class="ni-ic">🃏</span><span class="ni-lb">Mes flashcards</span></div>
-        <div class="ni" id="ni-docs" onclick="go(&#39;docs&#39;)"><span class="ni-ic">📎</span><span class="ni-lb">Documents adaptatifs</span></div>
+        <div class="ni" id="ni-mycours" onclick="go('mycours')"><span class="ni-ic">✏️</span><span class="ni-lb">Mes cours</span></div>
+        <div class="ni" id="ni-myflash" onclick="go('myflash')"><span class="ni-ic">🃏</span><span class="ni-lb">Mes flashcards</span></div>
+        <div class="ni" id="ni-docs" onclick="go('docs')"><span class="ni-ic">📎</span><span class="ni-lb">Documents adaptatifs</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG(&#39;tools&#39;)"><span class="ng-lbl">Outils</span><span class="ng-arr" id="na-tools">▾</span></div>
+      <div class="ng-hd" onclick="togNG('tools')"><span class="ng-lbl">Outils</span><span class="ng-arr" id="na-tools">▾</span></div>
       <div class="ng-items" id="ni-tools" style="max-height:500px">
-        <div class="ni" id="ni-map" onclick="go(&#39;map&#39;)"><span class="ni-ic">🗺️</span><span class="ni-lb">Monde 🌍</span></div>
-        <div class="ni" id="ni-news" onclick="go(&#39;news&#39;)"><span class="ni-ic">📰</span><span class="ni-lb">News géopo</span></div>
+        <div class="ni" id="ni-map" onclick="go('map')"><span class="ni-ic">🗺️</span><span class="ni-lb">Monde 🌍</span></div>
+        <div class="ni" id="ni-news" onclick="go('news')"><span class="ni-ic">📰</span><span class="ni-lb">News géopo</span></div>
       </div>
     </div>
   </nav>
@@ -709,7 +714,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <button class="sf-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
     <button class="sf-btn" onclick="openFontPicker()" title="Police du site">Aa</button>
     <span style="font-size:10px;color:var(--txt4);flex:1;text-align:center">GéoPrepa BCE</span>
-    <button class="sf-btn" onclick="go(&#39;screentime&#39;)">⏱</button>
+    <button class="sf-btn" onclick="go('screentime')">⏱</button>
   </div>
 </div>
 </aside>
@@ -733,24 +738,24 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 <div id="font-modal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:20px;box-shadow:var(--sh3);z-index:600;width:340px">
   <div style="font-size:13px;font-weight:700;margin-bottom:12px">🔤 Choisir la police du site</div>
   <div style="display:flex;flex-direction:column;gap:7px">
-    <div onclick="setFont(&#39;geist&#39;)" class="font-opt" data-f="geist">
-      <div style="font-family:&#39;Geist&#39;,sans-serif;font-size:17px;font-weight:700">Geist</div>
-      <div style="font-family:&#39;Geist&#39;,sans-serif;font-size:12px;color:var(--txt3)">Moderne · Technologique · Épuré (défaut)</div>
+    <div onclick="setFont('geist')" class="font-opt" data-f="geist">
+      <div style="font-family:'Geist',sans-serif;font-size:17px;font-weight:700">Geist</div>
+      <div style="font-family:'Geist',sans-serif;font-size:12px;color:var(--txt3)">Moderne · Technologique · Épuré (défaut)</div>
     </div>
-    <div onclick="setFont(&#39;dm&#39;)" class="font-opt" data-f="dm">
-      <div style="font-family:&#39;DM Sans&#39;,sans-serif;font-size:17px;font-weight:700">DM Sans</div>
-      <div style="font-family:&#39;DM Sans&#39;,sans-serif;font-size:12px;color:var(--txt3)">Humaniste · Lisible · Chaleureux</div>
+    <div onclick="setFont('dm')" class="font-opt" data-f="dm">
+      <div style="font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700">DM Sans</div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--txt3)">Humaniste · Lisible · Chaleureux</div>
     </div>
-    <div onclick="setFont(&#39;garamond&#39;)" class="font-opt" data-f="garamond">
-      <div style="font-family:&#39;EB Garamond&#39;,serif;font-size:17px;font-weight:700">EB Garamond</div>
-      <div style="font-family:&#39;EB Garamond&#39;,serif;font-size:12px;color:var(--txt3)">Classique · Académique · Élégant</div>
+    <div onclick="setFont('garamond')" class="font-opt" data-f="garamond">
+      <div style="font-family:'EB Garamond',serif;font-size:17px;font-weight:700">EB Garamond</div>
+      <div style="font-family:'EB Garamond',serif;font-size:12px;color:var(--txt3)">Classique · Académique · Élégant</div>
     </div>
-    <div onclick="setFont(&#39;spectral&#39;)" class="font-opt" data-f="spectral">
-      <div style="font-family:&#39;Spectral&#39;,serif;font-size:17px;font-weight:700">Spectral</div>
-      <div style="font-family:&#39;Spectral&#39;,serif;font-size:12px;color:var(--txt3)">Éditorial · Littéraire · Raffiné</div>
+    <div onclick="setFont('spectral')" class="font-opt" data-f="spectral">
+      <div style="font-family:'Spectral',serif;font-size:17px;font-weight:700">Spectral</div>
+      <div style="font-family:'Spectral',serif;font-size:12px;color:var(--txt3)">Éditorial · Littéraire · Raffiné</div>
     </div>
   </div>
-  <button class="btn btn-g" style="width:100%;margin-top:12px" onclick="document.getElementById(&#39;font-modal&#39;).style.display=&#39;none&#39;">Fermer</button>
+  <button class="btn btn-g" style="width:100%;margin-top:12px" onclick="document.getElementById('font-modal').style.display='none'">Fermer</button>
 </div>
 
 <style>
@@ -763,7 +768,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 <main class="mn">
   <div class="topbar">
     <button class="tb-tog" onclick="toggleSb()">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="7.25" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="11.5" width="14" height="1.5" rx=".75" fill="currentColor"></rect></svg>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="1.5" rx=".75" fill="currentColor"/><rect x="1" y="7.25" width="14" height="1.5" rx=".75" fill="currentColor"/><rect x="1" y="11.5" width="14" height="1.5" rx=".75" fill="currentColor"/></svg>
     </button>
     <div class="bc">
       <span class="bc-g" id="bc-g">Accueil</span>
@@ -772,7 +777,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     </div>
     <div class="tb-right">
       <div style="font-size:11px;color:var(--txt3);display:flex;align-items:center;gap:5px">
-        <span>🎯</span><span id="tb-obj" style="color: var(--txt3);">0/2 objectifs</span>
+        <span>🎯</span><span id="tb-obj">Aucun objectif</span>
         <button class="btn btn-g btn-xs" onclick="editObj()">✏️</button>
       </div>
       <div class="tb-search">
@@ -790,21 +795,21 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div style="background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:16px 18px;margin-bottom:16px">
       <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:3px">GéoPrepa BCE</div>
       <div style="font-family:var(--ffd);font-size:21px;font-weight:700;margin-bottom:3px;color:var(--txt)">Tableau de bord</div>
-      <div style="font-size:12px;color:var(--txt3)" id="dash-sub">10 jours avant le concours</div>
+      <div style="font-size:12px;color:var(--txt3)" id="dash-sub">—</div>
     </div>
     <div class="stat-row">
-      <div class="sc"><div class="sc-stripe" style="background:var(--acc)"></div><div class="sl">Chapitres vus</div><div class="sv" style="color:var(--acc)" id="st-chap">11</div><div class="ss">sur 30</div></div>
+      <div class="sc"><div class="sc-stripe" style="background:var(--acc)"></div><div class="sl">Chapitres vus</div><div class="sv" style="color:var(--acc)" id="st-chap">0</div><div class="ss">sur 30</div></div>
       <div class="sc"><div class="sc-stripe" style="background:var(--grn)"></div><div class="sl">Flashcards</div><div class="sv" style="color:var(--grn)" id="st-flash">0</div><div class="ss">validées</div></div>
       <div class="sc"><div class="sc-stripe" style="background:var(--gold)"></div><div class="sl">Score moyen</div><div class="sv" style="color:var(--gold)" id="st-score">—</div><div class="ss">/20 copies</div></div>
-      <div class="sc"><div class="sc-stripe" style="background:var(--red)"></div><div class="sl">Urgent</div><div class="sv" style="color:var(--red)" id="st-todo">7</div><div class="ss">chapitres</div></div>
+      <div class="sc"><div class="sc-stripe" style="background:var(--red)"></div><div class="sl">Urgent</div><div class="sv" style="color:var(--red)" id="st-todo">0</div><div class="ss">chapitres</div></div>
     </div>
     <div class="g2" style="margin-bottom:13px">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
           <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3)">Progression</span>
-          <span style="font-size:11px;color:var(--acc);cursor:pointer" onclick="go(&#39;cours&#39;)">Voir tout →</span>
+          <span style="font-size:11px;color:var(--acc);cursor:pointer" onclick="go('cours')">Voir tout →</span>
         </div>
-        <div id="dash-prog"><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 1</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 2</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 5</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 6</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 7</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 8</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 9</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--brd2)">0%</span></div><div class="pb"><div class="pf" style="width:0%;background:var(--brd2)"></div></div></div></div>
+        <div id="dash-prog"></div>
       </div>
       <div class="card">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:9px">Scores copies</div>
@@ -813,7 +818,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     </div>
     <div class="card">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:11px">Accès rapides</div>
-      <div class="g4" id="dash-actions"><div onclick="go(&#39;cours&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📖</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Cours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">30 chapitres</div></div><div onclick="go(&#39;fiches&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📋</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Fiches IA</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Synthèses</div></div><div onclick="go(&#39;flash&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🃏</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Flashcards</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">62 cartes</div></div><div onclick="go(&#39;training&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">✍️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Entraînement</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Correction BCE</div></div><div onclick="go(&#39;sim&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🚨</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Concours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Mode réel</div></div><div onclick="go(&#39;copies&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📊</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Copies</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">0 analysées</div></div><div onclick="go(&#39;map&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🗺️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Carte &amp; Globe</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">3D dispo</div></div><div onclick="go(&#39;news&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📰</div><div style="font-size:11px;font-weight:700;color:var(--txt)">News géopo</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Actualité IA</div></div></div>
+      <div class="g4" id="dash-actions"></div>
     </div>
   </div>
 
@@ -824,10 +829,10 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div style="display:flex;gap:6px">
         <button class="btn btn-g btn-sm" id="cours-new-folder-btn" onclick="pdfCreateFolder()" style="display:none">📁 Dossier</button>
         <button class="btn btn-g btn-sm" id="cours-new-subfolder-btn" onclick="pdfCreateSubFolder()" style="display:none">📁 Sous-dossier</button>
-        <button class="btn btn-p btn-sm" onclick="document.getElementById(&#39;pdf-upload-inp&#39;).click()" id="cours-add-pdf-btn">📎 Ajouter un PDF</button>
+        <button class="btn btn-p btn-sm" onclick="document.getElementById('pdf-upload-inp').click()" id="cours-add-pdf-btn">📎 Ajouter un PDF</button>
       </div>
     </div>
-    <input type="file" id="pdf-upload-inp" accept=".pdf" style="display:none" multiple="" onchange="uploadPDFs(this.files)">
+    <input type="file" id="pdf-upload-inp" accept=".pdf" style="display:none" multiple onchange="uploadPDFs(this.files)">
     <!-- Breadcrumb -->
     <div id="pdf-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)">
       <span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="pdfGoRoot()">📂 Cours</span>
@@ -890,13 +895,13 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   <div class="pg" id="pg-frise">
     <div class="page-t">Frise chronologique</div>
     <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
-      <button class="btn btn-p btn-sm" onclick="filterFrise(&#39;all&#39;)">Tout</button>
-      <button class="btn btn-red btn-sm" onclick="filterFrise(&#39;must&#39;)">📍 Indispensables</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;w&#39;)">⚔️ Guerres</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;p&#39;)">☮️ Paix</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;c&#39;)">💥 Crises</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;o&#39;)">🏛️ Orgs</button>
-            <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;a&#39;)">📌 Autres</button>
+      <button class="btn btn-p btn-sm" onclick="filterFrise('all')">Tout</button>
+      <button class="btn btn-red btn-sm" onclick="filterFrise('must')">📍 Indispensables</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise('w')">⚔️ Guerres</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise('p')">☮️ Paix</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise('c')">💥 Crises</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise('o')">🏛️ Orgs</button>
+            <button class="btn btn-g btn-sm" onclick="filterFrise('a')">📌 Autres</button>
     </div>
     <div class="card" style="margin-bottom:11px">
       <div class="frise-wrap"><div class="frise-line"></div><div id="frise-items"></div></div>
@@ -905,10 +910,10 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="card">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:9px">➕ Ajouter une date</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;align-items:end">
-        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Date début *</label><input id="fa-d" type="text" placeholder="ex: 1939" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)addFrise()"></div>
-        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Date fin (optionnel)</label><input id="fa-d2" type="text" placeholder="ex: 1945" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)addFrise()"></div>
-        <div style="grid-column:span 2"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Événement *</label><input id="fa-e" type="text" placeholder="Nom de l&#39;événement…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)addFrise()"></div>
-        <div style="grid-column:span 2"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Détail</label><input id="fa-det" type="text" placeholder="Contexte, conséquences…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)addFrise()"></div>
+        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Date début *</label><input id="fa-d" type="text" placeholder="ex: 1939" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
+        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Date fin (optionnel)</label><input id="fa-d2" type="text" placeholder="ex: 1945" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
+        <div style="grid-column:span 2"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Événement *</label><input id="fa-e" type="text" placeholder="Nom de l'événement…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
+        <div style="grid-column:span 2"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Détail</label><input id="fa-det" type="text" placeholder="Contexte, conséquences…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
         <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Type</label><select id="fa-t" style="width:100%;padding:5px 6px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="o">🏛️ Institution</option><option value="w">⚔️ Guerre/Conflit</option><option value="c">💥 Crise</option><option value="p">☮️ Paix/Accord</option><option value="a">📌 Autre</option></select></div>
         <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Niveau</label><select id="fa-m" style="width:100%;padding:5px 6px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="true">🔴 Indispensable</option><option value="false">🟡 Secondaire</option></select></div>
         <div style="display:flex;align-items:flex-end"><button class="btn btn-p" onclick="addFrise()" style="width:100%">➕ Ajouter</button></div>
@@ -961,7 +966,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div style="font-size:11px;color:var(--txt3);margin-bottom:9px" id="tr-m"></div>
       <hr>
       <div class="ex-q" id="tr-q"></div>
-      <textarea id="tr-a" placeholder="Définition → Argument 1 (auteur + exemple daté) → Argument 2 → Nuance" oninput="M.set(&#39;train_draft&#39;,this.value);document.getElementById(&#39;tr-cc&#39;).textContent=this.value.length+&#39; car.&#39;"></textarea>
+      <textarea id="tr-a" placeholder="Définition → Argument 1 (auteur + exemple daté) → Argument 2 → Nuance" oninput="M.set('train_draft',this.value);document.getElementById('tr-cc').textContent=this.value.length+' car.'"></textarea>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <button class="btn btn-p" onclick="submitTr()">⚡ Correction IA</button>
         <button class="btn btn-g" onclick="newQ()">↻ Nouvelle</button>
@@ -1035,7 +1040,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="page-s">Upload tes copies annotées — le système apprend le style de ton prof</div>
     <div class="g2" style="margin-bottom:14px">
       <div>
-        <div class="upload-z" onclick="document.getElementById(&#39;copy-file&#39;).click()" ondragover="event.preventDefault();this.classList.add(&#39;drag&#39;)" ondragleave="this.classList.remove(&#39;drag&#39;)" ondrop="handleDrop(event,&#39;copy&#39;)">
+        <div class="upload-z" onclick="document.getElementById('copy-file').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event,'copy')">
           <div style="font-size:28px;margin-bottom:7px">📄</div>
           <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:var(--txt)">Déposer une copie annotée</div>
           <div style="font-size:11px;color:var(--txt3)">PDF, JPG, PNG</div>
@@ -1059,7 +1064,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div class="card" style="border-top:2px solid var(--red)">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--red);margin-bottom:9px">🔴 Urgent</div>
         <div id="rev-u"></div>
-        <button class="btn btn-p" style="width:100%;margin-top:9px;font-size:12px" onclick="go(&#39;training&#39;)">▶ Réviser</button>
+        <button class="btn btn-p" style="width:100%;margin-top:9px;font-size:12px" onclick="go('training')">▶ Réviser</button>
       </div>
       <div class="card" style="border-top:2px solid var(--org)">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--org);margin-bottom:9px">🟠 À consolider</div>
@@ -1110,7 +1115,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="btn btn-p btn-sm" onclick="mcCreateFileInFolder()">📄 Nouveau fichier</button>
     </div>
     <!-- Finder Mes Cours -->
-    <div id="mc-finder-view" style="padding:20px 24px;min-height:200px"></div>
+    <div id="mc-finder-view" style="padding:20px 24px;min-height:200px" ></div>
     <!-- Barre éditeur (cachée par défaut) -->
     <div id="mc-editor-bar" style="display:none;background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 20px;align-items:center;gap:8px;flex-wrap:wrap">
       <button onclick="mcCloseEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:4px 8px;border-radius:5px">← Dossier</button>
@@ -1122,47 +1127,50 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
     <!-- Zone d'écriture -->
     <div id="mc-editor-zone" style="display:none;max-width:700px;margin:0 auto;padding:32px 32px 160px">
-      <input type="text" id="mc-title" placeholder="Titre du cours…" style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
+      <input type="text" id="mc-title" placeholder="Titre du cours…"
+        style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
       <div style="height:1px;background:var(--brd);margin-bottom:28px"></div>
-      <div id="mc-body" class="my-editor-body" contenteditable="true" style="min-height:50vh;font-size:16px;line-height:1.9;color:var(--txt2);outline:none;word-break:break-word" oninput="M.set(&#39;mc_draft_body&#39;,this.innerHTML)">
+      <div id="mc-body" class="my-editor-body" contenteditable="true"
+        style="min-height:50vh;font-size:16px;line-height:1.9;color:var(--txt2);outline:none;word-break:break-word"
+        oninput="M.set('mc_draft_body',this.innerHTML)">
       </div>
       <div style="height:80px"></div>
     </div>
 
     <!-- Toolbar fixe en bas au centre -->
     <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 18px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:99999">
-      <button class="rtb" onclick="execCmd(&#39;bold&#39;)"><strong>B</strong></button>
-      <button class="rtb" onclick="execCmd(&#39;italic&#39;)"><em>I</em></button>
-      <button class="rtb" onclick="execCmd(&#39;underline&#39;)"><u>U</u></button>
+      <button class="rtb" onclick="execCmd('bold')"><strong>B</strong></button>
+      <button class="rtb" onclick="execCmd('italic')"><em>I</em></button>
+      <button class="rtb" onclick="execCmd('underline')"><u>U</u></button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execCmd(&#39;formatBlock&#39;,&#39;h2&#39;)" style="font-size:10px;font-weight:700">Grand</button>
-      <button class="rtb" onclick="execCmd(&#39;formatBlock&#39;,&#39;h3&#39;)" style="font-size:10px">Moyen</button>
-      <button class="rtb" onclick="execCmd(&#39;formatBlock&#39;,&#39;p&#39;)" style="font-size:10px">Normal</button>
+      <button class="rtb" onclick="execCmd('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execCmd('formatBlock','h3')" style="font-size:10px">Moyen</button>
+      <button class="rtb" onclick="execCmd('formatBlock','p')" style="font-size:10px">Normal</button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execCmd(&#39;insertUnorderedList&#39;)">• L</button>
-      <button class="rtb" onclick="execCmd(&#39;insertOrderedList&#39;)">1.</button>
+      <button class="rtb" onclick="execCmd('insertUnorderedList')">• L</button>
+      <button class="rtb" onclick="execCmd('insertOrderedList')">1.</button>
       <div class="rtb-sep"></div>
-      <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd(&#39;foreColor&#39;,&#39;#8B4A6B&#39;)"></div>
-      <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2C5F8A&#39;)"></div>
-      <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2D6B4A&#39;)"></div>
-      <div class="rtb-c" style="background:#A63D40" onclick="execCmd(&#39;foreColor&#39;,&#39;#A63D40&#39;)"></div>
+      <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd('foreColor','#8B4A6B')"></div>
+      <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd('foreColor','#2C5F8A')"></div>
+      <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd('foreColor','#2D6B4A')"></div>
+      <div class="rtb-c" style="background:#A63D40" onclick="execCmd('foreColor','#A63D40')"></div>
       <div class="rtb-sep"></div>
       <button class="rtb" onclick="insertImage()">🖼️</button>
-      <button class="rtb" onclick="execCmd(&#39;removeFormat&#39;)">Aa</button>
+      <button class="rtb" onclick="execCmd('removeFormat')">Aa</button>
           <div class="rtb-sep"></div>
-          <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2C5F8A&#39;)" title="Bleu nuit"></div>
-          <div class="rtb-c" style="background:#6B5EA8" onclick="execCmd(&#39;foreColor&#39;,&#39;#6B5EA8&#39;)" title="Lavande"></div>
-          <div class="rtb-c" style="background:#A63D40" onclick="execCmd(&#39;foreColor&#39;,&#39;#A63D40&#39;)" title="Rouge"></div>
-          <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd(&#39;foreColor&#39;,&#39;#8B4A6B&#39;)" title="Mauve"></div>
-          <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2D6B4A&#39;)" title="Vert"></div>
-          <div class="rtb-c" style="background:#6B3A2A" onclick="execCmd(&#39;foreColor&#39;,&#39;#6B3A2A&#39;)" title="Marron"></div>
+          <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd('foreColor','#2C5F8A')" title="Bleu nuit"></div>
+          <div class="rtb-c" style="background:#6B5EA8" onclick="execCmd('foreColor','#6B5EA8')" title="Lavande"></div>
+          <div class="rtb-c" style="background:#A63D40" onclick="execCmd('foreColor','#A63D40')" title="Rouge"></div>
+          <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd('foreColor','#8B4A6B')" title="Mauve"></div>
+          <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd('foreColor','#2D6B4A')" title="Vert"></div>
+          <div class="rtb-c" style="background:#6B3A2A" onclick="execCmd('foreColor','#6B3A2A')" title="Marron"></div>
           <div class="rtb-sep"></div>
-          <div class="rtb-c" style="background:#BDD7F5;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#BDD7F5&#39;)" title="Surligner bleu">S</div>
-          <div class="rtb-c" style="background:#F5E6BD;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#F5E6BD&#39;)" title="Surligner jaune">S</div>
-          <div class="rtb-c" style="background:#D4F5BD;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#D4F5BD&#39;)" title="Surligner vert">S</div>
-          <div class="rtb-c" style="background:#F5BDD4;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#F5BDD4&#39;)" title="Surligner rose">S</div>
-      <button class="rtb" onclick="execCmd(&#39;undo&#39;)">↩</button>
-      <button class="rtb" onclick="execCmd(&#39;redo&#39;)">↪</button>
+          <div class="rtb-c" style="background:#BDD7F5;border:1px solid #aaa" onclick="execCmd('hiliteColor','#BDD7F5')" title="Surligner bleu">S</div>
+          <div class="rtb-c" style="background:#F5E6BD;border:1px solid #aaa" onclick="execCmd('hiliteColor','#F5E6BD')" title="Surligner jaune">S</div>
+          <div class="rtb-c" style="background:#D4F5BD;border:1px solid #aaa" onclick="execCmd('hiliteColor','#D4F5BD')" title="Surligner vert">S</div>
+          <div class="rtb-c" style="background:#F5BDD4;border:1px solid #aaa" onclick="execCmd('hiliteColor','#F5BDD4')" title="Surligner rose">S</div>
+      <button class="rtb" onclick="execCmd('undo')">↩</button>
+      <button class="rtb" onclick="execCmd('redo')">↪</button>
     </div>
 
     <!-- Cours sauvegardés (legacy, masqué) -->
@@ -1186,10 +1194,10 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
           <input type="text" id="mf-c" placeholder="Chapitre" style="flex:1;padding:4px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
         </div>
         <div style="display:flex;gap:6px;margin-bottom:8px">
-          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById(&#39;mf-img-inp&#39;).click()">🖼️ Image</button>
-          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById(&#39;mf-pdf-inp&#39;).click()">📄 PDF</button>
-          <input type="file" id="mf-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="attachToFlash(this,&#39;image&#39;)">
-          <input type="file" id="mf-pdf-inp" accept=".pdf" style="display:none" onchange="attachToFlash(this,&#39;pdf&#39;)">
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-img-inp').click()">🖼️ Image</button>
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-pdf-inp').click()">📄 PDF</button>
+          <input type="file" id="mf-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="attachToFlash(this,'image')">
+          <input type="file" id="mf-pdf-inp" accept=".pdf" style="display:none" onchange="attachToFlash(this,'pdf')">
         </div>
         <div id="mf-attach" style="margin-bottom:8px;font-size:11px;color:var(--txt3)"></div>
         <button class="btn btn-p" style="width:100%" onclick="saveMyFlash()">💾 Ajouter au deck</button>
@@ -1204,7 +1212,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   <div class="pg" id="pg-docs">
     <div class="page-t">Documents adaptatifs</div>
     <div class="page-s">Upload n'importe quel document — fiché automatiquement par IA</div>
-    <div class="upload-z" style="margin-bottom:13px" onclick="document.getElementById(&#39;doc-file&#39;).click()">
+    <div class="upload-z" style="margin-bottom:13px" onclick="document.getElementById('doc-file').click()">
       <div style="font-size:28px;margin-bottom:7px">📎</div>
       <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:var(--txt)">Ajouter un document</div>
       <div style="font-size:11px;color:var(--txt3)">Cours, colle, rapport de jury, article…</div>
@@ -1220,12 +1228,12 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
     <!-- Filtres -->
     <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px">
-      <div onclick="filterMapRegion(&#39;all&#39;)" id="mr-all" style="display:flex;align-items:center;gap:5px;background:var(--acc-l);border:1px solid var(--acc-m);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:600;color:var(--acc);cursor:pointer;transition:all .1s">🌐 Toutes les régions</div>
-      <div onclick="filterMapRegion(&#39;europe&#39;)" id="mr-europe" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🇪🇺 Europe</div>
-      <div onclick="filterMapRegion(&#39;ameriques&#39;)" id="mr-ameriques" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌎 Amériques</div>
-      <div onclick="filterMapRegion(&#39;asie&#39;)" id="mr-asie" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌏 Asie-Pacifique</div>
-      <div onclick="filterMapRegion(&#39;afrique&#39;)" id="mr-afrique" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌍 Afrique</div>
-      <div onclick="filterMapRegion(&#39;moyen-orient&#39;)" id="mr-moyen-orient" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌙 PMO</div>
+      <div onclick="filterMapRegion('all')" id="mr-all" style="display:flex;align-items:center;gap:5px;background:var(--acc-l);border:1px solid var(--acc-m);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:600;color:var(--acc);cursor:pointer;transition:all .1s">🌐 Toutes les régions</div>
+      <div onclick="filterMapRegion('europe')" id="mr-europe" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🇪🇺 Europe</div>
+      <div onclick="filterMapRegion('ameriques')" id="mr-ameriques" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌎 Amériques</div>
+      <div onclick="filterMapRegion('asie')" id="mr-asie" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌏 Asie-Pacifique</div>
+      <div onclick="filterMapRegion('afrique')" id="mr-afrique" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌍 Afrique</div>
+      <div onclick="filterMapRegion('moyen-orient')" id="mr-moyen-orient" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌙 PMO</div>
     </div>
 
     <!-- Fiches régions -->
@@ -1238,12 +1246,12 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="page-s">Actualités mondiales en lien avec le programme BCE · IA</div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;flex-wrap:wrap;gap:7px">
       <div style="display:flex;gap:5px;flex-wrap:wrap">
-        <button class="btn btn-p btn-sm" onclick="loadNews(&#39;all&#39;)">Monde</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;europe&#39;)">🇪🇺 Europe</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;asie&#39;)">🌏 Asie</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;moyen-orient&#39;)">🌙 PMO</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;afrique&#39;)">🌍 Afrique</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;ameriques&#39;)">🌎 Amériques</button>
+        <button class="btn btn-p btn-sm" onclick="loadNews('all')">Monde</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews('europe')">🇪🇺 Europe</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews('asie')">🌏 Asie</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews('moyen-orient')">🌙 PMO</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews('afrique')">🌍 Afrique</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews('ameriques')">🌎 Amériques</button>
       </div>
       <label style="display:flex;align-items:center;gap:5px;font-size:11px;cursor:pointer"><input type="checkbox" id="news-auto" style="accent-color:var(--acc)" onchange="toggleNewsAuto(this.checked)"><span style="color:var(--txt3)">Auto 30 min</span></label>
     </div>
@@ -1255,12 +1263,12 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     
     <!-- Barre top -->
     <div style="position:sticky;top:0;z-index:10;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:12px">
-      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px;transition:background .1s" onmouseover="this.style.background=&#39;var(--surf2)&#39;" onmouseout="this.style.background=&#39;&#39;">← Fiches</button>
+      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px;transition:background .1s" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">&#8592; Fiches</button>
       <div style="flex:1"></div>
       <select id="fe-prio" style="padding:5px 10px;border:1px solid var(--brd);border-radius:5px;font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
-        <option value="indispensable">🔴 Indispensable</option>
-        <option value="tres-frequent">🟠 Très fréquent</option>
-        <option value="frequent">🟨 Fréquent</option>
+        <option value="indispensable">&#128308; Indispensable</option>
+        <option value="tres-frequent">&#128992; Très fréquent</option>
+        <option value="frequent">&#129000; Fréquent</option>
       </select>
       <button onclick="saveFicheEditor()" style="background:var(--acc);color:#fff;border:none;border-radius:5px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">Sauvegarder</button>
     </div>
@@ -1269,14 +1277,16 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div style="max-width:660px;margin:0 auto;padding:72px 0 160px">
 
       <!-- Titre -->
-      <div id="fe-title" contenteditable="true" style="font-family:var(--ffd);font-size:42px;font-weight:700;color:var(--txt);outline:none;margin-bottom:24px;line-height:1.15;letter-spacing:-.03em;min-height:56px;word-break:break-word">
+      <div id="fe-title" contenteditable="true"
+        style="font-family:var(--ffd);font-size:42px;font-weight:700;color:var(--txt);outline:none;margin-bottom:24px;line-height:1.15;letter-spacing:-.03em;min-height:56px;word-break:break-word">
       </div>
 
       <!-- Séparateur fin -->
       <div style="height:1px;background:var(--brd);margin-bottom:32px"></div>
 
       <!-- Corps -->
-      <div id="fe-body" contenteditable="true" style="font-size:16px;line-height:2;color:var(--txt2);outline:none;min-height:60vh;word-break:break-word">
+      <div id="fe-body" contenteditable="true"
+        style="font-size:16px;line-height:2;color:var(--txt2);outline:none;min-height:60vh;word-break:break-word">
       </div>
 
       <!-- Zone PDF/images attachés -->
@@ -1286,24 +1296,24 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
     <!-- Toolbar flottante centrée -->
     <div style="position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 20px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:200">
-      <button class="rtb" onclick="execFE(&#39;bold&#39;)"><strong>B</strong></button>
-      <button class="rtb" onclick="execFE(&#39;italic&#39;)"><em>I</em></button>
-      <button class="rtb" onclick="execFE(&#39;underline&#39;)"><u>U</u></button>
+      <button class="rtb" onclick="execFE('bold')"><strong>B</strong></button>
+      <button class="rtb" onclick="execFE('italic')"><em>I</em></button>
+      <button class="rtb" onclick="execFE('underline')"><u>U</u></button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execFE(&#39;formatBlock&#39;,&#39;h2&#39;)" style="font-size:10px;font-weight:700">Grand</button>
-      <button class="rtb" onclick="execFE(&#39;formatBlock&#39;,&#39;h3&#39;)" style="font-size:10px">Moyen</button>
-      <button class="rtb" onclick="execFE(&#39;formatBlock&#39;,&#39;p&#39;)" style="font-size:10px">Normal</button>
+      <button class="rtb" onclick="execFE('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execFE('formatBlock','h3')" style="font-size:10px">Moyen</button>
+      <button class="rtb" onclick="execFE('formatBlock','p')" style="font-size:10px">Normal</button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execFE(&#39;insertUnorderedList&#39;)">• L</button>
-      <button class="rtb" onclick="insertFEQuote()">❞</button>
+      <button class="rtb" onclick="execFE('insertUnorderedList')">&#8226; L</button>
+      <button class="rtb" onclick="insertFEQuote()">&#10078;</button>
       <div class="rtb-sep"></div>
-      <div class="rtb-c" style="background:#8B4A6B" onclick="execFE(&#39;foreColor&#39;,&#39;#8B4A6B&#39;)"></div>
-      <div class="rtb-c" style="background:#2C5F8A" onclick="execFE(&#39;foreColor&#39;,&#39;#2C5F8A&#39;)"></div>
-      <div class="rtb-c" style="background:#2D6B4A" onclick="execFE(&#39;foreColor&#39;,&#39;#2D6B4A&#39;)"></div>
-      <div class="rtb-c" style="background:#A63D40" onclick="execFE(&#39;foreColor&#39;,&#39;#A63D40&#39;)"></div>
+      <div class="rtb-c" style="background:#8B4A6B" onclick="execFE('foreColor','#8B4A6B')"></div>
+      <div class="rtb-c" style="background:#2C5F8A" onclick="execFE('foreColor','#2C5F8A')"></div>
+      <div class="rtb-c" style="background:#2D6B4A" onclick="execFE('foreColor','#2D6B4A')"></div>
+      <div class="rtb-c" style="background:#A63D40" onclick="execFE('foreColor','#A63D40')"></div>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="document.getElementById(&#39;fe-img-inp&#39;).click()" title="Image">📷</button>
-      <button class="rtb" onclick="document.getElementById(&#39;fe-pdf-inp&#39;).click()" title="PDF">📄</button>
+      <button class="rtb" onclick="document.getElementById('fe-img-inp').click()" title="Image">&#128247;</button>
+      <button class="rtb" onclick="document.getElementById('fe-pdf-inp').click()" title="PDF">&#128196;</button>
     </div>
 
     <input type="file" id="fe-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="handleFEImage(this)">
@@ -3694,7 +3704,7 @@ const DEMO_FICHE_BODY = `
 `;
 
 (function injectDemoFlashcards(){
-  const key = 'geoprepa_demo_flash_injected_v1';
+  const key = 'geoprepa_demo_flash_injected_v2';
   if(localStorage.getItem(key)) return;
   // Clear all existing my_flashcards and replace with Démographie cards
   const cards = FLASHCARDS.map(f => ({...f, _demo: true}));
@@ -3703,7 +3713,7 @@ const DEMO_FICHE_BODY = `
 })();
 
 (function injectDemoFiche(){
-  const key = 'geoprepa_demo_fiche_injected_v1';
+  const key = 'geoprepa_demo_fiche_injected_v2';
   if(localStorage.getItem(key)) return; // déjà injecté — on ne touche pas
   const fiches = JSON.parse(localStorage.getItem('geo_v5_my_fiches') || '[]');
   // Vérifie si la fiche existe déjà
@@ -4314,5 +4324,5 @@ function ficheMoveToFolder(ficheIdx, srcFolder, dstFolderId){
 
 
 </script>
-
-</body></html>
+</body>
+</html>
