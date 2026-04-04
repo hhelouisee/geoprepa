@@ -400,6 +400,8 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 }
 .finder-item:hover { background: rgba(0,0,0,.05); }
 .finder-item:active { background: rgba(0,122,255,.1); transform: scale(.97); }
+.finder-item.drag-over { background: rgba(244,206,206,.6) !important; border: 2px dashed var(--folder-pink-dark); border-radius: 8px; transform: scale(1.05); }
+.finder-item.dragging { opacity: .4; transform: scale(.95); }
 .finder-item.selected { background: rgba(59,130,246,.12); }
 .finder-folder-icon {
   width: 62px;
@@ -4284,6 +4286,123 @@ function showCtxMenu(e, items){
   setTimeout(()=>document.addEventListener('click',closeCtxMenu,{once:true}),10);
 }
 function closeCtxMenu(){const m=document.getElementById('_finder_ctx');if(m)m.remove();}
+// ══════════════════════════════════════════════════════
+// DRAG & DROP — FINDER
+// ══════════════════════════════════════════════════════
+
+// Patch renderMcFinder to add drag/drop via event delegation after render
+const _origRenderMcFinder = renderMcFinder;
+renderMcFinder = function(){
+  _origRenderMcFinder();
+  const el = document.getElementById('mc-finder-view');
+  if(!el) return;
+
+  // Make files draggable
+  el.querySelectorAll('.finder-item').forEach(item => {
+    const isFolder = item.querySelector('.finder-folder-icon, .finder-folder');
+    const fileClick = item.getAttribute('onclick')||'';
+    if(!isFolder && fileClick.includes('mcOpenFile')) {
+      // Extract folder and file id from onclick
+      const m = fileClick.match(/mcOpenFile\('([^']+)','([^']+)'\)/);
+      if(!m) return;
+      const [,folderId, fileId] = m;
+      item.setAttribute('draggable','true');
+      item.addEventListener('dragstart', e=>{
+        e.dataTransfer.setData('mc-file-id', fileId);
+        e.dataTransfer.setData('mc-src-folder', folderId);
+        item.classList.add('dragging');
+      });
+      item.addEventListener('dragend', ()=>item.classList.remove('dragging'));
+    }
+    if(isFolder) {
+      const m = (item.getAttribute('onclick')||'').match(/mcOpenFolder\('([^']+)'/);
+      if(!m) return;
+      const folderId = m[1];
+      item.addEventListener('dragover', e=>{ e.preventDefault(); item.classList.add('drag-over'); });
+      item.addEventListener('dragleave', ()=>item.classList.remove('drag-over'));
+      item.addEventListener('drop', e=>{
+        e.preventDefault();
+        item.classList.remove('drag-over');
+        const fileId = e.dataTransfer.getData('mc-file-id');
+        const srcFolder = e.dataTransfer.getData('mc-src-folder');
+        if(!fileId || srcFolder === folderId) return;
+        mcMoveFile(srcFolder, folderId, fileId);
+      });
+    }
+  });
+};
+
+// Patch renderFicheFinder similarly
+const _origRenderFicheFinder = renderFicheFinder;
+renderFicheFinder = function(){
+  _origRenderFicheFinder();
+  const el = document.getElementById('fiche-finder');
+  if(!el) return;
+
+  el.querySelectorAll('.finder-item').forEach(item => {
+    const isFolder = item.querySelector('.finder-folder-icon, .finder-folder');
+    const fileClick = item.getAttribute('onclick')||'';
+    if(!isFolder && fileClick.includes('openFichePersoDetail')) {
+      const m = fileClick.match(/openFichePersoDetail\((\d+)\)/);
+      if(!m) return;
+      const idx = m[1];
+      item.setAttribute('draggable','true');
+      item.addEventListener('dragstart', e=>{
+        e.dataTransfer.setData('fi-idx', idx);
+        e.dataTransfer.setData('fi-src-folder', ficheCurFolder||'');
+        item.classList.add('dragging');
+      });
+      item.addEventListener('dragend', ()=>item.classList.remove('dragging'));
+    }
+    if(isFolder) {
+      const m = (item.getAttribute('onclick')||'').match(/ficheOpenFolder\('([^']+)'/);
+      if(!m) return;
+      const folderId = m[1];
+      item.addEventListener('dragover', e=>{ e.preventDefault(); item.classList.add('drag-over'); });
+      item.addEventListener('dragleave', ()=>item.classList.remove('drag-over'));
+      item.addEventListener('drop', e=>{
+        e.preventDefault();
+        item.classList.remove('drag-over');
+        const ficheIdx = parseInt(e.dataTransfer.getData('fi-idx'));
+        const srcFolder = e.dataTransfer.getData('fi-src-folder');
+        if(isNaN(ficheIdx)) return;
+        ficheMoveToFolder(ficheIdx, srcFolder, folderId);
+      });
+    }
+  });
+};
+
+// Move MC file between folders
+function mcMoveFile(srcFolderId, dstFolderId, fileId){
+  const d = mcGetData();
+  const srcFiles = d.files[srcFolderId]||[];
+  const file = srcFiles.find(f=>f.id===fileId);
+  if(!file) return;
+  d.files[srcFolderId] = srcFiles.filter(f=>f.id!==fileId);
+  if(!d.files[dstFolderId]) d.files[dstFolderId]=[];
+  d.files[dstFolderId].unshift(file);
+  mcSaveData(d);
+  mcGoRoot();
+  showToast('✅ Fichier déplacé vers '+( d.folders.find(f=>f.id===dstFolderId)?.name||dstFolderId));
+}
+
+// Move fiche to folder
+function ficheMoveToFolder(ficheIdx, srcFolder, dstFolderId){
+  const d = ficheGetData();
+  // Remove from src folder if it was in one
+  if(srcFolder){
+    d.files[srcFolder] = (d.files[srcFolder]||[]).filter(r=>r.ficheIdx!==ficheIdx);
+  }
+  if(!d.files[dstFolderId]) d.files[dstFolderId]=[];
+  // Avoid duplicates
+  if(!d.files[dstFolderId].some(r=>r.ficheIdx===ficheIdx)){
+    d.files[dstFolderId].unshift({ficheIdx, id:'fi_'+Date.now()});
+  }
+  ficheSaveData(d);
+  ficheGoRoot();
+  showToast('✅ Fiche déplacée vers '+(d.folders.find(f=>f.id===dstFolderId)?.name||dstFolderId));
+}
+
 
 
 </script>
