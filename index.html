@@ -372,6 +372,231 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   padding-top: max(10px, env(safe-area-inset-top)) !important;
 }
 
+
+/* ── FINDER STYLE ───────────────────────────────────── */
+:root {
+  --folder-pink: #f2c4ce;
+  --folder-pink-dark: #e8a0b0;
+  --folder-pink-bg: #fdf0f2;
+  --folder-pink-border: #f0b8c6;
+}
+.finder-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 4px 0;
+}
+.finder-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 88px;
+  cursor: pointer;
+  padding: 8px 6px 6px;
+  border-radius: 8px;
+  transition: background .12s;
+  user-select: none;
+  position: relative;
+}
+.finder-item:hover { background: rgba(0,0,0,.05); }
+.finder-item:active { background: rgba(0,122,255,.1); transform: scale(.97); }
+.finder-item.selected { background: rgba(59,130,246,.12); }
+.finder-folder-icon {
+  width: 62px;
+  height: 52px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.finder-folder-icon svg { width: 62px; height: 52px; }
+.finder-file-icon {
+  width: 48px;
+  height: 58px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.finder-file-icon svg { width: 48px; height: 58px; }
+.finder-label {
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--txt);
+  text-align: center;
+  word-break: break-word;
+  max-width: 80px;
+  line-height: 1.3;
+}
+.finder-label-edit {
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+  border: 1px solid var(--acc);
+  border-radius: 3px;
+  outline: none;
+  width: 76px;
+  padding: 1px 3px;
+  background: var(--surf);
+  color: var(--txt);
+}
+.finder-ctx-menu {
+  position: fixed;
+  background: var(--surf);
+  border: 1px solid var(--brd);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.15);
+  padding: 4px 0;
+  z-index: 9999;
+  min-width: 160px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.finder-ctx-item {
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--txt);
+}
+.finder-ctx-item:hover { background: var(--surf2); }
+.finder-ctx-item.danger { color: var(--red); }
+.finder-ctx-sep { height: 1px; background: var(--brd); margin: 3px 0; }
+.finder-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.finder-back-btn {
+  background: var(--surf2);
+  border: 1px solid var(--brd);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--txt2);
+}
+.finder-back-btn:disabled { opacity: .3; cursor: default; }
+
+
+/* ── FINDER STYLE ─────────────────────────────────────── */
+:root {
+  --folder-pink: #f5cece;
+  --folder-pink-dark: #e8b4b4;
+  --folder-pink-light: #fce8e8;
+  --folder-pink-shadow: rgba(245,206,206,.5);
+}
+.finder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  padding: 4px;
+}
+.finder-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .12s;
+  position: relative;
+  user-select: none;
+}
+.finder-item:hover { background: rgba(0,0,0,.05); }
+.finder-item.selected { background: rgba(0,122,255,.12); }
+[data-theme="dark"] .finder-item:hover { background: rgba(255,255,255,.07); }
+[data-theme="dark"] .finder-item.selected { background: rgba(0,122,255,.25); }
+.finder-folder {
+  width: 64px;
+  height: 54px;
+  position: relative;
+  flex-shrink: 0;
+}
+.finder-folder-body {
+  width: 64px;
+  height: 48px;
+  background: linear-gradient(160deg, var(--folder-pink-light) 0%, var(--folder-pink) 60%);
+  border-radius: 4px 6px 6px 6px;
+  position: absolute;
+  bottom: 0;
+  box-shadow: 0 2px 10px var(--folder-pink-shadow), inset 0 1px 0 rgba(255,255,255,.6);
+}
+.finder-folder-tab {
+  width: 26px;
+  height: 10px;
+  background: var(--folder-pink-dark);
+  border-radius: 3px 3px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.finder-folder-shine {
+  position: absolute;
+  top: 14px;
+  left: 6px;
+  right: 6px;
+  height: 14px;
+  background: linear-gradient(to bottom, rgba(255,255,255,.35), transparent);
+  border-radius: 2px;
+}
+.finder-file-icon {
+  width: 52px;
+  height: 62px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px 8px 4px 4px;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  flex-shrink: 0;
+}
+.finder-file-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: #e8e8e8;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0 8px 0 4px;
+}
+.finder-file-lines {
+  position: absolute;
+  top: 20px;
+  left: 7px;
+  right: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.finder-file-line {
+  height: 2px;
+  background: #e0e0e0;
+  border-radius: 1px;
+}
+.finder-file-line.short { width: 60%; }
+.finder-item-label {
+  font-size: 11px;
+  color: var(--txt);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.finder-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--txt3);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--brd);
+}
+
 </style>
 </head>
 <body>
@@ -618,29 +843,27 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
   <!-- ════ FICHES ════ -->
   <div class="pg" id="pg-fiches">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
-      <div class="page-t">Fiches synthèse</div>
-      <button class="btn btn-p btn-sm" onclick="openCreateFiche()">✏️ Créer une fiche</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="page-t" style="margin-bottom:0">Fiches synthèse</div>
+      <button class="btn btn-p btn-sm" onclick="ficheCreateInFolder()">✏️ Nouvelle fiche</button>
     </div>
-    <div class="page-s">Tes fiches thématiques · Modifiables · Supprimables</div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:8px" id="fiches-grid"></div>
+    <!-- Finder toolbar -->
+    <div id="fiche-finder-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)">
+      <span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>
+    </div>
+    <!-- Finder grid -->
+    <div id="fiche-finder" style="min-height:300px"></div>
   </div>
 
   <!-- ════ FLASHCARDS ════ -->
   <div class="pg" id="pg-flash">
     <div class="page-t">Flashcards</div>
-    <div class="page-s">Programme + tes cartes · Mélangées automatiquement</div>
-    <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center">
-      <span style="font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em">📁 Dossiers :</span>
-      <div id="flash-folders-bar" style="display:flex;gap:4px;flex-wrap:wrap;flex:1"></div>
-      <button class="btn btn-g btn-xs" onclick="addFlashFolder()">+ Dossier</button>
-    </div>
+    <div class="page-s">Organisées par chapitre · Mélangées automatiquement</div>
     <div style="display:flex;gap:7px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
       <select id="fl-chap" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="all">Tous les chapitres</option></select>
       <select id="fl-prio" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
-        <option value="all">Toutes priorités</option><option value="indispensable">🔴 Indispensables</option><option value="tres-frequent">🟠 Très fréquents</option>
+        <option value="all">Toutes priorités</option><option value="indispensable">🔴 Indispensable</option><option value="tres-frequent">🟠 Très fréquent</option>
       </select>
-      <input type="text" id="fl-theme" placeholder="Thème…" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;width:140px;font-family:var(--ff)" onkeyup="loadFlash()">
       <button class="btn btn-g btn-sm" onclick="loadFlash()">🔀 Mélanger</button>
       <span style="font-size:11px;color:var(--txt3)" id="fl-count"></span>
     </div>
@@ -686,13 +909,14 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <!-- Add form -->
     <div class="card">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:9px">➕ Ajouter une date</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end">
-        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Date</label><input id="fa-d" type="text" placeholder="1971" style="width:75px;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)"></div>
-        <div style="flex:1;min-width:140px"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Événement</label><input id="fa-e" type="text" placeholder="Choc Nixon…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)"></div>
-        <div style="flex:2;min-width:160px"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Détail</label><input id="fa-det" type="text" placeholder="Fin de Bretton Woods…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)"></div>
-        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Type</label><select id="fa-t" style="padding:5px 6px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="o">🏛️</option><option value="w">⚔️</option><option value="c">💥</option><option value="p">☮️</option></select></div>
-        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Niveau</label><select id="fa-m" style="padding:5px 6px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="true">🔴 Indispensable</option><option value="false">🟡 Secondaire</option></select></div>
-        <button class="btn btn-p" onclick="addFrise()" style="margin-top:14px">Ajouter</button>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;align-items:end">
+        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Date début *</label><input id="fa-d" type="text" placeholder="ex: 1939" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
+        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Date fin (optionnel)</label><input id="fa-d2" type="text" placeholder="ex: 1945" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
+        <div style="grid-column:span 2"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Événement *</label><input id="fa-e" type="text" placeholder="Nom de l'événement…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
+        <div style="grid-column:span 2"><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Détail</label><input id="fa-det" type="text" placeholder="Contexte, conséquences…" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:5px 7px;font-size:12px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key==='Enter')addFrise()"></div>
+        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Type</label><select id="fa-t" style="width:100%;padding:5px 6px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="o">🏛️ Institution</option><option value="w">⚔️ Guerre/Conflit</option><option value="c">💥 Crise</option><option value="p">☮️ Paix/Accord</option><option value="a">📌 Autre</option></select></div>
+        <div><label style="font-size:10px;color:var(--txt3);font-weight:600;display:block;margin-bottom:2px">Niveau</label><select id="fa-m" style="width:100%;padding:5px 6px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="true">🔴 Indispensable</option><option value="false">🟡 Secondaire</option></select></div>
+        <div style="display:flex;align-items:flex-end"><button class="btn btn-p" onclick="addFrise()" style="width:100%">➕ Ajouter</button></div>
       </div>
     </div>
   </div>
@@ -774,9 +998,15 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="sim-s" id="sim-intro">
       <div style="font-size:32px;margin-bottom:9px">🚨</div>
       <div style="font-family:var(--ffd);font-size:19px;font-weight:700;color:var(--red);margin-bottom:7px">Simulation Concours BCE</div>
-      <div style="margin-bottom:13px">
-        <label style="font-size:11px;color:var(--txt3);font-weight:600;display:block;margin-bottom:4px">Thème (optionnel)</label>
-        <input type="text" id="sim-theme" placeholder="Ex: mondialisation, puissance, Europe…" style="width:100%;max-width:380px;padding:5px 9px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
+      <div style="max-width:400px;margin:0 auto 16px">
+        <label style="font-size:11px;color:var(--txt3);font-weight:600;display:block;margin-bottom:4px">Thème libre (optionnel)</label>
+        <input type="text" id="sim-theme" placeholder="Ex: démographie, puissance, Europe…" style="width:100%;padding:5px 9px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
+      </div>
+      <div style="max-width:400px;margin:0 auto 20px">
+        <label style="font-size:11px;color:var(--txt3);font-weight:600;display:block;margin-bottom:4px">Chapitre (pour le 30 min express)</label>
+        <select id="sim-chap" style="width:100%;padding:5px 9px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
+          <option value="">— Aléatoire —</option>
+        </select>
       </div>
       <div style="display:flex;gap:7px;justify-content:center;flex-wrap:wrap">
         <button class="btn btn-red" onclick="startSim(240)">🚨 4h — Réel</button>
@@ -877,19 +1107,26 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   <div class="pg" id="pg-mycours" style="padding:0;background:var(--surf);position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;overflow-y:auto;box-sizing:border-box">
 
     <!-- Barre navigation haut — toujours visible -->
-    <div style="background:var(--surf);border-bottom:1px solid var(--brd);padding:14px 32px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <button onclick="closeMyCoursOverlay()" style="background:none;border:none;cursor:pointer;color:var(--txt2);font-size:14px;font-family:var(--ff);padding:6px 10px;border-radius:5px;display:flex;align-items:center;gap:6px;font-weight:500">← Mes cours</button>
-      <div style="flex:1"></div>
-      <button class="btn btn-g btn-sm" onclick="newMyCours()">+ Nouveau</button>
-      <button class="btn btn-g btn-sm" onclick="exportMyCoursTxt()">📄 TXT</button>
-      <button class="btn btn-g btn-sm" onclick="exportMyCoursHtml()">🖨 PDF</button>
-      <button class="btn btn-g btn-sm" onclick="fichageIA()">🤖 Fiche IA</button>
-      <button class="btn btn-g btn-sm" onclick="injectInCours()">📚 Injecter</button>
+    <div id="mc-topbar-finder" style="background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <button onclick="closeMyCoursOverlay()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:4px 8px;border-radius:5px">← Retour</button>
+      <div id="mc-breadcrumb" style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--txt3);flex:1">
+        <span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="mcGoRoot()">📂 Mes cours</span>
+      </div>
+      <button class="btn btn-p btn-sm" onclick="mcCreateFileInFolder()">📄 Nouveau fichier</button>
+    </div>
+    <!-- Finder Mes Cours -->
+    <div id="mc-finder-view" style="padding:20px 24px;min-height:200px" ></div>
+    <!-- Barre éditeur (cachée par défaut) -->
+    <div id="mc-editor-bar" style="display:none;background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 20px;align-items:center;gap:8px;flex-wrap:wrap">
+      <button onclick="mcCloseEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:4px 8px;border-radius:5px">← Dossier</button>
+      <input type="text" id="mc-title" placeholder="Titre du fichier…" style="flex:1;background:none;border:none;outline:none;font-size:15px;font-weight:700;color:var(--txt);font-family:var(--ff);min-width:0">
       <button class="btn btn-p btn-sm" onclick="saveMyCours()">💾 Sauvegarder</button>
+      <button class="btn btn-g btn-sm" onclick="exportMyCoursHtml()">🖨 PDF</button>
+      <button class="btn btn-g btn-sm" onclick="deleteCurMyCours()">🗑</button>
     </div>
 
     <!-- Zone d'écriture -->
-    <div style="max-width:700px;margin:0 auto;padding:48px 32px 160px">
+    <div id="mc-editor-zone" style="display:none;max-width:700px;margin:0 auto;padding:32px 32px 160px">
       <input type="text" id="mc-title" placeholder="Titre du cours…"
         style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
       <div style="height:1px;background:var(--brd);margin-bottom:28px"></div>
@@ -936,7 +1173,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="rtb" onclick="execCmd('redo')">↪</button>
     </div>
 
-    <!-- Cours sauvegardés -->
+    <!-- Cours sauvegardés (legacy, masqué) -->
     <div id="mc-list-wrap" style="display:none;max-width:700px;margin:0 auto;padding:0 32px 60px">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:14px;padding-top:24px;border-top:1px solid var(--brd)">Cours sauvegardés</div>
       <div class="g3" id="mc-list"></div>
@@ -1164,70 +1401,49 @@ const CHAPTERS_CONTENT={
   29:"<ul><li>Chapitre 4: Un monde de mobilit\u00e9s</li><li>L\u2019id\u00e9e que nous vivons d\u00e9sormais dans un monde en mouvement est devenue une banalit\u00e9 : la</li></ul><p>g\u00e9n\u00e9ralisation du d\u00e9placement a\u00e9rien, la d\u00e9mocratisation du toursime international, la visibilit\u00e9 des quartiers dits \u00ab ethniques \u00bb au couer des villes mondiales, ou encore l\u2019accroissement du nombre d\u2019\u00e9tudiants \u00e9trangers dans les universit\u00e9s des pays du nord contribuent \u00e0 faire des mobilit\u00e9s spatiales d\u2019\u00e9chelle itnernationale l\u2019une des caract\u00e9ristiques majeures des soci\u00e9t\u00e9s contemporaines.</p><p>-Notions principales :</p><p>Diaspora : dispersion \u00e0 travers le monde d\u2019une communaut\u00e9, et ensemble des membres de cette communaut\u00e9.</p><p>Brain drain : l\u2019attraction des cerveaux d\u00e9signe les flux de travailleurs qualifi\u00e9s vers les pays d\u00e9velopp\u00e9s.</p><p>Multiculturalisme : pluralisme culturel au sein d\u2019un m\u00eame espace politique</p><p>1950 : ONU cr\u00e9e l\u2019office du haut commissaire des nations unies pour les r\u00e9fugi\u00e9s</p><p>1970 : L\u2019ONU cr\u00e9e l\u2019organisation mondiale du tourisme si\u00e8ge \u00e0 Madrid</p><p>1985 : 1er convention de Schengen sign\u00e9e au Luxembourg \u2192principe de la libre circulation</p><p>2004 : cr\u00e9ation de l\u2019agence europ\u00e9enne pour la gestion de la coop\u00e9ration aux fronti\u00e8res ext\u00e9rieures, si\u00e8ge \u00e0 Varsovie. (frontex)</p><p>2015 : crise migratoire en Europe, 1,3 millions de migrants en provenance de Syrie</p><p>27 janvier 2017 ; d\u00e9cret de D.TRUMP interdisant l\u2019entr\u00e9e sur son territoire de ressortissants de 7 pays musulmans.</p><p>13 juillet 2018 : Signature \u00e0 Marrakech puis adoption par l\u2019ONU du pacte mondial pour des migrations s\u00fbres, r\u00e9guli\u00e8res.</p><p>2020 : pand\u00e9mie mondiale du Covid, entra\u00eene fermeture des fronti\u00e8res et une diminution de moiti\u00e9 des flux migratoires mondiaux.</p><p>I/Une plan\u00e8te migratoire entre permanence et renouvellement</p><p>A-Un ph\u00e9nom\u00e8ne ancien en constantes recompositions</p><p>1)Migrations et mobilit\u00e9s</p><ul><li>migration : transfert d\u00e9finitif ou durable de r\u00e9sidence d\u2019un lieu \u00e0 un autre.</li></ul><p>Limite de la def : Ph\u00e9nom\u00e8ne de multi-r\u00e9sidence et de circulation \u00e0 prendre en compte et abandonner l\u2019id\u00e9e d\u2019un d\u00e9placement d\u00e9finitif.</p><p>Essor des transports : permettent une forme d\u2019ubiquit\u00e9</p><p>Migrant international : individu qui change de pays de r\u00e9sidence habituelle pour une dur\u00e9e d\u2019au moins 1 an, migration interne dans l\u2019\u00e9tat</p><p>\u00c9tranger : individu qui ne poss\u00e8de pas la nationalit\u00e9 du pays dans lequel il r\u00e9side immigr\u00e9 : individu n\u00e9 dans un autre pays que celui dans lequel il r\u00e9side \u00e0 titre principal.</p><p>Peut \u00eatre \u00e9tranger ou avoir la nationalit\u00e9.</p><p>2)mondialisation et migration : une longue histoire</p><ul><li>Les migrations sont au c\u0153ur des processus de peuplement donnant ses traits culturels,</li></ul><p>linguistiques, et religieux au monde contemporain. Ex : la Turquie actuelle est l\u2019h\u00e9riti\u00e8re des migrations vers l\u2019Anatolie des Seldjoukides et Turco-mans, \u00e0 partir du XI si\u00e8cle.</p><ul><li>La seconde moiti\u00e9 du XIX si\u00e8cle a \u00e9t\u00e9 caract\u00e9ris\u00e9 par une intensification sans \u00e9quivalent des</li></ul><p>migrations internationales. Transition d\u00e9mo + besoin de main d\u2019\u0153uvre. Ex : 1800/1930, 40 millions d\u2019europ\u00e9ens s\u2019installent en Am\u00e9rique du nord. Aussi en 1900 le taux d\u2019\u00e9migration \u00e9tait de 40 % dans les \u00eeles britanniques.</p><p>CONSEQ : ces migrations anciennes se traduisent de mani\u00e8re tr\u00e8s concr\u00e8te aujourd\u2019hui dans la physionomie des grandes villes. (chinatowns, LA, Sydney, politiques migratoires contemporaines,</p><p>Allemagne aides au Aussiedlers (europe du nord) )</p><p>3)un accroissement relatif des flux migratoires</p><ul><li>Selon les Nations unies, 272 millions de personnes (3,5 % de la pop mondiale) r\u00e9sident</li></ul><p>aujourd\u2019hui hors de leur pays de naissance. Augmentation d\u2019environ 2 %/an</p><ul><li>La mondialisation ne se singularise pas nettement par une intensification des flux.</li></ul><p>L\u2019\u00e9volution de l\u2019immigration aux E.U fait appara\u00eetre le poids des \u00e9v\u00e9nements politiques (quasiannulation des flux pendant les 2GM et des inflexions des politiques migratoires ex : supp de la loi des quotas en 1965 se traduit par une croissance plus rapide de l\u2019immigration.</p><p>Les migrations sont \u00e9galement affect\u00e9es par les crises \u00e9pid\u00e9miques : ex : Crise de 2020 covid diminution de pr\u00e9s de 50 % des flux.</p><p>4)des migrants aux profils de plus en plus vari\u00e9s</p><p>Toute tentative d\u2019\u00e9laboration d\u2019une tyopologie syst\u00e9matique des migrants internationaux se heurte \u00e0 la multiplicit\u00e9 de crit\u00e8res \u00e0 prendre en compte :</p><p>*caract\u00e8re l\u00e9gal ou non</p><ul><li>diversification tr\u00e8s forte des profils socioprofessionnels des migrants par rapport au XXi\u00e8me</li></ul><p>si\u00e8cle : population masculine jeune actifs peu qualifi\u00e9s, motiv\u00e9 par la perspective d\u2019un emploi salari\u00e9.</p><ul><li>Aujourd\u2019hui : migrations \u00ab entrepreneuriales \u00bb (artisans, commer\u00e7ants) : secteur de l\u2019importexport, de l\u2019hotellerie-restauration</li></ul><p>\u25baZOOM : femmes et migrations</p><p>-1990 : f\u00e9minisation globale de la population migrante ex : 70 % des migrants philippins sont des femmes</p><p>-2020 : 52 % migrants hommes et 48%migrants femmes</p><p>-le regroupement familial reste la 1ere cause mais refl\u00e8te \u00e9mancipation des femmes dans les sph\u00e8res pro. B\u00e9n\u00e9ficient d\u2019une approche tr\u00e8s favorable de la part des organisations internationales</p><p>(empowerment ou autonomisation des femmes) + \u00e9mettrices de remises financi\u00e8res plus efficaces que les hommes</p><p>B-Une recomposition spatiale relative des mobilit\u00e9s internationales</p><p>1)Une g\u00e9ographie complexe des flux migratoires</p><p>Principaux flux migratoires ONU 2019 :</p><p>Am\u00e9rique latine au nord 26,5 millions de migrants</p><p>Asie de l\u2019est/sud est en Am\u00e9rique du nord</p><p>Afrique du nord et moyen orient en Europe :</p><ul><li>Alfred Sauvy renversement des flux</li></ul><p>migratoires entre le nord et le sud + complexification car nombre d\u2019ancien pays colonis\u00e9s sont aujourd\u2019hui \u00e0 la fois des p\u00f4les d\u2019immigrations et des foyer d\u2019\u00e9migration.</p><ul><li>la plan\u00e8te migratoire s\u2019est largement etoff\u00e9e avec l\u2019\u00e9mergence de pays d\u2019immigration et</li></ul><p>d\u2019\u00e9migratio et contraste fortement avec l\u2019image relativement simple de la g\u00e9ographie des migrations transatlantiques du XIX/XX si\u00e8cle</p><p>2)Escapes de d\u00e9part, de transit et d\u2019accueil</p><p>La plan\u00e8te migratoire est constitu\u00e9e aujourd\u2019hui de 3 cat\u00e9gories d\u2019espaces :</p><p>*de d\u00e9part : Pays du sud comme Asie, Afrique et Cara\u00efbe + fort volume d\u2019\u00e9migration (Inde d\u00e9tient aujourd\u2019hui le record du nombre d\u2019\u00e9migr\u00e9s)</p><p>*de transit : \u00e9tape souvent contrainte d\u2019une dur\u00e9e ind\u00e9termin\u00e9, sont le produit des renforcements des contr\u00f4les frontaliers, ex Maroc : flux subsahariens bloqu\u00e9s dans leur parcours vers l\u2019Europe</p><p>*d\u2019accueil : concentrent les emplois, les r\u00e9seaux ect</p><p>Am\u00e9rique du nord,(50 millions), \u00e9tat du golfe persique. (EAU 90 % d\u2019immigr\u00e9s)</p><p>\u25baZOOM : Les enclaves de Ceuta et Melilla</p><p>-enclaves espagnoles sur le littoral m\u00e9diterran\u00e9en du territoire marocain, hauts lieus de passage clandestin vers l\u2019Europe pour ceux trop pauvre pour payer un passeur marocain (d\u00e9troit de gilbratar)</p><p>-laboratoire de la militarisation et de l\u2019externalisation des fronti\u00e8res ext\u00e9rieures de la forteresses</p><p>-tensions concernant l\u2019opposostitions des associations contre les d\u00e9rives et les contradictions d\u2019une approche s\u00e9curitaire des migrations internationales</p><p>II/Facteurs et enjeux des migrations internationales</p><p>A-Une combinaison complexe de facteurs</p><ul><li>Identification des facteurs r\u00e9pulsifs (cris\u00e9 de l\u2019emploi,croissance d\u00e9mo rapide, ins\u00e9curit\u00e9 \u00e9co..)</li></ul><p>facteurs attractifs (main d\u2019\u0153uvre, politique d\u2019ouverture)</p><ul><li>d\u00e9sormais prise en compte de la diversit\u00e9 et la complexit\u00e9 des facteurs : l\u2019histoire migratoire, les</li></ul><p>r\u00e9seaux sociaux, le march\u00e9 de l\u2019emploi, et la famille, les crises et les conflits, facteurs climatiques</p><p>(79,5 millions de personnes d\u00e9racin\u00e9es \u00e0 travers le monde \u00e0 la fin 2019)</p><p>\u25baZOOM : migration Afrique subsaharienne</p><p>-tr\u00e8s forte croissance d\u00e9mographique cr\u00e9ant une forte tension sur le march\u00e9 de l\u2019emploi (65 % de la pop a moins de 25 ans)</p><p>-haut niveau de pauvret\u00e9 (34 pays sur 48 des pays moins avanc\u00e9s sont africains)</p><p>-une succession de conflit (Rwanda, Congo)\u2192entraine des d\u00e9placements d\u00e9veloppement de corridors migratoires ex : 1,5 millions entre le burkina faso et la c\u00f4te d\u2019ivoire, 1 million entre le Sud-Soudan et l\u2019Ouganda.</p><p>\u25baZOOM : La diaspora indienne aux \u00c9tats-Unis</p><p>-Le terme \\\"diaspora\\\" vient du grec spiro, qui veut dire \\\"je s\u00e8me\\\". Il d\u00e9signe habituellement les populations chass\u00e9es de leur pays, qui entretiennent entre elles des liens affectifs, culturels, \u00e9conomiques et politiques par-del\u00e0 les fronti\u00e8res.</p><p>-3,2 millions d\u2019individus : effet d\u2019une migration de comp\u00e9tence.</p><p>-1/3 des ing\u00e9 de la silicon valley sont indiens, domaine technologie (ex Satya Nadella, PDG de microsoft)</p><p>-15,5 % des starts-up ont \u00e9t\u00e9 cr\u00e9\u00e9es par des indiens</p><p>-1/10 m\u00e9decins est indien</p><p>-poids diplomatique ex : Satya Nadella, PDG de google depuis 2015, n\u00e9 \u00e0 Madras</p><p>B-Le r\u00f4le des politiques migratoires</p><p>1)S\u00e9lection et \u00ab migration choisie \u00bb</p><p>Depuis le choc p\u00e9trolier de 1970+ diminution drastique de l\u2019immigration de travail : d\u00e9but de la s\u00e9lection des migrants selon leur niveau de qualification professionnelle. (ex : \u00c9tats-Unis visa H-1</p><p>B, outil majeur de performance \u00e9conomique \u00e9conomie de 7 milliards $ concernant la formation).</p><p>50 % des doctorants aux \u00c9tats-Unis sont \u00e9trangers</p><ul><li>nourrit le d\u00e9bat sur le \u00ab brain drain \u00bb, la fuite des cerveaux : prive ces mays de leurs jeunes actifs</li></ul><p>les plus dynamiques et de pllus, les plus diplom\u00e9s. : risque de compromettre le d\u00e9veloppement \u00e9co/socio de leur pays pr\u00e8s de 85 % des 20 millions d emigrants hautement qualif\u00e9s vivent aujourd\u2019hui dans les pays de l\u2019OCDE. R\u00e9seau complexe : transnationalisation des pratisues et des savoirs.</p><p>-d\u00e9veloppement du mod\u00e8le am\u00e9ricain aux pays de l\u2019OCDE en 2006 la France met en place un visa de comp\u00e9tence talent ; contribuant ainsi aux \u00e9trangers au rzyonnement \u00e9co/socio de la france</p><p>2)Restrictions et fermetures</p><p>En cas d\u2019accroissement quantitatif des migrations internationales : les \u00e9tats mettent en place :</p><p>*politique d\u2019accueil restrictives : harmonisation des politiques migratoires entre \u00c9tats membres ex : mise en place du syst\u00e8me information Schengen SIS / Frontex/Eurodac, empreintes digi et asile</p><p>/Sive, zone strat\u00e9giques surveill\u00e9s.</p><ul><li>Le renforcement constant de ces dispositifs int\u00e9gr\u00e9s de contr\u00f4le policier des fronti\u00e8res exterieurs</li></ul><p>n\u2019offre pas, loin de la, une r\u00e9ponse satisfaisante aux multiples enjeux impliqu\u00e9s par la politique migratoire</p><p>2010 : accroissement des demandes d\u2019asile, 330 000 demandes, 1,3 millions en 2015\u2192 crises politiques et humanitaire en syrie, irak ou encre en Erythr\u00e9e.</p><ul><li>crise migratoire \u2192r\u00e9tablissement des contr\u00f4les, sur fond de crainte des menaces terroristes.</li><li>2020 : pacte europ\u00e9en sur la migration et l\u2019asile visant \u00e0 refondre le syst\u00e8me de Dublin.</li></ul><p>L'objectif du syst\u00e8me de Dublin actuellement en vigueur est de d\u00e9terminer un seul \u00c9tat membre de l'UE responsable du traitement d'une demande d'asile. La proc\u00e9dure est fond\u00e9e sur plusieurs crit\u00e8res, y compris le crit\u00e8re du premier pays d'entr\u00e9e.</p><ul><li>constitue un domaine \u00e0 part au sein des politiques migratoires.</li><li>repose sur des textes juridiques provenant de la convention de Gen\u00e8ve 1951 \u00e9tablissant les droits</li></ul><p>fondamentaux des r\u00e9fugi\u00e9s.</p><blockquote>\u00ab peut acc\u00e9der au statut de r\u00e9fugi\u00e9 toute personne qui craignant avec raison d\u2019\u00eatre pers\u00e9cut\u00e9e du fait</blockquote><p>de sa race, de sa religion, de sa nationalit\u00e9, de son appartenance \u00e0 un certain groupe social ou politique. \u00bb</p><ul><li>accroissement rapide des d\u00e9placements forc\u00e9s en raisons des crises/conflits politiques</li><li>80 Millions de personnes d\u00e9racin\u00e9es</li></ul><p>ex : pays receveur Turquie, (3"
 };
 
-const FRISE=[
-  {date:"1648",event:"Trait\u00e9s de Westphalie",detail:"Fondement du syst\u00e8me international. Naissance de l'\u00c9tat-nation souverain. Principe de non-ing\u00e9rence. R\u00e9f\u00e9rence obligatoire pour tout sujet sur la puissance ou les RI.",type:"o",must:true},
-  {date:"1815",event:"Congr\u00e8s de Vienne",detail:"R\u00e9organisation de l'Europe post-napol\u00e9onienne. Principe d'\u00e9quilibre des puissances. Concert europ\u00e9en (UK, Autriche, Prusse, Russie).",type:"o",must:true},
-  {date:"1823",event:"Doctrine Monroe",detail:"USA : doctrine de non-intervention europ\u00e9enne en Am\u00e9rique. Fondement de l'isolationnisme am\u00e9ricain jusqu'en 1917.",type:"o",must:false},
-  {date:"1884-1885",event:"Conf\u00e9rence de Berlin",detail:"Partage de l'Afrique entre puissances coloniales. Apog\u00e9e de l'imp\u00e9rialisme europ\u00e9en. 90% de l'Afrique colonis\u00e9e d'ici 1914.",type:"o",must:true},
-  {date:"Ao\u00fbt 1914",event:"D\u00e9clenchement de la 1\u00e8re Guerre mondiale",detail:"Assassinat de Fran\u00e7ois-Ferdinand \u2192 mobilisation g\u00e9n\u00e9rale. Forces profondes (Renouvin) : nationalismes, rivalit\u00e9s imp\u00e9riales. 19 millions de morts.",type:"w",must:true},
-  {date:"Janv. 1918",event:"14 Points de Wilson",detail:"Fondement de l'internationalisme lib\u00e9ral. Auto-d\u00e9termination des peuples. Base de la future SDN. Rupture avec l'isolationnisme.",type:"p",must:true},
-  {date:"28 juin 1919",event:"Trait\u00e9 de Versailles",detail:"Allemagne d\u00e9clar\u00e9e unique responsable (art. 231 = 'diktat'). R\u00e9parations. Pertes territoriales. SDN cr\u00e9\u00e9e. Germe de la WWII selon Keynes (Les cons\u00e9quences \u00e9conomiques de la paix).",type:"p",must:true},
-  {date:"10 janv. 1920",event:"Cr\u00e9ation de la SDN",detail:"1\u00e8re institution internationale pour la paix collective. Gen\u00e8ve. Absente : USA (S\u00e9nat refuse). Faiblesse structurelle. Dissolue en 1946 \u2192 ONU.",type:"p",must:true},
-  {date:"Oct. 1929",event:"Krach de Wall Street",detail:"Faillite Lehman \u2192 credit crunch \u2192 \u201366% \u00e9changes mondiaux. Ch\u00f4mage 25% USA. Protectionnisme (Smoot-Hawley 1930). Mont\u00e9e des fascismes. Fin de la mondialisation lib\u00e9rale.",type:"c",must:true},
-  {date:"1933",event:"Hitler au pouvoir en Allemagne",detail:"Fin de la R\u00e9publique de Weimar. Remilitarisation. Rupture avec l'ordre de Versailles. Acc\u00e9l\u00e9ration vers la WWII.",type:"w",must:true},
-  {date:"Sept. 1939",event:"D\u00e9clenchement de la 2\u00e8me Guerre mondiale",detail:"Invasion de la Pologne. 60-70 millions de morts. Holocauste (6 M). 1\u00e8re guerre totale avec civils = cibles.",type:"w",must:true},
-  {date:"Juil. 1944",event:"Accords de Bretton Woods",detail:"Syst\u00e8me mon\u00e9taire international : \u00e9talon-or-dollar (35$/once). FMI + BIRD cr\u00e9\u00e9s. H\u00e9g\u00e9monie financi\u00e8re am\u00e9ricaine. Fin en 1971 (Nixon choc).",type:"p",must:true},
-  {date:"Juin 1944",event:"D\u00e9barquement en Normandie (D-Day)",detail:"Op\u00e9ration Overlord. Tournant militaire WWII. Affirmation de la puissance am\u00e9ricaine en Europe.",type:"w",must:false},
-  {date:"Ao\u00fbt 1945",event:"Bombes atomiques sur Hiroshima et Nagasaki",detail:"Premi\u00e8re et unique utilisation de l'arme nucl\u00e9aire. D\u00e9but de l'\u00e8re nucl\u00e9aire. Dissuasion : MAD (Mutual Assured Destruction).",type:"w",must:true},
-  {date:"26 juin 1945",event:"Charte de San Francisco \u2014 ONU",detail:"Cr\u00e9ation de l'ONU (51 membres fondateurs). Conseil de S\u00e9curit\u00e9 + droit de veto (5 membres permanents). Art. 2\u00a74 : interdiction du recours \u00e0 la force.",type:"p",must:true},
-  {date:"5 juin 1947",event:"Plan Marshall",detail:"13 Mds$ d'aide am\u00e9ricaine \u00e0 l'Europe occidentale (1948-1951). Reconstruction ET endiguement du communisme. Refus\u00e9 par URSS = d\u00e9but Guerre froide.",type:"p",must:true},
-  {date:"Avr. 1949",event:"Cr\u00e9ation de l'OTAN",detail:"Alliance militaire atlantique. Article 5 : d\u00e9fense collective. R\u00e9ponse au blocus de Berlin (1948-49). 12 membres fondateurs.",type:"p",must:true},
-  {date:"9 mai 1950",event:"D\u00e9claration Schuman",detail:"Acte fondateur de l'UE. Schuman + Monnet : CECA pour rendre la guerre 'non seulement impensable mais mat\u00e9riellement impossible'. 9 mai = F\u00eate de l'Europe.",type:"p",must:true},
-  {date:"25 mars 1957",event:"Trait\u00e9s de Rome \u2014 CEE + Euratom",detail:"6 membres fondateurs. March\u00e9 commun. PAC (1962). Libre circulation. Base de tout ce qui suit.",type:"p",must:true},
-  {date:"1973",event:"CNUCED d\u00e9finit les FTN + 1er choc p\u00e9trolier",detail:"FTN = 6+ pays, CA > 500M$ dont 25% \u00e9tranger. Choc p\u00e9trolier : OPEP embargo \u2192 quadruplement prix. Fin des 30 Glorieuses.",type:"c",must:true},
-  {date:"1979",event:"2\u00e8me choc p\u00e9trolier + r\u00e9volution iranienne",detail:"Shah renvers\u00e9 par Khomeini. Doublement prix p\u00e9trole. Stagflation. Tournant n\u00e9olib\u00e9ral (Thatcher 1979, Reagan 1981).",type:"c",must:false},
-  {date:"Nov. 1989",event:"Chute du mur de Berlin",detail:"Symbole de la fin de la Guerre froide. R\u00e9unification allemande (oct. 1990). Fin du bloc sovi\u00e9tique. 'Fin de l'histoire' (Fukuyama).",type:"p",must:true},
-  {date:"D\u00e9c. 1991",event:"Dissolution de l'URSS",detail:"15 r\u00e9publiques ind\u00e9pendantes. Fin du monde bipolaire. 'Moment unipolaire' am\u00e9ricain (Krauthammer). \u00c9largissement OTAN vers l'Est.",type:"p",must:true},
-  {date:"7 f\u00e9v. 1992",event:"Trait\u00e9 de Maastricht",detail:"Naissance officielle de l'UE. 3 piliers. PESC. Citoyennet\u00e9 europ\u00e9enne. Convergence \u2192 Euro (1999). Crit\u00e8res de Maastricht.",type:"p",must:true},
-  {date:"1994",event:"Cr\u00e9ation de l'OMC (effective 1995)",detail:"Remplace le GATT (1947). R\u00e8glement des diff\u00e9rends. 164 membres. Crise depuis 2017 (Trump bloque l'organe d'appel).",type:"p",must:true},
-  {date:"11 sept. 2001",event:"Attentats du 11 Septembre",detail:"3 000 morts. Retour du hard power. 'Guerre contre la Terreur' (Bush). Patriot Act. Guerres Afghanistan (2001) et Irak (2003). Rupture g\u00e9opolitique majeure.",type:"w",must:true},
-  {date:"2001",event:"Entr\u00e9e de la Chine \u00e0 l'OMC",detail:"Int\u00e9gration d\u00e9finitive de la Chine dans la mondialisation. D\u00e9but de l'ascension \u00e9conomique. Pi\u00e8ge de Thucydide (Allison). Rivalit\u00e9 sino-am\u00e9ricaine.",type:"o",must:true},
-  {date:"2008",event:"Crise financi\u00e8re mondiale (Lehman Brothers)",detail:"15 sept. 2008. Credit crunch mondial. R\u00e9cession. Plans de relance. Retour de l'\u00c9tat. G20 supplante G8. Remise en cause du consensus de Washington.",type:"c",must:true},
-  {date:"2009",event:"Trait\u00e9 de Lisbonne (UE)",detail:"R\u00e9forme institutionnelle UE. Pr\u00e9sident du Conseil europ\u00e9en permanent. Haute repr\u00e9sentante PESC. Charte des droits fondamentaux contraignante.",type:"p",must:false},
-  {date:"2015",event:"Accord de Paris (COP21)",detail:"Limiter le r\u00e9chauffement \u00e0 +2\u00b0C / +1,5\u00b0C. NDCs volontaires. 195 signataires. Non contraignant. Retrait US sous Trump (2017 et 2025). Insuffisant selon GIEC.",type:"p",must:true},
-  {date:"Juin 2016",event:"Brexit",detail:"52% pour la sortie. Activation Art. 50 \u2192 2017. Sortie effective : 31 janv. 2020. Accord commercial d\u00e9c. 2020. Remise en cause du projet europ\u00e9en.",type:"c",must:true},
-  {date:"2017",event:"'America First' \u2014 Trump 1er mandat",detail:"Retrait Accord de Paris, TPP, UNESCO. Remise en cause OTAN, OMC. Guerre commerciale Chine. Symbole du repli nationaliste et de la crise du multilat\u00e9ralisme.",type:"c",must:true},
-  {date:"F\u00e9v. 2022",event:"Invasion russe de l'Ukraine",detail:"Violation flagrante art. 2\u00a74 ONU. Sanctions SWIFT (7 banques). R\u00e9armement europ\u00e9en. OTAN renforc\u00e9e (Finlande + Su\u00e8de). Retour de la guerre conventionnelle en Europe.",type:"w",must:true},
-  {date:"Oct. 2023",event:"7 Octobre \u2014 Attaque Hamas + Houthis",detail:"Embrasement du PMO. Houthis : \u201340% trafic Bab el-Mandeb/Suez. Coalition US-UK requise. Acteurs infra-\u00e9tatiques imposent leur agenda.",type:"w",must:true},
-  {date:"2025",event:"Retour de Trump \u2014 2\u00e8me mandat",detail:"Retrait accord de Paris, menace OTAN, tarifs douaniers massifs (+145% sur Chine). Retour de la g\u00e9opolitique. Fragilisation du multilat\u00e9ralisme.",type:"c",must:true},
-];
+const FRISE=[];
 
 const FLASHCARDS=[
-  {q:"Qu'est-ce que la g\u00e9opolitique selon Renouvin ?",a:"Science des forces profondes en RI : g\u00e9ographie, \u00e9conomie, d\u00e9mographie, id\u00e9ologies. Renouvin (1953) : d\u00e9passe la strat\u00e9gie militaire.",p:"indispensable",c:"Chap. 1"},
-  {q:"D\u00e9finir le hard power (Nye, 1990)",a:"Capacit\u00e9 de contraindre par la force militaire ou \u00e9conomique. Oppos\u00e9 au soft power (attraction). Smart power = combinaison des deux (Clinton, 2009).",p:"indispensable",c:"Chap. 1"},
-  {q:"Qu'est-ce que le soft power ?",a:"Capacit\u00e9 d'attirer sans contraindre (Nye, 1990). Repose sur culture, valeurs, politique \u00e9trang\u00e8re. Instrument cl\u00e9 des GAFAM et diplomatie US.",p:"indispensable",c:"Chap. 1"},
-  {q:"Trait\u00e9s de Westphalie (1648) \u2014 enjeux",a:"Fin de la Guerre de 30 ans. Fondent le syst\u00e8me inter\u00e9tatique : souverainet\u00e9, non-ing\u00e9rence, \u00e9galit\u00e9 des \u00c9tats. R\u00e9volution du droit international.",p:"indispensable",c:"Chap. 1"},
-  {q:"Pi\u00e8ge de Thucydide (Allison, 2017)",a:"Quand une puissance montante (Chine) menace la dominante (USA), la guerre est probable. 12 cas sur 16 dans l'histoire.",p:"indispensable",c:"Chap. 5"},
-  {q:"BRICS \u2014 composition et enjeux (2024)",a:"Br\u00e9sil, Russie, Inde, Chine, Afrique du Sud + 6 nouveaux membres 2024. 40% PIB mondial en PPA. Contestent l'h\u00e9g\u00e9monie occidentale.",p:"indispensable",c:"Chap. 5"},
-  {q:"Belt and Road Initiative (BRI, 2013)",a:"Nouvelles routes de la soie : 140+ pays, 900 Mds$. G\u00e9o\u00e9conomie chinoise. Critiqu\u00e9 : diplomatie de la dette.",p:"indispensable",c:"Chap. 5"},
-  {q:"Mondialisation \u2014 3 vagues (Stiglitz)",a:"1re : colonisation. 2e : 1870-1914 (\u00e9talon-or). 3e : 1980+ (FMI/BM/OMC, financiarisation). Stiglitz critique l'asym\u00e9trie.",p:"indispensable",c:"Chap. 7"},
-  {q:"FTN \u2014 d\u00e9finition et puissance",a:"Firmes Trans-Nationales : Apple 3000 Mds$ > PIB France 2800 Mds$. Amazon consulte 238 villes pour HQ2 (2018).",p:"indispensable",c:"Chap. 11"},
-  {q:"Bretton Woods \u2014 m\u00e9canisme et fin",a:"1944 : changes fixes, dollar=or (35$/once), FMI+BIRD. Fin : Nixon suspend convertibilit\u00e9 (1971), flottement (1973).",p:"indispensable",c:"Chap. 7"},
-  {q:"G\u00e9o\u00e9conomie (Luttwak, 1990)",a:"Substitution logique \u00e9conomique \u00e0 militaire dans la comp\u00e9tition inter\u00e9tatique. Armes : sanctions, ressources, monnaie.",p:"indispensable",c:"Chap. 5"},
-  {q:"Sanctions SWIFT sur la Russie (2022)",a:"Exclusion apr\u00e8s invasion Ukraine. 1re utilisation massive de la finance comme arme de guerre. Acc\u00e9l\u00e8re la d\u00e9-dollarisation.",p:"indispensable",c:"Chap. 5"},
-  {q:"Houthis et d\u00e9troit Bab-el-Mandeb (2023)",a:"Attaques nov. 2023 : -40% trafic Suez. D\u00e9tour cap : +14 jours. Vuln\u00e9rabilit\u00e9 des cha\u00eenes d'approvisionnement mondiales.",p:"indispensable",c:"Fiche Mers"},
-  {q:"Plan Marshall (1947)",a:"13 Mds$ sur 4 ans. Reconstruire l'Europe occidentale, contenir le communisme. Acte fondateur de la Guerre froide.",p:"indispensable",c:"Chap. 2"},
-  {q:"Souverainet\u00e9 westphalienne",a:"Chaque \u00c9tat souverain sur son territoire, sans ing\u00e9rence ext\u00e9rieure. Remis en cause par mondialisation et R2P (2005).",p:"indispensable",c:"Chap. 1"},
-  {q:"Consensus de Washington (1990)",a:"10 r\u00e9formes lib\u00e9rales FMI/BM : privatisations, lib\u00e9ralisation, aust\u00e9rit\u00e9. Critiqu\u00e9 par Stiglitz (Prix Nobel 2001).",p:"tres-frequent",c:"Chap. 9"},
-  {q:"G7 vs G20",a:"G7 : 7 d\u00e9mocraties avanc\u00e9es + UE. G20 : 19 pays + UE, 85% PIB mondial \u2014 int\u00e8gre les \u00e9mergents.",p:"tres-frequent",c:"Chap. 6"},
-  {q:"Accord de Paris (2015)",a:"Limiter \u00e0 +1,5\u00b0C. NDC non contraignantes. 196 signataires. USA : retrait Trump (2017), retour Biden (2021).",p:"tres-frequent",c:"Chap. 15"},
-  {q:"IDH \u2014 Indice D\u00e9veloppement Humain",a:"PNUD (1990) : esp\u00e9rance de vie + \u00e9ducation + revenu. D\u00e9passe le PIB/habitant seul.",p:"tres-frequent",c:"Chap. 10"},
-  {q:"Brexit \u2014 dates et cons\u00e9quences",a:"51,9% Leave (23 juin 2016). Sortie jan. 2020. -4% PIB UK (OBR). Question irlandaise.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"Trait\u00e9 de Maastricht (1992)",a:"Cr\u00e9e l'UE, citoyennet\u00e9 europ\u00e9enne, PESC, monnaie unique. France : 51,05%. Danemark : 2 r\u00e9f\u00e9rendums.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"Zone euro \u2014 avantages et critiques",a:"Avantages : stabilit\u00e9, no co\u00fbts transaction. Critiques : pas de ZMO (Mundell), pas de budget f\u00e9d\u00e9ral. Crise 2010-2012.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"TSCG 2012 \u2014 r\u00e8gle d'or",a:"D\u00e9ficit structurel < 0,5% PIB. D\u00e9ficit < 3%. Dette < 60%. Suspendu COVID (2020-2023). Retour 2024.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"Smart power (Clinton, 2009)",a:"Combinaison hard + soft power. Strat\u00e9gie am\u00e9ricaine post-Irak pour maintenir l'h\u00e9g\u00e9monie sans force syst\u00e9matique.",p:"tres-frequent",c:"Chap. 1"},
-  {q:"ODD \u2014 Objectifs de D\u00e9veloppement Durable",a:"17 ODD adopt\u00e9s ONU 2015 (Agenda 2030). Combinent \u00e9conomique, social, environnemental. 4000 Mds$/an n\u00e9cessaires.",p:"tres-frequent",c:"Chap. 13"},
+  // ══ DÉMOGRAPHIE — CONCEPTS ══
+  {q:"Citer la citation de Bodin sur la démographie et la donner précisément",a:"« Il n'est de richesse que d'hommes » — Jean Bodin, Six livres de la République, 1576. Fait le lien entre démographie et puissance géopolitique.",p:"indispensable",c:"Démographie"},
+  {q:"Définir la transition démographique",a:"Passage d'un régime forte fécondité/forte mortalité à faible fécondité/faible mortalité. 4 phases. À mobiliser dans toute copie démographie. Rupture clé : années 2000, part des >65 ans dépasse celle des <5 ans.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le dividende démographique",a:"Période où la pyramide des âges est élargie à la base → ratio actifs/dépendants favorable → boom économique potentiel. Se ferme au Tournant de Lewis. Rôle décisif dans l'essor chinois (1970-2010).",p:"indispensable",c:"Démographie"},
+  {q:"Définir le Youth Bulge",a:"Concentration de population jeune (15-24 ans) sans emploi suffisant → instabilité politique et sociale. 10-24 ans = 25% pop. mondiale. En 2050 : 2/3 des Africains auront moins de 30 ans.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le Tournant de Lewis",a:"Moment où la main d'œuvre rurale abondante est absorbée par l'industrie → hausse des salaires → fin du dividende démographique. Chine : ~2010.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le (néo)-malthusianisme",a:"Croissance pop. > croissance production → crises (Malthus, 1798). Néo-malthusiens étendent aux ressources naturelles, eau, énergie. Schéma démenti par la révolution industrielle mais toujours pertinent en Afrique.",p:"indispensable",c:"Démographie"},
+  {q:"Définir l'Effet Boserup",a:"La pression démographique stimule l'innovation agricole et technologique. Anti-Malthus. Ester Boserup, Évolution agraire et pression créatrice.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le taux de fécondité et son seuil de remplacement",a:"Nombre moyen d'enfants par femme. Seuil de remplacement : 2,1. Indicateur-clé de toute copie démographie.",p:"indispensable",c:"Démographie"},
+  {q:"Définir l'hiver démographique",a:"Ralentissement ou décroissance de la population dans les PDEM (et certains émergents). Coexiste avec explosion en Afrique. Macron (jan. 2024) : « réarmement démographique ».",p:"indispensable",c:"Démographie"},
+  {q:"Définir la Silver Economy",a:"Marchés et services liés au vieillissement : santé, autonomie, loisirs, tech grand âge. Japon : Japan's New Robot Strategy (2015). France : 130 Md€ en 2030.",p:"tres-frequent",c:"Démographie"},
+  {q:"Définir la P(eople) Bomb",a:"Paul Ehrlich (1968) : surpopulation = bombe à retardement → épuisement ressources. Cadre malthusien appliqué au XXe siècle. Largement démenti mais structure toujours utile.",p:"tres-frequent",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — CHIFFRES CLÉS ══
+  {q:"Donner l'évolution de la population mondiale de 1800 à 2080",a:"1800 : 1 Md · 1900 : 1,5 Md · 1950 : 2,5 Md · 2020 : 7,5 Md · 2080 : pic ~10,3 Md (ONU) · 2100 : retour à 4 Md ? (HSBC 2022).",p:"indispensable",c:"Démographie"},
+  {q:"Quels sont les indices de fécondité clés à connaître en 2023 ?",a:"Niger 6,67 · Afrique subsaharienne 4,9 · Monde 2,3 · Inde 2,05 · France 1,79 · Chine 1,19 · Corée du Sud 0,72. Seuil de remplacement : 2,1.",p:"indispensable",c:"Démographie"},
+  {q:"Quel est le poids des remises vers les PED et pourquoi est-ce important ?",a:"685 Md$ en 2024 (×3 vs 2005). Supérieur aux IDE (300 Md$) + aide internationale (210 Md$) cumulés. Levier géoéconomique majeur.",p:"tres-frequent",c:"Démographie"},
+  {q:"Quelle est la part des 10-24 ans dans la population mondiale ?",a:"25% de la population mondiale. En 2050, 2/3 des Africains auront moins de 30 ans. Inde : +6%/an de croissance nécessaire pour absorber les jeunes.",p:"indispensable",c:"Démographie"},
+  {q:"Donnez les chiffres sur le vieillissement mondial",a:"Part des >60 ans : 605 M (2000) → 2 Md (2050), soit 11%→22% de la population mondiale. Il a fallu 100 ans à la France pour doubler la part des >65 ans → 25 ans au Brésil ou à la Chine.",p:"indispensable",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — AUTEURS ══
+  {q:"Thèse de Jared Diamond dans Effondrement (2004) sur la démographie",a:"Génocide rwandais (1994) = crise malthusienne : pression démog. (750 hab/km²) + compétition terres + sécheresse. Facteur démographique > facteur ethnique (Severino). Extension : crise syrienne (sécheresse 2008-2011).",p:"indispensable",c:"Démographie"},
+  {q:"Thèse de Bruno Tertrais dans Le choc démographique (2020)",a:"P. Bomb largement désamorcée. Les sociétés trouvent des solutions quand la pression monte. Cheikh Yamani : 'L'âge du pétrole ne se terminera pas par manque de pétrole'. Question de répartition, pas de production.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Jacques Veron dans Faut-il avoir peur de la population mondiale ? (2020)",a:"Complexité des variables démographiques — ni catastrophisme ni angélisme. La décroissance crée de nouveaux problèmes (vieillissement). Augmenter le niveau de vie des PED sans faire croître les consommations non durables des PDEM.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Maxime de Blasi dans Le Débat (2019)",a:"Triangle d'incompatibilité : croissance démog. + hausse niveau de vie + préservation environnement ne peuvent coexister. En 2019 : 1,7 ressources renouvelables consommées par an.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Gunnar Heinsohn — indice de belligérance (2011)",a:"Déséquilibre jeunes hommes/emplois effectifs → conflits. Appliqué au monde arabe. Critiquable (amish, juifs orthodoxes) mais mobilisable comme facteur parmi d'autres.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Sylvie Brunel dans L'Afrique est-elle si bien partie ? (2014)",a:"Afrique : continent riche peuplé de pauvres. Youth bulge + inégalités + Internet = frustrations → djihadisme sahélien. 'Une guerre qui ne dit pas son nom : celle qui mobilise des jeunes combattants contre les nouvelles bourgeoisies émergentes.'",p:"tres-frequent",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — DYNAMIQUES RÉGIONALES ══
+  {q:"Quelle est la leçon centrale de l'exemple chinois sur le contrôle des naissances ?",a:"Campagne wan-xi-shao (1970s) : fécondité 5,7→2,8 avant l'enfant unique. Politique enfant unique (1979) assouplie dès 1984, concerne seulement 1/3 de la pop. C'est la modernisation (pas la politique) qui achève la baisse. La politique n'est efficace que si elle rencontre le désir de la population.",p:"indispensable",c:"Démographie"},
+  {q:"Quelle est la leçon centrale de l'exemple indien sur le contrôle des naissances ?",a:"Stérilisations forcées 1975 (Indira Gandhi) → défaite électorale 1977. Kerala 1,6 enfants/femme (transition achevée) vs nord >2,5 (pauvreté). Leçon : politique autoritaire impossible dans un pays non-convaincu.",p:"indispensable",c:"Démographie"},
+  {q:"Quelle est la leçon de l'exemple rwandais sur le contrôle des naissances ?",a:"Kagame → politique très volontariste post-génocide. Fécondité 6,1→3,75 entre 2000 et 2018 malgré la pauvreté. Preuve : volonté politique = résultats même sans développement.",p:"indispensable",c:"Démographie"},
+  {q:"Quels sont les défis démographiques du Japon ?",a:"Décroissance (130 M → 85 M en 2100). 40% >65 ans en 2050. Ratio actifs/retraités → 1 pour 1 en 2050. Coûts santé +60%. Réponses : robotisation (Japan's New Robot Strategy 2015), silver economy (Raku-raku/Fujitsu, 692 Md€), immigration-tourniquet (Bouissou).",p:"tres-frequent",c:"Démographie"},
+  {q:"Quel est le fait massif de la démographie africaine ?",a:"×40 entre 1900 et 2100 (4 Md). Fécondité baisse mais plus lente (villes > campagnes). Afrique = continent où la question malthusienne se posera avec acuité : Rwanda/Diamond, lac Tchad, RDC. Réfugiés climatiques à anticiper.",p:"indispensable",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — SUJETS & PIÈGES ══
+  {q:"Plan type pour le sujet 'Trop d'hommes sur Terre ?'",a:"I. La démographie comme force (Bodin, dividende, diasporas) · II. Les défis : P. Bomb, jeunesse, environnement, migrations · III. Dépasser Malthus : technologie (Boserup), contrôle naissances. PIÈGE : question de répartition, pas seulement de production (Tertrais).",p:"indispensable",c:"Démographie"},
+  {q:"Plan type pour 'N'y a-t-il de puissance que d'hommes ?'",a:"I. Oui : loi du nombre (Bodin), exemples historiques et actuels, dividende · II. Nuances : Japon riche et vieillissant, soft power · III. Démographie comme variable parmi d'autres. PIÈGE : ne pas réduire la puissance à la taille de la population.",p:"indispensable",c:"Démographie"},
+  {q:"Plan type pour 'Les défis de la démographie africaine'",a:"I. Youth bulge : opportunité ou bombe à retardement ? (Brunel, Heinsohn) · II. Question malthusienne (Diamond/Rwanda, lac Tchad, RDC) · III. Transition inachevée : solutions et obstacles. PIÈGE : ne pas homogénéiser l'Afrique.",p:"indispensable",c:"Démographie"},
+  {q:"Plan type pour 'Vers un hiver démographique mondial ?'",a:"I. Ralentissement global réel (HSBC 2022, The Lancet 2024) · II. Mais l'Afrique fait exception · III. Conséquences géopolitiques : vieillissement, migrations, recomposition des puissances. PIÈGE : ralentissement ≠ décroissance absolue (seule l'Europe décroît vraiment).",p:"indispensable",c:"Démographie"},
 ];
 
 const SEARCH_DATA=[
@@ -1414,7 +1630,7 @@ function go(id){
   document.getElementById('sb').classList.remove('open');
   logSession('nav',info.l);
   const inits={
-    dash:initDash,cours:initCours,fiches:initFiches,flash:initFlash,
+    dash:initDash,cours:initCours,fiches:initFiches,flash:initFlash,sim:initSim,mycours:initMyCours,
     frise:initFrise,training:initTraining,copies:initCopies,
     revision:initRevision,annales:initAnnales,
     map:()=>{filterMapRegion('all');},
@@ -1760,7 +1976,7 @@ function associatePDF(id,inp){alert('PDF associé à '+CHAPTERS[id].short+'. (Da
 // ══════════════════════════════════════════════════════
 // FICHES
 // ══════════════════════════════════════════════════════
-function initFiches(){renderOnlyPersoFiches();}
+// initFiches now in Finder system
 function filterFiches(p){renderFiches(p==='all'?CHAPTERS:CHAPTERS.filter(c=>c.priority===p));}
 function renderFiches(list){
   document.getElementById('fiches-grid').innerHTML=list.map(c=>{
@@ -1917,24 +2133,30 @@ let flDeck=[],flIdx=0,flipped=false;
 
 function initFlash(){
   const sel=document.getElementById('fl-chap');
-  if(sel.children.length<=1)CHAPTERS.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.short+' — '+c.title.substring(0,36);sel.appendChild(o);});
-  renderFlashFolders();
+  // Build chapter list from actual flashcard data
+  if(sel.children.length<=1){
+    const allCards=[...FLASHCARDS,...M.get('my_flashcards',[])];
+    const chapNames=[...new Set(allCards.map(f=>f.c).filter(Boolean))].sort();
+    chapNames.forEach(c=>{
+      const o=document.createElement('option');
+      o.value=c;o.textContent=c;
+      sel.appendChild(o);
+    });
+  }
   loadFlash();
 }
 
 function loadFlash(){
   const chapVal=document.getElementById('fl-chap')?.value||'all';
   const prioVal=document.getElementById('fl-prio')?.value||'all';
-  const theme=(document.getElementById('fl-theme')?.value||'').toLowerCase().trim();
   const myCards=M.get('my_flashcards',[]);
-  let deck=[...FLASHCARDS,...myCards]; // MIXED automatically
-  if(chapVal!=='all'){const chap=CHAPTERS[parseInt(chapVal)];if(chap)deck=deck.filter(f=>f.c===chap.short);}
-  if(prioVal!=='all')deck=deck.filter(f=>f.p===prioVal);
-  if(theme)deck=deck.filter(f=>f.q.toLowerCase().includes(theme)||f.a.toLowerCase().includes(theme)||(f.c||'').toLowerCase().includes(theme));
-  if(!deck.length)deck=[...FLASHCARDS,...myCards];
+  let deck=[...FLASHCARDS,...myCards];
+  if(chapVal!=='all') deck=deck.filter(f=>f.c===chapVal);
+  if(prioVal!=='all') deck=deck.filter(f=>f.p===prioVal);
+  if(!deck.length) deck=[...FLASHCARDS,...myCards];
   flDeck=deck.sort(()=>Math.random()-.5);
   flIdx=0;flipped=false;
-  document.getElementById('fl-count').textContent=flDeck.length+' cartes';
+  document.getElementById('fl-count').textContent=flDeck.length+' carte'+(flDeck.length>1?'s':'');
   renderFlash();
   logSession('flash',flDeck.length+' cartes');
 }
@@ -1942,7 +2164,7 @@ function loadFlash(){
 function renderFlash(){
   const f=flDeck[flIdx];if(!f)return;
   document.getElementById('fl-q').textContent=f.q;
-  document.getElementById('fl-hint').textContent=(f.c||'')+(f.p==='indispensable'?' · 🔴 Indispensable':' · 🟠 Très fréquent');
+  document.getElementById('fl-hint').textContent=(f.c||'')+(f.p==='indispensable'?' · 🔴 Indispensable':f.p==='tres-frequent'?' · 🟠 Très fréquent':' · 🟡 Fréquent');
   document.getElementById('fl-a').textContent=f.a;
   document.getElementById('fl-prog').textContent=(flIdx+1)+' / '+flDeck.length;
   document.getElementById('fl-inner').classList.remove('flipped');
@@ -1966,14 +2188,14 @@ function renderFrise(filter='all'){
   const el=document.getElementById('frise-items');
   if(!el)return;
   // Combine built-in FRISE + custom
-  let items=[...(typeof FRISE!=='undefined'?FRISE:[]),...M.get('custom_frise',[])];items.sort((a,b)=>{const ya=parseInt((a.date||'').match(/\d{4}/)?.[0])||0,yb=parseInt((b.date||'').match(/\d{4}/)?.[0])||0;return ya-yb;});
+  let items=[...(typeof FRISE!=='undefined'?FRISE:[]),...M.get('custom_frise',[])];items.sort((a,b)=>(a.dateStart||parseInt((a.date||'').match(/\d{4}/)?.[0])||0)-(b.dateStart||parseInt((b.date||'').match(/\d{4}/)?.[0])||0));
   if(filter==='must')items=items.filter(f=>f.must);
   else if(filter==='a')items=items.filter(f=>!['w','p','c','o'].includes(f.type));else if(filter!=='all')items=items.filter(f=>f.type===filter);
   if(!items.length){el.innerHTML='<div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune entrée pour ce filtre</div>';return;}
   el.innerHTML=items.map((f,fi)=>`
     <div class="fi">
       <div class="fi-dot ${f.type}"></div>
-      <div class="fi-date">${f.date} ${f._custom?`<button onclick="deleteFriseItem(${fi})" style="background:none;border:none;cursor:pointer;font-size:9px;color:var(--red);padding:0 3px">✕</button>`:''}</div>
+      <div class="fi-date">${f.date} <button onclick="deleteFriseItem(${fi})" style="background:none;border:none;cursor:pointer;font-size:9px;color:var(--red);padding:0 3px" title="Supprimer">✕</button></div>
       <div class="fi-ev">${f.event} ${f.must?'<span class="must-badge">📍 INDISPENSABLE</span>':'<span style="font-size:8px;color:var(--txt4);border:1px solid var(--brd);padding:1px 4px;border-radius:8px">à connaître</span>'}</div>
       <div class="fi-det">${f.detail}</div>
     </div>`).join('');
@@ -1990,15 +2212,27 @@ function deleteFriseItem(fi){
   if(customIdx>=0){custom.splice(customIdx,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}
 }
 function addFrise(){
-  const d=document.getElementById('fa-d').value.trim();
-  const d2=document.getElementById('fa-d2')?.value.trim()||'';
-  const e=document.getElementById('fa-e').value.trim();
-  if(!d||!e){alert('Renseigne la date et l\'événement.');return;}
+  const d=(document.getElementById('fa-d')?.value||'').trim();
+  const d2=(document.getElementById('fa-d2')?.value||'').trim();
+  const e=(document.getElementById('fa-e')?.value||'').trim();
+  if(!d||!e){showToast('⚠️ Date et événement obligatoires');return;}
   const custom=M.get('custom_frise',[]);
+  const dateStart=parseInt(d.match(/\d{4}/)?.[0])||9999;
   const dateLabel=d2?d+'–'+d2:d;
-  custom.push({date:dateLabel,dateStart:parseInt(d)||9999,event:e,detail:document.getElementById('fa-det').value.trim(),type:document.getElementById('fa-t').value,must:document.getElementById('fa-m').value==='true',_custom:true});
+  custom.push({
+    date:dateLabel,
+    dateStart:dateStart,
+    event:e,
+    detail:(document.getElementById('fa-det')?.value||'').trim(),
+    type:document.getElementById('fa-t')?.value||'o',
+    must:document.getElementById('fa-m')?.value==='true',
+    _custom:true
+  });
+  // Auto-sort chronologically
+  custom.sort((a,b)=>(a.dateStart||9999)-(b.dateStart||9999));
   M.set('custom_frise',custom);
   ['fa-d','fa-d2','fa-e','fa-det'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  showToast('✅ Date ajoutée');
   renderFrise();
 }
 
@@ -2100,8 +2334,15 @@ let sint=null;
 function fmt(s){return `${String(Math.floor(s/3600)).padStart(2,'0')}:${String(Math.floor((s%3600)/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
 async function startSim(min){
   const theme=document.getElementById('sim-theme')?.value?.trim()||'';
+  const chap=document.getElementById('sim-chap')?.value?.trim()||'';
+  // For express 30min, use chapter sujets if available
   let sujet=SUJETS_BASE[Math.floor(Math.random()*SUJETS_BASE.length)];
-  if(theme){try{const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:100,messages:[{role:'user',content:`Génère 1 sujet de dissertation type BCE sur le thème "${theme}". Réponds uniquement avec le sujet.`}]})});if(res.ok){const data=await res.json();sujet=data.content?.map(i=>i.text||'').join('').trim()||sujet;}}catch{}}
+  if(chap&&min===30){
+    // Pick a sujet from SUJETS_BASE related to chap, or use chap as theme
+    const chapSujets=SUJETS_BASE.filter(s=>s.toLowerCase().includes(chap.toLowerCase()));
+    sujet=chapSujets.length?chapSujets[Math.floor(Math.random()*chapSujets.length)]:`${chap} — sujet à définir selon le programme.`;
+  }
+  if(theme&&!chap){try{const res=await fetch('/api/claude',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:100,messages:[{role:'user',content:`Génère 1 sujet de dissertation type BCE sur le thème "${theme}". Réponds uniquement avec le sujet.`}]})});if(res.ok){const data=await res.json();sujet=data.content?.map(i=>i.text||'').join('').trim()||sujet;}}catch{}}
   document.getElementById('sim-subj').textContent=sujet;
   document.getElementById('sim-intro').style.display='none';
   document.getElementById('sim-active').style.display='block';
@@ -2116,6 +2357,18 @@ function endSim(){if(sint)clearInterval(sint);alert('⏱ Temps écoulé. Copie r
 // ══════════════════════════════════════════════════════
 // ANNALES
 // ══════════════════════════════════════════════════════
+function initSim(){
+  const sel=document.getElementById('sim-chap');
+  if(!sel||sel.children.length>1) return;
+  const allCards=[...FLASHCARDS,...M.get('my_flashcards',[])];
+  const chapNames=[...new Set(allCards.map(f=>f.c).filter(Boolean))].sort();
+  chapNames.forEach(c=>{
+    const o=document.createElement('option');
+    o.value=c;o.textContent=c;
+    sel.appendChild(o);
+  });
+}
+
 function initAnnales(){
   document.getElementById('ann-grid').innerHTML=ANNALES.map(a=>`
     <div class="card">
@@ -2769,7 +3022,7 @@ function toggleCoursSb(){
 
 // Tree folder system stubs (already defined above in main JS)
 function closeCoursOverlay(){const ov=document.getElementById('cours-overlay');if(ov)ov.style.display='none';document.querySelector('.topbar').style.display='';}
-function closeMyCoursOverlay(){document.querySelector('.topbar').style.display='';go('dash');}
+function closeMyCoursOverlay(){document.querySelector('.topbar').style.display='';go('dash');mcCurFolder=null;mcCurFileId=null;}
 function closeFicheEditor(){const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='none';document.querySelector('.topbar').style.display='';go('fiches');}
 function insertMcPdf(inp){const f=inp.files[0];if(!f)return;const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';document.getElementById('mc-body').appendChild(div);inp.value='';}
 function addFiAttachment(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const att=document.getElementById('fi-attachments');if(!att)return;const div=document.createElement('div');div.style.cssText='padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;position:relative';if(type==='image'){div.innerHTML='<img src="'+e.target.result+'" style="width:100%;border-radius:7px;display:block">';}else{div.innerHTML='<span style="font-size:18px">📄</span> <strong style="font-size:13px">'+f.name+'</strong>';}const del=document.createElement('button');del.textContent='🗑';del.onclick=()=>div.remove();del.style.cssText='position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;color:var(--red);font-size:13px';div.appendChild(del);att.appendChild(div);};r.readAsDataURL(f);inp.value='';}
@@ -2866,7 +3119,7 @@ function openFichePersoDetail(i){
   ov.style.display='block';
 }
 
-function deleteFriseItem(fi){const built=typeof FRISE!=='undefined'?FRISE:[];const custom=M.get('custom_frise',[]);const combined=[...built,...custom];const item=combined[fi];if(!item||!item._custom){showToast('Les dates officielles ne peuvent pas être supprimées');return;}const customIdx=custom.findIndex(c=>c.date===item.date&&c.event===item.event);if(customIdx>=0){custom.splice(customIdx,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}}
+function deleteFriseItem(fi){const custom=M.get('custom_frise',[]);if(!custom[fi]){showToast('Introuvable');return;}if(!confirm('Supprimer cette date ?'))return;custom.splice(fi,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}
 function deleteDoc(i){if(!confirm('Supprimer ce document ?'))return;const docs=M.get('my_docs',[]);docs.splice(i,1);M.set('my_docs',docs);initDocs();showToast('🗑 Document supprimé');}
 function deleteCopy(i){if(!confirm('Supprimer cette copie ?'))return;const copies=M.get('copies',[]);copies.splice(i,1);M.set('copies',copies);initCopies();showToast('🗑 Copie supprimée');}
 function insertCoursFile(id,inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const body=document.getElementById('cours-body-'+id);if(!body)return;if(type==='image'){body.focus();document.execCommand('insertImage',false,e.target.result);}else{const div=document.createElement('div');div.className='cours-ref';div.innerHTML='<span>📄</span><strong>'+f.name+'</strong>';body.appendChild(div);}M.set('edit_chap_'+id,body.innerHTML);};r.readAsDataURL(f);inp.value='';}
@@ -3461,6 +3714,15 @@ const DEMO_FICHE_BODY = `
 
 `;
 
+(function injectDemoFlashcards(){
+  const key = 'geoprepa_demo_flash_injected_v1';
+  if(localStorage.getItem(key)) return;
+  // Clear all existing my_flashcards and replace with Démographie cards
+  const cards = FLASHCARDS.map(f => ({...f, _demo: true}));
+  localStorage.setItem('geo_v5_my_flashcards', JSON.stringify(cards));
+  localStorage.setItem(key, '1');
+})();
+
 (function injectDemoFiche(){
   const key = 'geoprepa_demo_fiche_injected_v1';
   if(localStorage.getItem(key)) return; // déjà injecté — on ne touche pas
@@ -3495,49 +3757,12 @@ function renameCopy(i){
 // ══════════════════════════════════════════════════════
 // FICHES — PERSO SEULEMENT
 // ══════════════════════════════════════════════════════
-function renderOnlyPersoFiches(){
-  const myFiches = M.get('my_fiches',[]);
-  const grid = document.getElementById('fiches-grid');
-  if(!grid) return;
-  if(!myFiches.length){
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--txt3)"><div style="font-size:28px;margin-bottom:10px">📋</div><div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:5px">Aucune fiche pour l\'instant</div><div style="font-size:12px">Clique sur ✏️ Créer une fiche pour commencer</div></div>';
-    return;
-  }
-  grid.innerHTML = myFiches.map((f,i) => `
-    <div style="background:var(--surf);border:1px solid var(--brd);border-radius:12px;padding:20px;transition:all .15s;border-left:3px solid var(--acc)"
-         onmouseover="this.style.borderColor='var(--acc)';this.style.boxShadow='var(--sh2)'"
-         onmouseout="this.style.borderColor='var(--brd)';this.style.boxShadow=''">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:10px">
-        <span class="badge ${f.prio==='indispensable'?'bi':f.prio==='tres-frequent'?'btf':'bf'}">${f.prio==='indispensable'?'🔴 Indispensable':f.prio==='tres-frequent'?'🟠 Très fréquent':'🟡 Fréquent'}</span>
-        <span style="font-size:10px;background:var(--acc-l);color:var(--acc);padding:2px 7px;border-radius:8px;font-weight:600">✏️ Perso</span>
-      </div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:4px;color:var(--txt);line-height:1.3">${f.title}</div>
-      <div style="font-size:11px;color:var(--txt3);margin-bottom:13px">${f.date||''}</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button class="btn btn-g btn-sm" onclick="openFichePersoDetail(${i})">👁 Voir</button>
-        <button class="btn btn-g btn-sm" onclick="openCreateFiche(${i})">✏️ Modifier</button>
-        <button class="btn btn-g btn-sm" style="color:var(--red)" onclick="deleteFichePerso(${i})">🗑 Supprimer</button>
-      </div>
-    </div>`).join('');
-}
+// renderOnlyPersoFiches now in Finder system
 
-// Override deleteFichePerso to re-render correctly
-const _origDeleteFichePerso = deleteFichePerso;
-deleteFichePerso = function(i){
-  if(!confirm('Supprimer cette fiche ?')) return;
-  const fiches = M.get('my_fiches',[]);
-  fiches.splice(i,1);
-  M.set('my_fiches',fiches);
-  renderOnlyPersoFiches();
-  showToast('🗑 Fiche supprimée');
-};
 
-// Override saveFicheEditor to re-render correctly
-const _origSaveFicheEditor = saveFicheEditor;
-saveFicheEditor = function(){
-  _origSaveFicheEditor();
-  renderOnlyPersoFiches();
-};
+// deleteFichePerso now in Finder system
+
+// saveFicheEditor now in Finder system
 
 // ══════════════════════════════════════════════════════
 // COURS — PDF UNIQUEMENT
@@ -3681,6 +3906,385 @@ function dfFilter(n, btn) {
     }
   });
 }
+
+
+// ══════════════════════════════════════════════════════
+// FINDER SYSTEM — Fiches & Mes Cours
+// ══════════════════════════════════════════════════════
+
+// SVG icons
+function folderSVG(label=''){
+  return `<svg viewBox="0 0 62 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 10C2 7.8 3.8 6 6 6H22L27 12H56C58.2 12 60 13.8 60 16V46C60 48.2 58.2 50 56 50H6C3.8 50 2 48.2 2 46V10Z" fill="#f2c4ce"/>
+    <path d="M2 10C2 7.8 3.8 6 6 6H22L27 12H56C58.2 12 60 13.8 60 16V46C60 48.2 58.2 50 56 50H6C3.8 50 2 48.2 2 46V10Z" fill="url(#fp)" fill-opacity=".4"/>
+    <path d="M2 16H60V46C60 48.2 58.2 50 56 50H6C3.8 50 2 48.2 2 46V16Z" fill="#f7d6dd"/>
+    <path d="M2 10C2 7.8 3.8 6 6 6H22L27 12H56C58.2 12 60 13.8 60 16H2V10Z" fill="#f2c4ce"/>
+    <defs><linearGradient id="fp" x1="31" y1="6" x2="31" y2="50" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#000" stop-opacity=".05"/></linearGradient></defs>
+  </svg>`;
+}
+
+function fileSVG(){
+  return `<svg viewBox="0 0 48 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 2H32L46 16V54C46 56.2 44.2 58 42 58H6C3.8 58 2 56.2 2 54V6C2 3.8 3.8 2 6 2Z" fill="#fff" stroke="#ddd8d0" stroke-width="1.5"/>
+    <path d="M32 2L46 16H34C32.9 16 32 15.1 32 14V2Z" fill="#ece8e2"/>
+    <line x1="10" y1="26" x2="38" y2="26" stroke="#c4b0a0" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="10" y1="32" x2="38" y2="32" stroke="#c4b0a0" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="10" y1="38" x2="28" y2="38" stroke="#c4b0a0" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>`;
+}
+
+// ── FICHES FINDER ────────────────────────────────────
+const FICHE_FIXED_FOLDERS = ['Bizuth', 'Carré'];
+let ficheCurFolder = null; // null = root
+
+function ficheGetData(){
+  return M.get('fiche_finder_data', {
+    folders: FICHE_FIXED_FOLDERS.map(n=>({id:'ff_'+n.toLowerCase(),name:n,fixed:true})),
+    files: {} // key = folder_id | 'root', value = [{id, ficheIdx}]
+  });
+}
+function ficheSaveData(d){ M.set('fiche_finder_data', d); }
+
+function ficheGoRoot(){
+  ficheCurFolder = null;
+  renderFicheFinder();
+  document.getElementById('fiche-finder-breadcrumb').innerHTML =
+    '<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>';
+}
+
+function ficheOpenFolder(fid, fname){
+  ficheCurFolder = fid;
+  renderFicheFinder();
+  document.getElementById('fiche-finder-breadcrumb').innerHTML =
+    '<span style="cursor:pointer;color:var(--acc)" onclick="ficheGoRoot()">📂 Fiches</span>' +
+    '<span style="color:var(--txt3)"> › </span>' +
+    '<span style="font-weight:600;color:var(--txt)">' + fname + '</span>';
+}
+
+function renderFicheFinder(){
+  const el = document.getElementById('fiche-finder');
+  if(!el) return;
+  const d = ficheGetData();
+  const myFiches = M.get('my_fiches', []);
+  let html = '<div class="finder-toolbar">';
+  if(ficheCurFolder){
+    html += '<button class="finder-back-btn" onclick="ficheGoRoot()">‹ Fiches</button>';
+  }
+  html += '</div><div class="finder-grid">';
+
+  if(!ficheCurFolder){
+    // Root: show folders
+    d.folders.forEach(f=>{
+      html += `<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')" oncontextmenu="ficheFolderCtx(event,'${f.id}','${f.name}')">
+        <div class="finder-folder-icon">${folderSVG()}</div>
+        <div class="finder-label">${f.name}</div>
+      </div>`;
+    });
+    // Also show unorganised fiches (not in any folder)
+    const organised = new Set(Object.values(d.files).flat().map(f=>f.ficheIdx));
+    myFiches.forEach((fi, idx)=>{
+      if(!organised.has(idx)){
+        html += ficheFileItem(fi, idx, null);
+      }
+    });
+  } else {
+    // Inside folder: show files
+    const fileRefs = (d.files[ficheCurFolder]||[]);
+    fileRefs.forEach(ref=>{
+      const fi = myFiches[ref.ficheIdx];
+      if(fi) html += ficheFileItem(fi, ref.ficheIdx, ficheCurFolder);
+    });
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function ficheFileItem(fi, idx, folderId){
+  const badge = fi.prio==='indispensable'?'🔴':fi.prio==='tres-frequent'?'🟠':'🟡';
+  return `<div class="finder-item" onclick="openFichePersoDetail(${idx})" oncontextmenu="ficheFileCtx(event,${idx},'${folderId||''}')">
+    <div class="finder-file-icon">${fileSVG()}</div>
+    <div class="finder-label">${badge} ${fi.title}</div>
+  </div>`;
+}
+
+function ficheCreateInFolder(){
+  // If in a folder, create and place there; else create at root
+  const targetFolder = ficheCurFolder;
+  _feEditId = null;
+  openCreateFiche();
+  // After save, we'll place it in targetFolder
+  window._ficheTargetFolder = targetFolder;
+}
+
+// Override saveFicheEditor to place file in folder
+const _origSaveFicheEditor2 = typeof saveFicheEditor === 'function' ? saveFicheEditor : null;
+window.saveFicheEditor = function(){
+  const titleEl = document.getElementById('fe-title');
+  const bodyEl = document.getElementById('fe-body');
+  const prioSel = document.getElementById('fe-prio');
+  const title = (titleEl?.textContent||'').trim();
+  if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}
+  const fiches = M.get('my_fiches',[]);
+  const existing = (_feEditId!==null&&_feEditId!==undefined)?fiches[_feEditId]:null;
+  const body = existing&&existing._demo ? existing.body : (bodyEl?.innerHTML||'');
+  const entry = {title,body,prio:prioSel?.value||'frequent',date:existing?.date||new Date().toLocaleString('fr-FR'),_custom:true,_demo:existing?._demo||false};
+  if(typeof _feEditId!=='undefined'&&_feEditId!==null) fiches[_feEditId]=entry;
+  else {
+    fiches.unshift(entry);
+    // Place in target folder if applicable
+    const tFolder = window._ficheTargetFolder;
+    if(tFolder){
+      const d = ficheGetData();
+      if(!d.files[tFolder]) d.files[tFolder]=[];
+      d.files[tFolder].push({ficheIdx:0, id:'fi_'+Date.now()});
+      // Shift all existing refs +1
+      Object.keys(d.files).forEach(k=>{
+        d.files[k] = d.files[k].map(r=>({...r, ficheIdx: r.ficheIdx+1}));
+        // But the new one at idx 0 stays at 0
+      });
+      d.files[tFolder] = d.files[tFolder].map((r,i)=> i===d.files[tFolder].length-1 ? {...r,ficheIdx:0} : r);
+      ficheSaveData(d);
+    }
+    window._ficheTargetFolder = null;
+  }
+  M.set('my_fiches', fiches);
+  showToast('✅ Fiche sauvegardée !');
+  closeFicheEditor();
+  renderFicheFinder();
+};
+
+function ficheFileCtx(e, idx, folderId){
+  e.preventDefault();
+  showCtxMenu(e, [
+    {label:'👁 Ouvrir', fn:()=>openFichePersoDetail(idx)},
+    {label:'✏️ Modifier', fn:()=>openCreateFiche(idx)},
+    {sep:true},
+    {label:'🗑 Supprimer', danger:true, fn:()=>{
+      if(!confirm('Supprimer cette fiche ?')) return;
+      const fiches = M.get('my_fiches',[]);
+      fiches.splice(idx,1);
+      M.set('my_fiches',fiches);
+      // Remove from finder data too
+      const d = ficheGetData();
+      Object.keys(d.files).forEach(k=>{
+        d.files[k] = d.files[k].filter(r=>r.ficheIdx!==idx).map(r=>({...r,ficheIdx:r.ficheIdx>idx?r.ficheIdx-1:r.ficheIdx}));
+      });
+      ficheSaveData(d);
+      renderFicheFinder();
+      showToast('🗑 Fiche supprimée');
+    }}
+  ]);
+}
+
+function ficheFolderCtx(e, fid, fname){
+  e.preventDefault();
+  if(FICHE_FIXED_FOLDERS.map(n=>'ff_'+n.toLowerCase()).includes(fid)) return; // fixed folders
+  showCtxMenu(e,[{label:'🗑 Supprimer le dossier', danger:true, fn:()=>{
+    if(!confirm('Supprimer le dossier "'+fname+'" ?')) return;
+    const d=ficheGetData();
+    d.folders=d.folders.filter(f=>f.id!==fid);
+    delete d.files[fid];
+    ficheSaveData(d);
+    renderFicheFinder();
+    showToast('🗑 Dossier supprimé');
+  }}]);
+}
+
+function initFiches(){
+  ficheCurFolder = null;
+  renderFicheFinder();
+}
+
+// ── MES COURS FINDER ─────────────────────────────────
+const MC_FIXED_FOLDERS = ['Bizuth', 'Carré'];
+let mcCurFolder = null;
+let mcCurFileId = null;
+
+function mcGetData(){
+  return M.get('mc_finder_data', {
+    folders: MC_FIXED_FOLDERS.map(n=>({id:'mcf_'+n.toLowerCase(),name:n,fixed:true})),
+    files: {} // folder_id -> [{id, title, body, date, prio}]
+  });
+}
+function mcSaveData(d){ M.set('mc_finder_data', d); }
+
+function mcGoRoot(){
+  mcCurFolder = null;
+  mcCurFileId = null;
+  document.getElementById('mc-editor-zone').style.display = 'none';
+  document.getElementById('mc-editor-bar').style.display = 'none';
+  document.getElementById('mc-finder-view').style.display = 'block';
+  document.getElementById('mc-topbar-finder').style.display = 'flex';
+  renderMcFinder();
+}
+
+function mcCloseEditor(){
+  mcGoRoot();
+}
+
+function mcOpenFolder(fid, fname){
+  mcCurFolder = fid;
+  document.getElementById('mc-breadcrumb').innerHTML =
+    '<span style="cursor:pointer;color:var(--acc)" onclick="mcGoRoot()">📂 Mes cours</span>' +
+    '<span style="color:var(--txt3)"> › </span>' +
+    '<span style="font-weight:600;color:var(--txt)">' + fname + '</span>';
+  renderMcFinder();
+}
+
+function mcOpenFile(fid, fileId){
+  const d = mcGetData();
+  const files = d.files[fid]||[];
+  const file = files.find(f=>f.id===fileId);
+  if(!file) return;
+  mcCurFolder = fid;
+  mcCurFileId = fileId;
+  document.getElementById('mc-finder-view').style.display = 'none';
+  document.getElementById('mc-editor-zone').style.display = 'block';
+  document.getElementById('mc-editor-bar').style.display = 'flex';
+  document.getElementById('mc-topbar-finder').style.display = 'none';
+  document.getElementById('mc-title').value = file.title||'';
+  document.getElementById('mc-body').innerHTML = file.body||'';
+}
+
+function mcCreateFileInFolder(){
+  if(!mcCurFolder){showToast("Ouvre d'abord un dossier");return;}
+  const d = mcGetData();
+  if(!d.files[mcCurFolder]) d.files[mcCurFolder]=[];
+  const id = 'mcfile_'+Date.now();
+  d.files[mcCurFolder].unshift({id,title:'Nouveau fichier',body:'',date:new Date().toLocaleDateString('fr-FR')});
+  mcSaveData(d);
+  renderMcFinder();
+  mcOpenFile(mcCurFolder, id);
+}
+
+function renderMcFinder(){
+  const el = document.getElementById('mc-finder-view');
+  if(!el) return;
+  const d = mcGetData();
+  let html = '<div class="finder-toolbar">';
+  if(mcCurFolder){
+    const fn = d.folders.find(f=>f.id===mcCurFolder)?.name||'';
+    html += '<button class="finder-back-btn" onclick="mcGoRoot()">‹ Mes cours</button>';
+    html += '<span style="font-size:13px;font-weight:700;color:var(--txt)">'+fn+'</span>';
+  }
+  html += '</div><div class="finder-grid">';
+
+  if(!mcCurFolder){
+    d.folders.forEach(f=>{
+      const count = (d.files[f.id]||[]).length;
+      html += `<div class="finder-item" onclick="mcOpenFolder('${f.id}','${f.name}')" oncontextmenu="mcFolderCtx(event,'${f.id}','${f.name}')">
+        <div class="finder-folder-icon">${folderSVG()}</div>
+        <div class="finder-label">${f.name}${count?' <span style=\"font-size:9px;color:var(--txt3)\">'+count+'</span>':''}</div>
+      </div>`;
+    });
+  } else {
+    const files = d.files[mcCurFolder]||[];
+    if(!files.length){
+      html += '<div style="color:var(--txt3);font-size:13px;padding:20px">Aucun fichier · Double-cliquer pour en créer un</div>';
+    }
+    files.forEach(f=>{
+      html += `<div class="finder-item" onclick="mcOpenFile('${mcCurFolder}','${f.id}')" oncontextmenu="mcFileCtx(event,'${mcCurFolder}','${f.id}')">
+        <div class="finder-file-icon">${fileSVG()}</div>
+        <div class="finder-label">${f.title||'Sans titre'}</div>
+      </div>`;
+    });
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function mcFileCtx(e, folderId, fileId){
+  e.preventDefault();
+  showCtxMenu(e,[
+    {label:'✏️ Ouvrir', fn:()=>mcOpenFile(folderId, fileId)},
+    {label:'✏️ Renommer', fn:()=>{
+      const d=mcGetData();
+      const files=d.files[folderId]||[];
+      const f=files.find(x=>x.id===fileId);
+      if(!f)return;
+      const n=prompt('Nouveau nom :',f.title);
+      if(!n||!n.trim())return;
+      f.title=n.trim();
+      mcSaveData(d);renderMcFinder();
+    }},
+    {sep:true},
+    {label:'🗑 Supprimer', danger:true, fn:()=>{
+      if(!confirm('Supprimer ce fichier ?'))return;
+      const d=mcGetData();
+      d.files[folderId]=(d.files[folderId]||[]).filter(f=>f.id!==fileId);
+      mcSaveData(d);renderMcFinder();showToast('🗑 Fichier supprimé');
+    }}
+  ]);
+}
+
+function mcFolderCtx(e, fid, fname){
+  e.preventDefault();
+  if(MC_FIXED_FOLDERS.map(n=>'mcf_'+n.toLowerCase()).includes(fid)) return;
+  showCtxMenu(e,[{label:'🗑 Supprimer', danger:true, fn:()=>{
+    if(!confirm('Supprimer le dossier "'+fname+'" ?'))return;
+    const d=mcGetData();
+    d.folders=d.folders.filter(f=>f.id!==fid);
+    delete d.files[fid];
+    mcSaveData(d);renderMcFinder();
+  }}]);
+}
+
+// Override saveMyCours for finder system
+window.saveMyCours = function(){
+  if(!mcCurFolder||!mcCurFileId){
+    showToast('Ouvre un fichier pour sauvegarder');return;
+  }
+  const d=mcGetData();
+  const files=d.files[mcCurFolder]||[];
+  const f=files.find(x=>x.id===mcCurFileId);
+  if(!f)return;
+  f.title=document.getElementById('mc-title')?.value?.trim()||'Sans titre';
+  f.body=document.getElementById('mc-body')?.innerHTML||'';
+  f.date=new Date().toLocaleDateString('fr-FR');
+  mcSaveData(d);
+  showToast('✅ Sauvegardé');
+};
+
+function deleteCurMyCours(){
+  if(!mcCurFolder||!mcCurFileId)return;
+  if(!confirm('Supprimer ce fichier ?'))return;
+  const d=mcGetData();
+  d.files[mcCurFolder]=(d.files[mcCurFolder]||[]).filter(f=>f.id!==mcCurFileId);
+  mcSaveData(d);
+  mcGoRoot();
+  showToast('🗑 Fichier supprimé');
+}
+
+function initMyCours(){
+  mcCurFolder=null;mcCurFileId=null;
+  document.getElementById('mc-editor-zone').style.display='none';
+  document.getElementById('mc-editor-bar').style.display='none';
+  document.getElementById('mc-topbar-finder').style.display='flex';
+  document.getElementById('mc-finder-view').style.display='block';
+  renderMcFinder();
+}
+
+// ── CONTEXT MENU ─────────────────────────────────────
+function showCtxMenu(e, items){
+  closeCtxMenu();
+  const m=document.createElement('div');
+  m.className='finder-ctx-menu';
+  m.id='_finder_ctx';
+  m.style.left=Math.min(e.clientX, window.innerWidth-180)+'px';
+  m.style.top=Math.min(e.clientY, window.innerHeight-200)+'px';
+  items.forEach(item=>{
+    if(item.sep){const s=document.createElement('div');s.className='finder-ctx-sep';m.appendChild(s);return;}
+    const d=document.createElement('div');
+    d.className='finder-ctx-item'+(item.danger?' danger':'');
+    d.textContent=item.label;
+    d.onclick=()=>{closeCtxMenu();item.fn();};
+    m.appendChild(d);
+  });
+  document.body.appendChild(m);
+  setTimeout(()=>document.addEventListener('click',closeCtxMenu,{once:true}),10);
+}
+function closeCtxMenu(){const m=document.getElementById('_finder_ctx');if(m)m.remove();}
+
 
 </script>
 </body>
