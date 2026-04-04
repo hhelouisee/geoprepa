@@ -1805,7 +1805,7 @@ async function showFicheModal(id){
 
   // Build with template literal — safe because it's not inside another string
   ov.innerHTML = `
-    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 28px;padding-top:max(8px,env(safe-area-inset-top));min-height:52px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;z-index:10">
+    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:5px 16px;min-height:38px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;z-index:10">
       <button onclick="document.getElementById('fiche-overlay').style.display='none';document.querySelector('.topbar').style.display=''" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Fiches</button>
       <div style="flex:1"></div>
       <span class="badge ${prio}">${prioLabel}</span>
@@ -2797,28 +2797,73 @@ function handleFEImage(inp){
 }
 
 function handleFEPdf(inp){const f=inp.files[0];if(!f)return;const att=document.getElementById('fe-attachments');const div=document.createElement('div');div.style.cssText='display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--surf2);border:1px solid var(--brd);border-radius:8px';div.innerHTML='<span style="font-size:20px">📄</span><span style="flex:1;font-size:13px;font-weight:600;color:var(--txt)">'+f.name+'</span><button onclick="this.parentNode.remove()" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:12px">🗑</button>';if(att)att.appendChild(div);inp.value='';}
-function saveFicheEditor(){const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');const title=(titleEl?.textContent||'').trim();const body=bodyEl?.innerHTML||'';if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}const fiches=M.get('my_fiches',[]);const entry={title,body,prio:prioSel?.value||'frequent',date:new Date().toLocaleString('fr-FR'),_custom:true};if(typeof _feEditId!=='undefined'&&_feEditId!==null)fiches[_feEditId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);showToast('✅ Fiche sauvegardée !');closeFicheEditor();}
+function saveFicheEditor(){
+  const titleEl=document.getElementById('fe-title');
+  const bodyEl=document.getElementById('fe-body');
+  const prioSel=document.getElementById('fe-prio');
+  const title=(titleEl?.textContent||'').trim();
+  if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}
+  const fiches=M.get('my_fiches',[]);
+  const existing=(_feEditId!==null&&_feEditId!==undefined)?fiches[_feEditId]:null;
+  // Preserve body for _demo fiches
+  const body=existing&&existing._demo ? existing.body : (bodyEl?.innerHTML||'');
+  const entry={title,body,prio:prioSel?.value||'frequent',date:existing?.date||new Date().toLocaleString('fr-FR'),_custom:true,_demo:existing?._demo||false};
+  if(typeof _feEditId!=='undefined'&&_feEditId!==null)fiches[_feEditId]=entry;
+  else fiches.unshift(entry);
+  M.set('my_fiches',fiches);
+  showToast('✅ Sauvegardé !');
+  closeFicheEditor();
+  renderOnlyPersoFiches();
+}
 function execFE(cmd,val){document.execCommand(cmd,false,val||null);}
 function insertFEQuote(){document.getElementById('fe-body').focus();document.execCommand('formatBlock',false,'blockquote');}
 function addFicheImage(){document.getElementById('fe-img-inp').click();}
 function editFicheContent(id){showToast('Cliquer sur ✏️ Modifier dans la fiche ouverte');}
 function deleteFicheCache(id){if(!confirm('Effacer la fiche ?'))return;localStorage.removeItem('geo_v5_fiche_'+id);showToast('🗑 Fiche effacée');}
 let _feEditId=null;
-function openCreateFiche(editId=null){_feEditId=editId;const existing=editId!==null?M.get('my_fiches',[])[editId]:null;const el=document.getElementById('pg-fiche-editor');if(el)el.style.display='block';document.querySelector('.topbar').style.display='none';const titleEl=document.getElementById('fe-title');const bodyEl=document.getElementById('fe-body');const prioSel=document.getElementById('fe-prio');if(existing){if(titleEl)titleEl.textContent=existing.title||'';if(bodyEl)bodyEl.innerHTML=existing.body||'';if(prioSel)prioSel.value=existing.prio||'frequent';}else{if(titleEl)titleEl.textContent='';if(bodyEl)bodyEl.innerHTML='';if(prioSel)prioSel.value='frequent';}setTimeout(()=>{if(titleEl)titleEl.focus();},100);}
+function openCreateFiche(editId=null){
+  _feEditId=editId;
+  const existing=editId!==null?M.get('my_fiches',[])[editId]:null;
+  const el=document.getElementById('pg-fiche-editor');
+  if(el)el.style.display='block';
+  document.querySelector('.topbar').style.display='none';
+  const titleEl=document.getElementById('fe-title');
+  const bodyEl=document.getElementById('fe-body');
+  const prioSel=document.getElementById('fe-prio');
+  if(existing){
+    if(titleEl)titleEl.textContent=existing.title||'';
+    if(prioSel)prioSel.value=existing.prio||'frequent';
+    // Fiches thématiques complexes (_demo) : ne pas charger le HTML dans l'éditeur
+    if(existing._demo){
+      if(bodyEl)bodyEl.innerHTML='<div style="background:var(--gold-l);border:1px solid var(--gold-m);border-radius:8px;padding:14px;font-size:13px;color:var(--txt2);line-height:1.7"><strong style="color:var(--gold)">ℹ️ Fiche thématique</strong><br>Cette fiche a un contenu structuré (onglets, filtres…) qui ne peut pas être édité ici.<br>Tu peux modifier le <strong>titre</strong> et la <strong>priorité</strong> ci-dessus, puis sauvegarder.</div>';
+    } else {
+      if(bodyEl)bodyEl.innerHTML=existing.body||existing.content||'';
+    }
+  } else {
+    if(titleEl)titleEl.textContent='';
+    if(bodyEl)bodyEl.innerHTML='';
+    if(prioSel)prioSel.value='frequent';
+  }
+  setTimeout(()=>{if(titleEl)titleEl.focus();},100);
+}
 function saveFichePerso(editId){const title=document.getElementById('mf-title')?.value.trim();const content=document.getElementById('mf-content')?.value.trim();const prio=document.getElementById('mf-prio')?.value||'frequent';if(!title||!content){showToast('Remplis le titre et le contenu');return;}const fiches=M.get('my_fiches',[]);const entry={title,content,prio,date:new Date().toLocaleString('fr-FR'),_custom:true};if(editId!==null&&editId!==undefined)fiches[editId]=entry;else fiches.unshift(entry);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('✅ Fiche sauvegardée !');}
 function deleteFichePerso(i){if(!confirm('Supprimer cette fiche ?'))return;const fiches=M.get('my_fiches',[]);fiches.splice(i,1);M.set('my_fiches',fiches);renderFiches(CHAPTERS);showToast('🗑 Fiche supprimée');}
 function openFichePersoDetail(i){
   const f=M.get('my_fiches',[])[i];if(!f)return;
-  const m=document.createElement('div');
-  m.className='modal-bg';
-  const box=document.createElement('div');
-  box.className='modal-box';
-  box.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font-family:var(--ffd);font-size:18px;font-weight:700;color:var(--txt)">'+f.title+'</div><button id="fp-close" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--txt3)">✕</button></div><div style="font-size:13px;line-height:1.8;color:var(--txt2)">'+(f.body||f.content||'')+'</div>';
-  const close=()=>m.remove();
-  m.appendChild(box);
-  document.body.appendChild(m);
-  box.querySelector('#fp-close').onclick=close;
-  m.addEventListener('click',e=>{if(e.target===m)close();});
+  let ov=document.getElementById('fiche-perso-overlay');
+  if(!ov){
+    ov=document.createElement('div');
+    ov.id='fiche-perso-overlay';
+    ov.style.cssText='position:fixed;inset:0;z-index:2000;background:var(--surf);overflow-y:auto;display:none';
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML=`
+    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:6px 16px;display:flex;align-items:center;gap:8px;z-index:10;min-height:40px">
+      <button onclick="document.getElementById('fiche-perso-overlay').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:12px;font-family:var(--ff);padding:4px 8px;border-radius:5px;display:flex;align-items:center;gap:4px;flex-shrink:0">← Retour</button>
+      <div style="flex:1;font-size:13px;font-weight:700;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${f.title}</div>
+    </div>
+    <div style="max-width:860px;margin:0 auto;padding:24px 20px 60px">${f.body||f.content||''}</div>`;
+  ov.style.display='block';
 }
 
 function deleteFriseItem(fi){const built=typeof FRISE!=='undefined'?FRISE:[];const custom=M.get('custom_frise',[]);const combined=[...built,...custom];const item=combined[fi];if(!item||!item._custom){showToast('Les dates officielles ne peuvent pas être supprimées');return;}const customIdx=custom.findIndex(c=>c.date===item.date&&c.event===item.event);if(customIdx>=0){custom.splice(customIdx,1);M.set('custom_frise',custom);renderFrise();showToast('🗑 Date supprimée');}}
