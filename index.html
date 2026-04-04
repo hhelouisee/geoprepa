@@ -3713,11 +3713,14 @@ const DEMO_FICHE_BODY = `
 })();
 
 (function injectDemoFiche(){
-  const key = 'geoprepa_demo_fiche_injected_v2';
+  // Clear old keys to force re-injection
+  localStorage.removeItem('geoprepa_demo_fiche_injected_v1');
+  localStorage.removeItem('geoprepa_demo_fiche_injected_v2');
+  const key = 'geoprepa_demo_fiche_injected_v3';
   if(localStorage.getItem(key)) return; // déjà injecté — on ne touche pas
-  const fiches = JSON.parse(localStorage.getItem('geo_v5_my_fiches') || '[]');
-  // Vérifie si la fiche existe déjà
-  if(fiches.some(f => f.title === DEMO_FICHE_TITLE)) return;
+  // Always inject fresh — remove any existing demo fiche first
+  let fiches = JSON.parse(localStorage.getItem('geo_v5_my_fiches') || '[]');
+  fiches = fiches.filter(f => !f._demo);
   fiches.unshift({
     title: DEMO_FICHE_TITLE,
     body: DEMO_FICHE_BODY,
