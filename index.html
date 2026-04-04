@@ -4078,6 +4078,252 @@ function initCours(){
 
 
 // ══════════════════════════════════════════════════════
+// FICHES — FINDER SYSTEM COMPLET
+// ══════════════════════════════════════════════════════
+const FICHE_FIXED_FOLDERS = ['Bizuth', 'Carré'];
+let ficheCurFolder = null;
+let ficheCurFolderStack = [];
+
+function ficheGetData(){
+  const defaults = {
+    folders: FICHE_FIXED_FOLDERS.map(n=>({id:'ff_'+n.toLowerCase().replace('é','e'),name:n,fixed:true,parent:null})),
+    files: {}
+  };
+  const saved = M.get('fiche_finder_data', null);
+  if(!saved) return defaults;
+  // Ensure fixed folders always present
+  FICHE_FIXED_FOLDERS.forEach(n=>{
+    const id='ff_'+n.toLowerCase().replace('é','e');
+    if(!saved.folders.some(f=>f.id===id)) saved.folders.unshift({id,name:n,fixed:true,parent:null});
+  });
+  return saved;
+}
+function ficheSaveData(d){ M.set('fiche_finder_data',d); }
+
+function ficheGoRoot(){
+  ficheCurFolder=null; ficheCurFolderStack=[];
+  renderFicheFinder();
+  const bc=document.getElementById('fiche-finder-breadcrumb');
+  if(bc) bc.innerHTML='<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>';
+}
+
+function ficheOpenFolder(fid, fname){
+  ficheCurFolderStack.push({id:fid,name:fname});
+  ficheCurFolder=fid;
+  renderFicheFinder();
+  _ficheRenderBreadcrumb();
+}
+
+function ficheGoBack(){
+  if(!ficheCurFolderStack.length){ ficheGoRoot(); return; }
+  ficheCurFolderStack.pop();
+  const prev=ficheCurFolderStack[ficheCurFolderStack.length-1];
+  ficheCurFolder=prev?prev.id:null;
+  renderFicheFinder();
+  _ficheRenderBreadcrumb();
+}
+
+function _ficheRenderBreadcrumb(){
+  const el=document.getElementById('fiche-finder-breadcrumb');
+  if(!el) return;
+  let html='<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>';
+  ficheCurFolderStack.forEach((step,i)=>{
+    html+='<span style="color:var(--txt3)"> › </span>';
+    if(i<ficheCurFolderStack.length-1){
+      html+=`<span style="cursor:pointer;color:var(--acc)" onclick="ficheGoToLevel(${i})">${step.name}</span>`;
+    } else {
+      html+=`<span style="font-weight:600;color:var(--txt)">${step.name}</span>`;
+    }
+  });
+  el.innerHTML=html;
+}
+
+function ficheGoToLevel(i){
+  const step=ficheCurFolderStack[i];
+  ficheCurFolderStack=ficheCurFolderStack.slice(0,i+1);
+  ficheCurFolder=step.id;
+  renderFicheFinder(); _ficheRenderBreadcrumb();
+}
+
+function renderFicheFinder(){
+  const el=document.getElementById('fiche-finder');
+  if(!el) return;
+  const d=ficheGetData();
+  const myFiches=M.get('my_fiches',[]);
+  let html='<div class="finder-toolbar">';
+  if(ficheCurFolder){
+    html+='<button class="finder-back-btn" onclick="ficheGoBack()">‹ Retour</button>';
+    const fn=d.folders.find(f=>f.id===ficheCurFolder)?.name||'';
+    html+=`<span style="font-size:13px;font-weight:700;color:var(--txt)">${fn}</span>`;
+  }
+  html+='</div><div class="finder-grid">';
+
+  if(!ficheCurFolder){
+    // Root: top-level folders
+    d.folders.filter(f=>!f.parent).forEach(f=>{
+      const refs=(d.files[f.id]||[]);
+      const subs=d.folders.filter(sf=>sf.parent===f.id).length;
+      const info=[refs.length?refs.length+' fiche'+(refs.length>1?'s':''):'', subs?subs+' doss.':''].filter(Boolean).join(' · ');
+      html+=`<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')" oncontextmenu="ficheFolderCtx(event,'${f.id}','${f.name}')">
+        <div class="finder-folder-icon">${folderSVG()}</div>
+        <div class="finder-label">${f.name}${info?'<br><span style=\"font-size:9px;color:var(--txt3)\">'+info+'</span>':''}</div>
+      </div>`;
+    });
+    // Unorganised fiches at root
+    const organised=new Set(Object.values(d.files).flat().map(r=>r.ficheIdx));
+    myFiches.forEach((fi,idx)=>{
+      if(!organised.has(idx)) html+=ficheFileItem(fi,idx,null);
+    });
+  } else {
+    // Sub-folders first
+    d.folders.filter(f=>f.parent===ficheCurFolder).forEach(f=>{
+      const refs=(d.files[f.id]||[]).length;
+      html+=`<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')" oncontextmenu="ficheFolderCtx(event,'${f.id}','${f.name}')">
+        <div class="finder-folder-icon">${folderSVG()}</div>
+        <div class="finder-label">${f.name}${refs?'<br><span style=\"font-size:9px;color:var(--txt3)\">'+refs+' fiche'+(refs>1?'s':'')+'</span>':''}</div>
+      </div>`;
+    });
+    // Fiches in this folder
+    const fileRefs=d.files[ficheCurFolder]||[];
+    fileRefs.forEach(ref=>{
+      const fi=myFiches[ref.ficheIdx];
+      if(fi) html+=ficheFileItem(fi,ref.ficheIdx,ficheCurFolder);
+    });
+    if(!d.folders.some(f=>f.parent===ficheCurFolder)&&!fileRefs.length){
+      html+='<div style="color:var(--txt3);font-size:13px;padding:20px;grid-column:1/-1">Dossier vide — crée une fiche ou un sous-dossier</div>';
+    }
+  }
+  html+='</div>';
+  el.innerHTML=html;
+}
+
+function ficheFileItem(fi, idx, folderId){
+  const badge=fi.prio==='indispensable'?'🔴':fi.prio==='tres-frequent'?'🟠':'🟡';
+  return `<div class="finder-item" onclick="openFichePersoDetail(${idx})" oncontextmenu="ficheFileCtx(event,${idx},'${folderId||''}')">
+    <div class="finder-file-icon">${fileSVG()}</div>
+    <div class="finder-label">${badge} ${fi.title}</div>
+  </div>`;
+}
+
+function ficheFolderCtx(e, fid, fname){
+  e.preventDefault();
+  const isFixed=FICHE_FIXED_FOLDERS.map(n=>'ff_'+n.toLowerCase().replace('é','e')).includes(fid);
+  const items=[
+    {label:'✏️ Renommer', fn:()=>{
+      if(isFixed){showToast('Ce dossier ne peut pas être renommé');return;}
+      const d=ficheGetData(); const f=d.folders.find(x=>x.id===fid);
+      if(!f) return; const n=prompt('Nouveau nom :',f.name);
+      if(!n?.trim()) return; f.name=n.trim(); ficheSaveData(d); renderFicheFinder();
+    }}
+  ];
+  if(!isFixed) items.push({sep:true},{label:'🗑 Supprimer',danger:true,fn:()=>{
+    if(!confirm('Supprimer ce dossier ?')) return;
+    const d=ficheGetData();
+    function desc(id){return [id,...d.folders.filter(f=>f.parent===id).flatMap(f=>desc(f.id))];}
+    const ids=desc(fid);
+    d.folders=d.folders.filter(f=>!ids.includes(f.id));
+    ids.forEach(id=>delete d.files[id]);
+    ficheSaveData(d);
+    if(ids.includes(ficheCurFolder)) ficheGoRoot(); else renderFicheFinder();
+    showToast('🗑 Dossier supprimé');
+  }});
+  showCtxMenu(e,items);
+}
+
+function ficheFileCtx(e, idx, folderId){
+  e.preventDefault();
+  showCtxMenu(e,[
+    {label:'👁 Ouvrir', fn:()=>openFichePersoDetail(idx)},
+    {label:'✏️ Modifier', fn:()=>openCreateFiche(idx)},
+    {sep:true},
+    {label:'🗑 Supprimer',danger:true,fn:()=>{
+      if(!confirm('Supprimer cette fiche ?')) return;
+      const fiches=M.get('my_fiches',[]);
+      fiches.splice(idx,1);
+      M.set('my_fiches',fiches);
+      // Update all refs
+      const d=ficheGetData();
+      Object.keys(d.files).forEach(k=>{
+        d.files[k]=d.files[k].filter(r=>r.ficheIdx!==idx).map(r=>({...r,ficheIdx:r.ficheIdx>idx?r.ficheIdx-1:r.ficheIdx}));
+      });
+      ficheSaveData(d);
+      renderFicheFinder();
+      showToast('🗑 Fiche supprimée');
+    }}
+  ]);
+}
+
+function ficheCreateInFolder(){
+  const targetFolder=ficheCurFolder;
+  _feEditId=null;
+  window._ficheTargetFolder=targetFolder;
+  openCreateFiche();
+}
+
+function ficheCreateSubFolder(){
+  if(!ficheCurFolder){showToast("Ouvre un dossier d'abord");return;}
+  const name=prompt('Nom du sous-dossier :');
+  if(!name?.trim()) return;
+  const d=ficheGetData();
+  d.folders.push({id:'ff_sub_'+Date.now(),name:name.trim(),parent:ficheCurFolder});
+  ficheSaveData(d); renderFicheFinder(); showToast('📁 Sous-dossier créé');
+}
+
+function addFicheFolder(){
+  const name=prompt('Nom du dossier :');
+  if(!name?.trim()) return;
+  const d=ficheGetData();
+  d.folders.push({id:'ff_'+Date.now(),name:name.trim(),parent:ficheCurFolder||null});
+  ficheSaveData(d); renderFicheFinder(); showToast('📁 Dossier créé');
+}
+
+function initFiches(){
+  ficheGoRoot();
+}
+
+// Save fiche + place in folder
+window.saveFicheEditor=function(){
+  const titleEl=document.getElementById('fe-title');
+  const bodyEl=document.getElementById('fe-body');
+  const prioSel=document.getElementById('fe-prio');
+  const title=(titleEl?.textContent||'').trim();
+  if(!title){showToast('Ajoute un titre');titleEl?.focus();return;}
+  const fiches=M.get('my_fiches',[]);
+  const existing=(_feEditId!==null&&_feEditId!==undefined)?fiches[_feEditId]:null;
+  const body=existing&&existing._demo?existing.body:(bodyEl?.innerHTML||'');
+  const entry={title,body,prio:prioSel?.value||'frequent',date:existing?.date||new Date().toLocaleString('fr-FR'),_custom:true,_demo:existing?._demo||false};
+  if(_feEditId!==null&&_feEditId!==undefined) fiches[_feEditId]=entry;
+  else {
+    fiches.unshift(entry);
+    const tFolder=window._ficheTargetFolder;
+    if(tFolder){
+      const d=ficheGetData();
+      if(!d.files[tFolder]) d.files[tFolder]=[];
+      // Shift existing refs +1
+      Object.keys(d.files).forEach(k=>{ d.files[k]=d.files[k].map(r=>({...r,ficheIdx:r.ficheIdx+1})); });
+      d.files[tFolder].unshift({ficheIdx:0,id:'fi_'+Date.now()});
+      ficheSaveData(d);
+    }
+    window._ficheTargetFolder=null;
+  }
+  M.set('my_fiches',fiches);
+  showToast('✅ Fiche sauvegardée !');
+  closeFicheEditor();
+  renderFicheFinder();
+};
+
+function ficheMoveToFolder(ficheIdx, srcFolder, dstFolderId){
+  const d=ficheGetData();
+  if(srcFolder) d.files[srcFolder]=(d.files[srcFolder]||[]).filter(r=>r.ficheIdx!==ficheIdx);
+  if(!d.files[dstFolderId]) d.files[dstFolderId]=[];
+  if(!d.files[dstFolderId].some(r=>r.ficheIdx===ficheIdx)){
+    d.files[dstFolderId].unshift({ficheIdx,id:'fi_'+Date.now()});
+  }
+  ficheSaveData(d); ficheGoRoot();
+  showToast('✅ Fiche déplacée');
+}
+
+// ══════════════════════════════════════════════════════
 // DRAG & DROP + SOUS-DOSSIERS + RÉORDONNANCEMENT
 // ══════════════════════════════════════════════════════
 
