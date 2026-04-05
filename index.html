@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light" data-font="geist">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0043)file:///Users/huyuan/Downloads/index_2.html -->
+<html lang="fr" data-theme="light" data-font="dm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GéoPrepa BCE</title>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<link href="./index_files/css2" rel="stylesheet">
+<script src="./index_files/chart.umd.min.js"></script>
 <style>
 /* ═══════════ FONT SYSTEM ═══════════ */
 [data-font="geist"]   { --ff: 'Geist', sans-serif;      --ffd: 'Lora', serif; }
@@ -463,7 +463,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 </head>
 <body>
 <!-- ████ AUTH OVERLAY ████ -->
-<div id="auth-overlay" style="position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;font-family:var(--ff)">
+<div id="auth-overlay" style="position: fixed; inset: 0px; background: var(--bg); z-index: 9999; display: none; align-items: center; justify-content: center; font-family: var(--ff);">
   <div style="width:100%;max-width:380px;padding:20px">
     <div style="text-align:center;margin-bottom:28px">
       <div style="width:44px;height:44px;background:var(--acc);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--ffd);font-style:italic;font-size:20px;color:#fff;font-weight:700;margin:0 auto 10px">G</div>
@@ -471,24 +471,19 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div style="font-size:12px;color:var(--txt3);margin-top:3px">Geopolitique - ECG</div>
     </div>
     <div style="display:flex;border:1px solid var(--brd);border-radius:8px;overflow:hidden;margin-bottom:18px">
-      <button id="tab-login" onclick="switchAuthTab('login')" style="flex:1;padding:8px;font-size:13px;font-weight:600;background:var(--acc);color:#fff;border:none;cursor:pointer;font-family:var(--ff)">Connexion</button>
-      <button id="tab-signup" onclick="switchAuthTab('signup')" style="flex:1;padding:8px;font-size:13px;font-weight:500;background:var(--surf);color:var(--txt3);border:none;cursor:pointer;font-family:var(--ff)">Creer un compte</button>
+      <button id="tab-login" onclick="switchAuthTab(&#39;login&#39;)" style="flex:1;padding:8px;font-size:13px;font-weight:600;background:var(--acc);color:#fff;border:none;cursor:pointer;font-family:var(--ff)">Connexion</button>
+      <button id="tab-signup" onclick="switchAuthTab(&#39;signup&#39;)" style="flex:1;padding:8px;font-size:13px;font-weight:500;background:var(--surf);color:var(--txt3);border:none;cursor:pointer;font-family:var(--ff)">Creer un compte</button>
     </div>
     <div style="background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:20px">
       <div style="margin-bottom:12px">
         <label style="font-size:11px;font-weight:600;color:var(--txt3);display:block;margin-bottom:5px">EMAIL</label>
-        <input id="auth-email" type="email" placeholder="ton@email.com"
-          style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)"
-          onkeydown="if(event.key==='Enter')authSubmit()">
+        <input id="auth-email" type="email" placeholder="ton@email.com" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)authSubmit()">
       </div>
       <div style="margin-bottom:16px">
         <label style="font-size:11px;font-weight:600;color:var(--txt3);display:block;margin-bottom:5px">MOT DE PASSE</label>
-        <input id="auth-pwd" type="password" placeholder="min. 6 caracteres"
-          style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)"
-          onkeydown="if(event.key==='Enter')authSubmit()">
+        <input id="auth-pwd" type="password" placeholder="min. 6 caracteres" style="width:100%;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:9px 11px;font-size:13px;color:var(--txt);outline:none;font-family:var(--ff)" onkeydown="if(event.key===&#39;Enter&#39;)authSubmit()">
       </div>
-      <button onclick="authSubmit()" id="auth-btn"
-        style="width:100%;padding:10px;background:var(--acc);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">
+      <button onclick="authSubmit()" id="auth-btn" style="width:100%;padding:10px;background:var(--acc);color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">
         Se connecter
       </button>
       <div id="auth-msg" style="margin-top:10px;font-size:12px;text-align:center;color:var(--red);min-height:16px"></div>
@@ -499,7 +494,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 </div>
 
-<div class="app" id="main-app" style="display:none">
+<div class="app" id="main-app" style="display: flex;">
 
 <!-- ████ SIDEBAR ████ -->
 <aside class="sb" id="sb">
@@ -510,62 +505,62 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div><div class="logo-txt">GéoPrepa BCE</div><div style="font-size:9px;color:var(--txt4)">Géopolitique · ECG</div></div>
     </div>
     <div class="sb-cd" onclick="openCd()">
-      <div class="cd-n" id="cd-n">—</div>
-      <div style="flex:1"><div class="cd-lbl">jours BCE</div><div class="cd-sub" id="cd-s">Définir la date</div></div>
+      <div class="cd-n" id="cd-n">9</div>
+      <div style="flex:1"><div class="cd-lbl">jours BCE</div><div class="cd-sub" id="cd-s">14 avril</div></div>
       <span style="font-size:10px;color:var(--txt4)">✏️</span>
     </div>
   </div>
 
   <nav class="nav">
     <div style="padding:2px 6px">
-      <div class="ni on" id="ni-dash" onclick="go('dash')"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
+      <div class="ni" id="ni-dash" onclick="go(&#39;dash&#39;)"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG('prog')"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog">▾</span></div>
+      <div class="ng-hd" onclick="togNG(&#39;prog&#39;)"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog" style="transform: rotate(0deg);">▾</span></div>
       <div class="ng-items" id="ni-prog" style="max-height:500px">
-        <div class="ni" id="ni-cours-p" onclick="go('cours')"><span class="ni-ic">📖</span><span class="ni-lb">Cours complet</span></div>
-        <div class="ni" id="ni-fiches" onclick="go('fiches')"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
-        <div class="ni" id="ni-flash" onclick="go('flash')"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
-        <div class="ni" id="ni-frise" onclick="go('frise')"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
         
-        <div class="ni" id="ni-search" onclick="go('search')"><span class="ni-ic">🔍</span><span class="ni-lb">Recherche</span></div>
+        <div class="ni" id="ni-fiches" onclick="go(&#39;fiches&#39;)"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
+        <div class="ni" id="ni-flash" onclick="go(&#39;flash&#39;)"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
+        <div class="ni" id="ni-frise" onclick="go(&#39;frise&#39;)"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
+        
+        <div class="ni" id="ni-search" onclick="go(&#39;search&#39;)"><span class="ni-ic">🔍</span><span class="ni-lb">Recherche</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG('train')"><span class="ng-lbl">Entraînement</span><span class="ng-arr" id="na-train">▾</span></div>
+      <div class="ng-hd" onclick="togNG(&#39;train&#39;)"><span class="ng-lbl">Entraînement</span><span class="ng-arr" id="na-train" style="transform: rotate(0deg);">▾</span></div>
       <div class="ng-items" id="ni-train" style="max-height:500px">
-        <div class="ni" id="ni-training" onclick="go('training')"><span class="ni-ic">✍️</span><span class="ni-lb">Questions ouvertes</span></div>
-        <div class="ni" id="ni-sim" onclick="go('sim')"><span class="ni-ic">🚨</span><span class="ni-lb">Mode Concours BCE</span><span class="nbadge nb-r">BCE</span></div>
-        <div class="ni" id="ni-annales" onclick="go('annales')"><span class="ni-ic">📂</span><span class="ni-lb">Annales</span></div>
+        <div class="ni" id="ni-training" onclick="go(&#39;training&#39;)"><span class="ni-ic">✍️</span><span class="ni-lb">Questions ouvertes</span></div>
+        <div class="ni" id="ni-sim" onclick="go(&#39;sim&#39;)"><span class="ni-ic">🚨</span><span class="ni-lb">Mode Concours BCE</span><span class="nbadge nb-r">BCE</span></div>
+        <div class="ni" id="ni-annales" onclick="go(&#39;annales&#39;)"><span class="ni-ic">📂</span><span class="ni-lb">Annales</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG('suivi')"><span class="ng-lbl">Suivi</span><span class="ng-arr" id="na-suivi">▾</span></div>
+      <div class="ng-hd" onclick="togNG(&#39;suivi&#39;)"><span class="ng-lbl">Suivi</span><span class="ng-arr" id="na-suivi" style="transform: rotate(0deg);">▾</span></div>
       <div class="ng-items" id="ni-suivi" style="max-height:500px">
-        <div class="ni" id="ni-copies" onclick="go('copies')"><span class="ni-ic">📊</span><span class="ni-lb">Mes copies</span><span class="nbadge nb-g" id="nb-copies">0</span></div>
-        <div class="ni" id="ni-revision" onclick="go('revision')"><span class="ni-ic">🔁</span><span class="ni-lb">Révisions urgentes</span><span class="nbadge nb-r" id="nb-rev">0</span></div>
-        <div class="ni" id="ni-screentime" onclick="go('screentime')"><span class="ni-ic">⏱</span><span class="ni-lb">Temps de révision</span></div>
-        <div class="ni" id="ni-history" onclick="go('history')"><span class="ni-ic">🕐</span><span class="ni-lb">Historique</span></div>
+        <div class="ni" id="ni-copies" onclick="go(&#39;copies&#39;)"><span class="ni-ic">📊</span><span class="ni-lb">Mes copies</span><span class="nbadge nb-g" id="nb-copies">0</span></div>
+        <div class="ni" id="ni-revision" onclick="go(&#39;revision&#39;)"><span class="ni-ic">🔁</span><span class="ni-lb">Révisions urgentes</span><span class="nbadge nb-r" id="nb-rev">7</span></div>
+        <div class="ni" id="ni-screentime" onclick="go(&#39;screentime&#39;)"><span class="ni-ic">⏱</span><span class="ni-lb">Temps de révision</span></div>
+        <div class="ni" id="ni-history" onclick="go(&#39;history&#39;)"><span class="ni-ic">🕐</span><span class="ni-lb">Historique</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG('create')"><span class="ng-lbl">Créer</span><span class="ng-arr" id="na-create">▾</span></div>
+      <div class="ng-hd" onclick="togNG(&#39;create&#39;)"><span class="ng-lbl">Créer</span><span class="ng-arr" id="na-create" style="transform: rotate(0deg);">▾</span></div>
       <div class="ng-items" id="ni-create" style="max-height:500px">
-        <div class="ni" id="ni-mycours" onclick="go('mycours')"><span class="ni-ic">✏️</span><span class="ni-lb">Mes cours</span></div>
-        <div class="ni" id="ni-myflash" onclick="go('myflash')"><span class="ni-ic">🃏</span><span class="ni-lb">Mes flashcards</span></div>
-        <div class="ni" id="ni-docs" onclick="go('docs')"><span class="ni-ic">📎</span><span class="ni-lb">Documents adaptatifs</span></div>
+        <div class="ni" id="ni-mycours" onclick="go(&#39;mycours&#39;)"><span class="ni-ic">✏️</span><span class="ni-lb">Mes cours</span></div>
+        <div class="ni" id="ni-myflash" onclick="go(&#39;myflash&#39;)"><span class="ni-ic">🃏</span><span class="ni-lb">Mes flashcards</span></div>
+        <div class="ni" id="ni-docs" onclick="go(&#39;docs&#39;)"><span class="ni-ic">📎</span><span class="ni-lb">Documents adaptatifs</span></div>
       </div><div class="nsep"></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG('tools')"><span class="ng-lbl">Outils</span><span class="ng-arr" id="na-tools">▾</span></div>
+      <div class="ng-hd" onclick="togNG(&#39;tools&#39;)"><span class="ng-lbl">Outils</span><span class="ng-arr" id="na-tools" style="transform: rotate(0deg);">▾</span></div>
       <div class="ng-items" id="ni-tools" style="max-height:500px">
-        <div class="ni" id="ni-map" onclick="go('map')"><span class="ni-ic">🗺️</span><span class="ni-lb">Monde 🌍</span></div>
-        <div class="ni" id="ni-news" onclick="go('news')"><span class="ni-ic">📰</span><span class="ni-lb">News géopo</span></div>
+        <div class="ni on" id="ni-map" onclick="go(&#39;map&#39;)"><span class="ni-ic">🗺️</span><span class="ni-lb">Monde 🌍</span></div>
+        <div class="ni" id="ni-news" onclick="go(&#39;news&#39;)"><span class="ni-ic">📰</span><span class="ni-lb">News géopo</span></div>
       </div>
     </div>
   </nav>
@@ -574,7 +569,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <button class="sf-btn" onclick="toggleTheme()" id="theme-btn">🌙</button>
     <button class="sf-btn" onclick="openFontPicker()" title="Police du site">Aa</button>
     <span style="font-size:10px;color:var(--txt4);flex:1;text-align:center">GéoPrepa BCE</span>
-    <button class="sf-btn" onclick="go('screentime')">⏱</button>
+    <button class="sf-btn" onclick="go(&#39;screentime&#39;)">⏱</button>
   </div>
 </div>
 </aside>
@@ -598,24 +593,24 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 <div id="font-modal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:20px;box-shadow:var(--sh3);z-index:600;width:340px">
   <div style="font-size:13px;font-weight:700;margin-bottom:12px">🔤 Choisir la police du site</div>
   <div style="display:flex;flex-direction:column;gap:7px">
-    <div onclick="setFont('geist')" class="font-opt" data-f="geist">
-      <div style="font-family:'Geist',sans-serif;font-size:17px;font-weight:700">Geist</div>
-      <div style="font-family:'Geist',sans-serif;font-size:12px;color:var(--txt3)">Moderne · Technologique · Épuré (défaut)</div>
+    <div onclick="setFont(&#39;geist&#39;)" class="font-opt" data-f="geist">
+      <div style="font-family:&#39;Geist&#39;,sans-serif;font-size:17px;font-weight:700">Geist</div>
+      <div style="font-family:&#39;Geist&#39;,sans-serif;font-size:12px;color:var(--txt3)">Moderne · Technologique · Épuré (défaut)</div>
     </div>
-    <div onclick="setFont('dm')" class="font-opt" data-f="dm">
-      <div style="font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700">DM Sans</div>
-      <div style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--txt3)">Humaniste · Lisible · Chaleureux</div>
+    <div onclick="setFont(&#39;dm&#39;)" class="font-opt" data-f="dm">
+      <div style="font-family:&#39;DM Sans&#39;,sans-serif;font-size:17px;font-weight:700">DM Sans</div>
+      <div style="font-family:&#39;DM Sans&#39;,sans-serif;font-size:12px;color:var(--txt3)">Humaniste · Lisible · Chaleureux</div>
     </div>
-    <div onclick="setFont('garamond')" class="font-opt" data-f="garamond">
-      <div style="font-family:'EB Garamond',serif;font-size:17px;font-weight:700">EB Garamond</div>
-      <div style="font-family:'EB Garamond',serif;font-size:12px;color:var(--txt3)">Classique · Académique · Élégant</div>
+    <div onclick="setFont(&#39;garamond&#39;)" class="font-opt" data-f="garamond">
+      <div style="font-family:&#39;EB Garamond&#39;,serif;font-size:17px;font-weight:700">EB Garamond</div>
+      <div style="font-family:&#39;EB Garamond&#39;,serif;font-size:12px;color:var(--txt3)">Classique · Académique · Élégant</div>
     </div>
-    <div onclick="setFont('spectral')" class="font-opt" data-f="spectral">
-      <div style="font-family:'Spectral',serif;font-size:17px;font-weight:700">Spectral</div>
-      <div style="font-family:'Spectral',serif;font-size:12px;color:var(--txt3)">Éditorial · Littéraire · Raffiné</div>
+    <div onclick="setFont(&#39;spectral&#39;)" class="font-opt" data-f="spectral">
+      <div style="font-family:&#39;Spectral&#39;,serif;font-size:17px;font-weight:700">Spectral</div>
+      <div style="font-family:&#39;Spectral&#39;,serif;font-size:12px;color:var(--txt3)">Éditorial · Littéraire · Raffiné</div>
     </div>
   </div>
-  <button class="btn btn-g" style="width:100%;margin-top:12px" onclick="document.getElementById('font-modal').style.display='none'">Fermer</button>
+  <button class="btn btn-g" style="width:100%;margin-top:12px" onclick="document.getElementById(&#39;font-modal&#39;).style.display=&#39;none&#39;">Fermer</button>
 </div>
 
 <style>
@@ -628,16 +623,16 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 <main class="mn">
   <div class="topbar">
     <button class="tb-tog" onclick="toggleSb()">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="1.5" rx=".75" fill="currentColor"/><rect x="1" y="7.25" width="14" height="1.5" rx=".75" fill="currentColor"/><rect x="1" y="11.5" width="14" height="1.5" rx=".75" fill="currentColor"/></svg>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="7.25" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="11.5" width="14" height="1.5" rx=".75" fill="currentColor"></rect></svg>
     </button>
     <div class="bc">
-      <span class="bc-g" id="bc-g">Accueil</span>
+      <span class="bc-g" id="bc-g">Outils</span>
       <span class="bc-s">›</span>
-      <span class="bc-p" id="bc-p">Tableau de bord</span>
+      <span class="bc-p" id="bc-p">Monde 🌍</span>
     </div>
     <div class="tb-right">
       <div style="font-size:11px;color:var(--txt3);display:flex;align-items:center;gap:5px">
-        <span>🎯</span><span id="tb-obj">Aucun objectif</span>
+        <span>🎯</span><span id="tb-obj" style="color: var(--txt3);">0/2 objectifs</span>
         <button class="btn btn-g btn-xs" onclick="editObj()">✏️</button>
       </div>
       <div class="tb-search">
@@ -651,25 +646,25 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   <div class="content" id="content">
 
   <!-- ════ DASHBOARD ════ -->
-  <div class="pg on" id="pg-dash">
+  <div class="pg" id="pg-dash">
     <div style="background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:16px 18px;margin-bottom:16px">
       <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:3px">GéoPrepa BCE</div>
       <div style="font-family:var(--ffd);font-size:21px;font-weight:700;margin-bottom:3px;color:var(--txt)">Tableau de bord</div>
-      <div style="font-size:12px;color:var(--txt3)" id="dash-sub">—</div>
+      <div style="font-size:12px;color:var(--txt3)" id="dash-sub">9 jours avant le concours</div>
     </div>
     <div class="stat-row">
-      <div class="sc"><div class="sc-stripe" style="background:var(--acc)"></div><div class="sl">Chapitres vus</div><div class="sv" style="color:var(--acc)" id="st-chap">0</div><div class="ss">sur 30</div></div>
+      <div class="sc"><div class="sc-stripe" style="background:var(--acc)"></div><div class="sl">Chapitres vus</div><div class="sv" style="color:var(--acc)" id="st-chap">11</div><div class="ss">sur 30</div></div>
       <div class="sc"><div class="sc-stripe" style="background:var(--grn)"></div><div class="sl">Flashcards</div><div class="sv" style="color:var(--grn)" id="st-flash">0</div><div class="ss">validées</div></div>
       <div class="sc"><div class="sc-stripe" style="background:var(--gold)"></div><div class="sl">Score moyen</div><div class="sv" style="color:var(--gold)" id="st-score">—</div><div class="ss">/20 copies</div></div>
-      <div class="sc"><div class="sc-stripe" style="background:var(--red)"></div><div class="sl">Urgent</div><div class="sv" style="color:var(--red)" id="st-todo">0</div><div class="ss">chapitres</div></div>
+      <div class="sc"><div class="sc-stripe" style="background:var(--red)"></div><div class="sl">Urgent</div><div class="sv" style="color:var(--red)" id="st-todo">7</div><div class="ss">chapitres</div></div>
     </div>
     <div class="g2" style="margin-bottom:13px">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
           <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3)">Progression</span>
-          <span style="font-size:11px;color:var(--acc);cursor:pointer" onclick="go('cours')">Voir tout →</span>
+          <span style="font-size:11px;color:var(--acc);cursor:pointer" onclick="go(&#39;cours&#39;)">Voir tout →</span>
         </div>
-        <div id="dash-prog"></div>
+        <div id="dash-prog"><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 1</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 2</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 5</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 6</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 7</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 8</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--org)">10%</span></div><div class="pb"><div class="pf" style="width:10%;background:var(--org)"></div></div></div><div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:11px;color:var(--txt2)">Chap. 9</span><span style="font-size:10px;font-weight:700;font-family:var(--ffm);color:var(--brd2)">0%</span></div><div class="pb"><div class="pf" style="width:0%;background:var(--brd2)"></div></div></div></div>
       </div>
       <div class="card">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:9px">Scores copies</div>
@@ -678,7 +673,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     </div>
     <div class="card">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:11px">Accès rapides</div>
-      <div class="g4" id="dash-actions"></div>
+      <div class="g4" id="dash-actions"><div onclick="go(&#39;cours&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📖</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Cours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">30 chapitres</div></div><div onclick="go(&#39;fiches&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📋</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Fiches IA</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Synthèses</div></div><div onclick="go(&#39;flash&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🃏</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Flashcards</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">62 cartes</div></div><div onclick="go(&#39;training&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">✍️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Entraînement</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Correction BCE</div></div><div onclick="go(&#39;sim&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🚨</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Concours</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Mode réel</div></div><div onclick="go(&#39;copies&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📊</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Copies</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">0 analysées</div></div><div onclick="go(&#39;map&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">🗺️</div><div style="font-size:11px;font-weight:700;color:var(--txt)">Carte &amp; Globe</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">3D dispo</div></div><div onclick="go(&#39;news&#39;)" style="background:var(--surf2);border:1px solid var(--brd);border-radius:var(--r);padding:11px;cursor:pointer;text-align:center;transition:all .1s" onmouseover="this.style.borderColor=&#39;var(--acc)&#39;;this.style.transform=&#39;translateY(-1px)&#39;" onmouseout="this.style.borderColor=&#39;var(--brd)&#39;;this.style.transform=&#39;&#39;"><div style="font-size:18px;margin-bottom:4px">📰</div><div style="font-size:11px;font-weight:700;color:var(--txt)">News géopo</div><div style="font-size:10px;color:var(--txt3);margin-top:1px">Actualité IA</div></div></div>
     </div>
   </div>
 
@@ -703,25 +698,25 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="btn btn-g btn-xs" onclick="addFlashFolder()">+ Dossier</button>
     </div>
     <div style="display:flex;gap:7px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
-      <select id="fl-chap" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="all">Tous les chapitres</option></select>
+      <select id="fl-chap" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="all">Tous les chapitres</option><option value="Démographie">Démographie</option></select>
       <select id="fl-prio" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
         <option value="all">Toutes priorités</option><option value="indispensable">🔴 Indispensables</option><option value="tres-frequent">🟠 Très fréquents</option>
       </select>
       <input type="text" id="fl-theme" placeholder="Thème…" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;width:140px;font-family:var(--ff)" onkeyup="loadFlash()">
       <button class="btn btn-g btn-sm" onclick="loadFlash()">🔀 Mélanger</button>
-      <span style="font-size:11px;color:var(--txt3)" id="fl-count"></span>
+      <span style="font-size:11px;color:var(--txt3)" id="fl-count">62 cartes</span>
     </div>
     <div class="flash-wrap">
       <div class="flash-c" onclick="flipCard()">
         <div class="flash-inner" id="fl-inner">
           <div class="flash-f">
             <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);margin-bottom:11px">❓ Question</div>
-            <div class="flash-q" id="fl-q">Chargement…</div>
-            <div class="flash-hint" id="fl-hint"></div>
+            <div class="flash-q" id="fl-q">Définir la P(eople) Bomb</div>
+            <div class="flash-hint" id="fl-hint">Démographie · 🟠 Très fréquent</div>
           </div>
           <div class="flash-b">
             <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--grn);margin-bottom:11px">✅ Réponse</div>
-            <div class="flash-a" id="fl-a">—</div>
+            <div class="flash-a" id="fl-a">Paul Ehrlich (1968) : surpopulation = bombe à retardement → épuisement ressources. Cadre malthusien appliqué au XXe siècle. Largement démenti mais structure toujours utile.</div>
           </div>
         </div>
       </div>
@@ -731,7 +726,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
         <button class="btn btn-sm" style="background:var(--grn-l);color:var(--grn);border:1px solid var(--grn-m)" onclick="markCard(true)">✓ Connu</button>
         <button class="btn btn-g" onclick="nextCard()">Suiv. →</button>
       </div>
-      <div style="font-size:11px;color:var(--txt3);text-align:center" id="fl-prog">0 / 0</div>
+      <div style="font-size:11px;color:var(--txt3);text-align:center" id="fl-prog">1 / 62</div>
     </div>
   </div>
 
@@ -739,17 +734,17 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   <div class="pg" id="pg-frise">
     <div class="page-t">Frise chronologique</div>
     <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap">
-      <button class="btn btn-p btn-sm" onclick="filterFrise('all')">Tout</button>
-      <button class="btn btn-red btn-sm" onclick="filterFrise('must')">📍 Indispensables</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise('w')">⚔️ Guerres</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise('p')">☮️ Paix</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise('c')">💥 Crises</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise('o')">🏛️ Orgs</button>
-      <button class="btn btn-g btn-sm" onclick="filterFrise('a')">📌 Autres</button>
-            <button class="btn btn-g btn-sm" onclick="filterFrise('a')">📌 Autres</button>
+      <button class="btn btn-p btn-sm" onclick="filterFrise(&#39;all&#39;)">Tout</button>
+      <button class="btn btn-red btn-sm" onclick="filterFrise(&#39;must&#39;)">📍 Indispensables</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;w&#39;)">⚔️ Guerres</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;p&#39;)">☮️ Paix</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;c&#39;)">💥 Crises</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;o&#39;)">🏛️ Orgs</button>
+      <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;a&#39;)">📌 Autres</button>
+            <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;a&#39;)">📌 Autres</button>
     </div>
     <div class="card" style="margin-bottom:11px">
-      <div class="frise-wrap"><div class="frise-line"></div><div id="frise-items"></div></div>
+      <div class="frise-wrap"><div class="frise-line"></div><div id="frise-items"><div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune entrée pour ce filtre</div></div></div>
     </div>
     <!-- Add form -->
     <div class="card">
@@ -784,7 +779,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="card" style="margin-bottom:11px">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:7px">🎯 Choisir le thème / chapitre</div>
       <div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
-        <select id="tr-chap-sel" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="all">Tous les chapitres</option></select>
+        <select id="tr-chap-sel" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="all">Tous les chapitres</option><option value="0">Chap. 1 — Géopolitique et relations internatio</option><option value="1">Chap. 2 — Tableaux géopolitiques du monde (191</option><option value="2">Chap. 5 — Le monde actuel : ordres, désordres,</option><option value="3">Chap. 6 — La gouvernance mondiale : crise et r</option><option value="4">Chap. 7 — La croissance et le développement : </option><option value="5">Chap. 8 — Économie, croissance et société (191</option><option value="6">Chap. 9 — Les modèles de croissance de 1945 à </option><option value="7">Chap. 11 — Les acteurs et leurs stratégies</option><option value="8">Chap. 12 — Nouvelles frontières, nouveaux terri</option><option value="9">Chap. 13 — Les défis géopolitiques du développe</option><option value="10">Chap. 14 — Les ressources, un enjeu stratégique</option><option value="11">Chap. 15 — Les défis géopolitiques du changemen</option><option value="12">Chap. 16 — La France : héritage, crises et tran</option><option value="13">Chap. 17 — La France : une puissance européenne</option><option value="14">Chap. 18 — La France : une puissance mondiale e</option><option value="15">Fiche Europe — L'Europe : puissance, crises, intégr</option><option value="16">Fiche Acteurs — Les acteurs de la mondialisation</option><option value="17">Fiche Démo — Démographie</option><option value="18">Fiche Urba — Métropolisation et urbanisation</option><option value="19">Fiche Mobilités — Migrations, mobilités et tourisme</option><option value="20">Fiche Enviro — Environnement et climat</option><option value="21">Fiche Territoires — Les territoires dans la mondialisati</option><option value="22">Fiche Inégalités — La question des inégalités et de la </option><option value="23">Fiche Alim — Enjeux alimentaires</option><option value="24">Fiche Eau — L'eau</option><option value="25">Fiche Énergie — Matières premières et énergie</option><option value="26">Fiche France — La France : grande puissance moyenne</option><option value="27">Fiche Mers — Géopolitique des mers et des océans</option><option value="28">Fiche Techno — Croissance, numérique et 3e révoluti</option><option value="29">Fiche Mobilités 2 — Un monde de mobilités</option></select>
         <input type="text" id="tr-theme" placeholder="Thème (ex: puissance, FTN…)" style="flex:1;min-width:160px;padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
         <button class="btn btn-p btn-sm" onclick="genQuestion()">⚡ Générer</button>
         <button class="btn btn-g btn-sm" onclick="newQ()">↻ Aléatoire</button>
@@ -795,11 +790,11 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
         <span class="badge bd">📚 Question ouverte</span>
         <span class="badge bi" id="tr-badge">Indispensable</span>
       </div>
-      <div style="font-family:var(--ffd);font-size:16px;font-weight:700;margin-bottom:5px;color:var(--txt)" id="tr-t">Chargement…</div>
-      <div style="font-size:11px;color:var(--txt3);margin-bottom:9px" id="tr-m"></div>
+      <div style="font-family:var(--ffd);font-size:16px;font-weight:700;margin-bottom:5px;color:var(--txt)" id="tr-t">Les acteurs non-étatiques remplacent-ils les États dans les relations internationales ?</div>
+      <div style="font-size:11px;color:var(--txt3);margin-bottom:9px" id="tr-m"><span>📖 Chap. 1, 5, 11</span>&nbsp;&nbsp;<span>🏷️ acteurs</span></div>
       <hr>
-      <div class="ex-q" id="tr-q"></div>
-      <textarea id="tr-a" placeholder="Définition → Argument 1 (auteur + exemple daté) → Argument 2 → Nuance" oninput="M.set('train_draft',this.value);document.getElementById('tr-cc').textContent=this.value.length+' car.'"></textarea>
+      <div class="ex-q" id="tr-q"><strong>Consigne :</strong> Les acteurs non-étatiques remplacent-ils les États dans les relations internationales ? Mobilisez au moins 3 auteurs et 3 exemples précis datés.</div>
+      <textarea id="tr-a" placeholder="Définition → Argument 1 (auteur + exemple daté) → Argument 2 → Nuance" oninput="M.set(&#39;train_draft&#39;,this.value);document.getElementById(&#39;tr-cc&#39;).textContent=this.value.length+&#39; car.&#39;"></textarea>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <button class="btn btn-p" onclick="submitTr()">⚡ Correction IA</button>
         <button class="btn btn-g" onclick="newQ()">↻ Nouvelle</button>
@@ -867,7 +862,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="page-s">Upload tes copies annotées — le système apprend le style de ton prof</div>
     <div class="g2" style="margin-bottom:14px">
       <div>
-        <div class="upload-z" onclick="document.getElementById('copy-file').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event,'copy')">
+        <div class="upload-z" onclick="document.getElementById(&#39;copy-file&#39;).click()" ondragover="event.preventDefault();this.classList.add(&#39;drag&#39;)" ondragleave="this.classList.remove(&#39;drag&#39;)" ondrop="handleDrop(event,&#39;copy&#39;)">
           <div style="font-size:28px;margin-bottom:7px">📄</div>
           <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:var(--txt)">Déposer une copie annotée</div>
           <div style="font-size:11px;color:var(--txt3)">PDF, JPG, PNG</div>
@@ -876,7 +871,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       </div>
       <div class="card">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:9px">Progression par critère</div>
-        <canvas id="perf-chart" height="200"></canvas>
+        <canvas id="perf-chart" height="994" width="994" style="display: block; box-sizing: border-box; height: 497px; width: 497px;"></canvas>
       </div>
     </div>
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:7px">Copies analysées</div>
@@ -891,7 +886,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div class="card" style="border-top:2px solid var(--red)">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--red);margin-bottom:9px">🔴 Urgent</div>
         <div id="rev-u"></div>
-        <button class="btn btn-p" style="width:100%;margin-top:9px;font-size:12px" onclick="go('training')">▶ Réviser</button>
+        <button class="btn btn-p" style="width:100%;margin-top:9px;font-size:12px" onclick="go(&#39;training&#39;)">▶ Réviser</button>
       </div>
       <div class="card" style="border-top:2px solid var(--org)">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--org);margin-bottom:9px">🟠 À consolider</div>
@@ -911,23 +906,66 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="g2" style="margin-bottom:13px">
       <div class="card">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:9px">Cette semaine</div>
-        <canvas id="time-chart" height="155"></canvas>
+        <canvas id="time-chart" height="513" width="994" style="display: block; box-sizing: border-box; height: 256.8px; width: 497px;"></canvas>
       </div>
       <div class="card">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:9px">Aujourd'hui</div>
-        <div id="today-summary"></div>
+        <div id="today-summary">
+    <div style="font-size:30px;font-weight:700;font-family:var(--ffm);color:var(--acc);margin-bottom:3px">198 min</div>
+    <div style="font-size:11px;color:var(--txt3);margin-bottom:10px">de révision aujourd'hui</div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px"><span style="color:var(--txt2)">Fiches synthèse</span><span style="color:var(--txt3);font-family:var(--ffm)">09:55</span></div><div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px"><span style="color:var(--txt2)">Cours complet</span><span style="color:var(--txt3);font-family:var(--ffm)">09:55</span></div><div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px"><span style="color:var(--txt2)">Cours complet</span><span style="color:var(--txt3);font-family:var(--ffm)">09:55</span></div><div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px"><span style="color:var(--txt2)">Fiches synthèse</span><span style="color:var(--txt3);font-family:var(--ffm)">09:55</span></div><div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px"><span style="color:var(--txt2)">Frise chronologique</span><span style="color:var(--txt3);font-family:var(--ffm)">09:55</span></div><div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--brd);font-size:11px"><span style="color:var(--txt2)">Flashcards</span><span style="color:var(--txt3);font-family:var(--ffm)">09:55</span></div></div>
       </div>
     </div>
     <div class="card">
       <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:9px">Journal des révisions</div>
-      <div id="daily-log"></div>
+      <div id="daily-log"><div style="padding:9px 0;border-bottom:1px solid var(--brd)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:12px;font-weight:700;color:var(--txt)">31/03/2026</span>
+        <span style="font-size:11px;font-family:var(--ffm);color:var(--grn)">65 min</span>
+      </div>
+      <div style="font-size:11px;color:var(--txt3)">
+        
+        
+        
+      </div>
+    </div><div style="padding:9px 0;border-bottom:1px solid var(--brd)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:12px;font-weight:700;color:var(--txt)">28/03/2026</span>
+        <span style="font-size:11px;font-family:var(--ffm);color:var(--grn)">409 min</span>
+      </div>
+      <div style="font-size:11px;color:var(--txt3)">
+        📖 Chap. 1, Chap. 2, Chap. 5, Chap. 1, Chap. 1, Chap. 18, Fiche Techno, Chap. 6, Chap. 5, Chap. 7, Chap. 16, Fiche Eau, Chap. 7, Chap. 8, Fiche Techno, Chap. 1, Chap. 1, Chap. 6, Chap. 1, Chap. 7, Fiche France, Chap. 1 · 
+        
+        
+      </div>
+    </div><div style="padding:9px 0;border-bottom:1px solid var(--brd)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:12px;font-weight:700;color:var(--txt)">05/04/2026</span>
+        <span style="font-size:11px;font-family:var(--ffm);color:var(--grn)">198 min</span>
+      </div>
+      <div style="font-size:11px;color:var(--txt3)">
+        
+        
+        
+      </div>
+    </div><div style="padding:9px 0;border-bottom:1px solid var(--brd)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:12px;font-weight:700;color:var(--txt)">04/04/2026</span>
+        <span style="font-size:11px;font-family:var(--ffm);color:var(--gold)">26 min</span>
+      </div>
+      <div style="font-size:11px;color:var(--txt3)">
+        
+        
+        
+      </div>
+    </div></div>
     </div>
   </div>
 
   <!-- ════ HISTORIQUE ════ -->
   <div class="pg" id="pg-history">
     <div class="page-t">Historique</div>
-    <div class="card"><div id="history-list"></div></div>
+    <div class="card"><div id="history-list"><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Historique</div><div class="sess-time">05/04/2026 21:20:11</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Historique</div><div class="sess-time">05/04/2026 21:20:10</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Temps de révision</div><div class="sess-time">05/04/2026 21:20:10</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mes copies</div><div class="sess-time">05/04/2026 21:20:09</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mode Concours BCE</div><div class="sess-time">05/04/2026 21:20:08</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mode Concours BCE</div><div class="sess-time">05/04/2026 21:20:08</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Questions ouvertes</div><div class="sess-time">05/04/2026 21:20:07</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Frise chronologique</div><div class="sess-time">05/04/2026 21:20:06</div></div><div class="sess-item"><div class="sess-ic">🃏</div><div class="sess-lbl">62 cartes</div><div class="sess-time">05/04/2026 21:20:04</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Flashcards</div><div class="sess-time">05/04/2026 21:20:04</div></div><div class="sess-item"><div class="sess-ic">🃏</div><div class="sess-lbl">62 cartes</div><div class="sess-time">05/04/2026 21:20:03</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Flashcards</div><div class="sess-time">05/04/2026 21:20:03</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">05/04/2026 21:20:02</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">05/04/2026 17:41:17</div></div><div class="sess-item"><div class="sess-ic">🃏</div><div class="sess-lbl">62 cartes</div><div class="sess-time">05/04/2026 17:40:34</div></div><div class="sess-item"><div class="sess-ic">🃏</div><div class="sess-lbl">62 cartes</div><div class="sess-time">05/04/2026 17:40:26</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Flashcards</div><div class="sess-time">05/04/2026 17:40:26</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Questions ouvertes</div><div class="sess-time">05/04/2026 17:40:23</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mode Concours BCE</div><div class="sess-time">05/04/2026 17:40:21</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">05/04/2026 17:40:15</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Cours complet</div><div class="sess-time">05/04/2026 17:40:15</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">05/04/2026 17:40:14</div></div><div class="sess-item"><div class="sess-ic">🃏</div><div class="sess-lbl">62 cartes</div><div class="sess-time">05/04/2026 17:40:13</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Flashcards</div><div class="sess-time">05/04/2026 17:40:13</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Questions ouvertes</div><div class="sess-time">05/04/2026 17:40:12</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">05/04/2026 15:27:55</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Cours complet</div><div class="sess-time">05/04/2026 15:27:55</div></div><div class="sess-item"><div class="sess-ic">📰</div><div class="sess-lbl">all</div><div class="sess-time">05/04/2026 09:55:53</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">News géopo</div><div class="sess-time">05/04/2026 09:55:53</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Monde 🌍</div><div class="sess-time">05/04/2026 09:55:52</div></div><div class="sess-item"><div class="sess-ic">📰</div><div class="sess-lbl">all</div><div class="sess-time">05/04/2026 09:55:49</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">News géopo</div><div class="sess-time">05/04/2026 09:55:49</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Monde 🌍</div><div class="sess-time">05/04/2026 09:55:48</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Documents adaptatifs</div><div class="sess-time">05/04/2026 09:55:46</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Tableau de bord</div><div class="sess-time">05/04/2026 09:55:44</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mes cours</div><div class="sess-time">05/04/2026 09:55:43</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Historique</div><div class="sess-time">05/04/2026 09:55:42</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Historique</div><div class="sess-time">05/04/2026 09:55:41</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Temps de révision</div><div class="sess-time">05/04/2026 09:55:41</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Révisions urgentes</div><div class="sess-time">05/04/2026 09:55:40</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Révisions urgentes</div><div class="sess-time">05/04/2026 09:55:39</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mes copies</div><div class="sess-time">05/04/2026 09:55:38</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Recherche</div><div class="sess-time">05/04/2026 09:55:37</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Notes Notion</div><div class="sess-time">05/04/2026 09:55:37</div></div><div class="sess-item"><div class="sess-ic">🃏</div><div class="sess-lbl">62 cartes</div><div class="sess-time">05/04/2026 09:55:36</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Flashcards</div><div class="sess-time">05/04/2026 09:55:36</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Frise chronologique</div><div class="sess-time">05/04/2026 09:55:34</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">05/04/2026 09:55:33</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Cours complet</div><div class="sess-time">05/04/2026 09:55:33</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Cours complet</div><div class="sess-time">05/04/2026 09:55:22</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">05/04/2026 09:55:21</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Fiches synthèse</div><div class="sess-time">04/04/2026 17:20:13</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Questions ouvertes</div><div class="sess-time">04/04/2026 17:20:12</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Tableau de bord</div><div class="sess-time">04/04/2026 17:20:10</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mes cours</div><div class="sess-time">04/04/2026 17:20:02</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Temps de révision</div><div class="sess-time">04/04/2026 17:20:00</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Révisions urgentes</div><div class="sess-time">04/04/2026 17:19:59</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mes copies</div><div class="sess-time">04/04/2026 17:19:52</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Questions ouvertes</div><div class="sess-time">04/04/2026 17:19:51</div></div><div class="sess-item"><div class="sess-ic">🧭</div><div class="sess-lbl">Mode Concours BCE</div><div class="sess-time">04/04/2026 17:19:50</div></div></div></div>
   </div>
 
   <!-- ════ MES COURS ════ -->
@@ -947,56 +985,53 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
     <!-- Zone d'écriture -->
     <div style="max-width:700px;margin:0 auto;padding:48px 32px 160px">
-      <input type="text" id="mc-title" placeholder="Titre du cours…"
-        style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
+      <input type="text" id="mc-title" placeholder="Titre du cours…" style="width:100%;background:none;border:none;outline:none;font-family:var(--ffd);font-size:36px;font-weight:700;color:var(--txt);letter-spacing:-.02em;margin-bottom:20px;padding:0;display:block">
       <div style="height:1px;background:var(--brd);margin-bottom:28px"></div>
-      <div id="mc-body" class="my-editor-body" contenteditable="true"
-        style="min-height:50vh;font-size:16px;line-height:1.9;color:var(--txt2);outline:none;word-break:break-word"
-        oninput="M.set('mc_draft_body',this.innerHTML)">
+      <div id="mc-body" class="my-editor-body" contenteditable="true" style="min-height:50vh;font-size:16px;line-height:1.9;color:var(--txt2);outline:none;word-break:break-word" oninput="M.set(&#39;mc_draft_body&#39;,this.innerHTML)">
       </div>
       <div style="height:80px"></div>
     </div>
 
     <!-- Toolbar fixe en bas au centre -->
     <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 18px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:99999">
-      <button class="rtb" onclick="execCmd('bold')"><strong>B</strong></button>
-      <button class="rtb" onclick="execCmd('italic')"><em>I</em></button>
-      <button class="rtb" onclick="execCmd('underline')"><u>U</u></button>
+      <button class="rtb" onclick="execCmd(&#39;bold&#39;)"><strong>B</strong></button>
+      <button class="rtb" onclick="execCmd(&#39;italic&#39;)"><em>I</em></button>
+      <button class="rtb" onclick="execCmd(&#39;underline&#39;)"><u>U</u></button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execCmd('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
-      <button class="rtb" onclick="execCmd('formatBlock','h3')" style="font-size:10px">Moyen</button>
-      <button class="rtb" onclick="execCmd('formatBlock','p')" style="font-size:10px">Normal</button>
+      <button class="rtb" onclick="execCmd(&#39;formatBlock&#39;,&#39;h2&#39;)" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execCmd(&#39;formatBlock&#39;,&#39;h3&#39;)" style="font-size:10px">Moyen</button>
+      <button class="rtb" onclick="execCmd(&#39;formatBlock&#39;,&#39;p&#39;)" style="font-size:10px">Normal</button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execCmd('insertUnorderedList')">• L</button>
-      <button class="rtb" onclick="execCmd('insertOrderedList')">1.</button>
+      <button class="rtb" onclick="execCmd(&#39;insertUnorderedList&#39;)">• L</button>
+      <button class="rtb" onclick="execCmd(&#39;insertOrderedList&#39;)">1.</button>
       <div class="rtb-sep"></div>
-      <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd('foreColor','#8B4A6B')"></div>
-      <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd('foreColor','#2C5F8A')"></div>
-      <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd('foreColor','#2D6B4A')"></div>
-      <div class="rtb-c" style="background:#A63D40" onclick="execCmd('foreColor','#A63D40')"></div>
+      <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd(&#39;foreColor&#39;,&#39;#8B4A6B&#39;)"></div>
+      <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2C5F8A&#39;)"></div>
+      <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2D6B4A&#39;)"></div>
+      <div class="rtb-c" style="background:#A63D40" onclick="execCmd(&#39;foreColor&#39;,&#39;#A63D40&#39;)"></div>
       <div class="rtb-sep"></div>
       <button class="rtb" onclick="insertImage()">🖼️</button>
-      <button class="rtb" onclick="execCmd('removeFormat')">Aa</button>
+      <button class="rtb" onclick="execCmd(&#39;removeFormat&#39;)">Aa</button>
           <div class="rtb-sep"></div>
-          <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd('foreColor','#2C5F8A')" title="Bleu nuit"></div>
-          <div class="rtb-c" style="background:#6B5EA8" onclick="execCmd('foreColor','#6B5EA8')" title="Lavande"></div>
-          <div class="rtb-c" style="background:#A63D40" onclick="execCmd('foreColor','#A63D40')" title="Rouge"></div>
-          <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd('foreColor','#8B4A6B')" title="Mauve"></div>
-          <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd('foreColor','#2D6B4A')" title="Vert"></div>
-          <div class="rtb-c" style="background:#6B3A2A" onclick="execCmd('foreColor','#6B3A2A')" title="Marron"></div>
+          <div class="rtb-c" style="background:#2C5F8A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2C5F8A&#39;)" title="Bleu nuit"></div>
+          <div class="rtb-c" style="background:#6B5EA8" onclick="execCmd(&#39;foreColor&#39;,&#39;#6B5EA8&#39;)" title="Lavande"></div>
+          <div class="rtb-c" style="background:#A63D40" onclick="execCmd(&#39;foreColor&#39;,&#39;#A63D40&#39;)" title="Rouge"></div>
+          <div class="rtb-c" style="background:#8B4A6B" onclick="execCmd(&#39;foreColor&#39;,&#39;#8B4A6B&#39;)" title="Mauve"></div>
+          <div class="rtb-c" style="background:#2D6B4A" onclick="execCmd(&#39;foreColor&#39;,&#39;#2D6B4A&#39;)" title="Vert"></div>
+          <div class="rtb-c" style="background:#6B3A2A" onclick="execCmd(&#39;foreColor&#39;,&#39;#6B3A2A&#39;)" title="Marron"></div>
           <div class="rtb-sep"></div>
-          <div class="rtb-c" style="background:#BDD7F5;border:1px solid #aaa" onclick="execCmd('hiliteColor','#BDD7F5')" title="Surligner bleu">S</div>
-          <div class="rtb-c" style="background:#F5E6BD;border:1px solid #aaa" onclick="execCmd('hiliteColor','#F5E6BD')" title="Surligner jaune">S</div>
-          <div class="rtb-c" style="background:#D4F5BD;border:1px solid #aaa" onclick="execCmd('hiliteColor','#D4F5BD')" title="Surligner vert">S</div>
-          <div class="rtb-c" style="background:#F5BDD4;border:1px solid #aaa" onclick="execCmd('hiliteColor','#F5BDD4')" title="Surligner rose">S</div>
-      <button class="rtb" onclick="execCmd('undo')">↩</button>
-      <button class="rtb" onclick="execCmd('redo')">↪</button>
+          <div class="rtb-c" style="background:#BDD7F5;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#BDD7F5&#39;)" title="Surligner bleu">S</div>
+          <div class="rtb-c" style="background:#F5E6BD;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#F5E6BD&#39;)" title="Surligner jaune">S</div>
+          <div class="rtb-c" style="background:#D4F5BD;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#D4F5BD&#39;)" title="Surligner vert">S</div>
+          <div class="rtb-c" style="background:#F5BDD4;border:1px solid #aaa" onclick="execCmd(&#39;hiliteColor&#39;,&#39;#F5BDD4&#39;)" title="Surligner rose">S</div>
+      <button class="rtb" onclick="execCmd(&#39;undo&#39;)">↩</button>
+      <button class="rtb" onclick="execCmd(&#39;redo&#39;)">↪</button>
     </div>
 
     <!-- Cours sauvegardés -->
     <div id="mc-list-wrap" style="display:none;max-width:700px;margin:0 auto;padding:0 32px 60px">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:14px;padding-top:24px;border-top:1px solid var(--brd)">Cours sauvegardés</div>
-      <div class="g3" id="mc-list"></div>
+      <div class="g3" id="mc-list"><div style="font-size:12px;color:var(--txt3)">Aucun cours sauvegardé. Rédige ton premier cours ci-dessus.</div></div>
     </div>
   </div>
 
@@ -1014,25 +1049,25 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
           <input type="text" id="mf-c" placeholder="Chapitre" style="flex:1;padding:4px;border:1px solid var(--brd);border-radius:var(--r);font-size:11px;color:var(--txt);background:var(--surf);outline:none;font-family:var(--ff)">
         </div>
         <div style="display:flex;gap:6px;margin-bottom:8px">
-          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-img-inp').click()">🖼️ Image</button>
-          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById('mf-pdf-inp').click()">📄 PDF</button>
-          <input type="file" id="mf-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="attachToFlash(this,'image')">
-          <input type="file" id="mf-pdf-inp" accept=".pdf" style="display:none" onchange="attachToFlash(this,'pdf')">
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById(&#39;mf-img-inp&#39;).click()">🖼️ Image</button>
+          <button class="btn btn-g btn-sm" style="flex:1" onclick="document.getElementById(&#39;mf-pdf-inp&#39;).click()">📄 PDF</button>
+          <input type="file" id="mf-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="attachToFlash(this,&#39;image&#39;)">
+          <input type="file" id="mf-pdf-inp" accept=".pdf" style="display:none" onchange="attachToFlash(this,&#39;pdf&#39;)">
         </div>
         <div id="mf-attach" style="margin-bottom:8px;font-size:11px;color:var(--txt3)"></div>
         <button class="btn btn-p" style="width:100%" onclick="saveMyFlash()">💾 Ajouter au deck</button>
       </div>
-      <div class="card"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2);margin-bottom:9px">Stats</div><div id="mf-stats" style="font-size:12px;color:var(--txt3)"></div></div>
+      <div class="card"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt2);margin-bottom:9px">Stats</div><div id="mf-stats" style="font-size:12px;color:var(--txt3)"><div style="margin-bottom:5px">🃏 <strong>31</strong> cartes créées</div><div style="margin-bottom:5px">📚 <strong>31</strong> cartes du programme</div><div style="margin-bottom:5px">✅ <strong>0</strong> cartes validées</div><div style="color:var(--grn);font-weight:600;font-size:11px">🔀 Tes cartes sont mélangées automatiquement au deck général</div></div></div>
     </div>
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--txt3);margin-bottom:7px">Mes cartes</div>
-    <div class="g3" id="mf-list"></div>
+    <div class="g3" id="mf-list"><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(0)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Citer la citation de Bodin sur la démographie et la donner précisément</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">« Il n'est de richesse que d'hommes » — Jean Bodin, Six livres de la République,…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(1)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir la transition démographique</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Passage d'un régime forte fécondité/forte mortalité à faible fécondité/faible mo…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(2)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir le dividende démographique</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Période où la pyramide des âges est élargie à la base → ratio actifs/dépendants …</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(3)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir le Youth Bulge</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Concentration de population jeune (15-24 ans) sans emploi suffisant → instabilit…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(4)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir le Tournant de Lewis</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Moment où la main d'œuvre rurale abondante est absorbée par l'industrie → hausse…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(5)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir le (néo)-malthusianisme</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Croissance pop. &gt; croissance production → crises (Malthus, 1798). Néo-malthusien…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(6)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir l'Effet Boserup</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">La pression démographique stimule l'innovation agricole et technologique. Anti-M…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(7)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir le taux de fécondité et son seuil de remplacement</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Nombre moyen d'enfants par femme. Seuil de remplacement : 2,1. Indicateur-clé de…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(8)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir l'hiver démographique</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Ralentissement ou décroissance de la population dans les PDEM (et certains émerg…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(9)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir la Silver Economy</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Marchés et services liés au vieillissement : santé, autonomie, loisirs, tech gra…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(10)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Définir la P(eople) Bomb</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Paul Ehrlich (1968) : surpopulation = bombe à retardement → épuisement ressource…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(11)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Donner l'évolution de la population mondiale de 1800 à 2080</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">1800 : 1 Md · 1900 : 1,5 Md · 1950 : 2,5 Md · 2020 : 7,5 Md · 2080 : pic ~10,3 M…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(12)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quels sont les indices de fécondité clés à connaître en 2023 ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Niger 6,67 · Afrique subsaharienne 4,9 · Monde 2,3 · Inde 2,05 · France 1,79 · C…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(13)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quel est le poids des remises vers les PED et pourquoi est-ce important ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">685 Md$ en 2024 (×3 vs 2005). Supérieur aux IDE (300 Md$) + aide internationale …</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(14)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quelle est la part des 10-24 ans dans la population mondiale ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">25% de la population mondiale. En 2050, 2/3 des Africains auront moins de 30 ans…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(15)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Donnez les chiffres sur le vieillissement mondial</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Part des &gt;60 ans : 605 M (2000) → 2 Md (2050), soit 11%→22% de la population mon…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(16)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Thèse de Jared Diamond dans Effondrement (2004) sur la démographie</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Génocide rwandais (1994) = crise malthusienne : pression démog. (750 hab/km²) + …</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(17)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Thèse de Bruno Tertrais dans Le choc démographique (2020)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">P. Bomb largement désamorcée. Les sociétés trouvent des solutions quand la press…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(18)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Thèse de Jacques Veron dans Faut-il avoir peur de la population mondiale ? (2020)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Complexité des variables démographiques — ni catastrophisme ni angélisme. La déc…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(19)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Thèse de Maxime de Blasi dans Le Débat (2019)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Triangle d'incompatibilité : croissance démog. + hausse niveau de vie + préserva…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(20)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Thèse de Gunnar Heinsohn — indice de belligérance (2011)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Déséquilibre jeunes hommes/emplois effectifs → conflits. Appliqué au monde arabe…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(21)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Thèse de Sylvie Brunel dans L'Afrique est-elle si bien partie ? (2014)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Afrique : continent riche peuplé de pauvres. Youth bulge + inégalités + Internet…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(22)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quelle est la leçon centrale de l'exemple chinois sur le contrôle des naissances ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Campagne wan-xi-shao (1970s) : fécondité 5,7→2,8 avant l'enfant unique. Politiqu…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(23)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quelle est la leçon centrale de l'exemple indien sur le contrôle des naissances ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Stérilisations forcées 1975 (Indira Gandhi) → défaite électorale 1977. Kerala 1,…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(24)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quelle est la leçon de l'exemple rwandais sur le contrôle des naissances ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Kagame → politique très volontariste post-génocide. Fécondité 6,1→3,75 entre 200…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge btf" style="font-size:9px">Très fréquent</span><button onclick="deleteMyFlash(25)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quels sont les défis démographiques du Japon ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Décroissance (130 M → 85 M en 2100). 40% &gt;65 ans en 2050. Ratio actifs/retraités…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(26)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Quel est le fait massif de la démographie africaine ?</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">×40 entre 1900 et 2100 (4 Md). Fécondité baisse mais plus lente (villes &gt; campag…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(27)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Plan type pour le sujet 'Trop d'hommes sur Terre ?'</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">I. La démographie comme force (Bodin, dividende, diasporas) · II. Les défis : P.…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(28)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Plan type pour 'N'y a-t-il de puissance que d'hommes ?'</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">I. Oui : loi du nombre (Bodin), exemples historiques et actuels, dividende · II.…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(29)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Plan type pour 'Les défis de la démographie africaine'</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">I. Youth bulge : opportunité ou bombe à retardement ? (Brunel, Heinsohn) · II. Q…</div></div><div class="card"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="badge bi" style="font-size:9px">Indispensable</span><button onclick="deleteMyFlash(30)" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--txt4)">✕</button></div><div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:3px">Plan type pour 'Vers un hiver démographique mondial ?'</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">I. Ralentissement global réel (HSBC 2022, The Lancet 2024) · II. Mais l'Afrique …</div></div></div>
   </div>
 
   <!-- ════ DOCS ════ -->
   <div class="pg" id="pg-docs">
     <div class="page-t">Documents adaptatifs</div>
     <div class="page-s">Upload n'importe quel document — fiché automatiquement par IA</div>
-    <div class="upload-z" style="margin-bottom:13px" onclick="document.getElementById('doc-file').click()">
+    <div class="upload-z" style="margin-bottom:13px" onclick="document.getElementById(&#39;doc-file&#39;).click()">
       <div style="font-size:28px;margin-bottom:7px">📎</div>
       <div style="font-size:13px;font-weight:700;margin-bottom:2px;color:var(--txt)">Ajouter un document</div>
       <div style="font-size:11px;color:var(--txt3)">Cours, colle, rapport de jury, article…</div>
@@ -1042,22 +1077,22 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 
   <!-- ════ MONDE 🌍 ════ -->
-  <div class="pg" id="pg-map">
+  <div class="pg on" id="pg-map">
     <div class="page-t">Monde 🌍</div>
     <div class="page-s">Zones géopolitiques clés du programme BCE · Sélectionne une région</div>
 
     <!-- Filtres -->
     <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px">
-      <div onclick="filterMapRegion('all')" id="mr-all" style="display:flex;align-items:center;gap:5px;background:var(--acc-l);border:1px solid var(--acc-m);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:600;color:var(--acc);cursor:pointer;transition:all .1s">🌐 Toutes les régions</div>
-      <div onclick="filterMapRegion('europe')" id="mr-europe" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🇪🇺 Europe</div>
-      <div onclick="filterMapRegion('ameriques')" id="mr-ameriques" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌎 Amériques</div>
-      <div onclick="filterMapRegion('asie')" id="mr-asie" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌏 Asie-Pacifique</div>
-      <div onclick="filterMapRegion('afrique')" id="mr-afrique" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌍 Afrique</div>
-      <div onclick="filterMapRegion('moyen-orient')" id="mr-moyen-orient" style="display:flex;align-items:center;gap:5px;background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:6px 13px;font-size:12px;font-weight:500;color:var(--txt2);cursor:pointer;transition:all .1s">🌙 PMO</div>
+      <div onclick="filterMapRegion(&#39;all&#39;)" id="mr-all" style="display: flex; align-items: center; gap: 5px; background: var(--acc-l); border-color: var(--acc-m); border-top-style: ; border-top-width: ; border-right-style: ; border-right-width: ; border-bottom-style: ; border-bottom-width: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-radius: 6px; padding: 6px 13px; font-size: 12px; font-weight: 600; color: var(--acc); cursor: pointer; transition: 0.1s;">🌐 Toutes les régions</div>
+      <div onclick="filterMapRegion(&#39;europe&#39;)" id="mr-europe" style="display: flex; align-items: center; gap: 5px; background: var(--surf); border-color: var(--brd); border-top-style: ; border-top-width: ; border-right-style: ; border-right-width: ; border-bottom-style: ; border-bottom-width: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-radius: 6px; padding: 6px 13px; font-size: 12px; font-weight: 500; color: var(--txt2); cursor: pointer; transition: 0.1s;">🇪🇺 Europe</div>
+      <div onclick="filterMapRegion(&#39;ameriques&#39;)" id="mr-ameriques" style="display: flex; align-items: center; gap: 5px; background: var(--surf); border-color: var(--brd); border-top-style: ; border-top-width: ; border-right-style: ; border-right-width: ; border-bottom-style: ; border-bottom-width: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-radius: 6px; padding: 6px 13px; font-size: 12px; font-weight: 500; color: var(--txt2); cursor: pointer; transition: 0.1s;">🌎 Amériques</div>
+      <div onclick="filterMapRegion(&#39;asie&#39;)" id="mr-asie" style="display: flex; align-items: center; gap: 5px; background: var(--surf); border-color: var(--brd); border-top-style: ; border-top-width: ; border-right-style: ; border-right-width: ; border-bottom-style: ; border-bottom-width: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-radius: 6px; padding: 6px 13px; font-size: 12px; font-weight: 500; color: var(--txt2); cursor: pointer; transition: 0.1s;">🌏 Asie-Pacifique</div>
+      <div onclick="filterMapRegion(&#39;afrique&#39;)" id="mr-afrique" style="display: flex; align-items: center; gap: 5px; background: var(--surf); border-color: var(--brd); border-top-style: ; border-top-width: ; border-right-style: ; border-right-width: ; border-bottom-style: ; border-bottom-width: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-radius: 6px; padding: 6px 13px; font-size: 12px; font-weight: 500; color: var(--txt2); cursor: pointer; transition: 0.1s;">🌍 Afrique</div>
+      <div onclick="filterMapRegion(&#39;moyen-orient&#39;)" id="mr-moyen-orient" style="display: flex; align-items: center; gap: 5px; background: var(--surf); border-color: var(--brd); border-top-style: ; border-top-width: ; border-right-style: ; border-right-width: ; border-bottom-style: ; border-bottom-width: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-radius: 6px; padding: 6px 13px; font-size: 12px; font-weight: 500; color: var(--txt2); cursor: pointer; transition: 0.1s;">🌙 PMO</div>
     </div>
 
     <!-- Fiches régions -->
-    <div class="g3" id="map-region-cards"></div>
+    <div class="g3" id="map-region-cards"><div class="card" style="border-top:3px solid #2383e2"><div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px">🇪🇺 Europe</div><div onclick="go(&#39;cours&#39;)" style="padding: 8px 10px; background: var(--surf2); border-radius: 6px; margin-bottom: 6px; cursor: pointer; transition: background 0.1s; border: 1px solid var(--brd);" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Fiche Europe</span><span style="font-size:9px;background:var(--red);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🔴 Indispensable</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">L'UE : puissance, crises, intégration</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Maastricht (1992), Brexit (2016), PESC, euro. Puissance normative (Manners). Autonomie stratégique post-Ukraine.</div></div><div onclick="go(&#39;cours&#39;)" style="padding: 8px 10px; background: var(--surf2); border-radius: 6px; margin-bottom: 6px; cursor: pointer; transition: background 0.1s; border: 1px solid var(--brd);" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 17</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">La France : puissance européenne</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Axe franco-allemand. Réarmement post-2022. Soft power culturel. Dissuasion nucléaire.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 5</span><span style="font-size:9px;background:var(--red);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🔴 Indispensable</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Guerre en Ukraine (2022)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Invasion russe fév. 2022. Sanctions SWIFT. +2% OTAN. Remise en cause de la stabilité européenne.</div></div></div><div class="card" style="border-top:3px solid #e03e3e"><div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px">🌎 Amériques</div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 2</span><span style="font-size:9px;background:var(--red);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🔴 Indispensable</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Hégémonie américaine (1945-2000)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Plan Marshall, Bretton Woods, OTAN. Doctrine Monroe. Hyperpuissance post-Guerre froide.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 7</span><span style="font-size:9px;background:var(--red);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🔴 Indispensable</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Bretton Woods &amp; système monétaire</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">1944 : dollar=or, FMI, BIRD. Fin 1971 (Nixon). Naissance du libéralisme économique mondial.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 5</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Déclin relatif &amp; America First</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Retrait accords de Paris. Protectionnisme. Tensions sino-américaines. Trump II (2025).</div></div></div><div class="card" style="border-top:3px solid #e67e22"><div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px">🌏 Asie-Pacifique</div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 5</span><span style="font-size:9px;background:var(--red);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🔴 Indispensable</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Émergence de la Chine</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Belt &amp; Road Initiative (2013). Piège de Thucydide (Allison). BRICS leader. 2e PIB mondial.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 5</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Inde — puissance émergente</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">1,4 Md hab. BRICS. Non-alignement. Puissance nucléaire. Dividende démographique.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 9</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Modèles asiatiques de croissance</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Miracle économique (Japon, Corée, Singapour). État développeur. Export-led growth.</div></div></div><div class="card" style="border-top:3px solid #27ae60"><div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px">🌍 Afrique</div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 5</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">L'Afrique dans la mondialisation</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Union africaine. Présence chinoise (BRI). Ressources stratégiques. 2050 : 2,5 Mds d'hab.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Fiche Démo</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Transition démographique</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Fécondité 4,5 enfants/femme. Dividende démographique possible. Urbanisation rapide.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Fiche Alim</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Enjeux alimentaires</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Land grabbing. FAO : 733 M sous-alimentés (2023). Sécurité alimentaire enjeu stratégique.</div></div></div><div class="card" style="border-top:3px solid #8e44ad"><div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:10px">🌙 PMO</div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Fiche Mers</span><span style="font-size:9px;background:var(--red);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🔴 Indispensable</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Bab-el-Mandeb &amp; Houthis (2023)</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Attaques houthies nov. 2023 : -40% trafic Suez. Détour cap : +14 jours. Chaînes d'approvisionnement.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Fiche Énergie</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Pétrole &amp; OPEP</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">OPEP+ : 40% production mondiale. Détroit d'Ormuz : 21% pétrole mondial. Arme géoéconomique.</div></div><div onclick="go(&#39;cours&#39;)" style="padding:8px 10px;background:var(--surf2);border-radius:6px;margin-bottom:6px;cursor:pointer;transition:background .1s;border:1px solid var(--brd)" onmouseover="this.style.background=&#39;var(--acc-l)&#39;" onmouseout="this.style.background=&#39;var(--surf2)&#39;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;font-weight:700;color:var(--txt3)">Chap. 14</span><span style="font-size:9px;background:var(--org);color:#fff;padding:1px 6px;border-radius:8px;font-weight:600">🟠 Très fréquent</span></div><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">Ressources stratégiques</div><div style="font-size:11px;color:var(--txt3);line-height:1.5">Terres rares, eau, hydrocarbures. Paradoxe de l'abondance (Sachs &amp; Warner).</div></div></div></div>
   </div>
 
   <!-- ════ NEWS ════ -->
@@ -1066,16 +1101,16 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="page-s">Actualités mondiales en lien avec le programme BCE · IA</div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;flex-wrap:wrap;gap:7px">
       <div style="display:flex;gap:5px;flex-wrap:wrap">
-        <button class="btn btn-p btn-sm" onclick="loadNews('all')">Monde</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews('europe')">🇪🇺 Europe</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews('asie')">🌏 Asie</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews('moyen-orient')">🌙 PMO</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews('afrique')">🌍 Afrique</button>
-        <button class="btn btn-g btn-sm" onclick="loadNews('ameriques')">🌎 Amériques</button>
+        <button class="btn btn-p btn-sm" onclick="loadNews(&#39;all&#39;)">Monde</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;europe&#39;)">🇪🇺 Europe</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;asie&#39;)">🌏 Asie</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;moyen-orient&#39;)">🌙 PMO</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;afrique&#39;)">🌍 Afrique</button>
+        <button class="btn btn-g btn-sm" onclick="loadNews(&#39;ameriques&#39;)">🌎 Amériques</button>
       </div>
       <label style="display:flex;align-items:center;gap:5px;font-size:11px;cursor:pointer"><input type="checkbox" id="news-auto" style="accent-color:var(--acc)" onchange="toggleNewsAuto(this.checked)"><span style="color:var(--txt3)">Auto 30 min</span></label>
     </div>
-    <div class="card" id="news-list"><div style="text-align:center;padding:20px;color:var(--txt3)"><div class="dots" style="justify-content:center;margin-bottom:5px"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div style="font-size:12px">Chargement…</div></div></div>
+    <div class="card" id="news-list"><div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:var(--r);padding:13px;text-align:center;font-size:12px"><div style="font-weight:700;color:var(--red);margin-bottom:4px">Connexion API requise</div><div style="color:var(--txt3)">Déploie sur Vercel pour activer les news.</div></div></div>
   </div>
 
     <!-- ════ FICHE EDITOR ════ -->
@@ -1083,12 +1118,12 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     
     <!-- Barre top -->
     <div style="position:sticky;top:0;z-index:10;background:var(--surf);border-bottom:1px solid var(--brd);padding:0 40px;height:48px;display:flex;align-items:center;gap:12px">
-      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px;transition:background .1s" onmouseover="this.style.background='var(--surf2)'" onmouseout="this.style.background=''">&#8592; Fiches</button>
+      <button onclick="closeFicheEditor()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px;transition:background .1s" onmouseover="this.style.background=&#39;var(--surf2)&#39;" onmouseout="this.style.background=&#39;&#39;">← Fiches</button>
       <div style="flex:1"></div>
       <select id="fe-prio" style="padding:5px 10px;border:1px solid var(--brd);border-radius:5px;font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
-        <option value="indispensable">&#128308; Indispensable</option>
-        <option value="tres-frequent">&#128992; Très fréquent</option>
-        <option value="frequent">&#129000; Fréquent</option>
+        <option value="indispensable">🔴 Indispensable</option>
+        <option value="tres-frequent">🟠 Très fréquent</option>
+        <option value="frequent">🟨 Fréquent</option>
       </select>
       <button onclick="saveFicheEditor()" style="background:var(--acc);color:#fff;border:none;border-radius:5px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ff)">Sauvegarder</button>
     </div>
@@ -1097,16 +1132,14 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div style="max-width:660px;margin:0 auto;padding:72px 0 160px">
 
       <!-- Titre -->
-      <div id="fe-title" contenteditable="true"
-        style="font-family:var(--ffd);font-size:42px;font-weight:700;color:var(--txt);outline:none;margin-bottom:24px;line-height:1.15;letter-spacing:-.03em;min-height:56px;word-break:break-word">
+      <div id="fe-title" contenteditable="true" style="font-family:var(--ffd);font-size:42px;font-weight:700;color:var(--txt);outline:none;margin-bottom:24px;line-height:1.15;letter-spacing:-.03em;min-height:56px;word-break:break-word">
       </div>
 
       <!-- Séparateur fin -->
       <div style="height:1px;background:var(--brd);margin-bottom:32px"></div>
 
       <!-- Corps -->
-      <div id="fe-body" contenteditable="true"
-        style="font-size:16px;line-height:2;color:var(--txt2);outline:none;min-height:60vh;word-break:break-word">
+      <div id="fe-body" contenteditable="true" style="font-size:16px;line-height:2;color:var(--txt2);outline:none;min-height:60vh;word-break:break-word">
       </div>
 
       <!-- Zone PDF/images attachés -->
@@ -1116,24 +1149,24 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
     <!-- Toolbar flottante centrée -->
     <div style="position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--surf);border:1px solid var(--brd);border-radius:40px;padding:8px 20px;display:flex;gap:3px;align-items:center;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:200">
-      <button class="rtb" onclick="execFE('bold')"><strong>B</strong></button>
-      <button class="rtb" onclick="execFE('italic')"><em>I</em></button>
-      <button class="rtb" onclick="execFE('underline')"><u>U</u></button>
+      <button class="rtb" onclick="execFE(&#39;bold&#39;)"><strong>B</strong></button>
+      <button class="rtb" onclick="execFE(&#39;italic&#39;)"><em>I</em></button>
+      <button class="rtb" onclick="execFE(&#39;underline&#39;)"><u>U</u></button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execFE('formatBlock','h2')" style="font-size:10px;font-weight:700">Grand</button>
-      <button class="rtb" onclick="execFE('formatBlock','h3')" style="font-size:10px">Moyen</button>
-      <button class="rtb" onclick="execFE('formatBlock','p')" style="font-size:10px">Normal</button>
+      <button class="rtb" onclick="execFE(&#39;formatBlock&#39;,&#39;h2&#39;)" style="font-size:10px;font-weight:700">Grand</button>
+      <button class="rtb" onclick="execFE(&#39;formatBlock&#39;,&#39;h3&#39;)" style="font-size:10px">Moyen</button>
+      <button class="rtb" onclick="execFE(&#39;formatBlock&#39;,&#39;p&#39;)" style="font-size:10px">Normal</button>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="execFE('insertUnorderedList')">&#8226; L</button>
-      <button class="rtb" onclick="insertFEQuote()">&#10078;</button>
+      <button class="rtb" onclick="execFE(&#39;insertUnorderedList&#39;)">• L</button>
+      <button class="rtb" onclick="insertFEQuote()">❞</button>
       <div class="rtb-sep"></div>
-      <div class="rtb-c" style="background:#8B4A6B" onclick="execFE('foreColor','#8B4A6B')"></div>
-      <div class="rtb-c" style="background:#2C5F8A" onclick="execFE('foreColor','#2C5F8A')"></div>
-      <div class="rtb-c" style="background:#2D6B4A" onclick="execFE('foreColor','#2D6B4A')"></div>
-      <div class="rtb-c" style="background:#A63D40" onclick="execFE('foreColor','#A63D40')"></div>
+      <div class="rtb-c" style="background:#8B4A6B" onclick="execFE(&#39;foreColor&#39;,&#39;#8B4A6B&#39;)"></div>
+      <div class="rtb-c" style="background:#2C5F8A" onclick="execFE(&#39;foreColor&#39;,&#39;#2C5F8A&#39;)"></div>
+      <div class="rtb-c" style="background:#2D6B4A" onclick="execFE(&#39;foreColor&#39;,&#39;#2D6B4A&#39;)"></div>
+      <div class="rtb-c" style="background:#A63D40" onclick="execFE(&#39;foreColor&#39;,&#39;#A63D40&#39;)"></div>
       <div class="rtb-sep"></div>
-      <button class="rtb" onclick="document.getElementById('fe-img-inp').click()" title="Image">&#128247;</button>
-      <button class="rtb" onclick="document.getElementById('fe-pdf-inp').click()" title="PDF">&#128196;</button>
+      <button class="rtb" onclick="document.getElementById(&#39;fe-img-inp&#39;).click()" title="Image">📷</button>
+      <button class="rtb" onclick="document.getElementById(&#39;fe-pdf-inp&#39;).click()" title="PDF">📄</button>
     </div>
 
     <input type="file" id="fe-img-inp" accept="image/png,image/jpeg,image/gif,image/webp" style="display:none" onchange="handleFEImage(this)">
@@ -1224,31 +1257,46 @@ const CHAPTERS_CONTENT={
 const FRISE=[];
 
 const FLASHCARDS=[
-  {q:"Qu'est-ce que la g\u00e9opolitique selon Renouvin ?",a:"Science des forces profondes en RI : g\u00e9ographie, \u00e9conomie, d\u00e9mographie, id\u00e9ologies. Renouvin (1953) : d\u00e9passe la strat\u00e9gie militaire.",p:"indispensable",c:"Chap. 1"},
-  {q:"D\u00e9finir le hard power (Nye, 1990)",a:"Capacit\u00e9 de contraindre par la force militaire ou \u00e9conomique. Oppos\u00e9 au soft power (attraction). Smart power = combinaison des deux (Clinton, 2009).",p:"indispensable",c:"Chap. 1"},
-  {q:"Qu'est-ce que le soft power ?",a:"Capacit\u00e9 d'attirer sans contraindre (Nye, 1990). Repose sur culture, valeurs, politique \u00e9trang\u00e8re. Instrument cl\u00e9 des GAFAM et diplomatie US.",p:"indispensable",c:"Chap. 1"},
-  {q:"Trait\u00e9s de Westphalie (1648) \u2014 enjeux",a:"Fin de la Guerre de 30 ans. Fondent le syst\u00e8me inter\u00e9tatique : souverainet\u00e9, non-ing\u00e9rence, \u00e9galit\u00e9 des \u00c9tats. R\u00e9volution du droit international.",p:"indispensable",c:"Chap. 1"},
-  {q:"Pi\u00e8ge de Thucydide (Allison, 2017)",a:"Quand une puissance montante (Chine) menace la dominante (USA), la guerre est probable. 12 cas sur 16 dans l'histoire.",p:"indispensable",c:"Chap. 5"},
-  {q:"BRICS \u2014 composition et enjeux (2024)",a:"Br\u00e9sil, Russie, Inde, Chine, Afrique du Sud + 6 nouveaux membres 2024. 40% PIB mondial en PPA. Contestent l'h\u00e9g\u00e9monie occidentale.",p:"indispensable",c:"Chap. 5"},
-  {q:"Belt and Road Initiative (BRI, 2013)",a:"Nouvelles routes de la soie : 140+ pays, 900 Mds$. G\u00e9o\u00e9conomie chinoise. Critiqu\u00e9 : diplomatie de la dette.",p:"indispensable",c:"Chap. 5"},
-  {q:"Mondialisation \u2014 3 vagues (Stiglitz)",a:"1re : colonisation. 2e : 1870-1914 (\u00e9talon-or). 3e : 1980+ (FMI/BM/OMC, financiarisation). Stiglitz critique l'asym\u00e9trie.",p:"indispensable",c:"Chap. 7"},
-  {q:"FTN \u2014 d\u00e9finition et puissance",a:"Firmes Trans-Nationales : Apple 3000 Mds$ > PIB France 2800 Mds$. Amazon consulte 238 villes pour HQ2 (2018).",p:"indispensable",c:"Chap. 11"},
-  {q:"Bretton Woods \u2014 m\u00e9canisme et fin",a:"1944 : changes fixes, dollar=or (35$/once), FMI+BIRD. Fin : Nixon suspend convertibilit\u00e9 (1971), flottement (1973).",p:"indispensable",c:"Chap. 7"},
-  {q:"G\u00e9o\u00e9conomie (Luttwak, 1990)",a:"Substitution logique \u00e9conomique \u00e0 militaire dans la comp\u00e9tition inter\u00e9tatique. Armes : sanctions, ressources, monnaie.",p:"indispensable",c:"Chap. 5"},
-  {q:"Sanctions SWIFT sur la Russie (2022)",a:"Exclusion apr\u00e8s invasion Ukraine. 1re utilisation massive de la finance comme arme de guerre. Acc\u00e9l\u00e8re la d\u00e9-dollarisation.",p:"indispensable",c:"Chap. 5"},
-  {q:"Houthis et d\u00e9troit Bab-el-Mandeb (2023)",a:"Attaques nov. 2023 : -40% trafic Suez. D\u00e9tour cap : +14 jours. Vuln\u00e9rabilit\u00e9 des cha\u00eenes d'approvisionnement mondiales.",p:"indispensable",c:"Fiche Mers"},
-  {q:"Plan Marshall (1947)",a:"13 Mds$ sur 4 ans. Reconstruire l'Europe occidentale, contenir le communisme. Acte fondateur de la Guerre froide.",p:"indispensable",c:"Chap. 2"},
-  {q:"Souverainet\u00e9 westphalienne",a:"Chaque \u00c9tat souverain sur son territoire, sans ing\u00e9rence ext\u00e9rieure. Remis en cause par mondialisation et R2P (2005).",p:"indispensable",c:"Chap. 1"},
-  {q:"Consensus de Washington (1990)",a:"10 r\u00e9formes lib\u00e9rales FMI/BM : privatisations, lib\u00e9ralisation, aust\u00e9rit\u00e9. Critiqu\u00e9 par Stiglitz (Prix Nobel 2001).",p:"tres-frequent",c:"Chap. 9"},
-  {q:"G7 vs G20",a:"G7 : 7 d\u00e9mocraties avanc\u00e9es + UE. G20 : 19 pays + UE, 85% PIB mondial \u2014 int\u00e8gre les \u00e9mergents.",p:"tres-frequent",c:"Chap. 6"},
-  {q:"Accord de Paris (2015)",a:"Limiter \u00e0 +1,5\u00b0C. NDC non contraignantes. 196 signataires. USA : retrait Trump (2017), retour Biden (2021).",p:"tres-frequent",c:"Chap. 15"},
-  {q:"IDH \u2014 Indice D\u00e9veloppement Humain",a:"PNUD (1990) : esp\u00e9rance de vie + \u00e9ducation + revenu. D\u00e9passe le PIB/habitant seul.",p:"tres-frequent",c:"Chap. 10"},
-  {q:"Brexit \u2014 dates et cons\u00e9quences",a:"51,9% Leave (23 juin 2016). Sortie jan. 2020. -4% PIB UK (OBR). Question irlandaise.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"Trait\u00e9 de Maastricht (1992)",a:"Cr\u00e9e l'UE, citoyennet\u00e9 europ\u00e9enne, PESC, monnaie unique. France : 51,05%. Danemark : 2 r\u00e9f\u00e9rendums.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"Zone euro \u2014 avantages et critiques",a:"Avantages : stabilit\u00e9, no co\u00fbts transaction. Critiques : pas de ZMO (Mundell), pas de budget f\u00e9d\u00e9ral. Crise 2010-2012.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"TSCG 2012 \u2014 r\u00e8gle d'or",a:"D\u00e9ficit structurel < 0,5% PIB. D\u00e9ficit < 3%. Dette < 60%. Suspendu COVID (2020-2023). Retour 2024.",p:"tres-frequent",c:"Fiche Europe"},
-  {q:"Smart power (Clinton, 2009)",a:"Combinaison hard + soft power. Strat\u00e9gie am\u00e9ricaine post-Irak pour maintenir l'h\u00e9g\u00e9monie sans force syst\u00e9matique.",p:"tres-frequent",c:"Chap. 1"},
-  {q:"ODD \u2014 Objectifs de D\u00e9veloppement Durable",a:"17 ODD adopt\u00e9s ONU 2015 (Agenda 2030). Combinent \u00e9conomique, social, environnemental. 4000 Mds$/an n\u00e9cessaires.",p:"tres-frequent",c:"Chap. 13"},
+  // ══ DÉMOGRAPHIE — CONCEPTS ══
+  {q:"Citer la citation de Bodin sur la démographie et la donner précisément",a:"« Il n'est de richesse que d'hommes » — Jean Bodin, Six livres de la République, 1576. Fait le lien entre démographie et puissance géopolitique.",p:"indispensable",c:"Démographie"},
+  {q:"Définir la transition démographique",a:"Passage d'un régime forte fécondité/forte mortalité à faible fécondité/faible mortalité. 4 phases. À mobiliser dans toute copie démographie. Rupture clé : années 2000, part des >65 ans dépasse celle des <5 ans.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le dividende démographique",a:"Période où la pyramide des âges est élargie à la base → ratio actifs/dépendants favorable → boom économique potentiel. Se ferme au Tournant de Lewis. Rôle décisif dans l'essor chinois (1970-2010).",p:"indispensable",c:"Démographie"},
+  {q:"Définir le Youth Bulge",a:"Concentration de population jeune (15-24 ans) sans emploi suffisant → instabilité politique et sociale. 10-24 ans = 25% pop. mondiale. En 2050 : 2/3 des Africains auront moins de 30 ans.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le Tournant de Lewis",a:"Moment où la main d'œuvre rurale abondante est absorbée par l'industrie → hausse des salaires → fin du dividende démographique. Chine : ~2010.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le (néo)-malthusianisme",a:"Croissance pop. > croissance production → crises (Malthus, 1798). Néo-malthusiens étendent aux ressources naturelles, eau, énergie. Schéma démenti par la révolution industrielle mais toujours pertinent en Afrique.",p:"indispensable",c:"Démographie"},
+  {q:"Définir l'Effet Boserup",a:"La pression démographique stimule l'innovation agricole et technologique. Anti-Malthus. Ester Boserup, Évolution agraire et pression créatrice.",p:"indispensable",c:"Démographie"},
+  {q:"Définir le taux de fécondité et son seuil de remplacement",a:"Nombre moyen d'enfants par femme. Seuil de remplacement : 2,1. Indicateur-clé de toute copie démographie.",p:"indispensable",c:"Démographie"},
+  {q:"Définir l'hiver démographique",a:"Ralentissement ou décroissance de la population dans les PDEM (et certains émergents). Coexiste avec explosion en Afrique. Macron (jan. 2024) : « réarmement démographique ».",p:"indispensable",c:"Démographie"},
+  {q:"Définir la Silver Economy",a:"Marchés et services liés au vieillissement : santé, autonomie, loisirs, tech grand âge. Japon : Japan's New Robot Strategy (2015). France : 130 Md€ en 2030.",p:"tres-frequent",c:"Démographie"},
+  {q:"Définir la P(eople) Bomb",a:"Paul Ehrlich (1968) : surpopulation = bombe à retardement → épuisement ressources. Cadre malthusien appliqué au XXe siècle. Largement démenti mais structure toujours utile.",p:"tres-frequent",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — CHIFFRES CLÉS ══
+  {q:"Donner l'évolution de la population mondiale de 1800 à 2080",a:"1800 : 1 Md · 1900 : 1,5 Md · 1950 : 2,5 Md · 2020 : 7,5 Md · 2080 : pic ~10,3 Md (ONU) · 2100 : retour à 4 Md ? (HSBC 2022).",p:"indispensable",c:"Démographie"},
+  {q:"Quels sont les indices de fécondité clés à connaître en 2023 ?",a:"Niger 6,67 · Afrique subsaharienne 4,9 · Monde 2,3 · Inde 2,05 · France 1,79 · Chine 1,19 · Corée du Sud 0,72. Seuil de remplacement : 2,1.",p:"indispensable",c:"Démographie"},
+  {q:"Quel est le poids des remises vers les PED et pourquoi est-ce important ?",a:"685 Md$ en 2024 (×3 vs 2005). Supérieur aux IDE (300 Md$) + aide internationale (210 Md$) cumulés. Levier géoéconomique majeur.",p:"tres-frequent",c:"Démographie"},
+  {q:"Quelle est la part des 10-24 ans dans la population mondiale ?",a:"25% de la population mondiale. En 2050, 2/3 des Africains auront moins de 30 ans. Inde : +6%/an de croissance nécessaire pour absorber les jeunes.",p:"indispensable",c:"Démographie"},
+  {q:"Donnez les chiffres sur le vieillissement mondial",a:"Part des >60 ans : 605 M (2000) → 2 Md (2050), soit 11%→22% de la population mondiale. Il a fallu 100 ans à la France pour doubler la part des >65 ans → 25 ans au Brésil ou à la Chine.",p:"indispensable",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — AUTEURS ══
+  {q:"Thèse de Jared Diamond dans Effondrement (2004) sur la démographie",a:"Génocide rwandais (1994) = crise malthusienne : pression démog. (750 hab/km²) + compétition terres + sécheresse. Facteur démographique > facteur ethnique (Severino). Extension : crise syrienne (sécheresse 2008-2011).",p:"indispensable",c:"Démographie"},
+  {q:"Thèse de Bruno Tertrais dans Le choc démographique (2020)",a:"P. Bomb largement désamorcée. Les sociétés trouvent des solutions quand la pression monte. Cheikh Yamani : 'L'âge du pétrole ne se terminera pas par manque de pétrole'. Question de répartition, pas de production.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Jacques Veron dans Faut-il avoir peur de la population mondiale ? (2020)",a:"Complexité des variables démographiques — ni catastrophisme ni angélisme. La décroissance crée de nouveaux problèmes (vieillissement). Augmenter le niveau de vie des PED sans faire croître les consommations non durables des PDEM.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Maxime de Blasi dans Le Débat (2019)",a:"Triangle d'incompatibilité : croissance démog. + hausse niveau de vie + préservation environnement ne peuvent coexister. En 2019 : 1,7 ressources renouvelables consommées par an.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Gunnar Heinsohn — indice de belligérance (2011)",a:"Déséquilibre jeunes hommes/emplois effectifs → conflits. Appliqué au monde arabe. Critiquable (amish, juifs orthodoxes) mais mobilisable comme facteur parmi d'autres.",p:"tres-frequent",c:"Démographie"},
+  {q:"Thèse de Sylvie Brunel dans L'Afrique est-elle si bien partie ? (2014)",a:"Afrique : continent riche peuplé de pauvres. Youth bulge + inégalités + Internet = frustrations → djihadisme sahélien. 'Une guerre qui ne dit pas son nom : celle qui mobilise des jeunes combattants contre les nouvelles bourgeoisies émergentes.'",p:"tres-frequent",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — DYNAMIQUES RÉGIONALES ══
+  {q:"Quelle est la leçon centrale de l'exemple chinois sur le contrôle des naissances ?",a:"Campagne wan-xi-shao (1970s) : fécondité 5,7→2,8 avant l'enfant unique. Politique enfant unique (1979) assouplie dès 1984, concerne seulement 1/3 de la pop. C'est la modernisation (pas la politique) qui achève la baisse. La politique n'est efficace que si elle rencontre le désir de la population.",p:"indispensable",c:"Démographie"},
+  {q:"Quelle est la leçon centrale de l'exemple indien sur le contrôle des naissances ?",a:"Stérilisations forcées 1975 (Indira Gandhi) → défaite électorale 1977. Kerala 1,6 enfants/femme (transition achevée) vs nord >2,5 (pauvreté). Leçon : politique autoritaire impossible dans un pays non-convaincu.",p:"indispensable",c:"Démographie"},
+  {q:"Quelle est la leçon de l'exemple rwandais sur le contrôle des naissances ?",a:"Kagame → politique très volontariste post-génocide. Fécondité 6,1→3,75 entre 2000 et 2018 malgré la pauvreté. Preuve : volonté politique = résultats même sans développement.",p:"indispensable",c:"Démographie"},
+  {q:"Quels sont les défis démographiques du Japon ?",a:"Décroissance (130 M → 85 M en 2100). 40% >65 ans en 2050. Ratio actifs/retraités → 1 pour 1 en 2050. Coûts santé +60%. Réponses : robotisation (Japan's New Robot Strategy 2015), silver economy (Raku-raku/Fujitsu, 692 Md€), immigration-tourniquet (Bouissou).",p:"tres-frequent",c:"Démographie"},
+  {q:"Quel est le fait massif de la démographie africaine ?",a:"×40 entre 1900 et 2100 (4 Md). Fécondité baisse mais plus lente (villes > campagnes). Afrique = continent où la question malthusienne se posera avec acuité : Rwanda/Diamond, lac Tchad, RDC. Réfugiés climatiques à anticiper.",p:"indispensable",c:"Démographie"},
+
+  // ══ DÉMOGRAPHIE — SUJETS & PIÈGES ══
+  {q:"Plan type pour le sujet 'Trop d'hommes sur Terre ?'",a:"I. La démographie comme force (Bodin, dividende, diasporas) · II. Les défis : P. Bomb, jeunesse, environnement, migrations · III. Dépasser Malthus : technologie (Boserup), contrôle naissances. PIÈGE : question de répartition, pas seulement de production (Tertrais).",p:"indispensable",c:"Démographie"},
+  {q:"Plan type pour 'N'y a-t-il de puissance que d'hommes ?'",a:"I. Oui : loi du nombre (Bodin), exemples historiques et actuels, dividende · II. Nuances : Japon riche et vieillissant, soft power · III. Démographie comme variable parmi d'autres. PIÈGE : ne pas réduire la puissance à la taille de la population.",p:"indispensable",c:"Démographie"},
+  {q:"Plan type pour 'Les défis de la démographie africaine'",a:"I. Youth bulge : opportunité ou bombe à retardement ? (Brunel, Heinsohn) · II. Question malthusienne (Diamond/Rwanda, lac Tchad, RDC) · III. Transition inachevée : solutions et obstacles. PIÈGE : ne pas homogénéiser l'Afrique.",p:"indispensable",c:"Démographie"},
+  {q:"Plan type pour 'Vers un hiver démographique mondial ?'",a:"I. Ralentissement global réel (HSBC 2022, The Lancet 2024) · II. Mais l'Afrique fait exception · III. Conséquences géopolitiques : vieillissement, migrations, recomposition des puissances. PIÈGE : ralentissement ≠ décroissance absolue (seule l'Europe décroît vraiment).",p:"indispensable",c:"Démographie"},
 ];
 
 const SEARCH_DATA=[
@@ -1936,8 +1984,11 @@ let flDeck=[],flIdx=0,flipped=false;
 
 function initFlash(){
   const sel=document.getElementById('fl-chap');
-  if(sel.children.length<=1)CHAPTERS.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.short+' — '+c.title.substring(0,36);sel.appendChild(o);});
-  renderFlashFolders();
+  if(sel.children.length<=1){
+    const allCards=[...FLASHCARDS,...M.get('my_flashcards',[])];
+    const chapNames=[...new Set(allCards.map(f=>f.c).filter(Boolean))].sort();
+    chapNames.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o);});
+  }
   loadFlash();
 }
 
@@ -1947,7 +1998,7 @@ function loadFlash(){
   const theme=(document.getElementById('fl-theme')?.value||'').toLowerCase().trim();
   const myCards=M.get('my_flashcards',[]);
   let deck=[...FLASHCARDS,...myCards]; // MIXED automatically
-  if(chapVal!=='all'){const chap=CHAPTERS[parseInt(chapVal)];if(chap)deck=deck.filter(f=>f.c===chap.short);}
+  if(chapVal!=='all') deck=deck.filter(f=>f.c===chapVal);
   if(prioVal!=='all')deck=deck.filter(f=>f.p===prioVal);
   if(theme)deck=deck.filter(f=>f.q.toLowerCase().includes(theme)||f.a.toLowerCase().includes(theme)||(f.c||'').toLowerCase().includes(theme));
   if(!deck.length)deck=[...FLASHCARDS,...myCards];
@@ -2848,6 +2899,14 @@ let _flashAttach=null;
 function attachToFlash(inp,type){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{_flashAttach={name:f.name,data:e.target.result,type};document.getElementById('mf-attach').innerHTML=(type==='image'?'📷':'📄')+' '+f.name+' <button onclick="_flashAttach=null;document.getElementById(\'mf-attach\').innerHTML=\'\'" style="background:none;border:none;cursor:pointer;color:var(--red);font-size:10px">🗑</button>';};r.readAsDataURL(f);inp.value='';}
 
 // ── FICHES DOSSIERS ──────────────────────────────────────────────────────
+function ficheCreateSubFolder(){
+  if(!ficheCurFolder){showToast("Ouvre d'abord un dossier");return;}
+  const name=prompt('Nom du sous-dossier :'); if(!name?.trim()) return;
+  const d=ficheGetData();
+  d.folders.push({id:'ff_'+Date.now(),name:name.trim(),parent:ficheCurFolder});
+  ficheSaveData(d);renderFicheFinder();showToast('📁 Sous-dossier créé');
+}
+
 function addFicheFolder(){
   const name=prompt('Nom du dossier (ex: Puissance, Ressources…) :');
   if(!name?.trim())return;
@@ -3211,271 +3270,31 @@ function finderItemClick(el, type, id, folder, name, openFn){
 }
 
 function deleteSelected(){
-  if(!_sm){ showToast("Sélectionne d'abord un élément"); return; }
-  const {type, id, folder, name} = _sm;
-  if(!confirm('Supprimer "' + name + '" ?')) return;
-  if(type === 'pdf-folder'){
-    const d = pdfGetData();
-    function dp(fid){ return [fid, ...(d.folders||[]).filter(f=>f.parent===fid).flatMap(f=>dp(f.id))]; }
-    const ids = dp(id);
-    d.folders = (d.folders||[]).filter(f=>!ids.includes(f.id));
+  if(!_sm){showToast("Sélectionne d'abord un élément");return;}
+  const {type,id,folder,name}=_sm;
+  if(!confirm('Supprimer "'+name+'" ?')) return;
+  if(type==='fiche-folder'){
+    const isFixed=FICHE_FIXED_FOLDERS.map(n=>'ff_'+n.toLowerCase().replace(/é/g,'e')).includes(id);
+    if(isFixed){showToast('Ce dossier ne peut pas être supprimé');return;}
+    const d=ficheGetData();
+    function df(fid){return[fid,...d.folders.filter(f=>f.parent===fid).flatMap(f=>df(f.id))];}
+    const ids=df(id);
+    d.folders=d.folders.filter(f=>!ids.includes(f.id));
     ids.forEach(i=>delete d.files[i]);
-    pdfSaveData(d); if(ids.includes(pdfCurFolder)) pdfGoRoot(); else renderPDFFinder();
-  } else if(type === 'pdf-file'){
-    const d = pdfGetData();
-    d.files[folder] = (d.files[folder]||[]).filter(x=>x.id!==id);
-    pdfSaveData(d); renderPDFFinder();
-  } else if(type === 'fiche-folder'){
-    const isFixed = FICHE_FIXED_FOLDERS.map(n=>'ff_'+n.toLowerCase().replace('é','e')).includes(id);
-    if(isFixed){ showToast('Ce dossier ne peut pas être supprimé'); return; }
-    const d = ficheGetData();
-    function df(fid){ return [fid, ...d.folders.filter(f=>f.parent===fid).flatMap(f=>df(f.id))]; }
-    const ids = df(id);
-    d.folders = d.folders.filter(f=>!ids.includes(f.id));
-    ids.forEach(i=>delete d.files[i]);
-    ficheSaveData(d); if(ids.includes(ficheCurFolder)) ficheGoRoot(); else renderFicheFinder();
-  } else if(type === 'fiche'){
-    const idx = parseInt(id);
-    const fiches = M.get('my_fiches',[]);
-    fiches.splice(idx, 1); M.set('my_fiches', fiches);
-    const d = ficheGetData();
+    ficheSaveData(d);ficheGoRoot();showToast('🗑 Dossier supprimé');
+  } else if(type==='fiche'){
+    const idx=parseInt(id); if(isNaN(idx)) return;
+    const fiches=M.get('my_fiches',[]);
+    fiches.splice(idx,1); M.set('my_fiches',fiches);
+    const d=ficheGetData();
     Object.keys(d.files).forEach(k=>{
-      d.files[k] = (d.files[k]||[]).filter(r=>r.ficheIdx!==idx).map(r=>({...r, ficheIdx: r.ficheIdx>idx ? r.ficheIdx-1 : r.ficheIdx}));
+      d.files[k]=(d.files[k]||[]).filter(r=>r.ficheIdx!==idx).map(r=>({...r,ficheIdx:r.ficheIdx>idx?r.ficheIdx-1:r.ficheIdx}));
     });
-    ficheSaveData(d); renderFicheFinder();
+    ficheSaveData(d);renderFicheFinder();showToast('🗑 Fiche supprimée');
   }
-  _sel = null; _sm = null; document.getElementById('_dbtn')?.remove();
-  showToast('🗑 Supprimé');
+  _sel=null;_sm=null;document.getElementById('_dbtn')?.remove();
 }
 
-// ── PDF FINDER ──────────────────────────────────────
-function pdfGetData(){ return M.get('pdf_finder_data', {folders:[], files:{}}); }
-function pdfSaveData(d){ M.set('pdf_finder_data', d); }
-
-function pdfGoRoot(){
-  pdfCurFolder = null; pdfFolderStack = [];
-  const bc = document.getElementById('pdf-breadcrumb');
-  if(bc) bc.innerHTML = '<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="pdfGoRoot()">📂 Cours</span>';
-  renderPDFFinder();
-}
-
-function pdfOpenFolder(fid, fname){
-  pdfFolderStack.push({id:fid, name:fname});
-  pdfCurFolder = fid;
-  pdfRenderBreadcrumb(); renderPDFFinder();
-}
-
-function pdfRenderBreadcrumb(){
-  const el = document.getElementById('pdf-breadcrumb'); if(!el) return;
-  let html = '<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="pdfGoRoot()">📂 Cours</span>';
-  pdfFolderStack.forEach((step,i)=>{
-    html += '<span style="color:var(--txt3)"> › </span>';
-    if(i < pdfFolderStack.length-1) html += `<span style="cursor:pointer;color:var(--acc)" onclick="pdfGoToLevel(${i})">${step.name}</span>`;
-    else html += `<span style="font-weight:600;color:var(--txt)">${step.name}</span>`;
-  });
-  el.innerHTML = html;
-}
-
-function pdfGoToLevel(i){
-  const step = pdfFolderStack[i];
-  pdfFolderStack = pdfFolderStack.slice(0,i+1);
-  pdfCurFolder = step.id;
-  pdfRenderBreadcrumb(); renderPDFFinder();
-}
-
-function renderPDFFinder(){
-  const el = document.getElementById('pdf-finder'); if(!el) return;
-  const d = pdfGetData();
-  let html = '';
-  if(pdfCurFolder){
-    html += '<button class="finder-back-btn" onclick="pdfGoBack()" style="margin-bottom:12px">‹ Retour</button> ';
-  }
-  html += `<div ondragover="event.preventDefault();this.style.borderColor='var(--acc)'" ondragleave="this.style.borderColor='var(--brd2)'" ondrop="event.preventDefault();this.style.borderColor='var(--brd2)';uploadPDFs(event.dataTransfer.files)" onclick="document.getElementById('pdf-upload-inp').click()" style="border:2px dashed var(--brd2);border-radius:var(--rl);padding:14px;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:14px"><span style="font-size:13px;color:var(--txt3)">📎 Déposer un PDF ici ou cliquer</span></div>`;
-  html += '<div class="finder-grid">';
-  if(!pdfCurFolder){
-    (d.folders||[]).filter(f=>!f.parent).forEach(f=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-folder','${f.id}','','${f.name.replace(/'/g,"\\'")}',()=>pdfOpenFolder('${f.id}','${f.name.replace(/'/g,"\\'")}'))" ondragover="event.preventDefault();this.classList.add('finder-item-drag-over')" ondragleave="this.classList.remove('finder-item-drag-over')" ondrop="event.preventDefault();this.classList.remove('finder-item-drag-over');pdfDropToFolder(event,'${f.id}')"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
-    });
-    (d.files['root']||[]).forEach(p=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-file','${p.id}','root','${p.name.replace(/'/g,"\\'")}',()=>pdfOpenFile('root','${p.id}'))" draggable="true" ondragstart="event.dataTransfer.setData('pdf-id','${p.id}');event.dataTransfer.setData('pdf-src','root');this.style.opacity='.4'" ondragend="this.style.opacity='1'"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${p.name}</div></div>`;
-    });
-  } else {
-    (d.folders||[]).filter(f=>f.parent===pdfCurFolder).forEach(f=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-folder','${f.id}','','${f.name.replace(/'/g,"\\'")}',()=>pdfOpenFolder('${f.id}','${f.name.replace(/'/g,"\\'")}'))"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
-    });
-    (d.files[pdfCurFolder]||[]).forEach(p=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-file','${p.id}','${pdfCurFolder}','${p.name.replace(/'/g,"\\'")}',()=>pdfOpenFile('${pdfCurFolder}','${p.id}'))" draggable="true" ondragstart="event.dataTransfer.setData('pdf-id','${p.id}');event.dataTransfer.setData('pdf-src','${pdfCurFolder}');this.style.opacity='.4'" ondragend="this.style.opacity='1'"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${p.name}</div></div>`;
-    });
-    if(!(d.folders||[]).some(f=>f.parent===pdfCurFolder) && !(d.files[pdfCurFolder]||[]).length){
-      html += '<div style="color:var(--txt3);font-size:13px;padding:20px;grid-column:1/-1">Dossier vide</div>';
-    }
-  }
-  html += '</div>';
-  // Bouton nouveau dossier
-  if(!pdfCurFolder) html += '<div style="margin-top:12px"><button class="btn btn-g btn-sm" onclick="pdfCreateFolder()">📁 Nouveau dossier</button></div>';
-  else html += '<div style="margin-top:12px"><button class="btn btn-g btn-sm" onclick="pdfCreateSubFolder()">📁 Sous-dossier</button></div>';
-  el.innerHTML = html;
-}
-
-function pdfGoBack(){
-  if(!pdfFolderStack.length){ pdfGoRoot(); return; }
-  pdfFolderStack.pop();
-  const prev = pdfFolderStack[pdfFolderStack.length-1];
-  pdfCurFolder = prev ? prev.id : null;
-  if(!pdfCurFolder) pdfGoRoot(); else { pdfRenderBreadcrumb(); renderPDFFinder(); }
-}
-
-function pdfOpenFile(folderId, pdfId){
-  const d = pdfGetData();
-  const p = (d.files[folderId]||[]).find(x=>x.id===pdfId);
-  if(!p) return;
-  const ov = document.createElement('div');
-  ov.style.cssText = 'position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.85);display:flex;flex-direction:column';
-  ov.innerHTML = `<div style="background:var(--surf);border-bottom:1px solid var(--brd);padding:8px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0"><button onclick="this.closest('[style*=fixed]').remove()" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:13px;font-family:var(--ff);padding:5px 8px;border-radius:5px">← Retour</button><div style="font-size:13px;font-weight:700;color:var(--txt);flex:1">${p.name}</div><a href="${p.data}" download="${p.name}.pdf" class="btn btn-g btn-sm">⬇️</a></div><iframe src="${p.data}" style="flex:1;border:none;width:100%"></iframe>`;
-  document.body.appendChild(ov);
-}
-
-function pdfCreateFolder(){
-  const name = prompt('Nom du dossier :'); if(!name?.trim()) return;
-  const d = pdfGetData();
-  d.folders = d.folders||[];
-  d.folders.push({id:'pf_'+Date.now(), name:name.trim(), parent:null});
-  pdfSaveData(d); renderPDFFinder(); showToast('📁 Dossier créé');
-}
-
-function pdfCreateSubFolder(){
-  if(!pdfCurFolder){ showToast("Ouvre un dossier d'abord"); return; }
-  const name = prompt('Nom du sous-dossier :'); if(!name?.trim()) return;
-  const d = pdfGetData();
-  d.folders = d.folders||[];
-  d.folders.push({id:'pf_'+Date.now(), name:name.trim(), parent:pdfCurFolder});
-  pdfSaveData(d); renderPDFFinder(); showToast('📁 Sous-dossier créé');
-}
-
-function uploadPDFs(files){
-  if(!files||!files.length) return;
-  const d = pdfGetData();
-  const folder = pdfCurFolder || 'root';
-  Array.from(files).forEach(f=>{
-    if(!f.name.toLowerCase().endsWith('.pdf')){ showToast('⚠️ PDF uniquement'); return; }
-    const reader = new FileReader();
-    reader.onload = e=>{
-      try {
-        d.files[folder] = d.files[folder]||[];
-        d.files[folder].unshift({id:'pdf_'+Date.now(), name:f.name.replace(/\.pdf$/i,''), data:e.target.result, date:new Date().toLocaleDateString('fr-FR'), size:Math.round(f.size/1024)+'kb'});
-        pdfSaveData(d); renderPDFFinder(); showToast('✅ '+f.name.replace(/\.pdf$/i,''));
-      } catch(err){ showToast('⚠️ PDF trop lourd (max ~4MB)'); }
-    };
-    reader.readAsDataURL(f);
-  });
-  const inp = document.getElementById('pdf-upload-inp'); if(inp) inp.value='';
-}
-
-function initCours(){ pdfGoRoot(); }
-
-// ── FICHE FINDER ─────────────────────────────────────
-function ficheGetData(){
-  const defaults = {folders: FICHE_FIXED_FOLDERS.map(n=>({id:'ff_'+n.toLowerCase().replace('é','e'), name:n, fixed:true, parent:null})), files:{}};
-  const saved = M.get('fiche_finder_data', null);
-  if(!saved) return defaults;
-  FICHE_FIXED_FOLDERS.forEach(n=>{
-    const id = 'ff_'+n.toLowerCase().replace('é','e');
-    if(!saved.folders.some(f=>f.id===id)) saved.folders.unshift({id, name:n, fixed:true, parent:null});
-  });
-  return saved;
-}
-function ficheSaveData(d){ M.set('fiche_finder_data', d); }
-
-function ficheGoRoot(){
-  ficheCurFolder = null; ficheCurFolderStack = [];
-  const bc = document.getElementById('fiche-finder-breadcrumb');
-  if(bc) bc.innerHTML = '<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>';
-  renderFicheFinder();
-}
-
-function ficheOpenFolder(fid, fname){
-  ficheCurFolderStack.push({id:fid, name:fname});
-  ficheCurFolder = fid;
-  _ficheRenderBreadcrumb(); renderFicheFinder();
-}
-
-function _ficheRenderBreadcrumb(){
-  const el = document.getElementById('fiche-finder-breadcrumb'); if(!el) return;
-  let html = '<span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>';
-  ficheCurFolderStack.forEach((step,i)=>{
-    html += '<span style="color:var(--txt3)"> › </span>';
-    if(i < ficheCurFolderStack.length-1) html += `<span style="cursor:pointer;color:var(--acc)" onclick="ficheGoToLevel(${i})">${step.name}</span>`;
-    else html += `<span style="font-weight:600;color:var(--txt)">${step.name}</span>`;
-  });
-  el.innerHTML = html;
-}
-
-function ficheGoToLevel(i){
-  const step = ficheCurFolderStack[i];
-  ficheCurFolderStack = ficheCurFolderStack.slice(0,i+1);
-  ficheCurFolder = step.id;
-  renderFicheFinder(); _ficheRenderBreadcrumb();
-}
-
-function renderFicheFinder(){
-  const el = document.getElementById('fiche-finder'); if(!el) return;
-  const d = ficheGetData();
-  const myFiches = M.get('my_fiches',[]);
-  let html = '';
-  if(ficheCurFolder){
-    html += '<button class="finder-back-btn" onclick="ficheGoBack()" style="margin-bottom:12px">‹ Retour</button>';
-  }
-  html += '<div class="finder-grid">';
-  if(!ficheCurFolder){
-    // Fiche Démo toujours en premier
-    html += `<div class="finder-item" onclick="finderItemClick(this,'demo','demo','','Démographie',()=>openDemoFiche())"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">🔴 Thème 4 — Démographie</div></div>`;
-    // Dossiers fixes + custom
-    d.folders.filter(f=>!f.parent).forEach(f=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'fiche-folder','${f.id}','','${f.name.replace(/'/g,"\\'")}',()=>ficheOpenFolder('${f.id}','${f.name.replace(/'/g,"\\'")}'))"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
-    });
-    // Fiches non organisées
-    const organised = new Set(Object.values(d.files).flat().filter(r=>typeof r.ficheIdx==='number').map(r=>r.ficheIdx));
-    myFiches.forEach((fi,idx)=>{
-      if(fi && !fi._demo && !organised.has(idx)){
-        const badge = fi.prio==='indispensable'?'🔴':fi.prio==='tres-frequent'?'🟠':'🟡';
-        html += `<div class="finder-item" onclick="finderItemClick(this,'fiche','${idx}','','${(fi.title||'').replace(/'/g,"\\'")}',()=>openFichePersoDetail(${idx}))"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${badge} ${fi.title}</div></div>`;
-      }
-    });
-  } else {
-    d.folders.filter(f=>f.parent===ficheCurFolder).forEach(f=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'fiche-folder','${f.id}','','${f.name.replace(/'/g,"\\'")}',()=>ficheOpenFolder('${f.id}','${f.name.replace(/'/g,"\\'")}'))"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
-    });
-    const fileRefs = d.files[ficheCurFolder]||[];
-    fileRefs.forEach(ref=>{
-      const fi = myFiches[ref.ficheIdx];
-      if(fi){
-        const badge = fi.prio==='indispensable'?'🔴':fi.prio==='tres-frequent'?'🟠':'🟡';
-        html += `<div class="finder-item" onclick="finderItemClick(this,'fiche','${ref.ficheIdx}','${ficheCurFolder}','${(fi.title||'').replace(/'/g,"\\'")}',()=>openFichePersoDetail(${ref.ficheIdx}))"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${badge} ${fi.title}</div></div>`;
-      }
-    });
-    if(!d.folders.some(f=>f.parent===ficheCurFolder) && !fileRefs.length){
-      html += '<div style="color:var(--txt3);font-size:13px;padding:20px;grid-column:1/-1">Dossier vide</div>';
-    }
-  }
-  html += '</div>';
-  if(!ficheCurFolder) html += '<div style="margin-top:12px"><button class="btn btn-g btn-sm" onclick="addFicheFolder()">📁 Nouveau dossier</button></div>';
-  el.innerHTML = html;
-}
-
-function ficheGoBack(){
-  if(!ficheCurFolderStack.length){ ficheGoRoot(); return; }
-  ficheCurFolderStack.pop();
-  const prev = ficheCurFolderStack[ficheCurFolderStack.length-1];
-  ficheCurFolder = prev ? prev.id : null;
-  if(!ficheCurFolder) ficheGoRoot(); else { _ficheRenderBreadcrumb(); renderFicheFinder(); }
-}
-
-function addFicheFolder(){
-  const name = prompt('Nom du dossier :'); if(!name?.trim()) return;
-  const d = ficheGetData();
-  d.folders.push({id:'ff_'+Date.now(), name:name.trim(), parent:ficheCurFolder||null});
-  ficheSaveData(d); renderFicheFinder(); showToast('📁 Dossier créé');
-}
 
 function pdfDropToFolder(e, targetFolderId){
   const pdfId = e.dataTransfer.getData('pdf-id');
@@ -3492,6 +3311,16 @@ function pdfDropToFolder(e, targetFolderId){
   showToast('✅ PDF déplacé');
 }
 
+function ficheDropToFolder(e, targetFolderId){
+  const ficheIdx=parseInt(e.dataTransfer.getData('fiche-idx'));
+  const srcFolder=e.dataTransfer.getData('fiche-src');
+  if(isNaN(ficheIdx)) return;
+  const d=ficheGetData();
+  if(srcFolder&&srcFolder!=='root') d.files[srcFolder]=(d.files[srcFolder]||[]).filter(r=>r.ficheIdx!==ficheIdx);
+  d.files[targetFolderId]=d.files[targetFolderId]||[];
+  if(!d.files[targetFolderId].some(r=>r.ficheIdx===ficheIdx)) d.files[targetFolderId].unshift({ficheIdx,id:'fi_'+Date.now()});
+  ficheSaveData(d);renderFicheFinder();showToast('✅ Fiche déplacée');
+}
 function initFiches(){ ficheGoRoot(); }
 
 // Override saveFicheEditor pour placer dans dossier
@@ -3850,5 +3679,5 @@ function dfFilter(n, btn){
 }
 
 </script>
-</body>
-</html>
+
+</body></html>
