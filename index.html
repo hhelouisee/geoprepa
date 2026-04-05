@@ -1,3 +1,16 @@
+<!-- CORBEILLE FIXE -->
+<div id="trash-zone"
+  ondragover="event.preventDefault();this.style.background='var(--red-l)';this.style.borderColor='var(--red)'"
+  ondragleave="this.style.background='';this.style.borderColor='var(--brd2)'"
+  ondrop="event.preventDefault();this.style.background='';this.style.borderColor='var(--brd2)';trashDrop(event)"
+  style="position:fixed;bottom:24px;right:24px;z-index:1000;
+         width:56px;height:56px;border-radius:50%;
+         background:var(--surf);border:2px dashed var(--brd2);
+         display:none;align-items:center;justify-content:center;
+         font-size:22px;cursor:pointer;transition:all .2s;
+         box-shadow:0 2px 12px rgba(0,0,0,.1)"
+  title="Glisse ici pour supprimer">🗑</div>
+
 <!DOCTYPE html>
 <html lang="fr" data-theme="light" data-font="geist">
 <head>
@@ -1660,6 +1673,8 @@ function go(id){
   document.getElementById('content').scrollTop=0;
   document.getElementById('sb').classList.remove('open');
   logSession('nav',info.l);
+  const trash = document.getElementById('trash-zone');
+  if(trash) trash.style.display = ['cours','fiches'].includes(id) ? 'flex' : 'none';
   const inits={
     dash:initDash,cours:initCours,fiches:initFiches,flash:initFlash,sim:initSim,mycours:initMyCours,
     frise:initFrise,training:initTraining,copies:initCopies,
@@ -3885,7 +3900,10 @@ function renderPDFFinder(){
       const fcount=(d.files[f.id]||[]).length;
       const scount=d.folders.filter(sf=>sf.parent===f.id).length;
       const info=[fcount?fcount+' PDF':'',scount?scount+' doss.':''].filter(Boolean).join(' · ');
-      html+=`<div class="finder-item" onclick="pdfOpenFolder('${f.id}','${f.name}')" oncontextmenu="pdfFolderCtx(event,'${f.id}','${f.name}')">
+      html+=`<div class="finder-item" onclick="pdfOpenFolder('${f.id}','${f.name}')"
+        draggable="true"
+        ondragstart="event.dataTransfer.setData('trash-type','pdf-folder');event.dataTransfer.setData('trash-id','${f.id}');event.dataTransfer.setData('trash-name','${f.name}');this.style.opacity='.4'"
+        ondragend="this.style.opacity='1'">
         <div class="finder-folder-icon">${folderSVG()}</div>
         <div class="finder-label">${f.name}</div>
       </div>`;
@@ -3898,7 +3916,10 @@ function renderPDFFinder(){
     // Inside folder — sub-folders first, then PDFs
     d.folders.filter(f=>f.parent===cur).forEach(f=>{
       const fcount=(d.files[f.id]||[]).length;
-      html+=`<div class="finder-item" onclick="pdfOpenFolder('${f.id}','${f.name}')" oncontextmenu="pdfFolderCtx(event,'${f.id}','${f.name}')">
+      html+=`<div class="finder-item" onclick="pdfOpenFolder('${f.id}','${f.name}')"
+        draggable="true"
+        ondragstart="event.dataTransfer.setData('trash-type','pdf-folder');event.dataTransfer.setData('trash-id','${f.id}');event.dataTransfer.setData('trash-name','${f.name}');this.style.opacity='.4'"
+        ondragend="this.style.opacity='1'">
         <div class="finder-folder-icon">${folderSVG()}</div>
         <div class="finder-label">${f.name}</div>
       </div>`;
@@ -3962,7 +3983,10 @@ function renderPDFFinder(){
 }
 
 function pdfFileItemHTML(p, folderId){
-  return `<div class="finder-item" onclick="pdfOpenFile('${folderId}','${p.id}')" oncontextmenu="pdfFileCtx(event,'${folderId}','${p.id}')">
+  return `<div class="finder-item" onclick="pdfOpenFile('${folderId}','${p.id}')"
+    draggable="true"
+    ondragstart="event.dataTransfer.setData('trash-type','pdf-file');event.dataTransfer.setData('trash-id','${p.id}');event.dataTransfer.setData('trash-folder','${folderId}');event.dataTransfer.setData('trash-name','${p.name}');this.style.opacity='.4'"
+    ondragend="this.style.opacity='1'">
     <div class="finder-file-icon">${fileSVG()}</div>
     <div class="finder-label">${p.name}</div>
   </div>`;
@@ -4157,7 +4181,10 @@ function renderFicheFinder(){
   if(!ficheCurFolder){
     // Root: top-level folders
     d.folders.filter(f=>!f.parent).forEach(f=>{
-      html+=`<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')" oncontextmenu="ficheFolderCtx(event,'${f.id}','${f.name}')">
+      html+=`<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')"
+        draggable="true"
+        ondragstart="event.dataTransfer.setData('trash-type','fiche-folder');event.dataTransfer.setData('trash-id','${f.id}');event.dataTransfer.setData('trash-name','${f.name}');this.style.opacity='.4'"
+        ondragend="this.style.opacity='1'">
         <div class="finder-folder-icon">${folderSVG()}</div>
         <div class="finder-label">${f.name}</div>
       </div>`;
@@ -4180,7 +4207,10 @@ function renderFicheFinder(){
     // Sub-folders first
     d.folders.filter(f=>f.parent===ficheCurFolder).forEach(f=>{
       const refs=(d.files[f.id]||[]).length;
-      html+=`<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')" oncontextmenu="ficheFolderCtx(event,'${f.id}','${f.name}')">
+      html+=`<div class="finder-item" onclick="ficheOpenFolder('${f.id}','${f.name}')"
+        draggable="true"
+        ondragstart="event.dataTransfer.setData('trash-type','fiche-folder');event.dataTransfer.setData('trash-id','${f.id}');event.dataTransfer.setData('trash-name','${f.name}');this.style.opacity='.4'"
+        ondragend="this.style.opacity='1'">
         <div class="finder-folder-icon">${folderSVG()}</div>
         <div class="finder-label">${f.name}</div>
       </div>`;
@@ -4218,7 +4248,10 @@ function openDemoFiche(){
 
 function ficheFileItem(fi, idx, folderId){
   const badge=fi.prio==='indispensable'?'🔴':fi.prio==='tres-frequent'?'🟠':'🟡';
-  return `<div class="finder-item" onclick="openFichePersoDetail(${idx})" oncontextmenu="ficheFileCtx(event,${idx},'${folderId||''}')">
+  return `<div class="finder-item" onclick="openFichePersoDetail(${idx})"
+    draggable="true"
+    ondragstart="event.dataTransfer.setData('trash-type','fiche');event.dataTransfer.setData('trash-id','${idx}');event.dataTransfer.setData('trash-folder','${folderId||''}');event.dataTransfer.setData('trash-name','${fi.title}');this.style.opacity='.4'"
+    ondragend="this.style.opacity='1'">
     <div class="finder-file-icon">${fileSVG()}</div>
     <div class="finder-label">${badge} ${fi.title}</div>
   </div>`;
