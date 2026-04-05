@@ -436,6 +436,8 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   border-bottom: 1px solid #ddd;
   border-radius: 0 12px 0 4px;
 }
+.finder-item-drag-over { background: rgba(245,206,206,.6) !important; outline: 2px dashed #e8b4b4; }
+.finder-item.dragging { opacity: .4; }
 .finder-label {
   font-size: 11px;
   color: var(--txt);
@@ -522,7 +524,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     <div class="ng">
       <div class="ng-hd" onclick="togNG('prog')"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog">▾</span></div>
       <div class="ng-items" id="ni-prog" style="max-height:500px">
-        <div class="ni" id="ni-cours-p" onclick="go('cours')"><span class="ni-ic">📖</span><span class="ni-lb">Cours complet (30)</span></div>
+        <div class="ni" id="ni-cours-p" onclick="go('cours')"><span class="ni-ic">📖</span><span class="ni-lb">Cours complet</span></div>
         <div class="ni" id="ni-fiches" onclick="go('fiches')"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
         <div class="ni" id="ni-flash" onclick="go('flash')"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
         <div class="ni" id="ni-frise" onclick="go('frise')"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
@@ -3317,17 +3319,17 @@ function renderPDFFinder(){
   html += '<div class="finder-grid">';
   if(!pdfCurFolder){
     (d.folders||[]).filter(f=>!f.parent).forEach(f=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-folder','${f.id}','','${f.name.replace(/'/g,"\\'")}',()=>pdfOpenFolder('${f.id}','${f.name.replace(/'/g,"\\'")}'))"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
+      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-folder','${f.id}','','${f.name.replace(/'/g,"\\'")}',()=>pdfOpenFolder('${f.id}','${f.name.replace(/'/g,"\\'")}'))" ondragover="event.preventDefault();this.classList.add('finder-item-drag-over')" ondragleave="this.classList.remove('finder-item-drag-over')" ondrop="event.preventDefault();this.classList.remove('finder-item-drag-over');pdfDropToFolder(event,'${f.id}')"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
     });
     (d.files['root']||[]).forEach(p=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-file','${p.id}','root','${p.name.replace(/'/g,"\\'")}',()=>pdfOpenFile('root','${p.id}'))"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${p.name}</div></div>`;
+      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-file','${p.id}','root','${p.name.replace(/'/g,"\\'")}',()=>pdfOpenFile('root','${p.id}'))" draggable="true" ondragstart="event.dataTransfer.setData('pdf-id','${p.id}');event.dataTransfer.setData('pdf-src','root');this.style.opacity='.4'" ondragend="this.style.opacity='1'"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${p.name}</div></div>`;
     });
   } else {
     (d.folders||[]).filter(f=>f.parent===pdfCurFolder).forEach(f=>{
       html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-folder','${f.id}','','${f.name.replace(/'/g,"\\'")}',()=>pdfOpenFolder('${f.id}','${f.name.replace(/'/g,"\\'")}'))"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
     });
     (d.files[pdfCurFolder]||[]).forEach(p=>{
-      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-file','${p.id}','${pdfCurFolder}','${p.name.replace(/'/g,"\\'")}',()=>pdfOpenFile('${pdfCurFolder}','${p.id}'))"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${p.name}</div></div>`;
+      html += `<div class="finder-item" onclick="finderItemClick(this,'pdf-file','${p.id}','${pdfCurFolder}','${p.name.replace(/'/g,"\\'")}',()=>pdfOpenFile('${pdfCurFolder}','${p.id}'))" draggable="true" ondragstart="event.dataTransfer.setData('pdf-id','${p.id}');event.dataTransfer.setData('pdf-src','${pdfCurFolder}');this.style.opacity='.4'" ondragend="this.style.opacity='1'"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">${p.name}</div></div>`;
     });
     if(!(d.folders||[]).some(f=>f.parent===pdfCurFolder) && !(d.files[pdfCurFolder]||[]).length){
       html += '<div style="color:var(--txt3);font-size:13px;padding:20px;grid-column:1/-1">Dossier vide</div>';
@@ -3498,6 +3500,21 @@ function addFicheFolder(){
   const d = ficheGetData();
   d.folders.push({id:'ff_'+Date.now(), name:name.trim(), parent:ficheCurFolder||null});
   ficheSaveData(d); renderFicheFinder(); showToast('📁 Dossier créé');
+}
+
+function pdfDropToFolder(e, targetFolderId){
+  const pdfId = e.dataTransfer.getData('pdf-id');
+  const srcFolder = e.dataTransfer.getData('pdf-src');
+  if(!pdfId || srcFolder === targetFolderId) return;
+  const d = pdfGetData();
+  const src = d.files[srcFolder]||[];
+  const p = src.find(x=>x.id===pdfId);
+  if(!p) return;
+  d.files[srcFolder] = src.filter(x=>x.id!==pdfId);
+  d.files[targetFolderId] = d.files[targetFolderId]||[];
+  d.files[targetFolderId].unshift(p);
+  pdfSaveData(d); renderPDFFinder();
+  showToast('✅ PDF déplacé');
 }
 
 function initFiches(){ ficheGoRoot(); }
