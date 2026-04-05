@@ -1338,6 +1338,29 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 // ══════════════════════════════════════════════════════
 // SVG HELPERS — FINDER
 // ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// LONG PRESS — context menu sur mobile/Mac
+// ══════════════════════════════════════════════════════
+(function(){
+  let _lpt = null, _lpe = null;
+  document.addEventListener('touchstart', function(e){
+    const item = e.target.closest('.finder-item');
+    if(!item) return;
+    _lpe = e;
+    _lpt = setTimeout(function(){
+      _lpt = null;
+      const cm = item.getAttribute('data-ctx');
+      if(cm) { e.preventDefault(); eval(cm + '(_lpe)'); }
+      else {
+        const oc = item.getAttribute('oncontextmenu');
+        if(oc) { e.preventDefault(); eval(oc); }
+      }
+    }, 500);
+  }, {passive: true});
+  document.addEventListener('touchend', function(){ if(_lpt){ clearTimeout(_lpt); _lpt=null; }});
+  document.addEventListener('touchmove', function(){ if(_lpt){ clearTimeout(_lpt); _lpt=null; }});
+})();
+
 function folderSVG(){
   return '<div class="finder-folder"><div class="finder-folder-tab"></div><div class="finder-folder-body"></div><div class="finder-folder-shine"></div></div>';
 }
