@@ -3701,36 +3701,9 @@ const DEMO_FICHE_BODY = `
 
 `;
 
-(function injectDemoFlashcards(){
-  const key = 'geoprepa_demo_flash_injected_v2';
-  if(localStorage.getItem(key)) return;
-  // Clear all existing my_flashcards and replace with Démographie cards
-  const cards = FLASHCARDS.map(f => ({...f, _demo: true}));
-  localStorage.setItem('geo_v5_my_flashcards', JSON.stringify(cards));
-  localStorage.setItem(key, '1');
-})();
+// Demo flashcards handled natively
 
-(function injectDemoFiche(){
-  // Clear old keys to force re-injection
-  localStorage.removeItem('geoprepa_demo_fiche_injected_v1');
-  localStorage.removeItem('geoprepa_demo_fiche_injected_v2');
-  const key = 'geoprepa_demo_fiche_injected_v3';
-  if(localStorage.getItem(key)) return; // déjà injecté — on ne touche pas
-  // Always inject fresh — remove any existing demo fiche first
-  let fiches = JSON.parse(localStorage.getItem('geo_v5_my_fiches') || '[]');
-  fiches = fiches.filter(f => !f._demo);
-  fiches.unshift({
-    title: DEMO_FICHE_TITLE,
-    body: DEMO_FICHE_BODY,
-    prio: 'indispensable',
-    date: 'Sept. 2025 — GéoPrepa',
-    _custom: true,
-    _demo: true
-  });
-  localStorage.setItem('geo_v5_my_fiches', JSON.stringify(fiches));
-  localStorage.setItem(key, '1');
-  console.log('[GéoPrepa] Fiche Démographie injectée. Total fiches:', fiches.length);
-})();
+// Demo fiche handled natively
 
 function renameCopy(i){
   i=parseInt(i);
@@ -4174,13 +4147,14 @@ function renderFicheFinder(){
         .filter(r=>typeof r.ficheIdx==='number')
         .map(r=>r.ficheIdx)
     );
+    // Toujours afficher la fiche Démographie en premier
+    html += `<div class="finder-item" onclick="openDemoFiche()" style="position:relative">
+      <div class="finder-file-icon">${fileSVG()}</div>
+      <div class="finder-label">🔴 Thème 4 — Démographie</div>
+    </div>`;
     myFiches.forEach((fi,idx)=>{
-      if(fi && !organised.has(idx)) html+=ficheFileItem(fi,idx,null);
+      if(fi && !fi._demo && !organised.has(idx)) html+=ficheFileItem(fi,idx,null);
     });
-    // Si aucune fiche et aucun dossier, afficher un message
-    if(!myFiches.length && !d.folders.filter(f=>!f.parent).length){
-      html+='<div style="color:var(--txt3);font-size:13px;padding:20px;grid-column:1/-1">Aucune fiche — clique sur ✏️ Nouvelle fiche pour commencer</div>';
-    }
   } else {
     // Sub-folders first
     d.folders.filter(f=>f.parent===ficheCurFolder).forEach(f=>{
@@ -4202,6 +4176,23 @@ function renderFicheFinder(){
   }
   html+='</div>';
   el.innerHTML=html;
+}
+
+function openDemoFiche(){
+  let ov=document.getElementById('fiche-perso-overlay');
+  if(!ov){
+    ov=document.createElement('div');
+    ov.id='fiche-perso-overlay';
+    ov.style.cssText='position:fixed;inset:0;z-index:2000;background:var(--surf);overflow-y:auto;display:none';
+    document.body.appendChild(ov);
+  }
+  ov.innerHTML=`
+    <div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:6px 16px;display:flex;align-items:center;gap:8px;z-index:10;min-height:40px">
+      <button onclick="document.getElementById('fiche-perso-overlay').style.display='none'" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:12px;font-family:var(--ff);padding:4px 8px;border-radius:5px">← Retour</button>
+      <div style="flex:1;font-size:13px;font-weight:700;color:var(--txt)">Thème 4 — Démographie</div>
+    </div>
+    <div style="max-width:860px;margin:0 auto;padding:24px 20px 60px">${DEMO_FICHE_BODY}</div>`;
+  ov.style.display='block';
 }
 
 function ficheFileItem(fi, idx, folderId){
