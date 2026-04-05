@@ -528,7 +528,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
         <div class="ni" id="ni-fiches" onclick="go('fiches')"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
         <div class="ni" id="ni-flash" onclick="go('flash')"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
         <div class="ni" id="ni-frise" onclick="go('frise')"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
-        <div class="ni" id="ni-notion" onclick="go('notion')"><span class="ni-ic">📓</span><span class="ni-lb">Notes Notion</span></div>
+        
         <div class="ni" id="ni-search" onclick="go('search')"><span class="ni-ic">🔍</span><span class="ni-lb">Recherche</span></div>
       </div><div class="nsep"></div>
     </div>
@@ -682,20 +682,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
     </div>
   </div>
 
-  <!-- ════ COURS ════ -->
-  <div class="pg" id="pg-cours">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-      <div class="page-t" style="margin-bottom:0">Cours complet</div>
-      <button class="btn btn-p btn-sm" onclick="document.getElementById('pdf-upload-inp').click()">📎 Ajouter un PDF</button>
-    </div>
-    <input type="file" id="pdf-upload-inp" accept=".pdf" style="display:none" multiple onchange="uploadPDFs(this.files)">
-    <div id="pdf-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)">
-      <span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="pdfGoRoot()">📂 Cours</span>
-    </div>
-    <div id="pdf-finder" style="min-height:200px"></div>
-  </div>
-
-<!-- ════ FICHES ════ -->
+  <!-- ════ FICHES ════ -->
   <div class="pg" id="pg-fiches">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div class="page-t" style="margin-bottom:0">Fiches synthèse</div>
@@ -777,18 +764,6 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
         <button class="btn btn-p" onclick="addFrise()" style="margin-top:14px">Ajouter</button>
       </div>
     </div>
-  </div>
-
-  <!-- ════ NOTION ════ -->
-  <div class="pg" id="pg-notion">
-    <div class="page-t">Notes Notion</div>
-    <div class="page-s">Contenu synchronisé depuis ton espace Notion · Géopolitique</div>
-    <div style="display:flex;gap:7px;margin-bottom:14px;align-items:center;flex-wrap:wrap">
-      <button class="btn btn-p" onclick="loadNotion()">🔄 Synchroniser</button>
-      <button class="btn btn-g" onclick="pasteNotion()">📋 Coller du contenu Notion</button>
-      <span style="font-size:11px;color:var(--txt3)" id="notion-status">Non synchronisé</span>
-    </div>
-    <div id="notion-content" class="notion-content"></div>
   </div>
 
   <!-- ════ SEARCH ════ -->
