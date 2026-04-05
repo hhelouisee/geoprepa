@@ -696,25 +696,25 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <button class="btn btn-g btn-xs" onclick="addFlashFolder()">+ Dossier</button>
     </div>
     <div style="display:flex;gap:7px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
-      <select id="fl-chap" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="all">Tous les chapitres</option></select>
+      <select id="fl-chap" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)"><option value="all">Tous les chapitres</option><option value="Démographie">Démographie</option></select>
       <select id="fl-prio" onchange="loadFlash()" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;background:var(--surf);color:var(--txt);outline:none;font-family:var(--ff)">
         <option value="all">Toutes priorités</option><option value="indispensable">🔴 Indispensables</option><option value="tres-frequent">🟠 Très fréquents</option>
       </select>
       <input type="text" id="fl-theme" placeholder="Thème…" style="padding:5px 7px;border:1px solid var(--brd);border-radius:var(--r);font-size:12px;color:var(--txt);background:var(--surf);outline:none;width:140px;font-family:var(--ff)" onkeyup="loadFlash()">
       <button class="btn btn-g btn-sm" onclick="loadFlash()">🔀 Mélanger</button>
-      <span style="font-size:11px;color:var(--txt3)" id="fl-count"></span>
+      <span style="font-size:11px;color:var(--txt3)" id="fl-count">62 cartes</span>
     </div>
     <div class="flash-wrap">
       <div class="flash-c" onclick="flipCard()">
         <div class="flash-inner" id="fl-inner">
           <div class="flash-f">
             <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);margin-bottom:11px">❓ Question</div>
-            <div class="flash-q" id="fl-q">Chargement…</div>
-            <div class="flash-hint" id="fl-hint"></div>
+            <div class="flash-q" id="fl-q">Thèse de Sylvie Brunel dans L'Afrique est-elle si bien partie ? (2014)</div>
+            <div class="flash-hint" id="fl-hint">Démographie · 🟠 Très fréquent</div>
           </div>
           <div class="flash-b">
             <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--grn);margin-bottom:11px">✅ Réponse</div>
-            <div class="flash-a" id="fl-a">—</div>
+            <div class="flash-a" id="fl-a">Afrique : continent riche peuplé de pauvres. Youth bulge + inégalités + Internet = frustrations → djihadisme sahélien. 'Une guerre qui ne dit pas son nom : celle qui mobilise des jeunes combattants contre les nouvelles bourgeoisies émergentes.'</div>
           </div>
         </div>
       </div>
@@ -724,7 +724,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
         <button class="btn btn-sm" style="background:var(--grn-l);color:var(--grn);border:1px solid var(--grn-m)" onclick="markCard(true)">✓ Connu</button>
         <button class="btn btn-g" onclick="nextCard()">Suiv. →</button>
       </div>
-      <div style="font-size:11px;color:var(--txt3);text-align:center" id="fl-prog">0 / 0</div>
+      <div style="font-size:11px;color:var(--txt3);text-align:center" id="fl-prog">1 / 62</div>
     </div>
   </div>
 
@@ -742,7 +742,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
             <button class="btn btn-g btn-sm" onclick="filterFrise(&#39;a&#39;)">📌 Autres</button>
     </div>
     <div class="card" style="margin-bottom:11px">
-      <div class="frise-wrap"><div class="frise-line"></div><div id="frise-items"></div></div>
+      <div class="frise-wrap"><div class="frise-line"></div><div id="frise-items"><div style="color:var(--txt3);text-align:center;padding:14px;font-size:12px">Aucune entrée pour ce filtre</div></div></div>
     </div>
     <!-- Add form -->
     <div class="card">
@@ -3736,7 +3736,7 @@ function dfFilter(n, btn){
 
 </script>
 
-<div id="fiche-perso-overlay" style="position: fixed; inset: 0px; z-index: 2000; background: var(--surf); overflow-y: auto; display: none;"><div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:6px 16px;display:flex;align-items:center;gap:8px;z-index:10;min-height:40px"><button onclick="document.getElementById(&#39;fiche-perso-overlay&#39;).style.display=&#39;none&#39;" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:12px;font-family:var(--ff);padding:4px 8px;border-radius:5px">← Retour</button><div style="flex:1;font-size:13px;font-weight:700;color:var(--txt)">Thème 4 — Démographie</div></div><div style="max-width:860px;margin:0 auto;padding:24px 20px 60px">
+<div id="fiche-perso-overlay" style="position: fixed; inset: 0px; z-index: 2000; background: var(--surf); overflow-y: auto; display: block;"><div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:6px 16px;display:flex;align-items:center;gap:8px;z-index:10;min-height:40px"><button onclick="document.getElementById(&#39;fiche-perso-overlay&#39;).style.display=&#39;none&#39;" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:12px;font-family:var(--ff);padding:4px 8px;border-radius:5px">← Retour</button><div style="flex:1;font-size:13px;font-weight:700;color:var(--txt)">Thème 4 — Démographie</div></div><div style="max-width:860px;margin:0 auto;padding:24px 20px 60px">
 <style>
 .df-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--brd);margin-bottom:16px;gap:0;scrollbar-width:none}
 .df-tabs::-webkit-scrollbar{display:none}
