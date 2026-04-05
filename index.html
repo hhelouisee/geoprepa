@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///Users/huyuan/Downloads/index_2.html -->
+<!-- saved from url=(0043)file:///Users/huyuan/Downloads/index_1.html -->
 <html lang="fr" data-theme="light" data-font="dm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -513,14 +513,14 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
   <nav class="nav">
     <div style="padding:2px 6px">
-      <div class="ni on" id="ni-dash" onclick="go(&#39;dash&#39;)"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
+      <div class="ni" id="ni-dash" onclick="go(&#39;dash&#39;)"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG(&#39;prog&#39;)"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog">▾</span></div>
+      <div class="ng-hd" onclick="togNG(&#39;prog&#39;)"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog" style="transform: rotate(0deg);">▾</span></div>
       <div class="ng-items" id="ni-prog" style="max-height:500px">
         
-        <div class="ni" id="ni-fiches" onclick="go(&#39;fiches&#39;)"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
+        <div class="ni on" id="ni-fiches" onclick="go(&#39;fiches&#39;)"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
         <div class="ni" id="ni-flash" onclick="go(&#39;flash&#39;)"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
         <div class="ni" id="ni-frise" onclick="go(&#39;frise&#39;)"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
         
@@ -626,9 +626,9 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="7.25" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="11.5" width="14" height="1.5" rx=".75" fill="currentColor"></rect></svg>
     </button>
     <div class="bc">
-      <span class="bc-g" id="bc-g">Accueil</span>
+      <span class="bc-g" id="bc-g">Programme</span>
       <span class="bc-s">›</span>
-      <span class="bc-p" id="bc-p">Tableau de bord</span>
+      <span class="bc-p" id="bc-p">Fiches synthèse</span>
     </div>
     <div class="tb-right">
       <div style="font-size:11px;color:var(--txt3);display:flex;align-items:center;gap:5px">
@@ -646,7 +646,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   <div class="content" id="content">
 
   <!-- ════ DASHBOARD ════ -->
-  <div class="pg on" id="pg-dash">
+  <div class="pg" id="pg-dash">
     <div style="background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:16px 18px;margin-bottom:16px">
       <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:3px">GéoPrepa BCE</div>
       <div style="font-family:var(--ffd);font-size:21px;font-weight:700;margin-bottom:3px;color:var(--txt)">Tableau de bord</div>
@@ -678,14 +678,12 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 
   <!-- ════ FICHES ════ -->
-  <div class="pg" id="pg-fiches">
+  <div class="pg on" id="pg-fiches">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div class="page-t" style="margin-bottom:0">Fiches synthèse</div>
     </div>
-    <div id="fiche-finder-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)">
-      <span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>
-    </div>
-    <div id="fiche-finder" style="min-height:300px"></div>
+    <div id="fiche-finder-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)"><span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span></div>
+    <div id="fiche-finder" style="min-height:300px"><div style="margin-bottom:12px"><button class="btn btn-g btn-sm" onclick="addFicheFolder()">📁 Nouveau dossier</button></div><div class="finder-grid"><div class="finder-item" onclick="finderItemClick(this,&#39;demo&#39;,&#39;demo&#39;,&#39;&#39;,&#39;Démographie&#39;,()=&gt;openDemoFiche())"><div class="finder-file-icon"><div class="finder-file-icon"></div></div><div class="finder-label">🔴 Thème 4 — Démographie</div></div><div class="finder-item" onclick="finderItemClick(this,&#39;fiche-folder&#39;,&#39;ff_bizuth&#39;,&#39;&#39;,&#39;Bizuth&#39;,()=&gt;ficheOpenFolder(&#39;ff_bizuth&#39;,&#39;Bizuth&#39;))" ondragover="event.preventDefault();this.classList.add(&#39;finder-item-drag-over&#39;)" ondragleave="this.classList.remove(&#39;finder-item-drag-over&#39;)" ondrop="event.preventDefault();this.classList.remove(&#39;finder-item-drag-over&#39;);ficheDropToFolder(event,&#39;ff_bizuth&#39;)"><div class="finder-folder-icon"><div class="finder-folder"><div class="finder-folder-tab"></div><div class="finder-folder-body"></div><div class="finder-folder-shine"></div></div></div><div class="finder-label">Bizuth</div></div><div class="finder-item" onclick="finderItemClick(this,&#39;fiche-folder&#39;,&#39;ff_carré&#39;,&#39;&#39;,&#39;Carré&#39;,()=&gt;ficheOpenFolder(&#39;ff_carré&#39;,&#39;Carré&#39;))" ondragover="event.preventDefault();this.classList.add(&#39;finder-item-drag-over&#39;)" ondragleave="this.classList.remove(&#39;finder-item-drag-over&#39;)" ondrop="event.preventDefault();this.classList.remove(&#39;finder-item-drag-over&#39;);ficheDropToFolder(event,&#39;ff_carré&#39;)"><div class="finder-folder-icon"><div class="finder-folder"><div class="finder-folder-tab"></div><div class="finder-folder-body"></div><div class="finder-folder-shine"></div></div></div><div class="finder-label">Carré</div></div></div></div>
   </div>
 
 <!-- ════ FLASHCARDS ════ -->
@@ -1145,6 +1143,9 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
 <!-- DATA -->
 <script>
+const FICHE_FIXED_FOLDERS = ['Bizuth'];
+let ficheCurFolder = null;
+let ficheCurFolderStack = [];
 const CHAPTERS=[
   {id:0,short:"Chap. 1",title:"Géopolitique et relations internationales : une introduction",priority:"indispensable",category:"géo"},
   {id:1,short:"Chap. 2",title:"Tableaux géopolitiques du monde (1913, 1939, 1945)",priority:"indispensable",category:"hist"},
@@ -3190,9 +3191,9 @@ function renameCopy(i){
 
 // ══ FINDER SYSTEM — NOUVELLES FONCTIONS ══════════════
 
-const FICHE_FIXED_FOLDERS = ['Bizuth'];
+
 let pdfCurFolder = null, pdfFolderStack = [];
-let ficheCurFolder = null, ficheCurFolderStack = [];
+
 let _sel = null, _sm = null;
 
 function folderSVG(){
