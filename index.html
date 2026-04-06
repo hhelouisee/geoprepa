@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0041)file:///Users/huyuan/Downloads/index.html -->
+<!-- saved from url=(0043)file:///Users/huyuan/Downloads/index_6.html -->
 <html lang="fr" data-theme="light" data-font="dm"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -505,7 +505,7 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <div><div class="logo-txt">GéoPrepa BCE</div><div style="font-size:9px;color:var(--txt4)">Géopolitique · ECG</div></div>
     </div>
     <div class="sb-cd" onclick="openCd()">
-      <div class="cd-n" id="cd-n">9</div>
+      <div class="cd-n" id="cd-n">8</div>
       <div style="flex:1"><div class="cd-lbl">jours BCE</div><div class="cd-sub" id="cd-s">14 avril</div></div>
       <span style="font-size:10px;color:var(--txt4)">✏️</span>
     </div>
@@ -513,14 +513,14 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
 
   <nav class="nav">
     <div style="padding:2px 6px">
-      <div class="ni on" id="ni-dash" onclick="go(&#39;dash&#39;)"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
+      <div class="ni" id="ni-dash" onclick="go(&#39;dash&#39;)"><span class="ni-ic">⊞</span><span class="ni-lb">Tableau de bord</span></div>
     </div>
 
     <div class="ng">
-      <div class="ng-hd" onclick="togNG(&#39;prog&#39;)"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog">▾</span></div>
+      <div class="ng-hd" onclick="togNG(&#39;prog&#39;)"><span class="ng-lbl">Programme</span><span class="ng-arr" id="na-prog" style="transform: rotate(0deg);">▾</span></div>
       <div class="ng-items" id="ni-prog" style="max-height:500px">
         
-        <div class="ni" id="ni-fiches" onclick="go(&#39;fiches&#39;)"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
+        <div class="ni on" id="ni-fiches" onclick="go(&#39;fiches&#39;)"><span class="ni-ic">📋</span><span class="ni-lb">Fiches synthèse</span></div>
         <div class="ni" id="ni-flash" onclick="go(&#39;flash&#39;)"><span class="ni-ic">🃏</span><span class="ni-lb">Flashcards</span></div>
         <div class="ni" id="ni-frise" onclick="go(&#39;frise&#39;)"><span class="ni-ic">📅</span><span class="ni-lb">Frise chronologique</span></div>
         
@@ -626,9 +626,9 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="7.25" width="14" height="1.5" rx=".75" fill="currentColor"></rect><rect x="1" y="11.5" width="14" height="1.5" rx=".75" fill="currentColor"></rect></svg>
     </button>
     <div class="bc">
-      <span class="bc-g" id="bc-g">Accueil</span>
+      <span class="bc-g" id="bc-g">Programme</span>
       <span class="bc-s">›</span>
-      <span class="bc-p" id="bc-p">Tableau de bord</span>
+      <span class="bc-p" id="bc-p">Fiches synthèse</span>
     </div>
     <div class="tb-right">
       <div style="font-size:11px;color:var(--txt3);display:flex;align-items:center;gap:5px">
@@ -646,11 +646,11 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   <div class="content" id="content">
 
   <!-- ════ DASHBOARD ════ -->
-  <div class="pg on" id="pg-dash">
+  <div class="pg" id="pg-dash">
     <div style="background:var(--surf);border:1px solid var(--brd);border-radius:var(--rl);padding:16px 18px;margin-bottom:16px">
       <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:3px">GéoPrepa BCE</div>
       <div style="font-family:var(--ffd);font-size:21px;font-weight:700;margin-bottom:3px;color:var(--txt)">Tableau de bord</div>
-      <div style="font-size:12px;color:var(--txt3)" id="dash-sub">9 jours avant le concours</div>
+      <div style="font-size:12px;color:var(--txt3)" id="dash-sub">8 jours avant le concours</div>
     </div>
     <div class="stat-row">
       <div class="sc"><div class="sc-stripe" style="background:var(--acc)"></div><div class="sl">Chapitres vus</div><div class="sv" style="color:var(--acc)" id="st-chap">11</div><div class="ss">sur 30</div></div>
@@ -678,14 +678,12 @@ hr{border:none;border-top:1px solid var(--brd);margin:11px 0}
   </div>
 
   <!-- ════ FICHES ════ -->
-  <div class="pg" id="pg-fiches">
+  <div class="pg on" id="pg-fiches">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div class="page-t" style="margin-bottom:0">Fiches synthèse</div>
     </div>
-    <div id="fiche-finder-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)">
-      <span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span>
-    </div>
-    <div id="fiche-finder" style="min-height:300px"></div>
+    <div id="fiche-finder-breadcrumb" style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:12px;color:var(--txt3)"><span style="cursor:pointer;color:var(--acc);font-weight:600" onclick="ficheGoRoot()">📂 Fiches</span><span style="color:var(--txt3)"> › </span><span style="font-weight:600;color:var(--txt)">Bizuth</span></div>
+    <div id="fiche-finder" style="min-height:300px"><div style="margin-bottom:12px;display:flex;gap:8px"><button class="finder-back-btn" onclick="ficheGoBack()">‹ Retour</button><button class="btn btn-g btn-sm" onclick="ficheCreateSubFolder()">📁 Sous-dossier</button></div><div class="finder-grid"><div class="finder-item" onclick="finderItemClick(this,&#39;demo&#39;,&#39;demo&#39;,&#39;&#39;,&#39;Démographie&#39;,()=&gt;openDemoFiche())"><div class="finder-file-icon"><div class="finder-file-icon"></div></div><div class="finder-label">🔴 Thème 4 — Démographie</div></div></div></div>
   </div>
 
 <!-- ════ FLASHCARDS ════ -->
@@ -1208,6 +1206,7 @@ const DEMO_FICHE_BODY = `
 
 <div class="df-tabs">
   <button class="df-tab on" onclick="dfTab(this,'df-accroche')">📌 Accroche</button>
+  <button class="df-tab" onclick="dfTab(this,'df-definitions')">📖 Définitions</button>
   <button class="df-tab" onclick="dfTab(this,'df-donnees')">📊 Données</button>
   <button class="df-tab" onclick="dfTab(this,'df-foyers')">🗺 Foyers</button>
   <button class="df-tab" onclick="dfTab(this,'df-dynamiques')">⚙️ Dynamiques</button>
@@ -1219,6 +1218,39 @@ const DEMO_FICHE_BODY = `
   <button class="df-tab" onclick="dfTab(this,'df-exemples')">🔍 Exemples</button>
   <button class="df-tab" onclick="dfTab(this,'df-sujets')">✍️ Sujets</button>
   <button class="df-tab" onclick="dfTab(this,'df-concepts')">🧠 Concepts</button>
+</div>
+
+
+<!-- DÉFINITIONS -->
+<div id="df-definitions" class="df-panel" style="display:none">
+<div data-n="1" style="margin-bottom:8px">
+<div class="df-acc-hd op1" onclick="dfAcc(this)"><span>🔴 Indispensable</span><span>+</span></div>
+<div class="df-acc-bd op1" style="display:none">
+<p style="margin:8px 0"><strong>Transition démographique</strong> — Passage d'un régime de forte natalité/forte mortalité à un régime de faible natalité/faible mortalité. 4 phases. Terminée partout sauf en Afrique.</p>
+<p style="margin:8px 0"><strong>Taux d'accroissement naturel</strong> — Écart entre natalité et mortalité. Moteur principal de la croissance démographique.</p>
+<p style="margin:8px 0"><strong>Taux de fécondité</strong> — Nombre moyen d'enfants par femme. Seuil renouvellement = 2,1. Niger 6,67 ; Monde 2,3 ; France 1,79 ; Corée du Sud 0,72.</p>
+<p style="margin:8px 0"><strong>Dividende démographique</strong> — Période où le nombre d'actifs croît par rapport aux retraités → fenêtre d'opportunité économique. Rôle central dans l'essor chinois (1970-2010).</p>
+<p style="margin:8px 0"><strong>Youth Bulge</strong> — Gonflement de la population jeune (10-24 ans = 25% pop mondiale). Source d'instabilité si les emplois manquent (cf. Printemps Arabes). Heinsohn, Brunel.</p>
+<p style="margin:8px 0"><strong>(Néo-)Malthusianisme</strong> — Malthus : croissance démographique dépasse croissance agricole. Les néo-malthusianistes étendent au triangle d'incompatibilité démographie/niveau de vie/environnement (De Blasi, 2019).</p>
+<p style="margin:8px 0"><strong>Pyramide des âges</strong> — Représentation graphique de la structure par âge et sexe. Révèle les dynamiques démographiques.</p>
+</div>
+</div>
+<div data-n="2" style="margin-bottom:8px">
+<div class="df-acc-hd op2" onclick="dfAcc(this)"><span>🟠 Fait gagner des points</span><span>+</span></div>
+<div class="df-acc-bd op2" style="display:none">
+<p style="margin:8px 0"><strong>Tournant de Lewis</strong> — Point où la main d'œuvre surplus se tarit → hausse des coûts salariaux, fin du dividende. Chine : atteint vers 2010.</p>
+<p style="margin:8px 0"><strong>Silver Economy</strong> — Économie liée au vieillissement. Marchés : autonomie, maisons de retraite, tourisme senior. France : 130Md€ en 2030.</p>
+<p style="margin:8px 0"><strong>P(eople) Bomb</strong> — Paul R. Ehrlich (1968). Explosion démographique = menace sur les ressources et la stabilité politique.</p>
+<p style="margin:8px 0"><strong>Explosion démographique</strong> — Croissance très rapide : 2,5Md en 1950 → 8,2Md aujourd'hui. Alimentée par la baisse de la mortalité sans baisse immédiate de la natalité.</p>
+</div>
+</div>
+<div data-n="3" style="margin-bottom:8px">
+<div class="df-acc-hd op3" onclick="dfAcc(this)"><span>🔵 Différenciant</span><span>+</span></div>
+<div class="df-acc-bd op3" style="display:none">
+<p style="margin:8px 0"><strong>Effet Boserup</strong> — Contre-thèse à Malthus : la pression démographique stimule l'innovation agricole. La population est un moteur de progrès.</p>
+<p style="margin:8px 0"><strong>Surpopulation</strong> — Concept relatif : population dépasse la capacité de charge d'un territoire. Dépend du niveau de consommation.</p>
+</div>
+</div>
 </div>
 
 <!-- ACCROCHE -->
@@ -1420,7 +1452,48 @@ const DEMO_FICHE_BODY = `
 </div>
 
 
-`;
+<p style="margin:8px 0 4px 0"><strong>Transition démographique</strong> — Passage d'un régime de forte natalité/forte mortalité à un régime de faible natalité/faible mortalité. Se déroule en 4 phases. Terminée dans la plupart des pays sauf en Afrique.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Taux d'accroissement naturel</strong> — Écart entre le taux de natalité et le taux de mortalité. Moteur principal de la croissance démographique avec l'allongement de l'espérance de vie.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Taux de fécondité</strong> — Nombre moyen d'enfants par femme. Seuil de renouvellement = 2,1. Chiffres clés : Niger 6,67 ; Monde 2,3 ; France 1,79 ; Corée du Sud 0,72.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Dividende démographique</strong> — Période où la pyramide des âges s'élargit à la base, le nombre d'actifs croît par rapport aux retraités → fenêtre d'opportunité économique (main d'œuvre abondante, salaires compétitifs, épargne élevée). A joué un rôle central dans l'essor chinois (1970-2010).</p>
+
+<p style="margin:8px 0 4px 0"><strong>Youth Bulge</strong> — Gonflement de la population jeune (10-24 ans = 25% pop mondiale ; en 2050, 2/3 des Africains auront -30 ans). Source d'instabilité politique si les emplois manquent (cf. Printemps Arabes). Concept de G. Heinsohn, S. Brunel.</p>
+
+<p style="margin:8px 0 4px 0"><strong>(Néo-)Malthusianisme</strong> — Malthus : la croissance démographique dépasse la croissance agricole → préconise le contrôle des naissances. Les néo-malthusianistes étendent le raisonnement aux ressources naturelles (eau, énergie, alimentation). Triangle d'incompatibilité de De Blasi : démographie + niveau de vie + environnement.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Pyramide des âges</strong> — Représentation graphique de la structure par âge et sexe d'une population. Révèle les dynamiques démographiques (explosive, vieillissante, régressive…).</p>
+
+</div>
+
+<div style="margin-bottom:10px;padding:10px 12px;background:var(--surf2);border-radius:8px;border-left:3px solid var(--org)">
+<div style="font-weight:700;font-size:12px;color:var(--org);margin-bottom:4px">🟠 FAIT GAGNER DES POINTS</div>
+
+<p style="margin:8px 0 4px 0"><strong>Tournant de Lewis</strong> — Point où la main d'œuvre agricole surplus se tarit dans un pays en développement → hausse des coûts salariaux, fin du dividende démographique. La Chine a atteint ce tournant vers 2010.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Silver Economy</strong> — Économie liée au vieillissement de la population. Nouveaux marchés : autonomie à domicile, maisons de retraite, tourisme senior. En France : 130Md€ estimés en 2030. Exemple de Dubaï : visa retraité depuis 2019.</p>
+
+<p style="margin:8px 0 4px 0"><strong>P(eople) Bomb</strong> — Paul R. Ehrlich, The People Bomb (1968). Thèse malthusienne : explosion démographique = menace sur les ressources (alimentation, eau, énergie) et sur la stabilité politique.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Explosion démographique</strong> — Croissance très rapide de la population mondiale, surtout après 1945 : 2,5Md en 1950 → 8,2Md aujourd'hui. Alimentée par la baisse de la mortalité sans baisse immédiate de la natalité.</p>
+
+</div>
+
+<div style="margin-bottom:10px;padding:10px 12px;background:var(--surf2);border-radius:8px;border-left:3px solid var(--acc)">
+<div style="font-weight:700;font-size:12px;color:var(--acc-h);margin-bottom:4px">🔵 DIFFÉRENCIANT</div>
+
+<p style="margin:8px 0 4px 0"><strong>Effet Boserup</strong> — Ester Boserup : contre-thèse à Malthus. La pression démographique stimule l'innovation agricole → la croissance de la population n'est pas une menace mais un moteur de progrès.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Surpopulation</strong> — Concept relatif : un territoire est surpeuplé quand sa population dépasse sa capacité de charge (ressources disponibles). Notion contestée car dépend du niveau de consommation.</p>
+
+</div>
+
+</div>
+</div>
+
+</div>`;
 
 
 const FICHE_FIXED_FOLDERS = ['Bizuth'];
@@ -3677,7 +3750,6 @@ function renderFicheFinder(){
   }
   html+='<div class="finder-grid">';
   if(!ficheCurFolder){
-    html+=`<div class="finder-item" onclick="finderItemClick(this,'demo','demo','','Démographie',()=>openDemoFiche())"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">🔴 Thème 4 — Démographie</div></div>`;
     d.folders.filter(f=>!f.parent).forEach(f=>{
       html+=`<div class="finder-item" onclick="finderItemClick(this,'fiche-folder','${f.id}','','${f.name.replace(/'/g,"\'")}',()=>ficheOpenFolder('${f.id}','${f.name.replace(/'/g,"\'")}'))" onmouseenter="if(_sm&&_sm.moving)this.classList.add('finder-item-drag-over')" onmouseleave="this.classList.remove('finder-item-drag-over')" ondragover="event.preventDefault();this.classList.add('finder-item-drag-over')" ondragleave="this.classList.remove('finder-item-drag-over')" ondrop="event.preventDefault();this.classList.remove('finder-item-drag-over');ficheDropToFolder(event,'${f.id}')"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
     });
@@ -3691,6 +3763,10 @@ function renderFicheFinder(){
     d.folders.filter(f=>f.parent===ficheCurFolder).forEach(f=>{
       html+=`<div class="finder-item" onclick="finderItemClick(this,'fiche-folder','${f.id}','','${f.name.replace(/'/g,"\'")}',()=>ficheOpenFolder('${f.id}','${f.name.replace(/'/g,"\'")}'))" onmouseenter="if(_sm&&_sm.moving)this.classList.add('finder-item-drag-over')" onmouseleave="this.classList.remove('finder-item-drag-over')" ondragover="event.preventDefault();this.classList.add('finder-item-drag-over')" ondragleave="this.classList.remove('finder-item-drag-over')" ondrop="event.preventDefault();this.classList.remove('finder-item-drag-over');ficheDropToFolder(event,'${f.id}')"><div class="finder-folder-icon">${folderSVG()}</div><div class="finder-label">${f.name}</div></div>`;
     });
+    // Fiche Démo toujours dans Bizuth
+    if(ficheCurFolder === 'ff_bizuth'){
+      html+=`<div class="finder-item" onclick="finderItemClick(this,'demo','demo','','Démographie',()=>openDemoFiche())"><div class="finder-file-icon">${fileSVG()}</div><div class="finder-label">🔴 Thème 4 — Démographie</div></div>`;
+    }
     (d.files[ficheCurFolder]||[]).forEach(ref=>{
       const fi=myFiches[ref.ficheIdx]; if(!fi) return;
       const badge=fi.prio==='indispensable'?'🔴':fi.prio==='tres-frequent'?'🟠':'🟡';
@@ -3784,4 +3860,351 @@ function dfFilter(n, btn){
 
 </script>
 
-</body></html>
+<div id="fiche-perso-overlay" style="position: fixed; inset: 0px; z-index: 2000; background: var(--surf); overflow-y: auto; display: none;"><div style="position:sticky;top:0;background:var(--surf);border-bottom:1px solid var(--brd);padding:6px 16px;display:flex;align-items:center;gap:8px;z-index:10;min-height:40px"><button onclick="document.getElementById(&#39;fiche-perso-overlay&#39;).style.display=&#39;none&#39;" style="background:none;border:none;cursor:pointer;color:var(--txt3);font-size:12px;font-family:var(--ff);padding:4px 8px;border-radius:5px">← Retour</button><div style="flex:1;font-size:13px;font-weight:700;color:var(--txt)">Thème 4 — Démographie</div></div><div style="max-width:860px;margin:0 auto;padding:24px 20px 60px">
+<style>
+.df-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--brd);margin-bottom:16px;gap:0;scrollbar-width:none}
+.df-tabs::-webkit-scrollbar{display:none}
+.df-tab{background:none;border:none;padding:8px 13px;cursor:pointer;font-size:12px;font-family:var(--ff);white-space:nowrap;color:var(--txt3);border-bottom:2px solid transparent;font-weight:500;flex-shrink:0}
+.df-tab.on{color:var(--acc);border-bottom:2px solid var(--acc);font-weight:700}
+.df-panel{display:none}.df-panel.on{display:block}
+.df-filter{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
+.df-fbtn{background:var(--surf);border:1px solid var(--brd);color:var(--txt2);border-radius:20px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:var(--ff);font-weight:500}
+.df-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border-radius:20px;padding:2px 7px;flex-shrink:0}
+.df-b1{color:var(--red);background:var(--red-l);border:1px solid var(--red-m)}
+.df-b2{color:var(--org);background:var(--org-l);border:1px solid var(--org-m)}
+.df-b3{color:var(--acc);background:var(--acc-l);border:1px solid var(--acc-m)}
+.df-acc{margin-bottom:5px}
+.df-acc-hd{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;cursor:pointer;border-radius:7px;border:1px solid var(--brd);background:var(--surf);font-size:13px}
+.df-acc-hd:hover{border-color:var(--txt3)}
+.df-acc-hd.op1{background:var(--red-l);border-color:var(--red-m);border-radius:7px 7px 0 0}
+.df-acc-hd.op2{background:var(--org-l);border-color:var(--org-m);border-radius:7px 7px 0 0}
+.df-acc-hd.op3{background:var(--acc-l);border-color:var(--acc-m);border-radius:7px 7px 0 0}
+.df-acc-bd{display:none;padding:12px 14px;font-size:13px;line-height:1.7;color:var(--txt2);border:1px solid var(--brd);border-top:none;border-radius:0 0 7px 7px;background:var(--surf2);margin-bottom:2px}
+.df-acc-bd.op1{border-color:var(--red-m)}
+.df-acc-bd.op2{border-color:var(--org-m)}
+.df-acc-bd.op3{border-color:var(--acc-m)}
+.df-sec{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--txt3);font-weight:700;margin-bottom:10px;margin-top:20px;padding-bottom:5px;border-bottom:1px solid var(--brd)}
+.df-sec:first-child{margin-top:0}
+.df-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:7px;margin-bottom:16px}
+.df-card{border-radius:7px;padding:11px;text-align:center;border:1px solid}
+.df-cv{font-size:14px;font-weight:700}.df-cl{font-size:10px;color:var(--txt3);margin-top:2px}
+.df-bar-wrap{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.df-bar-lbl{width:130px;font-size:12px;color:var(--txt);flex-shrink:0}
+.df-bar-track{flex:1;background:var(--surf3);border-radius:3px;height:13px;overflow:hidden;border:1px solid var(--brd)}
+.df-bar-fill{height:100%;border-radius:3px;opacity:.75}
+.df-bar-val{width:30px;font-size:12px;font-weight:700;text-align:right}
+.df-tl{position:relative;padding-left:14px;border-left:2px solid var(--brd)}
+.df-tl-item{margin-bottom:10px;position:relative}
+.df-tl-dot{position:absolute;left:-20px;width:8px;height:8px;border-radius:50%;top:4px;border:2px solid var(--surf)}
+.df-dyn{border-radius:9px;padding:15px;margin-bottom:12px;border:1px solid}
+.df-dyn-t{font-size:13px;font-weight:700;margin-bottom:12px}
+.df-pt{margin-bottom:10px;padding-left:10px;border-left:2px solid}
+.df-pt-title{display:flex;align-items:center;gap:7px;margin-bottom:3px;flex-wrap:wrap;font-weight:600;color:var(--txt);font-size:13px}
+.df-pt-desc{color:var(--txt3);font-size:12px;line-height:1.6}
+.df-tier{display:inline-block;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;margin-top:4px}
+.df-plan-item{background:var(--surf2);border-radius:5px;padding:6px 10px;margin-bottom:4px;font-size:12px;color:var(--txt2);border:1px solid var(--brd)}
+.df-piege{background:var(--red-l);border:1px solid var(--red-m);border-radius:5px;padding:8px 11px;margin-top:8px;font-size:12px;color:var(--red)}
+.df-tag{background:var(--surf);border:1px solid var(--brd);border-radius:20px;padding:3px 10px;font-size:12px;color:var(--txt2);display:inline-block;margin:3px}
+.df-pt-arrow{color:var(--org);flex-shrink:0}
+.df-hidden{display:none!important}
+</style>
+
+<div style="font-family:var(--ffd);font-size:28px;font-weight:700;color:var(--txt);margin-bottom:6px;letter-spacing:-.02em">Démographie</div>
+<div style="height:1px;background:var(--brd);margin:14px 0 18px"></div>
+
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+  <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txt2)"><div style="width:8px;height:8px;border-radius:50%;background:var(--red)"></div>Indispensable</div>
+  <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txt2)"><div style="width:8px;height:8px;border-radius:50%;background:var(--org)"></div>Fait gagner des points</div>
+  <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txt2)"><div style="width:8px;height:8px;border-radius:50%;background:var(--acc)"></div>Différenciant</div>
+</div>
+
+<div class="df-tabs">
+  <button class="df-tab on" onclick="dfTab(this,&#39;df-accroche&#39;)">📌 Accroche</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-definitions&#39;)">📖 Définitions</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-donnees&#39;)">📊 Données</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-foyers&#39;)">🗺 Foyers</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-dynamiques&#39;)">⚙️ Dynamiques</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-regions&#39;)">🌍 Régions</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-vieillissement&#39;)">👴 Vieillissement</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-naissances&#39;)">👶 Naissances</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-transitions&#39;)">🔄 Transitions</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-auteurs&#39;)">📚 Auteurs</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-exemples&#39;)">🔍 Exemples</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-sujets&#39;)">✍️ Sujets</button>
+  <button class="df-tab" onclick="dfTab(this,&#39;df-concepts&#39;)">🧠 Concepts</button>
+</div>
+
+
+<!-- DÉFINITIONS -->
+<div id="df-definitions" class="df-panel" style="display:none">
+<div data-n="1" style="margin-bottom:8px">
+<div class="df-acc-hd op1" onclick="dfAcc(this)"><span>🔴 Indispensable</span><span>+</span></div>
+<div class="df-acc-bd op1" style="display:none">
+<p style="margin:8px 0"><strong>Transition démographique</strong> — Passage d'un régime de forte natalité/forte mortalité à un régime de faible natalité/faible mortalité. 4 phases. Terminée partout sauf en Afrique.</p>
+<p style="margin:8px 0"><strong>Taux d'accroissement naturel</strong> — Écart entre natalité et mortalité. Moteur principal de la croissance démographique.</p>
+<p style="margin:8px 0"><strong>Taux de fécondité</strong> — Nombre moyen d'enfants par femme. Seuil renouvellement = 2,1. Niger 6,67 ; Monde 2,3 ; France 1,79 ; Corée du Sud 0,72.</p>
+<p style="margin:8px 0"><strong>Dividende démographique</strong> — Période où le nombre d'actifs croît par rapport aux retraités → fenêtre d'opportunité économique. Rôle central dans l'essor chinois (1970-2010).</p>
+<p style="margin:8px 0"><strong>Youth Bulge</strong> — Gonflement de la population jeune (10-24 ans = 25% pop mondiale). Source d'instabilité si les emplois manquent (cf. Printemps Arabes). Heinsohn, Brunel.</p>
+<p style="margin:8px 0"><strong>(Néo-)Malthusianisme</strong> — Malthus : croissance démographique dépasse croissance agricole. Les néo-malthusianistes étendent au triangle d'incompatibilité démographie/niveau de vie/environnement (De Blasi, 2019).</p>
+<p style="margin:8px 0"><strong>Pyramide des âges</strong> — Représentation graphique de la structure par âge et sexe. Révèle les dynamiques démographiques.</p>
+</div>
+</div>
+<div data-n="2" style="margin-bottom:8px">
+<div class="df-acc-hd op2" onclick="dfAcc(this)"><span>🟠 Fait gagner des points</span><span>+</span></div>
+<div class="df-acc-bd op2" style="display:none">
+<p style="margin:8px 0"><strong>Tournant de Lewis</strong> — Point où la main d'œuvre surplus se tarit → hausse des coûts salariaux, fin du dividende. Chine : atteint vers 2010.</p>
+<p style="margin:8px 0"><strong>Silver Economy</strong> — Économie liée au vieillissement. Marchés : autonomie, maisons de retraite, tourisme senior. France : 130Md€ en 2030.</p>
+<p style="margin:8px 0"><strong>P(eople) Bomb</strong> — Paul R. Ehrlich (1968). Explosion démographique = menace sur les ressources et la stabilité politique.</p>
+<p style="margin:8px 0"><strong>Explosion démographique</strong> — Croissance très rapide : 2,5Md en 1950 → 8,2Md aujourd'hui. Alimentée par la baisse de la mortalité sans baisse immédiate de la natalité.</p>
+</div>
+</div>
+<div data-n="3" style="margin-bottom:8px">
+<div class="df-acc-hd op3" onclick="dfAcc(this)"><span>🔵 Différenciant</span><span>+</span></div>
+<div class="df-acc-bd op3" style="display:none">
+<p style="margin:8px 0"><strong>Effet Boserup</strong> — Contre-thèse à Malthus : la pression démographique stimule l'innovation agricole. La population est un moteur de progrès.</p>
+<p style="margin:8px 0"><strong>Surpopulation</strong> — Concept relatif : population dépasse la capacité de charge d'un territoire. Dépend du niveau de consommation.</p>
+</div>
+</div>
+</div>
+
+<!-- ACCROCHE -->
+<div class="df-panel on" id="df-accroche">
+  <div style="background:var(--surf);border:1px solid var(--brd);border-left:4px solid var(--acc);border-radius:7px;padding:18px;margin-bottom:13px">
+    <div style="font-size:18px;font-style:italic;color:var(--txt);margin-bottom:5px;font-family:var(--ffd);line-height:1.4">« Il n'est de richesse que d'hommes »</div>
+    <div style="color:var(--txt3);font-size:11px">Jean Bodin, Six livres de la République, 1576</div>
+    <div style="margin-top:8px"><span class="df-badge df-b1">Indispensable</span></div>
+  </div>
+  <div style="background:var(--surf);border:1px solid var(--brd);border-radius:7px;padding:13px;margin-bottom:13px">
+    <div style="font-size:10px;color:var(--acc);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Tension centrale : risque / opportunité</div>
+    <p style="font-size:13px;line-height:1.7;color:var(--txt2)">Tout au long de l'histoire, prime aux nations les plus nombreuses (France XVIIIe, Allemagne XIXe, Chine/Russie aujourd'hui). Mais démographie aussi vue comme danger depuis Malthus (1798).</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div style="background:var(--grn-l);border:1px solid var(--grn-m);border-radius:7px;padding:13px">
+      <div style="font-size:10px;color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:7px">Axe néo-malthusien</div>
+      <p style="font-size:12px;line-height:1.6;color:var(--txt2)">La Terre peut-elle se permettre 10 Md d'humains convergeant vers les modes de vie occidentaux ?</p>
+    </div>
+    <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:7px;padding:13px">
+      <div style="font-size:10px;color:var(--red);font-weight:700;text-transform:uppercase;margin-bottom:7px">Axe hiver démographique</div>
+      <p style="font-size:12px;line-height:1.6;color:var(--txt2)">Macron (jan. 2024) : « réarmement démographique ». The Lancet (2024) : ralentissement plus rapide que prévu.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DONNÉES -->
+<div class="df-panel" id="df-donnees">
+  <div class="df-filter">
+    <button class="df-fbtn" onclick="dfFilter(0,this)">Tout</button>
+    <button class="df-fbtn" onclick="dfFilter(1,this)" style="color:var(--red);border-color:var(--red-m)">Indispensable</button>
+    <button class="df-fbtn" onclick="dfFilter(2,this)" style="color:var(--org);border-color:var(--org-m)">Fait gagner des points</button>
+    <button class="df-fbtn" onclick="dfFilter(3,this)" style="color:var(--acc);border-color:var(--acc-m)">Différenciant</button>
+  </div>
+  <div class="df-sec">Chiffres-clés</div>
+  <div class="df-grid">
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">1 Md</div><div class="df-cl">1800</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">1,5 Md</div><div class="df-cl">1900</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">2,5 Md</div><div class="df-cl">1950</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">7,5 Md</div><div class="df-cl">2020</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">~10,3 Md</div><div class="df-cl">2080 — pic ONU</div></div>
+    <div class="df-card" style="background:var(--org-l);border-color:var(--org-m)" data-n="2"><div class="df-cv" style="color:var(--org)">4 Md ?</div><div class="df-cl">2100 (HSBC 2022)</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">+400M/an</div><div class="df-cl">Croissance annuelle</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">25%</div><div class="df-cl">Pop. a 10-24 ans</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">11%→22%</div><div class="df-cl">&gt;60 ans 2000→2050</div></div>
+    <div class="df-card" style="background:var(--org-l);border-color:var(--org-m)" data-n="2"><div class="df-cv" style="color:var(--org)">685 Md$</div><div class="df-cl">Remises PED 2024</div></div>
+    <div class="df-card" style="background:var(--org-l);border-color:var(--org-m)" data-n="2"><div class="df-cv" style="color:var(--org)">-150 M</div><div class="df-cl">Europe en 2100</div></div>
+    <div class="df-card" style="background:var(--red-l);border-color:var(--red-m)" data-n="1"><div class="df-cv" style="color:var(--red)">×40</div><div class="df-cl">Afrique 1900→2100</div></div>
+  </div>
+  <div class="df-sec">Indices de fécondité (2023)</div>
+  <div style="margin-bottom:16px">
+    <div class="df-bar-wrap" data-n="1"><div class="df-bar-lbl">Niger</div><div class="df-bar-track"><div class="df-bar-fill" style="width:95%;background:var(--red)"></div></div><div class="df-bar-val" style="color:var(--red)">6,67</div></div>
+    <div class="df-bar-wrap" data-n="1"><div class="df-bar-lbl">Afrique subsaharienne</div><div class="df-bar-track"><div class="df-bar-fill" style="width:70%;background:var(--red)"></div></div><div class="df-bar-val" style="color:var(--red)">4,9</div></div>
+    <div class="df-bar-wrap" data-n="1"><div class="df-bar-lbl">Monde</div><div class="df-bar-track"><div class="df-bar-fill" style="width:33%;background:var(--txt3)"></div></div><div class="df-bar-val" style="color:var(--txt3)">2,3</div></div>
+    <div class="df-bar-wrap" data-n="1"><div class="df-bar-lbl">France</div><div class="df-bar-track"><div class="df-bar-fill" style="width:26%;background:var(--acc)"></div></div><div class="df-bar-val" style="color:var(--acc)">1,79</div></div>
+    <div class="df-bar-wrap" data-n="2"><div class="df-bar-lbl">EUA</div><div class="df-bar-track"><div class="df-bar-fill" style="width:24%;background:var(--acc)"></div></div><div class="df-bar-val" style="color:var(--acc)">1,66</div></div>
+    <div class="df-bar-wrap" data-n="1"><div class="df-bar-lbl">Chine</div><div class="df-bar-track"><div class="df-bar-fill" style="width:17%;background:var(--acc)"></div></div><div class="df-bar-val" style="color:var(--acc)">1,19</div></div>
+    <div class="df-bar-wrap" data-n="1"><div class="df-bar-lbl">Corée du Sud</div><div class="df-bar-track"><div class="df-bar-fill" style="width:10%;background:var(--acc)"></div></div><div class="df-bar-val" style="color:var(--acc)">0,72</div></div>
+    <div style="font-size:10px;color:var(--txt4);margin-top:4px">Seuil de remplacement : 2,1</div>
+  </div>
+  <div class="df-sec">Chronologie</div>
+  <div class="df-tl">
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">1798 </span><span style="font-size:12px;color:var(--txt2)">Malthus, Essai sur le principe de la population</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">1970s </span><span style="font-size:12px;color:var(--txt2)">Baisse fécondité Europe/Asie/Amérique — tournant démographique mondial</span></div>
+    <div class="df-tl-item" data-n="2"><div class="df-tl-dot" style="background:var(--org)"></div><span style="font-weight:700;font-size:12px;color:var(--org)">1975 </span><span style="font-size:12px;color:var(--txt2)">Stérilisations forcées en Inde → défaite Indira Gandhi 1977</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">1979 </span><span style="font-size:12px;color:var(--txt2)">Début politique enfant unique (Chine)</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">2010 </span><span style="font-size:12px;color:var(--txt2)">Tournant de Lewis en Chine : fin du dividende démographique</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">2015 </span><span style="font-size:12px;color:var(--txt2)">Fin politique enfant unique (Chine)</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">2022 </span><span style="font-size:12px;color:var(--txt2)">HSBC : population mondiale → 4 Md en 2100. Scandale Orpea (V. Castanet)</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">2023 </span><span style="font-size:12px;color:var(--txt2)">Inde dépasse Chine — 1ère puissance démographique mondiale</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">2024 </span><span style="font-size:12px;color:var(--txt2)">The Lancet : ralentissement plus rapide que prévu. Macron : « réarmement démographique »</span></div>
+    <div class="df-tl-item" data-n="2"><div class="df-tl-dot" style="background:var(--org)"></div><span style="font-weight:700;font-size:12px;color:var(--org)">2035 </span><span style="font-size:12px;color:var(--txt2)">Les 85+ seront plus nombreux que les -1 an</span></div>
+    <div class="df-tl-item" data-n="1"><div class="df-tl-dot" style="background:var(--red)"></div><span style="font-weight:700;font-size:12px;color:var(--red)">2080 </span><span style="font-size:12px;color:var(--txt2)">Pic démographique estimé (~10 Md)</span></div>
+  </div>
+</div>
+
+<!-- FOYERS -->
+<div class="df-panel" id="df-foyers">
+  <div class="df-sec">3 foyers historiques</div>
+  <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:7px;padding:11px 13px;margin-bottom:7px"><div style="font-weight:600;color:var(--txt);font-size:13px;margin-bottom:3px">Asie du Sud (Inde) — 1er foyer</div><div style="font-size:12px;color:var(--txt2)">Avec l'Asie orientale, regroupent 3/5e de la population mondiale.</div></div>
+  <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:7px;padding:11px 13px;margin-bottom:7px"><div style="font-weight:600;color:var(--txt);font-size:13px;margin-bottom:3px">Asie orientale (Chine) — 2e foyer</div><div style="font-size:12px;color:var(--txt2)">Avec l'Asie du Sud, regroupent 3/5e de la population mondiale.</div></div>
+  <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:7px;padding:11px 13px;margin-bottom:14px"><div style="font-weight:600;color:var(--txt);font-size:13px;margin-bottom:3px">Europe occidentale — 3e foyer</div><div style="font-size:12px;color:var(--txt2)">700 M d'habitants.</div></div>
+  <div class="df-sec">Foyers secondaires</div>
+  <div style="margin-bottom:14px"><span class="df-tag">Asie du Sud-Est</span><span class="df-tag">Croissant fertile</span><span class="df-tag">Golfe de Guinée</span><span class="df-tag">Sudeste brésilien</span></div>
+  <div class="df-sec">Déserts humains</div>
+  <div style="margin-bottom:14px"><span class="df-tag">(Ant)Arctique</span><span class="df-tag">Sahara</span><span class="df-tag">Himalaya</span></div>
+  <div style="background:var(--surf);border:1px solid var(--brd);border-radius:7px;padding:11px 13px"><span style="color:var(--org);font-weight:700;font-size:12px">Littoraux : </span><span style="font-size:12px;color:var(--txt2)">60% de la population mondiale vit à moins de 100 km de la mer.</span></div>
+</div>
+
+<!-- DYNAMIQUES -->
+<div class="df-panel" id="df-dynamiques">
+  <div class="df-dyn" style="background:var(--grn-l);border-color:var(--grn-m)">
+    <div class="df-dyn-t" style="color:var(--grn)">I. La démographie comme force</div>
+    <div class="df-pt" style="border-color:var(--grn-m)"><div class="df-pt-title">1/ Loi du nombre (Bodin)<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">Démographie = premier facteur de puissance géopolitique. France XVIIIe, Allemagne XIXe, Chine/Inde/Nigeria/Brésil. Russie face Ukraine : 3-4 soldats pour 1 ukrainien → stratégie d'attrition.</div></div>
+    <div class="df-pt" style="border-color:var(--grn-m)"><div class="df-pt-title">2/ Dividende démographique<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">Pyramide élargie à la base → actifs &gt; retraités → MO abondante, salaires compétitifs, épargne forte. Rôle décisif dans l'essor chinois (1970-2010). Se ferme au Tournant de Lewis.</div></div>
+    <div class="df-pt" style="border-color:var(--grn-m)"><div class="df-pt-title">3/ Diasporas &amp; remises<span class="df-badge df-b2">Fait gagner des points</span></div><div class="df-pt-desc">685 Md$ remises vers PED (2024, ×3 vs 2005) &gt; IDE (300 Md$) + aide internationale (210 Md$) cumulés.</div></div>
+  </div>
+  <div class="df-dyn" style="background:var(--red-l);border-color:var(--red-m)">
+    <div class="df-dyn-t" style="color:var(--red)">II. Les défis — la P. Bomb (Ehrlich, 1968)</div>
+    <div class="df-pt" style="border-color:var(--red-m)"><div class="df-pt-title">1/ Question environnementale<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">Consommation ressources : alimentation, eau, énergie. Impact quantitatif (plus d'hommes) ET qualitatif (qui consomment davantage).</div></div>
+    <div class="df-pt" style="border-color:var(--red-m)"><div class="df-pt-title">2/ Youth Bulge<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">10-24 ans = 25% pop. mondiale. En 2050 : 2/3 des Africains auront &lt;30 ans. Si pas d'emplois → instabilité (Printemps arabes). Inde : +6%/an de croissance nécessaire.</div></div>
+    <div class="df-pt" style="border-color:var(--red-m)"><div class="df-pt-title">3/ Question migratoire<span class="df-badge df-b2">Fait gagner des points</span></div><div class="df-pt-desc">Pression démographique alimente les flux migratoires. Lien direct fiche Mobilités (Smith, La ruée vers l'Europe).</div></div>
+  </div>
+  <div class="df-dyn" style="background:var(--org-l);border-color:var(--org-m)">
+    <div class="df-dyn-t" style="color:var(--org)">III. Le défi du vieillissement</div>
+    <div class="df-pt" style="border-color:var(--org-m)"><div class="df-pt-title">1/ Question de la dépendance<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">Ratio actifs/retraités se dégrade → régimes retraites, solidarités intergénérationnelles, Alzheimer. Dans PDEM : modèle État-providence en jeu.</div></div>
+    <div class="df-pt" style="border-color:var(--org-m)"><div class="df-pt-title">2/ Émergents 'vieux avant d'être riches'<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">Chine : 1/3 des habitants auront &gt;60 ans en 2050. 5% PIB santé vs 9% Brésil, 10% Japon. Il a fallu 100 ans à la France pour doubler la part des &gt;65 ans → 25 ans au Brésil ou à la Chine.</div></div>
+    <div class="df-pt" style="border-color:var(--org-m)"><div class="df-pt-title">3/ Silver Economy<span class="df-badge df-b2">Fait gagner des points</span></div><div class="df-pt-desc">Vieillissement ouvre nouveaux marchés. Japon : Japan's New Robot Strategy (2015). France : 130 Md€ en 2030. Dubaï : visa retraité 2019.</div></div>
+  </div>
+  <div class="df-dyn" style="background:var(--acc-l);border-color:var(--acc-m)">
+    <div class="df-dyn-t" style="color:var(--acc)">IV. Dépasser Malthus</div>
+    <div class="df-pt" style="border-color:var(--acc-m)"><div class="df-pt-title">1/ Le développement baisse la fécondité<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">Enfant = assurance-vie dans pays pauvre. Éducation + urbanisation = leviers essentiels. Même des pays pauvres ont réussi (Rwanda, Madagascar).</div></div>
+    <div class="df-pt" style="border-color:var(--acc-m)"><div class="df-pt-title">2/ Contrôle des naissances<span class="df-badge df-b1">Indispensable</span></div><div class="df-pt-desc">Recettes connues mais explosives politiquement. Meilleur levier = développement + éducation des filles. Aller contre la volonté d'une population ne marche pas.</div></div>
+    <div class="df-pt" style="border-color:var(--acc-m)"><div class="df-pt-title">3/ Progrès technologique (Boserup)<span class="df-badge df-b2">Fait gagner des points</span></div><div class="df-pt-desc">Angle mort de Malthus. Pression démographique → innovation agricole → Effet Boserup. Tertrais : Cheikh Yamani — 'l'âge du pétrole ne se terminera pas par manque de pétrole'.</div></div>
+  </div>
+</div>
+
+<!-- RÉGIONS -->
+<div class="df-panel" id="df-regions">
+  <div class="df-filter"><button class="df-fbtn" onclick="dfFilter(0,this)">Tout</button><button class="df-fbtn" onclick="dfFilter(1,this)" style="color:var(--red);border-color:var(--red-m)">Indispensable</button><button class="df-fbtn" onclick="dfFilter(2,this)" style="color:var(--org);border-color:var(--org-m)">Fait gagner des points</button><button class="df-fbtn" onclick="dfFilter(3,this)" style="color:var(--acc);border-color:var(--acc-m)">Différenciant</button></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Europe</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Vieillissement + recul dans les équilibres mondiaux (25% en 1900 → 7% en 2050) → affaiblissement géopolitique. Fécondité très faible au sud et à l'est. Population se contracte depuis 2020 : -150 M attendus en 2100 (-20%).</div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Russie</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Héritage communiste + thérapie de choc → fécondité plancher à 1,16 en 1999. Poutine : politiques natalistes mais fécondité reste &lt;2,1. La guerre aggrave : morts au front, fuites à l'étranger.</div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">États-Unis</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Fécondité chute (1,64 en 2020). Dynamisme porté par migrations. Fin de l'Amérique blanche à l'horizon 2040-2050 (Blancs &lt;50% pop.). Enjeu électoral majeur.</div></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Chine</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Vieillissement rapide, population plafonne à 1,4 Md puis décroît. Dividende 1970-2010 → Tournant de Lewis. En 2050 : 1/3 des habitants auront &gt;60 ans. 5% PIB en santé. C'est la modernisation (pas la politique) qui achève la baisse de la fécondité.</div></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Inde</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">1ère puissance démographique (2023). Diaspora + remises = levier majeur. Stérilisations forcées 1975 → défaite Indira Gandhi. Transition achevée au sud (Kerala 1,6) mais pas au nord (&gt;2,5). Ratio filles/garçons problématique.</div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Japon</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Décroissance (130 M → 85 M en 2100). 40% &gt;65 ans en 2050. Ratio actifs/retraités → 1 pour 1 en 2050. Espérance vie 87 ans. Fécondité 1,25. -450 000/an depuis 2017. 70% des 18-34 ans célibataires ('herbivores').</div></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Afrique</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">×40 entre 1900 et 2100 (4 Md). Fécondité baisse mais plus lente (villes &gt; campagnes). Échec relatif politiques natalité faute de volonté politique. Rwanda exception (Kagame). Question malthusienne : Rwanda/Diamond, lac Tchad, RDC. Réfugiés climatiques à anticiper.</div></div>
+  <div class="df-acc" data-n="3"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Moyen-Orient</span><span class="df-badge df-b3">Différenciant</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Fécondité faible (Qatar, Iran, Turquie &gt;2,1) ou modeste (Arabie Saoudite, Maroc, Algérie, Tunisie &gt;3 ; Égypte 3,2). Enjeux démographiques autour de la question palestinienne.</div></div>
+</div>
+
+<!-- VIEILLISSEMENT -->
+<div class="df-panel" id="df-vieillissement">
+  <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:7px;padding:13px;margin-bottom:14px;font-size:13px;line-height:1.7;color:var(--txt2)"><strong style="color:var(--red)">Chiffre-clé :</strong> Part des &gt;60 ans : 605 M (2000) → 2 Md (2050) soit 11%→22%.<br>Il a fallu <strong>100 ans à la France</strong> pour doubler la part des &gt;65 ans → <strong>25 ans au Brésil ou à la Chine</strong>.</div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Asie — vieillissement accéléré</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>8% de la pop. asiatique avait &gt;60 ans en 2000 → 25% en 2050.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Thaïlande : doublement seniors en 20 ans (7→14%) quand il a fallu 1 siècle à l'Europe.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>BAD : 40% des &gt;60 ans sans retraite ; 60% sans médecin ; 95% travaillent dans l'économie informelle.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Allemagne — Mittelstand en péril</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Mittelstand (PME familiales = cœur du dynamisme économique) : faute d'enfants, les entreprises ne trouvent pas de repreneurs.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>30% des entrepreneurs du Mittelstand ont &gt;60 ans aujourd'hui (×3 vs il y a 20 ans).</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Japon — réponses détaillées</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Robotisation : Japan's New Robot Strategy (2015). Paro (contre Alzheimer). Ropits. 17 M€ en 2014.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Silver economy : Raku-raku (Fujitsu). 40% conso ménages en 2015 (692 Md€).</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Immigration-tourniquet (Bouissou) : 50 000 travailleurs 2019, 5 ans max.</div></div></div>
+</div>
+
+<!-- NAISSANCES -->
+<div class="df-panel" id="df-naissances">
+  <div style="background:var(--red-l);border:1px solid var(--red-m);border-radius:7px;padding:13px;margin-bottom:14px;font-size:13px;line-height:1.7;color:var(--txt2)"><strong style="color:var(--red)">Leçon centrale : </strong>Aller contre la volonté d'une population ne fonctionne pas. Le meilleur levier reste le développement + l'éducation des filles.</div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Pourquoi ça marche moins en Afrique</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Plus facile dans les villes (distances planning familial, éducation, économie monétarisée).</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Manque d'engagement des dirigeants.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Rwanda : Kagame → fécondité 6,1→3,75 en 18 ans malgré pauvreté.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Exemple chinois — nuances</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Campagne wan-xi-shao (1970s) : fécondité 5,7→2,8 entre 1970 et 1979, avant l'enfant unique.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Enfant unique 1979. Assoupli 1984. Seulement 1/3 de la pop., surtout villes.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Fécondité reste &gt;2 jusqu'aux années 1990 → c'est la modernisation qui achève la baisse.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Exemple indien — autoritarisme impossible</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Stérilisations forcées 1975 → défaite électorale 1977.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Kerala 1,6 enfants/femme (transition achevée) vs nord &gt;2,5 (pauvreté).</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Leçon : politique autoritaire impossible dans un pays non-convaincu de réduire sa population.</div></div></div>
+</div>
+
+<!-- TRANSITIONS -->
+<div class="df-panel" id="df-transitions">
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Transition démographique</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Passage d'un régime forte fécondité/forte mortalité à faible fécondité/faible mortalité. 4 phases. À mobiliser dans toute copie.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Rupture 2000s : part &gt;65 ans dépasse celle des &lt;5 ans à l'échelle mondiale. À part en Afrique, transition en passe d'être terminée.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Impact sur l'environnement</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Impact QUANTITATIF (plus d'hommes) → abordé via la transition démographique.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Impact QUALITATIF (qui consomment davantage) → abordé via les transitions urbaine et alimentaire.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Transition alimentaire</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Avec le développement : consommation de viande augmente.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>1 kg bœuf = 13 000 L d'eau / 45 kg CO₂ / 7 kg de céréales.</div></div></div>
+</div>
+
+<!-- AUTEURS -->
+<div class="df-panel" id="df-auteurs">
+  <div class="df-filter"><button class="df-fbtn" onclick="dfFilter(0,this)">Tout</button><button class="df-fbtn" onclick="dfFilter(1,this)" style="color:var(--red);border-color:var(--red-m)">Indispensable</button><button class="df-fbtn" onclick="dfFilter(2,this)" style="color:var(--org);border-color:var(--org-m)">Fait gagner des points</button><button class="df-fbtn" onclick="dfFilter(3,this)" style="color:var(--acc);border-color:var(--acc-m)">Différenciant</button></div>
+  <div class="df-tier" style="background:var(--red-l);border:1px solid var(--red-m);color:var(--red)">Tier 1 — Indispensables</div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Jean Bodin — 1576</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">« Il n'est de richesse que d'hommes » — démographie = premier facteur de puissance géopolitique. Loi du nombre.</div></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Malthus — 1798</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Surpopulation → crises de subsistance. Démenti par la révolution industrielle mais schéma toujours possible (Rwanda).</div></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Jared Diamond — Effondrement, 2004</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Génocide rwandais = crise malthusienne. Rwanda : 750 hab/km² en 1994. Severino : massacres au sein même de l'ethnie hutue → facteur démographique &gt; facteur ethnique. Extension : crise syrienne — facteur parmi d'autres.</div></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Ester Boserup — Évolution agraire</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Anti-Malthus : la pression démographique stimule l'innovation agricole → Effet Boserup. La surpopulation doit être pensée à l'aune des technologies disponibles.</div></div>
+  <div class="df-tier" style="background:var(--org-l);border:1px solid var(--org-m);color:var(--org);margin-top:9px">Tier 2 — Font gagner des points</div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Bruno Tertrais — Le choc démographique, 2020</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">P. Bomb largement désamorcée. Cheikh Yamani : 'L'âge du pétrole ne se terminera pas par manque de pétrole'. Question de répartition, pas de production.</div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Jacques Veron — Faut-il avoir peur ?, 2020</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Complexité des variables démographiques. Augmenter niveau de vie des PED sans faire croître consommations non durables des PDEM.</div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Maxime de Blasi — Le Débat, 2019</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Triangle d'incompatibilité : croissance démog. + hausse niveau de vie + préservation environnement ne peuvent coexister. En 2019 : 1,7 ressources renouvelables consommées/an.</div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Gunnar Heinsohn — Indice de belligérance, 2011</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Déséquilibre jeunes hommes/emplois effectifs → conflits. Appliqué au monde arabe. Critiquable mais mobilisable comme facteur parmi d'autres.</div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap"><span style="font-weight:600;font-size:13px">Sylvie Brunel — L'Afrique est-elle si bien partie ?, 2014</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Afrique : continent riche peuplé de pauvres. Youth bulge + inégalités + Internet = frustrations → djihadisme sahélien.</div></div>
+</div>
+
+<!-- EXEMPLES -->
+<div class="df-panel" id="df-exemples">
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Rwanda — Diamond &amp; contrôle naissances</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>750 hab/km² en 1994 (500 en 2018 vs 120 France). Diamond : génocide = crise malthusienne.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Severino : massacres au sein même de l'ethnie hutue → facteur démographique &gt; facteur ethnique.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Kagame → fécondité 6,1→3,75 entre 2000 et 2018. Volonté politique = résultats.</div></div></div>
+  <div class="df-acc" data-n="1"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Chine — enfant unique nuancé</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Campagne wan-xi-shao (1970s) : fécondité 5,7→2,8 entre 1970 et 1979, avant l'enfant unique.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Enfant unique 1979. Assoupli 1984. Seulement 1/3 de la pop., surtout villes.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Dividende 1970-2010. Tournant de Lewis ~2010. 2050 : 1/3 des hab. auront &gt;60 ans.</div></div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Japon — réponses au vieillissement</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>130 M → 85 M en 2100. 40% &gt;65 ans en 2050. Ratio actifs/retraités → 1 pour 1.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Robotisation : Japan's New Robot Strategy (2015). Paro, Ropits. Silver economy : Raku-raku (Fujitsu). 692 Md€ en 2015.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Immigration-tourniquet (Bouissou) : 50 000 travailleurs (2019), 5 ans max.</div></div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Silver Economy — France &amp; Dubaï</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>France : 130 Md€ en 2030. 65-75 ans : 22 600€/an (+9%). 54% voitures neuves achetées par &gt;55 ans.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Startups : Granny &amp; Charly, SeniorAdom, Fingertip, Cityzen Mobility.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Scandale Orpea (2022, Castanet) : rationnement repas/couches → dérives du marché.</div></div></div>
+  <div class="df-acc" data-n="2"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Allemagne — Mittelstand &amp; vieillissement</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>Mittelstand = PME familiales au cœur du dynamisme économique allemand.</div><div style="margin-bottom:6px"><span class="df-pt-arrow">→ </span>30% des entrepreneurs ont &gt;60 ans aujourd'hui (×3 vs il y a 20 ans) → pas de repreneurs.</div></div></div>
+</div>
+
+<!-- SUJETS -->
+<div class="df-panel" id="df-sujets">
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Trop d'hommes sur Terre ?</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div class="df-plan-item">I. La démographie comme force (Bodin, dividende, diasporas)</div><div class="df-plan-item">II. Les défis : P. Bomb, jeunesse, environnement, migrations</div><div class="df-plan-item">III. Dépasser Malthus : technologie (Boserup), contrôle naissances, transition démographique</div><div class="df-piege"><strong>⚠ Piège : </strong>Ne pas conclure que la surpopulation est LE problème — question de répartition (Tertrais, Veron).</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">N'y a-t-il de puissance que d'hommes ?</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div class="df-plan-item">I. Oui : loi du nombre (Bodin), exemples historiques et actuels, dividende</div><div class="df-plan-item">II. Nuances : Japon riche et vieillissant, soft power, économie de la connaissance</div><div class="df-plan-item">III. Démographie comme variable parmi d'autres (ressources, tech, institutions)</div><div class="df-piege"><strong>⚠ Piège : </strong>Ne pas réduire la puissance à la taille de la population — exemple japonais ou suisse.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Les défis de la démographie africaine</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div class="df-plan-item">I. Youth bulge : opportunité ou bombe à retardement ? (Brunel, Heinsohn)</div><div class="df-plan-item">II. La question malthusienne en Afrique (Diamond/Rwanda, lac Tchad, RDC)</div><div class="df-plan-item">III. Transition inachevée : solutions et obstacles (éducation, volonté politique, urbanisation)</div><div class="df-piege"><strong>⚠ Piège : </strong>Ne pas homogénéiser l'Afrique — Afrique du Nord ≠ Sahel ≠ Afrique australe.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Vers un hiver démographique mondial ?</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div class="df-plan-item">I. Ralentissement global réel (HSBC 2022, The Lancet 2024, indices de fécondité)</div><div class="df-plan-item">II. Mais l'Afrique fait exception — divergence croissante Nord/Sud</div><div class="df-plan-item">III. Conséquences géopolitiques : vieillissement, migrations, recomposition des puissances</div><div class="df-piege"><strong>⚠ Piège : </strong>Ne pas confondre ralentissement de la croissance et décroissance absolue — seule l'Europe décroît vraiment.</div></div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">La démographie : une chance pour l'Afrique ?</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd"><div class="df-plan-item">I. Oui : dividende démographique potentiel, marché intérieur, dynamisme (Tertrais)</div><div class="df-plan-item">II. Mais : youth bulge non absorbé = instabilité (Brunel, Heinsohn, Printemps arabes)</div><div class="df-plan-item">III. Conditions : éducation, emploi, gouvernance, contrôle des naissances</div><div class="df-piege"><strong>⚠ Piège : </strong>Le dividende n'est pas automatique — il suppose investissements massifs éducation/santé.</div></div></div>
+</div>
+
+<!-- CONCEPTS -->
+<div class="df-panel" id="df-concepts">
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Transition démographique</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Passage d'un régime forte fécondité/forte mortalité à faible fécondité/faible mortalité. 4 phases. À mobiliser dans toute copie.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Dividende démographique</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Période où pyramide des âges élargie à la base → ratio actifs/dépendants favorable → boom économique potentiel. Se ferme au Tournant de Lewis.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Youth Bulge</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Concentration de population jeune (15-24 ans) sans emploi suffisant → instabilité politique et sociale.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Tournant de Lewis</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Moment où MO rurale abondante est absorbée par l'industrie → hausse salaires → fin dividende démographique. Chine ~2010.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">(Néo)-malthusianisme</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Croissance pop. &gt; croissance production → crises. Néo-malthusiens étendent aux ressources naturelles, eau, énergie.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Effet Boserup</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">La pression démographique stimule l'innovation agricole et technologique. Anti-Malthus.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Silver Economy</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Marchés et services liés au vieillissement (santé, autonomie, loisirs, tech grand âge). Opportunité économique.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">P(eople) Bomb</span><span class="df-badge df-b2">Fait gagner des points</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Ehrlich (1968) : surpopulation = bombe à retardement. Cadre malthusien appliqué aux ressources naturelles.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Taux de fécondité</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Nombre moyen d'enfants par femme. Seuil de remplacement : 2,1. Indicateur-clé de toute copie démographie.</div></div>
+  <div class="df-acc"><div class="df-acc-hd" onclick="dfAcc(this)"><div style="display:flex;align-items:center;gap:7px"><span style="font-weight:600;font-size:13px">Hiver démographique</span><span class="df-badge df-b1">Indispensable</span></div><span style="color:var(--txt3)">+</span></div><div class="df-acc-bd">Ralentissement ou décroissance de la population dans les PDEM (et certains émergents). Coexiste avec explosion en Afrique.</div></div>
+</div>
+
+
+<p style="margin:8px 0 4px 0"><strong>Transition démographique</strong> — Passage d'un régime de forte natalité/forte mortalité à un régime de faible natalité/faible mortalité. Se déroule en 4 phases. Terminée dans la plupart des pays sauf en Afrique.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Taux d'accroissement naturel</strong> — Écart entre le taux de natalité et le taux de mortalité. Moteur principal de la croissance démographique avec l'allongement de l'espérance de vie.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Taux de fécondité</strong> — Nombre moyen d'enfants par femme. Seuil de renouvellement = 2,1. Chiffres clés : Niger 6,67 ; Monde 2,3 ; France 1,79 ; Corée du Sud 0,72.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Dividende démographique</strong> — Période où la pyramide des âges s'élargit à la base, le nombre d'actifs croît par rapport aux retraités → fenêtre d'opportunité économique (main d'œuvre abondante, salaires compétitifs, épargne élevée). A joué un rôle central dans l'essor chinois (1970-2010).</p>
+
+<p style="margin:8px 0 4px 0"><strong>Youth Bulge</strong> — Gonflement de la population jeune (10-24 ans = 25% pop mondiale ; en 2050, 2/3 des Africains auront -30 ans). Source d'instabilité politique si les emplois manquent (cf. Printemps Arabes). Concept de G. Heinsohn, S. Brunel.</p>
+
+<p style="margin:8px 0 4px 0"><strong>(Néo-)Malthusianisme</strong> — Malthus : la croissance démographique dépasse la croissance agricole → préconise le contrôle des naissances. Les néo-malthusianistes étendent le raisonnement aux ressources naturelles (eau, énergie, alimentation). Triangle d'incompatibilité de De Blasi : démographie + niveau de vie + environnement.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Pyramide des âges</strong> — Représentation graphique de la structure par âge et sexe d'une population. Révèle les dynamiques démographiques (explosive, vieillissante, régressive…).</p>
+
+</div>
+
+<div style="margin-bottom:10px;padding:10px 12px;background:var(--surf2);border-radius:8px;border-left:3px solid var(--org)">
+<div style="font-weight:700;font-size:12px;color:var(--org);margin-bottom:4px">🟠 FAIT GAGNER DES POINTS</div>
+
+<p style="margin:8px 0 4px 0"><strong>Tournant de Lewis</strong> — Point où la main d'œuvre agricole surplus se tarit dans un pays en développement → hausse des coûts salariaux, fin du dividende démographique. La Chine a atteint ce tournant vers 2010.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Silver Economy</strong> — Économie liée au vieillissement de la population. Nouveaux marchés : autonomie à domicile, maisons de retraite, tourisme senior. En France : 130Md€ estimés en 2030. Exemple de Dubaï : visa retraité depuis 2019.</p>
+
+<p style="margin:8px 0 4px 0"><strong>P(eople) Bomb</strong> — Paul R. Ehrlich, The People Bomb (1968). Thèse malthusienne : explosion démographique = menace sur les ressources (alimentation, eau, énergie) et sur la stabilité politique.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Explosion démographique</strong> — Croissance très rapide de la population mondiale, surtout après 1945 : 2,5Md en 1950 → 8,2Md aujourd'hui. Alimentée par la baisse de la mortalité sans baisse immédiate de la natalité.</p>
+
+</div>
+
+<div style="margin-bottom:10px;padding:10px 12px;background:var(--surf2);border-radius:8px;border-left:3px solid var(--acc)">
+<div style="font-weight:700;font-size:12px;color:var(--acc-h);margin-bottom:4px">🔵 DIFFÉRENCIANT</div>
+
+<p style="margin:8px 0 4px 0"><strong>Effet Boserup</strong> — Ester Boserup : contre-thèse à Malthus. La pression démographique stimule l'innovation agricole → la croissance de la population n'est pas une menace mais un moteur de progrès.</p>
+
+<p style="margin:8px 0 4px 0"><strong>Surpopulation</strong> — Concept relatif : un territoire est surpeuplé quand sa population dépasse sa capacité de charge (ressources disponibles). Notion contestée car dépend du niveau de consommation.</p>
+
+</div>
+
+
+
+
+</div></body></html>
