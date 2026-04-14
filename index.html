@@ -2280,6 +2280,11 @@ function stab(el,id){
 let flDeck=[],flIdx=0,flipped=false;
 
 function initFlash(){
+  // Migrate old chapter names in localStorage
+  const myCards=M.get('my_flashcards',[]);
+  let migrated=false;
+  myCards.forEach(c=>{if(c.c==='Démographie'){c.c='T4 — Démographie';migrated=true;}});
+  if(migrated) M.set('my_flashcards',myCards);
   const sel=document.getElementById('fl-chap');
   // Always rebuild chapter list to pick up new cards
   while(sel.children.length>1) sel.removeChild(sel.lastChild);
